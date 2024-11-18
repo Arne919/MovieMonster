@@ -16,6 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 class CategorySerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+    
     class Meta:
         model = Category
         fields = ['id', 'user', 'name']

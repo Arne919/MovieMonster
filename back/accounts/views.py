@@ -7,6 +7,7 @@ from django.contrib.auth.hashers import make_password
 from .models import User, Category, Ranking, Game
 from .serializers import UserSerializer, CategorySerializer, RankingSerializer, GameSerializer
 from django.shortcuts import get_object_or_404
+from django.middleware.csrf import get_token
 
 # 회원가입
 @api_view(['POST'])
@@ -28,7 +29,11 @@ def login_user(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return Response({"message": "Login successful!"}, status=status.HTTP_200_OK)
+        csrf_token = get_token(request)
+        return Response({
+            "message": "Login successful!",
+             "csrf_token": csrf_token
+             }, status=status.HTTP_200_OK)
     else:
         return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -85,3 +90,10 @@ def manage_games(request):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+from django.middleware.csrf import get_token
+
+@api_view(['GET'])
+def get_csrf_token(request):
+    csrf_token = get_token(request)
+    return Response({'csrfToken': csrf_token})
