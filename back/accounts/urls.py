@@ -9,4 +9,5 @@ urlpatterns = [
     path('categories/', views.manage_categories, name='manage_categories'),
     path('rankings/', views.get_user_rankings, name='get_user_rankings'),
     path('games/', views.manage_games, name='manage_games'),
+    path('csrf-token/', views.get_csrf_token, name='get_csrf_token'),
 ]
