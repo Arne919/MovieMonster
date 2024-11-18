@@ -1,22 +1,28 @@
 from django.db import models
 
-
 class Genre(models.Model):
-    name = models.CharField(max_length=50, unique=True) # 장르 이름
-    
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.name
+
+class Actor(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
     def __str__(self):
         return self.name
 
 class Movie(models.Model):
+    movie_id = models.IntegerField(unique=True)  # JSON 파일의 movie_id
     title = models.CharField(max_length=255)  # 영화 제목
-    poster_url = models.URLField(max_length=500) # 포스터 URL
-    genres = models.ManyToManyField(Genre, related_name="movies")  # 다대다 관계
-    release_date = models.DateField()  # 실제 개봉일 저장
-    director = models.CharField(max_length=100)  # 감독 이름
-    actors = models.TextField()  # 주요 배우 (콤마로 구분된 문자열로 저장 가능)
-    description = models.TextField()  # 영화 설명
-    trailer_url = models.URLField(max_length=500, blank=True, null=True)
-    
+    release_date = models.DateField()  # 개봉일
+    popularity = models.FloatField(null=True, blank=True)  # 인기 점수
+    vote_avg = models.FloatField(null=True, blank=True)  # 평균 평점
+    description = models.TextField(blank=True, null=True)  # 설명
+    poster_url = models.URLField(max_length=500, blank=True, null=True)  # 포스터 URL
+    genres = models.TextField()
+    actors = models.TextField(blank=True, null=True)
+    director = models.CharField(max_length=100, blank=True, null=True)  # 감독 이름
+
     def __str__(self):
         return self.title
-      
