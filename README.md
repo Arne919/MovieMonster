@@ -1,93 +1,96 @@
-# final-pjt
+## 로고 - HOME - MOVIE - COMMUNITY - PROFILE
 
+### 메인 페이지
 
+- 로그인 - 내 정보(프로필사진-이름)
+- 금주 사용자 랭킹
+- 1등 유저의 추천 영화 리스트
+- 금주 베스트 리뷰
+    - 포스터
+    - 유저명, 별점
+    - 영화 제목, 리뷰 내용
+    - 좋아요(타 유저의) 수
+    - 몇일 전 작성
+- 커뮤니티-리뷰 이동 버튼
 
-## Getting started
+### Movie 페이지
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+- 검색 기능 없어도 되는데 넣을거면 정확한 영화 제목 일치해야 검색 가능하게 구현
+- 장르 - 드롭다운
+- 최신 영화 - 더보기
+- 인기 영화 - 더보기
+- 개봉 예정 영화 - 더보기
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+### MOVIE-Detail
 
-## Add your files
+- 포스터, 영화 제목, 별점, 감독, 배우, 개봉일, 줄거리
+- 예고편 영상
+- **내 카테고리 추가하기 버튼**
+    - 모달 - 영화 저장(체크 박스→ 카테고리 1,2 …. )
+        - 모달 → 모달 가능할 시
+            - 새 카테고리(이름 입력 - 저장)
+        - 불가능
+            - 내 프로필로 이동 → 새 카테고리로 이동(이벤트리스너로)
+- **리뷰 쓰기 버튼**
+    - 모달 - 탭 띄워서 리뷰 바로 작성 가능하도록
+        - 리뷰 제목
+        - 리뷰 내용
+        - 별점
+        - close, save → save 클릭 시 작성한 리뷰로 이동
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+### 커뮤니티 페이지
 
-```
-cd existing_repo
-git remote add origin https://lab.ssafy.com/rjs4013/final-pjt.git
-git branch -M master
-git push -uf origin master
-```
+1. **리뷰**
+    - 영화 검색(텍스트 인풋) → 리뷰쓰러가기 버튼 → 누르면 영화 디테일페이지로 이동
+    - 한 줄에 리뷰 4개씩
+    - 전체 리뷰(최신순), 인기순(좋아요 많은 순)
+    - 포스터, 리뷰 제목, 작성 유저명, 작성일(~몇 일전)
+    - 좋아요 수, 댓글 수(댓글 수 누르면 리뷰 상세 페이지)
+    - 리뷰 상세 페이지
+        - 글 제목, 유저명, 몇일전, 좋아요 수, 댓글 수
+        - 포스터, 리뷰 내용
+        - 좋아요 버튼
+        - 댓글
+            - 유저 프로필 사진, 댓글 내용, 몇일 전, 삭제 버튼, 댓글 등록 버튼
+2. **게임**
+    - 게임하고 포인트 받자!
+    - 게임 3개
+        - 썸네일(클릭 시 게임 페이지로 이동) - 포스터 보고 영화 제목 맞추기
+        - 썸네일(클릭 시 게임 페이지로 이동) - 명대사 보고 영화 제목 맞추기
+        - 썸네일(클릭 시 게임 페이지로 이동) - 한줄평보고 영화 제목 맞추기
+        - 게임 페이지
+            - 사진
+                - 이름 없는 포스터, 명대사, 한줄평
+            - 정답 란(인풋 텍스트), 제출버튼(enter)
+                - 정답 시
+                    - 포스터
+                    - 정답 !
+                    - 영화 제목
+                - 오답 시
+                    - 포스터
+                    - 오답
+                    - 영화 제목
+        - 게임 결과 페이지
+            - 몇 개 맞추셨습니다!
+            - + 100p
+            - 돌아가기 버튼(게임 메인 페이지로), 랭크 확인하기 버튼(랭크 페이지로)
 
-## Integrate with your tools
+1. **랭크**
+    - (가제) ~ 의 랭커
+    - 1위부터 ~위 까지 행으로 나열
+    - 1위 부터 3위까지는 왼쪽에 금, 은, 동 이미지 표시
+    - 속성
+        - 프사(클릭 시 해당 유저 프로필로 이동), 이름, 포인트, 게시물 수, 좋아요 수, 팔로워 수
 
-- [ ] [Set up project integrations](https://lab.ssafy.com/rjs4013/final-pjt/-/settings/integrations)
+### 프로필 페이지
 
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- 프로필 사진, 랭크 + 유저명
+- 팔로잉, 팔로워 수, 팔로우 버튼
+- 게시글(리뷰) 수, 랭크 등급, 좋아요 수
+- 카테고리 나열(1, 2, 3 …)
+    - 영화 1개 썸네일 보여준 뒤
+        - 카테고리 이름, (목록에 있는) 영화 개수
+            - 마우스 올리면 영화 목록 열기(모달)
+                - 포스터 - 제목 (포스터 클릭 시 Movie Detail 페이지로 이동)
+- 카테고리 추가 버튼(클릭 시 모달 on)
+    - 카테고리 이름, 저장 버튼
