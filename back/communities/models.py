@@ -16,3 +16,9 @@ class Article(models.Model):
 
     def like_count(self):
         return self.like_users.count()
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article, related_name='comments', on_delete=models.CASCADE)  # 특정 게시글에 연결
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # 댓글 작성자
+    content = models.TextField()  # 댓글 내용
+    created_at = models.DateTimeField(auto_now_add=True)  # 댓글 작성 시간

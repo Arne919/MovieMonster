@@ -11,8 +11,8 @@ from rest_framework.permissions import IsAuthenticated
 
 from django.shortcuts import get_object_or_404, get_list_or_404
 
-from .serializers import ArticleListSerializer, ArticleSerializer
-from .models import Article
+from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer
+from .models import Article, Comment
 
 
 @api_view(['GET', 'POST'])
@@ -58,3 +58,15 @@ def like_article(request, article_pk):
         'like_count': article.like_count(),
         'action': action
     }, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_comment(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)  # 게시글을 찾음
+
+    if request.method == 'POST':
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user, article=article)  # 현재 사용자와 게시글을 연결하여 저장
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
