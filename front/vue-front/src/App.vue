@@ -1,19 +1,15 @@
 <template>
-  <div id="app">
+  <header>
     <nav>
-      <router-link to="/">홈</router-link>
-      <router-link to="/create-article">게시글 생성</router-link>
+      <RouterLink :to="{ name: 'ArticleView' }">Articles</RouterLink>
     </nav>
-    <router-view />
-  </div>
+  </header>
+  <RouterView />
 </template>
 
-<script>
-export default {
-  name: "App",
-};
+<script setup>
+import { RouterView, RouterLink } from 'vue-router'
 </script>
 
-<style>
-/* 추가 스타일 */
+<style scoped>
 </style>
