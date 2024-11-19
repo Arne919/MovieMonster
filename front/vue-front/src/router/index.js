@@ -4,6 +4,8 @@ import DetailView from '@/views/DetailView.vue'
 import CreateView from '@/views/CreateView.vue'
 // import SignUpView from '@/views/SignUpView.vue'
 // import LogInView from '@/views/LogInView.vue'
+import MovieList from '../components/MovieList.vue';
+import MovieDetail from '../components/MovieDetail.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,6 +25,16 @@ const router = createRouter({
       name: 'CreateView',
       component: CreateView
     },
+    {
+      path: '/movies',
+      name: 'MovieList',
+      component: MovieList // 영화 리스트
+    },
+    {
+      path: '/movies/:id',
+      name: 'MovieDetail',
+      component: MovieDetail // 영화 디테일 페이지
+    }
     // {
     //   path: '/signup',
     //   name: 'SignUpView',
