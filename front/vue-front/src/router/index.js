@@ -4,6 +4,8 @@ import DetailView from '@/views/DetailView.vue'
 import CreateView from '@/views/CreateView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import LogInView from '@/views/LogInView.vue'
+import MovieList from '@/components/MovieList.vue'; // MovieList 컴포넌트 추가
+import MovieDetail from '@/components/MovieDetail.vue'; // MovieDetail 컴포넌트 추가
 import { useCounterStore } from '@/stores/counter'
 
 
@@ -34,7 +36,19 @@ const router = createRouter({
       path: '/login',
       name: 'LogInView',
       component: LogInView
-    }
+    },
+    // 영화 리스트 페이지 추가
+    {
+      path: '/movies',
+      name: 'MovieList',
+      component: MovieList,
+    },
+    // 영화 상세 페이지 추가
+    {
+      path: '/movies/:id',
+      name: 'MovieDetail',
+      component: MovieDetail,
+    },
   ]
 })
 
