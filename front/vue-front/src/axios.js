@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: "http://127.0.0.1:8000/api", // Django API URL
-  withCredentials: true, // 필요하면 사용 (로그인 인증 등)
+const axiosInstance = axios.create({
+  baseURL: "http://127.0.0.1:8000/api/v1", // Django API URL
+  timeout: 10000, // 요청 시간 초과
+  withCredentials: true, // 필요하면 사용
 });
 
-export default instance;
+export default axiosInstance;
