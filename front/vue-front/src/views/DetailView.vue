@@ -9,6 +9,19 @@
       <p>수정일 : {{ article.updated_at }}</p>
       <p>좋아요 수: {{ article.like_count }}</p> <!-- 좋아요 수 표시 -->
       <button @click="toggleLike">좋아요</button> <!-- 좋아요 버튼 추가 -->
+      <!-- 댓글 목록 표시 -->
+      <div v-if="comments.length > 0">
+        <h3>댓글</h3>
+        <div v-for="comment in comments" :key="comment.id">
+          <p><strong>{{ comment.user }}</strong>: {{ comment.content }}</p>
+        </div>
+      </div>
+
+      <!-- 댓글 작성 폼 -->
+      <div>
+        <textarea v-model="newComment" placeholder="댓글을 작성하세요"></textarea>
+        <button @click="submitComment">댓글 작성</button> <!-- 댓글 작성 버튼 -->
+      </div>
     </div>
   </div>
 </template>
@@ -37,6 +50,7 @@ onMounted(() => {
       console.log(err)
     })
 })
+
 
 const toggleLike = () => {
   // 좋아요 토글 요청
