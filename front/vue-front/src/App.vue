@@ -6,7 +6,8 @@
         <RouterLink :to="{ name: 'SignUpView' }">SignUpView</RouterLink> |
         <RouterLink :to="{ name: 'LogInView' }">LogInView</RouterLink> | 
         <RouterLink :to="{ name: 'ArticleView' }" class="nav-link">Articles</RouterLink> |
-        <RouterLink to="/movies" class="nav-link">Movies</RouterLink>
+        <!-- <RouterLink to="/movies" class="nav-link">Movies</RouterLink> -->
+        <RouterLink :to="{ name: 'MovieList' }" class="nav-link">Movies</RouterLink>
         <form @submit.prevent="logOut">
           <input type="submit" value="Logout">
         </form>
