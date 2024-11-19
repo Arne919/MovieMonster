@@ -39,3 +39,22 @@ def article_detail(request, article_pk):
         serializer = ArticleSerializer(article)
         print(serializer.data)
         return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def like_article(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    user = request.user
+
+    if user in article.like_users.all():
+        article.like_users.remove(user)  # 이미 좋아요한 경우 취소
+        action = 'removed'
+    else:
+        article.like_users.add(user)  # 좋아요 추가
+        action = 'added'
+
+    article.save()
+    return Response({
+        'like_count': article.like_count(),
+        'action': action
+    }, status=status.HTTP_200_OK)
