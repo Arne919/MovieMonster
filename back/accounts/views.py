@@ -10,32 +10,32 @@ from django.shortcuts import get_object_or_404
 from django.middleware.csrf import get_token
 
 # 회원가입
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def register_user(request):
-    data = request.data
-    serializer = UserSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save(password=make_password(data['password']))
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# @api_view(['POST'])
+# @permission_classes([AllowAny])
+# def register_user(request):
+#     data = request.data
+#     serializer = UserSerializer(data=data)
+#     if serializer.is_valid():
+#         serializer.save(password=make_password(data['password']))
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# 로그인
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def login_user(request):
-    username = request.data.get('username')
-    password = request.data.get('password')
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        csrf_token = get_token(request)
-        return Response({
-            "message": "Login successful!",
-             "csrf_token": csrf_token
-             }, status=status.HTTP_200_OK)
-    else:
-        return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+# # 로그인
+# @api_view(['POST'])
+# @permission_classes([AllowAny])
+# def login_user(request):
+#     username = request.data.get('username')
+#     password = request.data.get('password')
+#     user = authenticate(request, username=username, password=password)
+#     if user is not None:
+#         login(request, user)
+#         csrf_token = get_token(request)
+#         return Response({
+#             "message": "Login successful!",
+#              "csrf_token": csrf_token
+#              }, status=status.HTTP_200_OK)
+#     else:
+#         return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
 # 사용자 프로필 정보 조회
 @api_view(['GET'])
