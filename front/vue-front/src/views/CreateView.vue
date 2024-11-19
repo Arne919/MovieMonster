@@ -28,13 +28,17 @@ const router = useRouter()
 
 // DRF로 게시글 생성 요청을 보내는 함수
 const createArticle = function () {
+  console.log(store.token)
   axios({
     method: 'post',
     url: `${store.API_URL}/api/v1/communities/`,
     data: {
       title: title.value,
       content: content.value
-    }
+    },
+    headers: {
+        Authorization: `Token ${store.token}`
+      }
   })
     .then((res) => {
       // console.log('게시글 작성 성공!')

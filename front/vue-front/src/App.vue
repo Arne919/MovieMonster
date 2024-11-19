@@ -3,8 +3,13 @@
     <nav class="navbar">
       <div class="container">
         <!-- Navigation Links -->
+        <RouterLink :to="{ name: 'SignUpView' }">SignUpView</RouterLink> |
+        <RouterLink :to="{ name: 'LogInView' }">LogInView</RouterLink> | 
         <RouterLink :to="{ name: 'ArticleView' }" class="nav-link">Articles</RouterLink> |
         <RouterLink to="/movies" class="nav-link">Movies</RouterLink>
+        <form @submit.prevent="logOut">
+          <input type="submit" value="Logout">
+        </form>
       </div>
     </nav>
   </header>
@@ -15,6 +20,13 @@
 
 <script setup>
 import { RouterView, RouterLink } from 'vue-router';
+import { useCounterStore } from '@/stores/counter'
+
+const store = useCounterStore()
+
+const logOut = function () {
+  store.logOut()
+}
 </script>
 
 <style scoped>
