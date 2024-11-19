@@ -6,5 +6,6 @@ urlpatterns = [
     path('', views.article_list),
     path('<int:article_pk>/', views.article_detail),
     path('<int:article_pk>/like/', views.like_article, name='like-article'),
-    path('articles/<int:article_pk>/comments/', views.create_comment, name='create-comment'),
+    path('<int:article_pk>/comments/', views.create_comment, name='create-comment'),
+    path('<int:article_pk>/comments/list/', views.get_comments, name='get-comments'),  # 댓글 목록 요청 추가
 ]

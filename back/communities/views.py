@@ -1,9 +1,9 @@
 from django.shortcuts import render
-
 # Create your views here.
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+from django.db.models import Count
 
 # permission Decorators
 from rest_framework.decorators import permission_classes
@@ -19,7 +19,7 @@ from .models import Article, Comment
 @permission_classes([IsAuthenticated])
 def article_list(request):
     if request.method == 'GET':
-        articles = get_list_or_404(Article)
+        articles = get_list_or_404(Article.objects.annotate(comment_count=Count('comments')))  # 댓글 수 계산
         serializer = ArticleListSerializer(articles, many=True)
         return Response(serializer.data)
 
@@ -70,3 +70,10 @@ def create_comment(request, article_pk):
             serializer.save(user=request.user, article=article)  # 현재 사용자와 게시글을 연결하여 저장
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['GET'])
+def get_comments(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)  # 게시글을 찾음
+    comments = article.comments.all()  # 해당 게시글에 대한 댓글 가져오기
+    serializer = CommentSerializer(comments, many=True)  # 댓글 목록 직렬화
+    return Response(serializer.data)  # 댓글 목록 반환
