@@ -4,14 +4,16 @@ from .models import Article, Comment
 
 class ArticleListSerializer(serializers.ModelSerializer):
     like_count = serializers.IntegerField(read_only=True)
+    comment_count = serializers.IntegerField(read_only=True)  # 댓글 수 추가
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'content', 'like_count')
+        fields = ('id', 'title', 'content', 'like_count', 'comment_count' )
 
 
 class ArticleSerializer(serializers.ModelSerializer):
     like_count = serializers.IntegerField(read_only=True)
+    comment_count = serializers.IntegerField(read_only=True)  # 댓글 수 추가
 
     class Meta:
         model = Article

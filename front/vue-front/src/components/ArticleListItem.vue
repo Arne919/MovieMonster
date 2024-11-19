@@ -5,6 +5,7 @@
     <p>{{ article.content }}</p>
     <p>좋아요 수: {{ article.like_count }}</p> <!-- 좋아요 수 표시 -->
     <button @click="toggleLike">좋아요</button> <!-- 좋아요 버튼 추가 -->
+    <p>댓글 수: {{ article.comment_count }}</p> <!-- 댓글 수 표시 -->
     <RouterLink 
       :to="{ name: 'DetailView', params: { id: article.id } }"  
     >

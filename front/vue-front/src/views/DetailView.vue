@@ -10,11 +10,15 @@
       <p>좋아요 수: {{ article.like_count }}</p> <!-- 좋아요 수 표시 -->
       <button @click="toggleLike">좋아요</button> <!-- 좋아요 버튼 추가 -->
       <!-- 댓글 목록 표시 -->
-      <div v-if="comments.length > 0">
+      <div v-if="comments && comments.length > 0">
         <h3>댓글</h3>
         <div v-for="comment in comments" :key="comment.id">
           <p><strong>{{ comment.user }}</strong>: {{ comment.content }}</p>
         </div>
+      </div>
+      <!-- 댓글이 없으면 표시할 메시지 -->
+      <div v-else>
+        <p>댓글이 없습니다.</p>
       </div>
 
       <!-- 댓글 작성 폼 -->
@@ -35,6 +39,8 @@ import { useRoute } from 'vue-router'
 const store = useCounterStore()
 const route = useRoute()
 const article = ref(null)
+const comments = ref([])  // 댓글 목록 (이 부분을 ref()로 정의)
+const newComment = ref('')  // 새로운 댓글 내용
 
 // DetailView가 마운트되기전에 DRF로 단일 게시글 조회를 요청 후 응답데이터를 저장
 onMounted(() => {
@@ -51,6 +57,83 @@ onMounted(() => {
     })
 })
 
+
+  // 댓글 목록 로드
+  axios({
+    method: 'get',
+    url: `${store.API_URL}/api/v1/communities/${route.params.id}/comments/list`,  // 댓글 목록 URL
+    headers: {
+      Authorization: `Token ${store.token}`  // 토큰 추가
+    }
+  })
+    .then((res) => {
+      comments.value = res.data  // 댓글 목록 업데이트
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+// 댓글 작성 함수
+const submitComment = () => {
+  if (!newComment.value.trim()) {
+    return
+  }
+
+  axios({
+    method: 'post',
+    url: `${store.API_URL}/api/v1/communities/${route.params.id}/comments/`,
+    headers: {
+      Authorization: `Token ${store.token}`  // 토큰 추가
+    },
+    data: { content: newComment.value }
+  })
+    .then((res) => {
+      comments.value.push(res.data)  // 새로운 댓글 추가
+      newComment.value = ''  // 댓글 작성 후 입력 필드 초기화
+
+      // 댓글 작성 후, 전체 게시글 목록을 갱신
+      store.getArticles();  // 댓글 추가 후 전체 게시글 리스트를 새로고침
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+// axios({
+//     method: 'get',
+//     url: `${store.API_URL}/api/v1/communities/${route.params.id}/comments/`,
+//     headers: {
+//       Authorization: `Token ${store.token}`
+//     }
+//   })
+//     .then((res) => {
+//       comments.value = res.data  // 댓글 목록 업데이트
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+
+// // 댓글 작성 함수
+// const submitComment = () => {
+//   if (!newComment.value.trim()) {
+//     return
+//   }
+
+//   axios({
+//     method: 'post',
+//     url: `${store.API_URL}/api/v1/communities/${route.params.id}/comments/`,
+//     headers: {
+//       Authorization: `Token ${store.token}`
+//     },
+//     data: { content: newComment.value }
+//   })
+//     .then((res) => {
+//       comments.value.push(res.data)  // 새로운 댓글 추가
+//       newComment.value = ''  // 댓글 작성 후 입력 필드 초기화
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+// }
 
 const toggleLike = () => {
   // 좋아요 토글 요청

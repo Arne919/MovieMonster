@@ -98,5 +98,27 @@ export const useCounterStore = defineStore('counter', () => {
         console.log(err)
       })
   }
-  return { articles, API_URL, getArticles, signUp, logIn, token, isLogin, logOut }
+
+  // 댓글 작성 및 댓글 목록 요청을 위한 함수 추가
+  const getComments = (articleId) => {
+    return axios({
+      method: 'get',
+      url: `${API_URL}/api/v1/communities/${articleId}/comments/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      }
+    })
+  }
+
+  const addComment = (articleId, commentContent) => {
+    return axios({
+      method: 'post',
+      url: `${API_URL}/api/v1/communities/${articleId}/comments/`,
+      headers: {
+        Authorization: `Token ${token.value}`
+      },
+      data: { content: commentContent }
+    })
+  }
+  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut }
 }, { persist: true })
