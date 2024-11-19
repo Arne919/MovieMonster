@@ -45,7 +45,7 @@ const createArticle = function () {
       router.push({ name: 'ArticleView' })
     })
     .catch((err) => {
-      console.log(err)
+      console.error('Error creating article:', err.response.data)
     })
 }
 
