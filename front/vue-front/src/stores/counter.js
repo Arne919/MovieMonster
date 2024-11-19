@@ -1,12 +1,25 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import axios from 'axios'
 
 export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
-  const doubleCount = computed(() => count.value * 2)
-  function increment() {
-    count.value++
-  }
+  const articles = ref([])
+  const API_URL = 'http://127.0.0.1:8000'
 
-  return { count, doubleCount, increment }
-})
+  // DRF로 전체 게시글 요청을 보내고 응답을 받아 articles에 저장하는 함수
+  const getArticles = function () {
+    axios({
+      method: 'get',
+      url: `${API_URL}/api/v1/communities/`
+    })
+      .then((res) => {
+        // console.log(res.data)
+        articles.value = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  
+  return { articles, API_URL, getArticles }
+}, { persist: true })
