@@ -1,4 +1,426 @@
 [
+   
+      {
+         "pk": 539972,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 539972,
+            "title": "크레이븐 더 헌터",
+            "release_date": "2024-12-11",
+            "popularity": 120.541,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/1GvBhRxY6MELDfxFrete6BNhBB5.jpg",
+            "genres": [
+               "Action",
+               "Adventure",
+               "Thriller"
+            ],
+            "actors": [
+               "Aaron Taylor-Johnson",
+               "Russell Crowe",
+               "Ariana DeBose",
+               "Fred Hechinger",
+               "Alessandro Nivola",
+               "Christopher Abbott",
+               "Levi Miller"
+            ],
+            "director": "Ben Davis"
+         }
+      },
+      {
+         "pk": 957119,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 957119,
+            "title": "Sidelined: The QB & Me",
+            "release_date": "2024-11-29",
+            "popularity": 60.464,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/hklQwv6QVoOp5bWyh1bjuF2ydyG.jpg",
+            "genres": [
+               "Comedy",
+               "Romance"
+            ],
+            "actors": [
+               "Noah Beck",
+               "Siena Agudong",
+               "Drew Ray Tanner",
+               "Deborah Cox",
+               "Jake Foy",
+               "James Van Der Beek",
+               "Josh Zaharia",
+               "Mia Shanks",
+               "Jason Fernandes",
+               "Chris Wood"
+            ],
+            "director": "McKenna Marshall"
+         }
+      },
+      {
+         "pk": 839033,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 839033,
+            "title": "반지의 제왕: 로히림의 전쟁",
+            "release_date": "2024-12-05",
+            "popularity": 63.842,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/qXKFlGX9n66zd4q0oWztPuvRD9D.jpg",
+            "genres": [
+               "Animation",
+               "Fantasy",
+               "Action"
+            ],
+            "actors": [
+               "Brian Cox",
+               "Gaia Wise",
+               "Luke Pasqualino",
+               "Miranda Otto",
+               "Christopher Lee",
+               "Lorraine Ashbourne",
+               "Yazdan Qafouri",
+               "Benjamin Wainwright",
+               "Laurence Ubong Williams",
+               "Shaun Dooley"
+            ],
+            "director": "Arty Papageorgiou"
+         }
+      },
+      {
+         "pk": 1382406,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 1382406,
+            "title": "惊天大营救",
+            "release_date": "2024-12-05",
+            "popularity": 45.345,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/npLvwol2oZGLc0VeYYxJ72KXYwY.jpg",
+            "genres": [
+               "Crime",
+               "Action"
+            ],
+            "actors": [
+               "Tony Jaa",
+               "Eason Hung",
+               "Xing Yu",
+               "Philip Keung Hiu-Man",
+               "Chen Duo-Yi",
+               "Peng Bo",
+               "Yu Bolin",
+               "Mao Fan",
+               "Ge Shuai",
+               "Zhao Leiqi"
+            ],
+            "director": "Cheng Siyi"
+         }
+      },
+      {
+         "pk": 857598,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 857598,
+            "title": "పుష్పా 2 - The Rule",
+            "release_date": "2024-12-04",
+            "popularity": 49.991,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/1T21FblunT0y8fz7YaW8JMYgUKm.jpg",
+            "genres": [
+               "Crime",
+               "Action",
+               "Adventure",
+               "Thriller"
+            ],
+            "actors": [
+               "Allu Arjun",
+               "Fahadh Faasil",
+               "Rashmika Mandanna",
+               "Jagadeesh Bandari",
+               "Sunil Varma",
+               "Dhananjay",
+               "Rao Ramesh",
+               "Anasuya Bharadwaj",
+               "Divi Vadthya",
+               "Sree Leela"
+            ],
+            "director": "Chandrabose"
+         }
+      },
+      {
+         "pk": 1094274,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 1094274,
+            "title": "Y2K",
+            "release_date": "2024-12-06",
+            "popularity": 23.891,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/qndubIQalyxBJI5EBNZKGXEX74q.jpg",
+            "genres": [
+               "Comedy",
+               "Horror",
+               "Science Fiction"
+            ],
+            "actors": [
+               "Jaeden Martell",
+               "Rachel Zegler",
+               "Julian Dennison",
+               "Daniel Zolghadri",
+               "Lachlan Watson",
+               "Fred Durst",
+               "Kyle Mooney",
+               "Eduardo Franco",
+               "Mason Gooding",
+               "The Kid LAROI"
+            ],
+            "director": "Jessica Kelly"
+         }
+      },
+      {
+         "pk": 1252309,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 1252309,
+            "title": "Pídeme lo que quieras",
+            "release_date": "2024-11-29",
+            "popularity": 29.08,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/76qnVxU2rPdVvipBN3DPQH6fVYB.jpg",
+            "genres": [
+               "Romance",
+               "Drama"
+            ],
+            "actors": [
+               "Gabriela Andrada",
+               "Mario Ermito",
+               "Fernando Oyagüez",
+               "Paco Tous",
+               "David Solans",
+               "Celia Freijeiro",
+               "Alba Ribas",
+               "Joel Bosqued"
+            ],
+            "director": "Megan Maxwell"
+         }
+      },
+      {
+         "pk": 1240949,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 1240949,
+            "title": "Beck 51 - Vilhelm",
+            "release_date": "2024-12-06",
+            "popularity": 16.782,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/dIPAZTcHIjrh7HLxqKcpXnNQm61.jpg",
+            "genres": [
+               "Crime",
+               "Mystery",
+               "Thriller",
+               "Drama"
+            ],
+            "actors": [
+               "Peter Haber",
+               "Valter Skarsgård",
+               "Jennie Silfverhjelm",
+               "Martin Wallström",
+               "Måns Nathanaelson",
+               "Anna Asp",
+               "Elmira Arikan",
+               "Nina Zanjani",
+               "Magnus Schmitz",
+               "Ellen Fosti"
+            ],
+            "director": "Per Wahlöö"
+         }
+      },
+      {
+         "pk": 1113583,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 1113583,
+            "title": "오, 캐나다",
+            "release_date": "2024-12-06",
+            "popularity": 12.229,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/hKDR5AYXRTPb751oc7xK2Ay3PH0.jpg",
+            "genres": [
+               "Drama"
+            ],
+            "actors": [
+               "Richard Gere",
+               "Uma Thurman",
+               "Michael Imperioli",
+               "Jacob Elordi",
+               "Caroline Dhavernas",
+               "Kristine Froseth",
+               "Penelope Mitchell",
+               "Victoria Hill",
+               "Aaron Roman Weiner",
+               "Ryan Woodle"
+            ],
+            "director": "Aubrey Laufer"
+         }
+      },
+      {
+         "pk": 970450,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 970450,
+            "title": "Werewolves",
+            "release_date": "2024-12-05",
+            "popularity": 21.463,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/elKf8Y5yi6Rl6teKsrQg0GAwaQD.jpg",
+            "genres": [
+               "Action",
+               "Horror",
+               "Thriller"
+            ],
+            "actors": [
+               "Frank Grillo",
+               "Katrina Law",
+               "Ilfenesh Hadera",
+               "Sam Daly",
+               "James Kyson",
+               "Lou Diamond Phillips",
+               "Johnathon Schaech",
+               "Daniel Fernandez",
+               "Kamdynn Gary"
+            ],
+            "director": "Steven C. Miller"
+         }
+      },
+      {
+         "pk": 1063738,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 1063738,
+            "title": "화이트 리버",
+            "release_date": "2024-12-11",
+            "popularity": 21.095,
+            "vote_avg": 0.0,
+            "description": "베이징의 '베드 타운' 도시 '얀자오'를 배경으로 펼쳐지는 서로에게 얽매인 세 사람의 적나라한 사랑이야기. 베이징의 '베드 타운'이라 불리는 도시 얀자오에 사는 여성 '양 판'. 그녀는 관음증 환자인 남편 '위엔 용'과 레스토랑 종업원 '시아오팡'과 위태로운 인연을 맺는다. 서로 얽매여 있고, 누구 하나 떨어질 수 없는 그들은 흐트러져가는 일상을 서서히 받아들이기 시작한다.",
+            "poster_url": "/sQrbJpsyuC8gn5rWpVnCAbsmY53.jpg",
+            "genres": [
+               "Drama"
+            ],
+            "actors": [
+               "Tian Yuan",
+               "Song Ningfeng",
+               "Xu Weihao",
+               "Zhang Wenmo",
+               "Zuo Xiaoguang",
+               "Lu Mianda",
+               "Shi Yongjia",
+               "Zhuang Ran",
+               "Li Donghe",
+               "Li Wei"
+            ],
+            "director": "Ma Xue"
+         }
+      },
+      {
+         "pk": 1211472,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 1211472,
+            "title": "9월 5일",
+            "release_date": "2024-11-29",
+            "popularity": 10.455,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/9BfBxNmY7jUTR1AtYJcBVoEzhSN.jpg",
+            "genres": [
+               "Drama",
+               "Thriller"
+            ],
+            "actors": [
+               "Peter Sarsgaard",
+               "John Magaro",
+               "Ben Chaplin",
+               "Leonie Benesch",
+               "Daniel Adeosun",
+               "Corey Johnson",
+               "Solomon Mousley",
+               "Georgina Rich",
+               "Marcus Rutherford",
+               "Zinedine Soualem"
+            ],
+            "director": "Tim Fehlbaum"
+         }
+      },
+      {
+         "pk": 1061699,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 1061699,
+            "title": "6888 중앙우편대대",
+            "release_date": "2024-12-06",
+            "popularity": 9.59,
+            "vote_avg": 0.0,
+            "description": "제2차 세계대전 중, 미 육군의 유일한 흑인 여성 대대가 불가능에 가까운 임무를 수행한다. 타일러 페리가 실화를 바탕으로 연출한 드라마 영화.",
+            "poster_url": "/cmXSdyUiujWlY79lwFXXTqJjepq.jpg",
+            "genres": [
+               "Drama",
+               "War"
+            ],
+            "actors": [
+               "Kerry Washington",
+               "Sam Waterston",
+               "Susan Sarandon",
+               "Oprah Winfrey",
+               "Ebony Obsidian",
+               "Milauna Jackson",
+               "Kylie Jefferson",
+               "Shanice Shantay",
+               "Sarah Jeffery",
+               "Pepi Sonuga"
+            ],
+            "director": "Tyler Perry"
+         }
+      },
+      {
+         "pk": 728949,
+         "model": "movies.movie",
+         "fields": {
+            "movie_id": 728949,
+            "title": "나이트비치",
+            "release_date": "2024-12-05",
+            "popularity": 12.126,
+            "vote_avg": 0.0,
+            "description": "",
+            "poster_url": "/rc9gyp0vMRTo9wAAmBfJ20zNJLI.jpg",
+            "genres": [
+               "Comedy",
+               "Fantasy"
+            ],
+            "actors": [
+               "Amy Adams",
+               "Scoot McNairy",
+               "Arleigh Snowden",
+               "Emmett Snowden",
+               "Jessica Harper",
+               "Zoë Chao",
+               "Mary Holland",
+               "Archana Rajan",
+               "Nate Heller",
+               "Darius De La Cruz"
+            ],
+            "director": "Marielle Heller"
+         }
+      },
+
    {
       "pk": 278,
       "model": "movies.movie",

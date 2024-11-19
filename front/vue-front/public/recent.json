@@ -1,0 +1,482 @@
+[
+   {
+      "pk": 1034541,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1034541,
+         "title": "테리파이어 3",
+         "release_date": "2024-10-09",
+         "popularity": 3158.896,
+         "vote_avg": 6.932,
+         "description": "\"아트 더 클라운\"이 크리스마스 이브에 평화롭게 잠든 \"마일스 카운티\"의 주민들을 향해 혼돈을 일으키려 한다",
+         "poster_url": "/l1175hgL5DoXnqeZQCcU3eZIdhX.jpg",
+         "genres": [
+            "Horror",
+            "Thriller",
+            "Mystery"
+         ],
+         "actors": [
+            "Lauren LaVera",
+            "David Howard Thornton",
+            "Samantha Scaffidi",
+            "Elliott Fullam",
+            "Margaret Anne Florence",
+            "Bryce Johnson",
+            "Alexa Blair Robertson",
+            "Antonella Rose",
+            "Mason Mecartea",
+            "Krsy Fox"
+         ],
+         "director": "Phil Falcone"
+      }
+   },
+   {
+      "pk": 558449,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 558449,
+         "title": "글래디에이터 II",
+         "release_date": "2024-11-13",
+         "popularity": 2557.256,
+         "vote_avg": 6.804,
+         "description": "로마의 영웅이자 최고의 검투사였던 ‘막시무스’가 콜로세움에서 죽음을 맞이한 뒤 20여 년이 흐른 후. 쌍둥이 황제 ‘게타’와 ‘카라칼라’의 폭압 아래 시민을 위한 자유로운 나라 ‘로마의 꿈’은 잊힌 지 오래다. 한편 ‘아카시우스’ 장군이 이끄는 로마군에 대패한 후 모든 것을 잃고 노예로 전락한 ‘루시우스’는 강한 권력욕을 지닌 ‘마크리누스’의 눈에 띄어 검투사로 발탁된다. 로마를 향한 걷잡을 수 없는 분노, 타고난 투사의 기질로 콜로세움에 입성하게 된 ‘루시우스’는 결투를 거듭하며 자신이 진짜 누구인지 알게 되고 마침내 로마의 운명을 건 결전을 준비하게 되는데...!",
+         "poster_url": "/b5UXjzW5cLZhprMnlAmsVAA3G4t.jpg",
+         "genres": [
+            "Action",
+            "Adventure",
+            "Drama"
+         ],
+         "actors": [
+            "Paul Mescal",
+            "Denzel Washington",
+            "Pedro Pascal",
+            "Connie Nielsen",
+            "Joseph Quinn",
+            "Fred Hechinger",
+            "Lior Raz",
+            "Derek Jacobi",
+            "Peter Mensah",
+            "Matt Lucas"
+         ],
+         "director": "John Mathieson"
+      }
+   },
+   {
+      "pk": 845781,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 845781,
+         "title": "레드 원",
+         "release_date": "2024-10-31",
+         "popularity": 1672.621,
+         "vote_avg": 6.6,
+         "description": "크리스마스 D-1, 철통같은 보안을 뚫고 코드명 '레드 원' 산타클로스가 납치되고 크리스마스가 사라질 위기에 처했다! '레드 원'을 찾기 위해 사령관 '칼럼 드리프트'는 산타클로스 따위는 없다고 믿는 현상금 사냥꾼 '잭 오말리'와 협력하기로 한다. 시작부터 삐그덕 거리는 이들 앞에 크리스마스의 존재를 위협하는 위험천만한 적들이 나타나는데…",
+         "poster_url": "/ryYEpxWiZFmJJZUyvQCBvM5UOCU.jpg",
+         "genres": [
+            "Action",
+            "Comedy",
+            "Fantasy"
+         ],
+         "actors": [
+            "Dwayne Johnson",
+            "Chris Evans",
+            "J.K. Simmons",
+            "Lucy Liu",
+            "Kiernan Shipka",
+            "Bonnie Hunt",
+            "Kristofer Hivju",
+            "Nick Kroll",
+            "Wesley Kimmel",
+            "Mary Elizabeth Ellis"
+         ],
+         "director": "Riley Flanagan"
+      }
+   },
+   {
+      "pk": 976734,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 976734,
+         "title": "카나리 블랙",
+         "release_date": "2024-10-10",
+         "popularity": 716.277,
+         "vote_avg": 6.339,
+         "description": "CIA 최고 요원 에이버리 그레이브스(케이트 베킨세일)는 납치된 남편을 구하기 위해 조국을 배신하라는 테러리스트의 협박을 받는다. 팀과 단절된 그녀는 납치범들이 원하는 정보를 찾기 위해 지하세계의 인맥에 도움을 청한다. 매번 배신을 당하는 에이버리는 글로벌 위기를 촉발할 수 있는 몸값을 전달하기 위해 치명적인 경쟁에 뛰어들게 되는데...",
+         "poster_url": "/hhiR6uUbTYYvKoACkdAIQPS5c6f.jpg",
+         "genres": [
+            "Action",
+            "Thriller",
+            "Crime"
+         ],
+         "actors": [
+            "Kate Beckinsale",
+            "Rupert Friend",
+            "Saffron Burrows",
+            "Ray Stevenson",
+            "Goran Kostić",
+            "Ben Miles",
+            "Jaz Hutchins",
+            "Romina Tonković",
+            "Ana Cilas",
+            "Emma Gojković"
+         ],
+         "director": "Pierre Morel"
+      }
+   },
+   {
+      "pk": 402431,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 402431,
+         "title": "위키드",
+         "release_date": "2024-11-20",
+         "popularity": 426.578,
+         "vote_avg": 7.7,
+         "description": "자신의 진정한 힘을 아직 발견하지 못한 엘파바와 자신의 진정한 본성을 발견하지 못한 글린다, 전혀 다른 두 인물이 우정을 쌓아가며 맞닥뜨리는 예상치 못한 위기와 모험을 그린 이야기",
+         "poster_url": "/4FKnORrMQZtvk96YM4zdJLDwC9E.jpg",
+         "genres": [
+            "Drama",
+            "Fantasy",
+            "Romance"
+         ],
+         "actors": [
+            "Cynthia Erivo",
+            "Ariana Grande",
+            "Jonathan Bailey",
+            "Michelle Yeoh",
+            "Jeff Goldblum",
+            "Ethan Slater",
+            "Marissa Bode",
+            "Bowen Yang",
+            "Bronwyn James",
+            "Keala Settle"
+         ],
+         "director": "Marc Platt"
+      }
+   },
+   {
+      "pk": 1241982,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1241982,
+         "title": "모아나 2",
+         "release_date": "2024-11-27",
+         "popularity": 478.696,
+         "vote_avg": 0.0,
+         "description": "바다를 누볐던 선조들에게서 예기치 못한 부름을 받은 모아나가 마우이와 다시 만나 새로운 선원들과 함께 오랫동안 잊혀진 멀고 위험한 바다 너머로 떠나는 특별한 모험을 담은 이야기",
+         "poster_url": "/2WVvPcVRqfjyVzIUVIcszGb6zT4.jpg",
+         "genres": [
+            "Animation",
+            "Adventure",
+            "Family",
+            "Comedy"
+         ],
+         "actors": [
+            "Auli'i Cravalho",
+            "Dwayne Johnson",
+            "Alan Tudyk",
+            "Rachel House",
+            "Temuera Morrison",
+            "Nicole Scherzinger",
+            "Hualālai Chung",
+            "David Fane",
+            "Rose Matafeo",
+            "Awhimai Fraser"
+         ],
+         "director": "David G. Derrick Jr."
+      }
+   },
+   {
+      "pk": 1292359,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1292359,
+         "title": "Hello, Love, Again",
+         "release_date": "2024-11-13",
+         "popularity": 349.757,
+         "vote_avg": 0.0,
+         "description": "",
+         "poster_url": "/7R940b9RNNKLDrAI1GmCjOd5ta.jpg",
+         "genres": [
+            "Romance",
+            "Drama"
+         ],
+         "actors": [
+            "Kathryn Bernardo",
+            "Alden Richards",
+            "Joross Gamboa",
+            "Valerie Concepcion",
+            "Kevin Kreider",
+            "Jennica Garcia",
+            "Ruby Rodriguez",
+            "Jobert Austria",
+            "Mark Labella",
+            "Marvin Aritrangco"
+         ],
+         "director": "Cathy Garcia-Sampana"
+      }
+   },
+   {
+      "pk": 1361292,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1361292,
+         "title": "Cellar Door",
+         "release_date": "2024-10-31",
+         "popularity": 337.252,
+         "vote_avg": 6.4,
+         "description": "",
+         "poster_url": "/9vasnPh69RoUg9oUpzXoErMVDB7.jpg",
+         "genres": [
+            "Thriller"
+         ],
+         "actors": [
+            "Jordana Brewster",
+            "Scott Speedman",
+            "Laurence Fishburne",
+            "Addison Timlin",
+            "Chris Conner",
+            "Randy Schulman",
+            "Katie O’Grady",
+            "Zach Feiner"
+         ],
+         "director": "Vaughn Stein"
+      }
+   },
+   {
+      "pk": 1047373,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1047373,
+         "title": "The Silent Hour",
+         "release_date": "2024-10-03",
+         "popularity": 318.872,
+         "vote_avg": 6.4,
+         "description": "",
+         "poster_url": "/j736cRzBtEPCm0nHnpRN1prqiqj.jpg",
+         "genres": [
+            "Crime",
+            "Thriller",
+            "Action"
+         ],
+         "actors": [
+            "Joel Kinnaman",
+            "Sandra Mae Frank",
+            "Mekhi Phifer",
+            "Mark Strong",
+            "Michael Eklund",
+            "Anthony Grant",
+            "Jonathan Koensgen",
+            "Mike Parish",
+            "Seán James Sutton",
+            "Djinda Kane"
+         ],
+         "director": "Eric Paquette"
+      }
+   },
+   {
+      "pk": 1182047,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1182047,
+         "title": "어프렌티스",
+         "release_date": "2024-10-09",
+         "popularity": 232.82,
+         "vote_avg": 7.0,
+         "description": "세입자들에게 밀린 집세를 받으러 다니는 뉴욕 부동산 업자의 아들 ‘도널드 트럼프’는 어느 날 정·재계 고위 인사들을 변호하며 정치 브로커로 활동하는 변호사 ‘로이 콘’을 만나게 된다. 성공을 향한 강한 야망을 가진 ‘도널드 트럼프’는 불법 수사와 협박, 사기, 선동으로 인간의 탈을 쓴 악마라고 불리는 ‘로이 콘’을 스승으로 삼고 더욱 악랄한 괴물로 거듭나는데!",
+         "poster_url": "/36t19mk84eUaAysyWb29CHp3Rcv.jpg",
+         "genres": [
+            "Drama",
+            "History"
+         ],
+         "actors": [
+            "Sebastian Stan",
+            "Jeremy Strong",
+            "Martin Donovan",
+            "Maria Bakalova",
+            "Catherine McNally",
+            "Charlie Carrick",
+            "Patch Darragh",
+            "Stuart Hughes",
+            "Eoin Duffy",
+            "Chloe Madison"
+         ],
+         "director": "Ali Abbasi"
+      }
+   },
+   {
+      "pk": 1064213,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1064213,
+         "title": "아노라",
+         "release_date": "2024-10-11",
+         "popularity": 161.037,
+         "vote_avg": 7.4,
+         "description": "뉴욕의 스트리퍼 ‘아노라’는 자신의 바를 찾은 철부지 러시아 재벌2세 ‘이반’을 만나게 되고 충동적인 사랑을 믿고 허황된 신분 상승을 꿈꾸며 결혼식을 올리게 된다. 그러나 신데렐라 스토리를 꿈꿨던 것도 잠시, 한 번도 본 적 없는 ‘이반’의 부모님이 아들의 결혼 사실을 알게 되자 길길이 날뛰며 미국에 있는 하수인 3인방에게 둘을 잡아 혼인무효소송을 진행할 것을 지시한다. 하수인 3인이 들이닥치자 부모님이 무서워 겁에 질린 남편 ‘이반’은 ‘아노라’를 버린채 홀로 도망친다. ‘이반’을 찾아 결혼 생활을 유지하고 싶은 ‘아노라’와 어떻게든 ‘이반’을 찾아 혼인무효소송을 시켜야만 하는 하수인 3인방의 대환장 발악이 시작된다.",
+         "poster_url": "/mwguqSMRCA3NgpPoRsXdFhid25m.jpg",
+         "genres": [
+            "Drama",
+            "Romance",
+            "Comedy"
+         ],
+         "actors": [
+            "Mikey Madison",
+            "Mark Eydelshteyn",
+            "Karren Karagulian",
+            "Yura Borisov",
+            "Vache Tovmasyan",
+            "Lindsey Normington",
+            "Darya Ekamasova",
+            "Aleksey Serebryakov",
+            "Anton Bitter",
+            "Ivy Wolk"
+         ],
+         "director": "Alex Coco"
+      }
+   },
+   {
+      "pk": 1269108,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1269108,
+         "title": "Santet Segoro Pitu",
+         "release_date": "2024-11-07",
+         "popularity": 93.065,
+         "vote_avg": 6.7,
+         "description": "",
+         "poster_url": "/9s4esglPlA8FdVDhfrvzxudkdEd.jpg",
+         "genres": [
+            "Horror",
+            "Thriller"
+         ],
+         "actors": [
+            "Ari Irham",
+            "Sandrinna Michelle",
+            "Christian Sugiono",
+            "Sara Wijayanto",
+            "Agus Firmansyah",
+            "Erwin Moron",
+            "Eduwart Manalu",
+            "Khalif Al Juna",
+            "Monica Jauwry",
+            "Dinda Arinie"
+         ],
+         "director": "Rocky Soraya"
+      }
+   },
+   {
+      "pk": 1262299,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1262299,
+         "title": "El Apocalipsis de san Juan",
+         "release_date": "2024-10-07",
+         "popularity": 139.503,
+         "vote_avg": 10.0,
+         "description": "",
+         "poster_url": "/zzXU586n4uDBgMtVMPPQW7UJwu8.jpg",
+         "genres": [
+            "Documentary",
+            "History"
+         ],
+         "actors": [
+            "Ricardo Castro",
+            "Miguel Angel Marchessi",
+            "Héctor Hugo Larriera",
+            "Carlos Secilio"
+         ],
+         "director": "Patricio Dondo"
+      }
+   },
+   {
+      "pk": 835113,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 835113,
+         "title": "오늘의 여자 주인공",
+         "release_date": "2024-10-03",
+         "popularity": 130.459,
+         "vote_avg": 6.541,
+         "description": "배우를 지망하는 여성, 그리고 살인 행각을 이어오던 연쇄 살인범. 70년대 LA에서 두 사람이 《데이트 게임》에 출연하게 되면서 서로의 삶이 교차한다. 실화에 바탕을 둔 작품.",
+         "poster_url": "/ancDRrrkBPQyV7Qd8x0sc6lQmKS.jpg",
+         "genres": [
+            "Crime",
+            "Drama",
+            "Thriller"
+         ],
+         "actors": [
+            "Anna Kendrick",
+            "Daniel Zovatto",
+            "Tony Hale",
+            "Nicolette Robinson",
+            "Autumn Best",
+            "Pete Holmes",
+            "Kathryn Gallagher",
+            "Kelley Jakle",
+            "Matt Visser",
+            "Jedidiah Goodacre"
+         ],
+         "director": "Ian McDonald"
+      }
+   },
+   {
+      "pk": 1138194,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1138194,
+         "title": "헤레틱",
+         "release_date": "2024-10-31",
+         "popularity": 104.306,
+         "vote_avg": 7.2,
+         "description": "",
+         "poster_url": "/5HJqjCTcaE1TFwnNh3Dn21be2es.jpg",
+         "genres": [
+            "Horror",
+            "Thriller"
+         ],
+         "actors": [
+            "Sophie Thatcher",
+            "Chloe East",
+            "Hugh Grant",
+            "Topher Grace",
+            "Elle Young",
+            "Julie Lynn-Mortensen",
+            "Haylie Hansen",
+            "Elle McKinnon",
+            "Hanna Huffman",
+            "Miguel Castillo"
+         ],
+         "director": "Justin Ludwig"
+      }
+   },
+   {
+      "pk": 1035048,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1035048,
+         "title": "Elevation",
+         "release_date": "2024-11-07",
+         "popularity": 109.708,
+         "vote_avg": 7.3,
+         "description": "",
+         "poster_url": "/uQhYBxOVFU6s9agD49FnGHwJqG5.jpg",
+         "genres": [
+            "Action",
+            "Science Fiction",
+            "Thriller"
+         ],
+         "actors": [
+            "Anthony Mackie",
+            "Morena Baccarin",
+            "Maddie Hasson",
+            "Danny Boyd Jr.",
+            "Shauna Earp",
+            "Tyler Grey",
+            "Drexel Malkoff",
+            "David Malkoff"
+         ],
+         "director": "Brad Fuller"
+      }
+   }
+]
