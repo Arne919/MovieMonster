@@ -4,8 +4,8 @@ import DetailView from '@/views/DetailView.vue'
 import CreateView from '@/views/CreateView.vue'
 // import SignUpView from '@/views/SignUpView.vue'
 // import LogInView from '@/views/LogInView.vue'
-import MovieList from '../components/MovieList.vue';
-import MovieDetail from '../components/MovieDetail.vue';
+import MovieList from '@/components/MovieList.vue';
+import MovieDetail from '@/components/MovieDetail.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

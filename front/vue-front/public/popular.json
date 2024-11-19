@@ -1,0 +1,620 @@
+[
+   {
+      "pk": 912649,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 912649,
+         "title": "베놈: 라스트 댄스",
+         "release_date": "2024-10-22",
+         "popularity": 4301.968,
+         "vote_avg": 6.435,
+         "description": "환상의 케미스트리의 에디 브록과 그의 심비오트 베놈은 그들을 노리는 정체불명 존재의 추격을 피해 같이 도망을 다니게 된다. 한편 베놈의 창조자 널은 고향 행성에서부터 그들을 찾아내기 위해 지구를 침략하고 에디와 베놈은 그동안 겪어보지 못한 최악의 위기를 맞이하게 되는데…",
+         "poster_url": "/3flIDcZF3tnR7m5OU2h7lLPQwmr.jpg",
+         "genres": [
+            "Science Fiction",
+            "Action",
+            "Adventure"
+         ],
+         "actors": [
+            "Tom Hardy",
+            "Chiwetel Ejiofor",
+            "Juno Temple",
+            "Clark Backo",
+            "Rhys Ifans",
+            "Stephen Graham",
+            "Peggy Lu",
+            "Alanna Ubach",
+            "Hala Finley",
+            "Dash McCloud"
+         ],
+         "director": "David Michelinie"
+      }
+   },
+   {
+      "pk": 1034541,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1034541,
+         "title": "테리파이어 3",
+         "release_date": "2024-10-09",
+         "popularity": 3158.896,
+         "vote_avg": 6.931,
+         "description": "\"아트 더 클라운\"이 크리스마스 이브에 평화롭게 잠든 \"마일스 카운티\"의 주민들을 향해 혼돈을 일으키려 한다",
+         "poster_url": "/l1175hgL5DoXnqeZQCcU3eZIdhX.jpg",
+         "genres": [
+            "Horror",
+            "Thriller",
+            "Mystery"
+         ],
+         "actors": [
+            "Lauren LaVera",
+            "David Howard Thornton",
+            "Samantha Scaffidi",
+            "Elliott Fullam",
+            "Margaret Anne Florence",
+            "Bryce Johnson",
+            "Alexa Blair Robertson",
+            "Antonella Rose",
+            "Mason Mecartea",
+            "Krsy Fox"
+         ],
+         "director": "Phil Falcone"
+      }
+   },
+   {
+      "pk": 1184918,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1184918,
+         "title": "와일드 로봇",
+         "release_date": "2024-09-12",
+         "popularity": 2808.78,
+         "vote_avg": 8.475,
+         "description": "우연한 사고로 거대한 야생에 불시착한 로봇 로즈는 주변 동물들의 행동을 배우며 낯선 환경 속에 적응해 가던 중, 사고로 세상에 홀로 남겨진 아기 기러기 브라이트빌의 보호자가 된다. 로즈는 입력되어 있지 않은 새로운 역할과 관계에 낯선 감정을 마주하고 겨울이 오기 전에 남쪽으로 떠나야 하는 브라이트빌을 위해 동물들의 도움을 받아 이주를 위한 생존 기술을 가르쳐준다. 그러나 선천적으로 몸집이 작은 브라이트빌은 짧은 비행도 힘겨워 하는데...",
+         "poster_url": "/8dkuf9IuVh0VZjDTk7kAY67lU0U.jpg",
+         "genres": [
+            "Animation",
+            "Science Fiction",
+            "Family"
+         ],
+         "actors": [
+            "Lupita Nyong'o",
+            "Pedro Pascal",
+            "Kit Connor",
+            "Bill Nighy",
+            "Stephanie Hsu",
+            "Matt Berry",
+            "Ving Rhames",
+            "Mark Hamill",
+            "Catherine O'Hara",
+            "Boone Storm"
+         ],
+         "director": "Raymond Zibach"
+      }
+   },
+   {
+      "pk": 1118031,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1118031,
+         "title": "아포칼립스 Z: 종말의 시작",
+         "release_date": "2024-10-04",
+         "popularity": 2787.601,
+         "vote_avg": 6.758,
+         "description": "광견병과 유사한 질병이 지구 전역에 퍼져 사람들이 공격적인 생명체로 변한다. 마넬은 고양이와 함께 집에 숨어서 재치를 발휘해 살아남는다. 곧 둘은 식량을 구하고 육지와 바다의 안전한 곳을 찾기 위해 떠나야 한다.",
+         "poster_url": "/hofZ9t2zQEYjQWNZ8cPjMByVHci.jpg",
+         "genres": [
+            "Drama",
+            "Action",
+            "Horror"
+         ],
+         "actors": [
+            "Francisco Ortiz",
+            "José María Yázpik",
+            "Berta Vázquez",
+            "Iria del Río",
+            "Marta Poveda",
+            "Amalia Gómez",
+            "María Salgueiro",
+            "Yuri Mykhaylychenko",
+            "Ian Monclús",
+            "Yaiza Macías"
+         ],
+         "director": "Manel Loureiro"
+      }
+   },
+   {
+      "pk": 558449,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 558449,
+         "title": "글래디에이터 II",
+         "release_date": "2024-11-13",
+         "popularity": 2557.256,
+         "vote_avg": 6.808,
+         "description": "로마의 영웅이자 최고의 검투사였던 ‘막시무스’가 콜로세움에서 죽음을 맞이한 뒤 20여 년이 흐른 후. 쌍둥이 황제 ‘게타’와 ‘카라칼라’의 폭압 아래 시민을 위한 자유로운 나라 ‘로마의 꿈’은 잊힌 지 오래다. 한편 ‘아카시우스’ 장군이 이끄는 로마군에 대패한 후 모든 것을 잃고 노예로 전락한 ‘루시우스’는 강한 권력욕을 지닌 ‘마크리누스’의 눈에 띄어 검투사로 발탁된다. 로마를 향한 걷잡을 수 없는 분노, 타고난 투사의 기질로 콜로세움에 입성하게 된 ‘루시우스’는 결투를 거듭하며 자신이 진짜 누구인지 알게 되고 마침내 로마의 운명을 건 결전을 준비하게 되는데...!",
+         "poster_url": "/b5UXjzW5cLZhprMnlAmsVAA3G4t.jpg",
+         "genres": [
+            "Action",
+            "Adventure",
+            "Drama"
+         ],
+         "actors": [
+            "Paul Mescal",
+            "Denzel Washington",
+            "Pedro Pascal",
+            "Connie Nielsen",
+            "Joseph Quinn",
+            "Fred Hechinger",
+            "Lior Raz",
+            "Derek Jacobi",
+            "Peter Mensah",
+            "Matt Lucas"
+         ],
+         "director": "John Mathieson"
+      }
+   },
+   {
+      "pk": 533535,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 533535,
+         "title": "데드풀과 울버린",
+         "release_date": "2024-07-24",
+         "popularity": 2352.676,
+         "vote_avg": 7.7,
+         "description": "히어로 생활에서 은퇴한 후, 평범한 중고차 딜러로 살아가던 ‘데드풀’이 예상치 못한 거대한 위기를 맞아 모든 면에서 상극인 ‘울버린’을 찾아가게 되며 펼쳐지는 도파민 폭발 액션 블록버스터.",
+         "poster_url": "/4Zb4Z2HjX1t5zr1qYOTdVoisJKp.jpg",
+         "genres": [
+            "Action",
+            "Comedy",
+            "Science Fiction"
+         ],
+         "actors": [
+            "Ryan Reynolds",
+            "Hugh Jackman",
+            "Emma Corrin",
+            "Matthew Macfadyen",
+            "Dafne Keen",
+            "Jon Favreau",
+            "Morena Baccarin",
+            "Rob Delaney",
+            "Leslie Uggams",
+            "Jennifer Garner"
+         ],
+         "director": "Shawn Levy"
+      }
+   },
+   {
+      "pk": 933260,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 933260,
+         "title": "서브스턴스",
+         "release_date": "2024-09-07",
+         "popularity": 1926.657,
+         "vote_avg": 7.3,
+         "description": "더 나은 버전의 당신을 꿈꿔본 적 있나요? 당신의 인생을 바꿔줄 신제품 ‘서브스턴스’. ‘서브스턴스’는 또 다른 당신을 만들어냅니다. 새롭고, 젊고, 더 아름답고, 더 완벽한 당신을. 단 한가지 규칙, 당신의 시간을 공유하면 됩니다. 당신을 위한 일주일, 새로운 당신을 위한 일주일, 각각 7일간의 완벽한 밸런스. 쉽죠? 균형을 존중한다면… 무엇이 잘못될 수 있을까요?",
+         "poster_url": "/pq5Wh3DE0KIBjF2kdGHn98eV1PC.jpg",
+         "genres": [
+            "Drama",
+            "Horror",
+            "Science Fiction"
+         ],
+         "actors": [
+            "Demi Moore",
+            "Margaret Qualley",
+            "Dennis Quaid",
+            "Edward Hamilton-Clark",
+            "Gore Abrams",
+            "Oscar Lesage",
+            "Christian Erickson",
+            "Robin Greer",
+            "Tom Morton",
+            "Hugo Diego Garcia"
+         ],
+         "director": "Matthieu de la Mortière"
+      }
+   },
+   {
+      "pk": 845781,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 845781,
+         "title": "레드 원",
+         "release_date": "2024-10-31",
+         "popularity": 1672.621,
+         "vote_avg": 6.6,
+         "description": "크리스마스 D-1, 철통같은 보안을 뚫고 코드명 '레드 원' 산타클로스가 납치되고 크리스마스가 사라질 위기에 처했다! '레드 원'을 찾기 위해 사령관 '칼럼 드리프트'는 산타클로스 따위는 없다고 믿는 현상금 사냥꾼 '잭 오말리'와 협력하기로 한다. 시작부터 삐그덕 거리는 이들 앞에 크리스마스의 존재를 위협하는 위험천만한 적들이 나타나는데…",
+         "poster_url": "/ryYEpxWiZFmJJZUyvQCBvM5UOCU.jpg",
+         "genres": [
+            "Action",
+            "Comedy",
+            "Fantasy"
+         ],
+         "actors": [
+            "Dwayne Johnson",
+            "Chris Evans",
+            "J.K. Simmons",
+            "Lucy Liu",
+            "Kiernan Shipka",
+            "Bonnie Hunt",
+            "Kristofer Hivju",
+            "Nick Kroll",
+            "Wesley Kimmel",
+            "Mary Elizabeth Ellis"
+         ],
+         "director": "Riley Flanagan"
+      }
+   },
+   {
+      "pk": 698687,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 698687,
+         "title": "트랜스포머 ONE",
+         "release_date": "2024-09-11",
+         "popularity": 1736.623,
+         "vote_avg": 8.088,
+         "description": "사이버트론 행성의 지하 광산에서 일하는 변신 못 하는 하급 로봇 오라이온 팩스와 D-16. 한 번도 가보지 못한 지상 세계를 꿈꾸던 둘은 쾌활한 수다쟁이 B-127, 카리스마 넘치는 엘리타 원과 함께 출입이 금지된 지상에 도달한다. 지상에서 잠들어 있던 알파 트라이온을 만난 넷은 그의 도움으로 잠재되어 있던 변신 능력을 얻게 된다. 막강한 힘과 변신 능력으로 자유를 느낀 것도 잠시, 자신들의 행성을 지배하고 있는 거대한 배후의 존재를 알게 되며 모든 것을 바꿀 전쟁을 시작하는데…",
+         "poster_url": "/c2JXlWzvXegSda8qaATr8I47kMx.jpg",
+         "genres": [
+            "Animation",
+            "Science Fiction",
+            "Adventure",
+            "Family"
+         ],
+         "actors": [
+            "Chris Hemsworth",
+            "Brian Tyree Henry",
+            "Scarlett Johansson",
+            "Keegan-Michael Key",
+            "Jon Hamm",
+            "Steve Buscemi",
+            "Laurence Fishburne",
+            "Vanessa Liguori",
+            "Jon Bailey",
+            "Jason Konopisos-Alvarez"
+         ],
+         "director": "Frazer Churchill"
+      }
+   },
+   {
+      "pk": 1124641,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1124641,
+         "title": "Classified",
+         "release_date": "2024-09-19",
+         "popularity": 1692.494,
+         "vote_avg": 5.585,
+         "description": "",
+         "poster_url": "/3k8jv1kSAAc0rCfFGtWDDQL4dfK.jpg",
+         "genres": [
+            "Action",
+            "Thriller"
+         ],
+         "actors": [
+            "Aaron Eckhart",
+            "Tim Roth",
+            "Abigail Breslin",
+            "Matt Hookings",
+            "Lucky Ali",
+            "Joe Azzopardi",
+            "Kirsty Bartolo",
+            "Marc Cabourdin",
+            "Myles Clohessy",
+            "Kim DeLonghi"
+         ],
+         "director": "Jordan Dykstra"
+      }
+   },
+   {
+      "pk": 945961,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 945961,
+         "title": "에이리언: 로물루스",
+         "release_date": "2024-08-13",
+         "popularity": 1463.963,
+         "vote_avg": 7.3,
+         "description": "2142년, 부모 세대가 맞닥뜨렸던 암울한 미래를 피하려는 청년들이 더 나은 삶을 찾기 위해 식민지를 떠날 계획을 세운다. 하지만 버려진 우주 기지 로물루스에 도착한 이들은 악몽과도 같은 에이리언의 무자비한 공격에 쫓기기 시작한다. 그 누구도 그들의 절규를 들을 수 없는 우주 한가운데, 생존을 위한 치열한 사투를 벌여야 하는데...",
+         "poster_url": "/AmWTYg3RCMv7fbQxwCqrxiaUhkc.jpg",
+         "genres": [
+            "Science Fiction",
+            "Horror"
+         ],
+         "actors": [
+            "Cailee Spaeny",
+            "David Jonsson",
+            "Archie Renaux",
+            "Isabela Merced",
+            "Spike Fearn",
+            "Aileen Wu",
+            "Rosie Ede",
+            "Soma Simon",
+            "Bence Okeke",
+            "Viktor Orizu"
+         ],
+         "director": "Fede Álvarez"
+      }
+   },
+   {
+      "pk": 519182,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 519182,
+         "title": "슈퍼배드 4",
+         "release_date": "2024-06-20",
+         "popularity": 1198.555,
+         "vote_avg": 7.095,
+         "description": "슈트-업 하고 악당 전담 처리반 AVL이 된 에이전트 미니언즈와 미니언즈 만큼 귀여운 그루 주니어가 태어나면서 더욱 완벽해진 그루 패밀리. 이들 앞에 과거 그루의 고등학교 동창이자 그에게 체포당했던 빌런 맥심이 등장하고, 오직 그루를 향한 복수심에 불타올라 탈옥까지 감행한 맥심은 그루 패밀리의 뒤를 바짝 추격하며 위협을 가하기 시작하는데... 과연 에이전트 미니언즈와 그루 패밀리는 맥심을 막아낼 수 있을까?",
+         "poster_url": "/5hl1PEpAvZ8Ok37kB7woIssHi3X.jpg",
+         "genres": [
+            "Animation",
+            "Family",
+            "Comedy",
+            "Action"
+         ],
+         "actors": [
+            "Steve Carell",
+            "Kristen Wiig",
+            "Will Ferrell",
+            "Sofía Vergara",
+            "Miranda Cosgrove",
+            "Dana Gaier",
+            "Madison Polan",
+            "Pierre Coffin",
+            "Chris Renaud",
+            "Steve Coogan"
+         ],
+         "director": "Chris Renaud"
+      }
+   },
+   {
+      "pk": 1084736,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1084736,
+         "title": "몬테크리스토 백작",
+         "release_date": "2024-06-28",
+         "popularity": 984.677,
+         "vote_avg": 8.3,
+         "description": "에드먼드 단테스는  음모에 빠져 결혼식 날 자신이 저지르지도 않은 범죄로 체포된다. 샤토 디프에서 14년 동안의 수감 생활을 끝으로 탈옥에 성공하고  꿈에 그리던 부자가 된다. 단테스는 몬테크리스토 백작으로 신분을 위장하고 세 남자에게 복수를 실행에 옮긴다.",
+         "poster_url": "/4MlHj9EWOFIDoa4uXwcQhnf66w5.jpg",
+         "genres": [
+            "Action",
+            "Adventure",
+            "Drama",
+            "History",
+            "Romance",
+            "Thriller"
+         ],
+         "actors": [
+            "Pierre Niney",
+            "Bastien Bouillon",
+            "Anaïs Demoustier",
+            "Anamaria Vartolomei",
+            "Laurent Lafitte",
+            "Pierfrancesco Favino",
+            "Patrick Mille",
+            "Vassili Schneider",
+            "Julien de Saint Jean",
+            "Julie de Bona"
+         ],
+         "director": "Chloé Van Lierde"
+      }
+   },
+   {
+      "pk": 1051896,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1051896,
+         "title": "아카디안",
+         "release_date": "2024-04-12",
+         "popularity": 1184.002,
+         "vote_avg": 6.08,
+         "description": "문명의 대부분이 파괴된 지구, 쌍둥이 형제들이 정체를 알 수 없는 괴물들로부터 아버지 ‘폴’과 이웃들을 지키기 위해 나서며 벌어지는 액션 스릴러",
+         "poster_url": "/spWV1eRzlDxvai8LbxwAWR0Vst4.jpg",
+         "genres": [
+            "Action",
+            "Horror",
+            "Thriller",
+            "Science Fiction"
+         ],
+         "actors": [
+            "Nicolas Cage",
+            "Jaeden Martell",
+            "Maxwell Jenkins",
+            "Sadie Soverall",
+            "Samantha Coughlan",
+            "Joel Gillman",
+            "Joe Dixon",
+            "Daire McMahon"
+         ],
+         "director": "Michael Nilon"
+      }
+   },
+   {
+      "pk": 1116490,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1116490,
+         "title": "캐시 아웃",
+         "release_date": "2024-04-26",
+         "popularity": 1132.004,
+         "vote_avg": 6.2,
+         "description": "전설적인 강도단의 보스 ‘메이슨’(존 트라볼타) 실패로 끝난 작전 이후 은퇴하고 잠적했던 그가 옛 팀원들의 다급한 요청으로 은행 강도 현장에 도착한다.  하지만 현장은 곧 치밀한 작전 따윈 사라지고 예상치 못한 FBI 협상가까지 등장하며 엉망이 되어버린다.  ‘메이슨’은 이제 FBI에 맞서 팀원들을 지키고 인생 마지막 한탕을 성공시키기 위해 완벽한 플랜 B를 설계하기 시작하는데…",
+         "poster_url": "/4r77ZO9pKgQuW1GxjMrktyY8eUP.jpg",
+         "genres": [
+            "Action",
+            "Thriller"
+         ],
+         "actors": [
+            "John Travolta",
+            "Kristin Davis",
+            "Lukas Haas",
+            "Quavo",
+            "Joel Cohen",
+            "Noel Gugliemi",
+            "Daniel Louis Rivas",
+            "Natali Yura",
+            "Victorya Brandart",
+            "Jake Ellenz"
+         ],
+         "director": "Joel Cohen"
+      }
+   },
+   {
+      "pk": 335983,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 335983,
+         "title": "베놈",
+         "release_date": "2018-09-28",
+         "popularity": 1033.837,
+         "vote_avg": 6.835,
+         "description": "진실을 위해서라면 몸을 사리지 않고 사회의 부조리를 취재하는 정의로운 열혈 기자 에디 브록. 거대 기업 라이프 파운데이션의 생체실험에 의혹을 품고 뒤를 쫓던 그는 이들의 사무실에 잠입했다가 실험실에서 외계 생물체 심비오트의 기습 공격을 받게 된다. 심비오트가 숙주의 몸과 정신을 지배할 때 능력을 발휘하는 베놈은 에디의 몸에 기생하며 갖가지 소동을 일으킨다. 한편 비밀리에 인간과 심비오트를 결합해 새로운 생명체를 만들려는 시도를 계속하던 라이프 파운데이션의 회장 드레이크 또한 심비오트의 숙주가 된다.",
+         "poster_url": "/x4ojC59pYfPlAP4mmy2LSkCCuK2.jpg",
+         "genres": [
+            "Science Fiction",
+            "Action"
+         ],
+         "actors": [
+            "Tom Hardy",
+            "Michelle Williams",
+            "Riz Ahmed",
+            "Scott Haze",
+            "Reid Scott",
+            "Jenny Slate",
+            "Melora Walters",
+            "Woody Harrelson",
+            "Peggy Lu",
+            "Malcolm C. Murray"
+         ],
+         "director": "Monique Ganderton"
+      }
+   },
+   {
+      "pk": 1022789,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1022789,
+         "title": "인사이드 아웃 2",
+         "release_date": "2024-06-11",
+         "popularity": 948.908,
+         "vote_avg": 7.6,
+         "description": "13살이 된 라일리의 행복을 위해 매일 바쁘게 머릿속 감정 컨트롤 본부를 운영하는 ‘기쁨’, ‘슬픔’, ‘버럭’, ‘까칠’, ‘소심’. 그러던 어느 날, 낯선 감정인 ‘불안’, ‘당황’, ‘따분’, ‘부럽’이가 본부에 등장하고, 언제나 최악의 상황을 대비하며 제멋대로인 ‘불안’이와 기존 감정들은 계속 충돌한다. 결국 새로운 감정들에 의해 본부에서 쫓겨나게 된 기존 감정들은 다시 본부로 돌아가기 위해 위험천만한 모험을 시작하는데…",
+         "poster_url": "/x2BHx02jMbvpKjMvbf8XxJkYwHJ.jpg",
+         "genres": [
+            "Animation",
+            "Family",
+            "Adventure",
+            "Comedy",
+            "Drama"
+         ],
+         "actors": [
+            "Amy Poehler",
+            "Maya Hawke",
+            "Kensington Tallman",
+            "Liza Lapira",
+            "Tony Hale",
+            "Lewis Black",
+            "Phyllis Smith",
+            "Ayo Edebiri",
+            "Lilimar",
+            "Grace Lu"
+         ],
+         "director": "Kelsey Mann"
+      }
+   },
+   {
+      "pk": 1100856,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1100856,
+         "title": "Заклятье. Шепот ведьм",
+         "release_date": "2024-06-13",
+         "popularity": 1032.238,
+         "vote_avg": 6.2,
+         "description": "",
+         "poster_url": "/um3n8rQbr97uaGB2058TsktPtAy.jpg",
+         "genres": [
+            "Horror",
+            "Thriller"
+         ],
+         "actors": [
+            "Arthur Beschastny",
+            "Maryana Spivak",
+            "Sofya Shidlovskaya",
+            "Igor Grabuzov",
+            "Sergey Safronov",
+            "Valeria Kot",
+            "Ilya Vinogorsky",
+            "Kirill Rusin",
+            "Artyom Fadeev",
+            "Marina Grishakova"
+         ],
+         "director": "Serik Beyseu"
+      }
+   },
+   {
+      "pk": 1196470,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 1196470,
+         "title": "Survivre",
+         "release_date": "2024-06-19",
+         "popularity": 901.94,
+         "vote_avg": 5.07,
+         "description": "",
+         "poster_url": "/901kRttzfLScns7ss7RyKqG6d2A.jpg",
+         "genres": [
+            "Thriller",
+            "Adventure",
+            "Action",
+            "Science Fiction"
+         ],
+         "actors": [
+            "Andreas Pietschmann",
+            "Émilie Dequenne",
+            "Lucas Ebel",
+            "Arben Bajraktaraj",
+            "Lisa Delamar",
+            "Olivier Ho Hio Hen"
+         ],
+         "director": "Pierre Quefféléan"
+      }
+   },
+   {
+      "pk": 580489,
+      "model": "movies.movie",
+      "fields": {
+         "movie_id": 580489,
+         "title": "베놈 2: 렛 데어 비 카니지",
+         "release_date": "2021-09-30",
+         "popularity": 819.558,
+         "vote_avg": 6.799,
+         "description": "‘베놈'과 완벽한 파트너가 된 ‘에디 브록' 앞에 ‘클리터스 캐서디'가 ‘카니지'로 등장, 앞으로 닥칠 대혼돈의 세상을 예고한다. 대혼돈의 시대가 시작되고, 악을 악으로 처단할 것인가?",
+         "poster_url": "/fHnKlSp28U648O4vm95z86Jw5tT.jpg",
+         "genres": [
+            "Science Fiction",
+            "Action",
+            "Adventure"
+         ],
+         "actors": [
+            "Tom Hardy",
+            "Woody Harrelson",
+            "Michelle Williams",
+            "Naomie Harris",
+            "Reid Scott",
+            "Stephen Graham",
+            "Peggy Lu",
+            "Sian Webber",
+            "Michelle Greenidge",
+            "Rob Bowen"
+         ],
+         "director": "Kelly Marcel"
+      }
+   }
+]
