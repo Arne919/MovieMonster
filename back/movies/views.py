@@ -71,11 +71,16 @@ class MovieDetailView(View):
             return JsonResponse({"error": str(e)}, status=500)
 
 # 장르별 영화 조회
-class MoviesByGenreView(View):
-    def get(self, request, genre_name):
-        try:
-            genre = Genre.objects.get(name=genre_name)
-            movies = genre.movies.all().values('id', 'title', 'release_date', 'poster_url', 'description')
-            return JsonResponse(list(movies), safe=False)
-        except Genre.DoesNotExist:
-            return JsonResponse({'error': 'Genre not found'}, status=404)
+# class MoviesByGenreView(View):
+#     def get(self, request, genre_name):
+#         try:
+#             genre = Genre.objects.get(name=genre_name)
+#             movies = genre.movies.all().values('id', 'title', 'release_date', 'poster_url', 'description')
+#             return JsonResponse(list(movies), safe=False)
+#         except Genre.DoesNotExist:
+#             return JsonResponse({'error': 'Genre not found'}, status=404)
+
+class GenreListView(View):
+    def get(self, request):
+        genres = Genre.objects.all().values('id', 'name')  # id와 name만 반환
+        return JsonResponse(list(genres), safe=False)

@@ -20,12 +20,31 @@
         <p><strong>배우:</strong> {{ movie.actors.join(", ") }}</p>
         <p><strong>감독:</strong> {{ movie.director }}</p>
       </div>
+
+      <div class="movie-youtube">
+      <h3>공식 예고편</h3>
+      <button
+        type="button"
+        class="btn"
+        @click="openModal"
+        data-bs-toggle="modal"
+        data-bs-target="#youtubeTrailerModal"
+      >
+        <img :src="youtubeLogo" alt="YouTube" class="youtube-logo" />
+      </button>
+
+      <YoutubeTrailerModal :movieTitle="movie.title" />
+    </div>
+
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import youtubeLogo from "@/assets/youtubeLogo.svg";
+import YoutubeTrailerModal from "./YoutubeTrailerModal.vue";
+
 
 export default {
   data() {
@@ -83,5 +102,17 @@ h1 {
 p {
   font-size: 1rem;
   margin-bottom: 10px;
+}
+.youtube-logo {
+  width: 36px;
+  height: 36px;
+}
+
+.movie-youtube {
+  margin-top: 20px;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  text-align: center;
+  margin-bottom: 5rem;
 }
 </style>
