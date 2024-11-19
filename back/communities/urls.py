@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
-from .views import test_view
 
 app_name = 'community'
 
@@ -11,6 +10,5 @@ urlpatterns = [
     path('<int:article_pk>/like/', views.like_article),
     # comments
     path('<int:article_pk>/comments/', views.create_comment),
-    path('<int:article_pk>/comments/<int:comment_pk>/', views.comment_update_or_delete)
-    path('test/', test_view, name='test_view'),  # 테스트 URL 추가
+    path('<int:article_pk>/comments/<int:comment_pk>/', views.comment_update_or_delete),
 ]
