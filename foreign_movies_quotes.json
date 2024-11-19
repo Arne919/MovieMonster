@@ -1,0 +1,152 @@
+[
+    {
+        "id": 1,
+        "title": "어벤져스: 엔드게임",
+        "movietext": "I love you 3000."
+    },
+    {
+        "id": 2,
+        "title": "아바타",
+        "movietext": "I see you."
+    },
+    {
+        "id": 3,
+        "title": "타이타닉",
+        "movietext": "I'm the king of the world!"
+    },
+    {
+        "id": 4,
+        "title": "스타워즈: 깨어난 포스",
+        "movietext": "May the Force be with you."
+    },
+    {
+        "id": 5,
+        "title": "쥬라기 월드",
+        "movietext": "If something chases you, run."
+    },
+    {
+        "id": 6,
+        "title": "분노의 질주: 더 세븐",
+        "movietext": "I don't have friends. I got family."
+    },
+    {
+        "id": 7,
+        "title": "블랙 팬서",
+        "movietext": "Wakanda forever!"
+    },
+    {
+        "id": 8,
+        "title": "해리 포터와 죽음의 성물 - 2부",
+        "movietext": "After all this time? Always."
+    },
+    {
+        "id": 9,
+        "title": "겨울왕국",
+        "movietext": "Let it go!"
+    },
+    {
+        "id": 10,
+        "title": "미녀와 야수",
+        "movietext": "Tale as old as time."
+    },
+    {
+        "id": 11,
+        "title": "인크레더블 2",
+        "movietext": "Done properly, parenting is a heroic act."
+    },
+    {
+        "id": 12,
+        "title": "아이언맨 3",
+        "movietext": "I am Iron Man."
+    },
+    {
+        "id": 13,
+        "title": "미니언즈",
+        "movietext": "Banana!"
+    },
+    {
+        "id": 14,
+        "title": "캡틴 아메리카: 시빌 워",
+        "movietext": "I can do this all day."
+    },
+    {
+        "id": 15,
+        "title": "아쿠아맨",
+        "movietext": "My parents made me what I am. I am the protector of the deep."
+    },
+    {
+        "id": 16,
+        "title": "캡틴 마블",
+        "movietext": "I'm not gonna fight your war. I'm gonna end it."
+    },
+    {
+        "id": 17,
+        "title": "트랜스포머 3",
+        "movietext": "We will kill them all."
+    },
+    {
+        "id": 18,
+        "title": "반지의 제왕: 왕의 귀환",
+        "movietext": "My friends, you bow to no one."
+    },
+    {
+        "id": 19,
+        "title": "007 스카이폴",
+        "movietext": "The name's Bond, James Bond."
+    },
+    {
+        "id": 20,
+        "title": "트랜스포머: 사라진 시대",
+        "movietext": "Autobots, roll out!"
+    },
+    {
+        "id": 21,
+        "title": "다크나이트 라이즈",
+        "movietext": "A hero can be anyone."
+    },
+    {
+        "id": 22,
+        "title": "토이스토리 3",
+        "movietext": "So long, partner."
+    },
+    {
+        "id": 23,
+        "title": "캐리비안의 해적: 망자의 함",
+        "movietext": "Why is the rum always gone?"
+    },
+    {
+        "id": 24,
+        "title": "슈퍼배드 3",
+        "movietext": "Life is full of disappointments."
+    },
+    {
+        "id": 25,
+        "title": "도리를 찾아서",
+        "movietext": "Just keep swimming."
+    },
+    {
+        "id": 26,
+        "title": "이상한 나라의 앨리스",
+        "movietext": "We're all mad here."
+    },
+    {
+        "id": 27,
+        "title": "주토피아",
+        "movietext": "Anyone can be anything."
+    },
+    {
+        "id": 28,
+        "title": "다크나이트",
+        "movietext": "Why so serious?"
+    },
+    {
+        "id": 29,
+        "title": "알라딘",
+        "movietext": "Do you trust me?"
+    },
+    {
+        "id": 30,
+        "title": "스파이더맨: 파 프롬 홈",
+        "movietext": "With great power, comes great responsibility."
+    }
+]
