@@ -3,17 +3,20 @@
     <nav class="navbar">
       <div class="container">
         <!-- Navigation Links -->
-        <RouterLink :to="{ name: 'SignUpView' }" class="nav-link">SignUp</RouterLink> |
-        <RouterLink :to="{ name: 'LogInView' }" class="nav-link">LogIn</RouterLink> |
-        <RouterLink :to="{ name: 'ArticleView' }" class="nav-link">Reviews</RouterLink> |
-        <RouterLink :to="{ name: 'MovieList' }" class="nav-link">Movies</RouterLink> |
-        <RouterLink :to="{ name: 'GameView' }" class="nav-link">Game</RouterLink> |
-        <RouterLink :to="{ name: 'RankView' }" class="nav-link">Rank</RouterLink>
+        <RouterLink :to="{ name: 'SignUpView' }" class="nav-link">회원가입</RouterLink> |
+        <!-- <RouterLink :to="{ name: 'LogInView' }" class="nav-link">LogIn</RouterLink> | -->
+        <RouterLink :to="{ name: 'ArticleView' }" class="nav-link">게시글</RouterLink> |
+        <RouterLink :to="{ name: 'MovieList' }" class="nav-link">영화</RouterLink> |
+        <RouterLink :to="{ name: 'GameView' }" class="nav-link">게임</RouterLink> |
+        <RouterLink :to="{ name: 'RankView' }" class="nav-link">랭크</RouterLink> |
+        <RouterLink v-if="isLogin" :to="{ name: 'ProfileView' }" class="nav-link">내 프로필</RouterLink>
+        <RouterLink v-else :to="{ name: 'LogInView' }" class="nav-link">로그인</RouterLink>
+
 
         <div class="user-info" v-if="user.username">
           {{ user.username }} | Points: {{ user.current_points }}
         </div>
-        <form @submit.prevent="logOut">
+        <form @submit.prevent="logOut" v-if="isLogin">
           <input type="submit" value="Logout">
         </form>
       </div>
@@ -32,6 +35,7 @@ import { useCounterStore } from '@/stores/counter'
 import { computed } from 'vue';
 
 const store = useCounterStore()
+const isLogin = computed(() => store.isLogin);
 const user = computed(() => store.user);
 
 // const user = ref({ username: '', points: 0 }); // 유저 정보
@@ -55,10 +59,16 @@ const logOut = () => {
   store.logOut();  // store에서 로그아웃 처리
   user.value = { username: '', points: 0 }; // 유저 정보 초기화
 };
-
 onMounted(() => {
-  store.fetchUserPoints(); // 컴포넌트가 마운트되면 유저 정보 가져오기
+  if (isLogin.value) {
+    store.fetchUserPoints(); // 유저 포인트 가져오기
+  }
 });
+
+// onMounted(() => {
+//   store.fetchUserPoints(); // 컴포넌트가 마운트되면 유저 정보 가져오기
+// });
+
 </script>
 
 <style scoped>

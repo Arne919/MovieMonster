@@ -14,6 +14,7 @@ import ForeignQuotesView from "@/views/ForeignQuotesView.vue"
 import RankView from '@/views/RankView.vue'
 import { useCounterStore } from '@/stores/counter'
 import EditView from '@/views/EditView.vue'
+import ProfileView from '@/views/ProfileView.vue';
 
 
 const router = createRouter({
@@ -86,24 +87,30 @@ const router = createRouter({
       name: 'RankView',
       component: RankView,
     },
+    {
+      path: '/profile',
+      name: 'ProfileView',
+      component: ProfileView,
+    },
   ]
 })
 
 router.beforeEach((to, from) => {
-  const store = useCounterStore()
-  // 만약 이동하는 목적지가 메인 페이지이면서
-  // 현재 로그인 상태가 아니라면 로그인 페이지로 보냄
-  if (to.name === 'ArticleView' && !store.isLogin) {
-    window.alert('로그인이 필요합니다.')
-    return { name: 'LogInView' }
+  const store = useCounterStore();
+
+  // 로그인 상태 확인이 필요한 경로들
+  const protectedRoutes = ['ArticleView', 'MovieList', 'GameView', 'RankView'];
+
+  if (protectedRoutes.includes(to.name) && !store.isLogin) {
+    window.alert('로그인이 필요합니다.');
+    return { name: 'LogInView' };
   }
 
-  // 만약 로그인 사용자가 회원가입 또는 로그인 페이지로 이동하려고 하면
-  // 메인 페이지로 보냄
-  if ((to.name === 'SignUpView' || to.name === 'LogInView') && (store.isLogin)) {
-    window.alert('이미 로그인 되어있습니다.')
-    return { name: 'ArticleView' }
+  // 로그인 사용자가 회원가입 또는 로그인 페이지로 이동하려고 하면 메인 페이지로 리다이렉트
+  if ((to.name === 'SignUpView' || to.name === 'LogInView') && store.isLogin) {
+    window.alert('이미 로그인 되어있습니다.');
+    return { name: 'ArticleView' };
   }
-})
+});
 
 export default router
