@@ -18,6 +18,18 @@ export const useCounterStore = defineStore('counter', () => {
   })
   const router = useRouter()
 
+  // 별점 표시 함수
+  const displayStars = (rating) => {
+    const stars = []
+    for (let i = 1; i <= 10; i++) {
+      stars.push({
+        filled: i <= rating, // rating 이하의 별은 노란색으로 채워짐
+      })
+    }
+    return stars
+  }
+
+
   
   const fetchUserPoints = async () => {
     try {
@@ -177,5 +189,5 @@ export const useCounterStore = defineStore('counter', () => {
       data: { content: commentContent }
     })
   }
-  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut, Username, fetchUserPoints, user}
+  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut, Username, fetchUserPoints, user, displayStars}
 }, { persist: true })

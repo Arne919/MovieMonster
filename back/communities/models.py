@@ -11,6 +11,7 @@ class Article(models.Model):
     )
     title = models.CharField(max_length=100)
     content = models.TextField()
+    rating = models.IntegerField(default=0)  # 소수점 대신 정수형으로 변경
     poster_url = models.URLField(max_length=500, blank=True, null=True)  # 포스터 URL 필드 추가
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

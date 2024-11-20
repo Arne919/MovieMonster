@@ -9,6 +9,17 @@
         <h4>영화 포스터</h4>
         <img :src="article.poster_url" alt="영화 포스터" class="poster-image" />
       </div>
+      <p class="rating-container">
+      <span>별점 : </span>
+        <div class="stars">
+          <div
+          v-for="(star, index) in store.displayStars(article.rating)"
+          :key="index"
+          class="star"
+          :class="{ filled: star.filled }"
+          ></div>
+        </div>
+      </p>
       <p>게시글 번호 : {{ article.id }}</p>
       <p>내용 : {{ article.content }}</p>
       <p>작성일 : {{ article.created_at }}</p>
@@ -156,6 +167,28 @@ const deleteArticle = async () => {
 }
 </script>
 
-<style>
+<style scoped>
+.rating-container {
+  display: flex;
+  align-items: center; /* 텍스트와 별점을 세로로 정렬 */
+  gap: 8px; /* 텍스트와 별점 사이의 간격 조절 */
+}
 
+.stars {
+  display: flex;
+  gap: 5px;
+  pointer-events: none; /* 마우스 이벤트를 비활성화 */
+}
+
+.star {
+  width: 24px;
+  height: 24px;
+  background: url('/assets/images/gray-star.png') no-repeat center;
+  background-size: contain;
+}
+
+.star.filled {
+  background: url('/assets/images/yellow-star.png') no-repeat center;
+  background-size: contain;
+}
 </style>
