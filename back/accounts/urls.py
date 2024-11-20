@@ -10,4 +10,5 @@ urlpatterns = [
     path('rankings/', views.get_user_rankings, name='get_user_rankings'),
     path('games/', views.manage_games, name='manage_games'),
     path('csrf-token/', views.get_csrf_token, name='get_csrf_token'),
+    path('api/user/points/', views.user_points, name='user_points'),
 ]

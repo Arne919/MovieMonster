@@ -3,7 +3,7 @@ from django.db import models
 
 class User(AbstractUser):
     profile_picture = models.URLField(max_length=100, blank=True)
-    points = models.IntegerField(default=0)
+    points = models.IntegerField(default=500)
     follower = models.IntegerField(default=0)
     following = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
