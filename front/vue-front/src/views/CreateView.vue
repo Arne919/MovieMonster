@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>게시글 작성</h1>
+    <h1>리뷰 작성</h1>
 
     <!-- 영화 검색 영역 추가 -->
     <div>
@@ -14,7 +14,7 @@
 
     <!-- 영화 포스터 미리보기 -->
     <div v-if="moviePoster">
-      <h4>영화 포스터 미리보기</h4>
+      <h3>영화 포스터</h3>
       <img :src="moviePoster" alt="영화 포스터" class="poster-image" />
     </div>
 

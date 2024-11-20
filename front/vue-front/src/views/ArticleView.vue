@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Article Page</h1>
-    <RouterLink :to="{ name: 'CreateView' }">Create</RouterLink>
+    <h1>전체 영화 리뷰</h1>
+    <RouterLink :to="{ name: 'CreateView' }">리뷰 작성하기</RouterLink>
     <ArticleList />
   </div>
 </template>

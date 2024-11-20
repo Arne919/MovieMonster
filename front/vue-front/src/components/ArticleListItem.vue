@@ -2,9 +2,10 @@
   <div>
      <!-- 포스터 이미지 출력 -->
     <img v-if="article.poster_url" :src="article.poster_url" alt="포스터 이미지" class="poster-image" />
-    <h5>{{ article.id }}</h5>
-    <p>{{ article.title }}</p>
-    <p>{{ article.content }}</p>
+    <p>글 번호: {{ article.id }}</p>
+    <p>제목 :{{ article.title }}</p>
+    <p>내용 : {{ article.content }}</p>
+    <p>작성자: {{ article.user }}</p>
     <p>좋아요 수: {{ article.like_count }}</p> <!-- 좋아요 수 표시 -->
     <p>댓글 수: {{ article.comment_count }}</p> <!-- 댓글 수 표시 -->
     <RouterLink 

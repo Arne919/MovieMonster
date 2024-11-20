@@ -1,14 +1,15 @@
 <template>
   <div>
-    <h1>Detail</h1>
     <div v-if="article">
+      <h2>제목 : {{ article.title }}</h2>
+      <!-- 작성자 정보 출력 -->
+      <p>작성자: {{ article.user }}</p>
        <!-- 포스터 이미지 출력 -->
        <div v-if="article.poster_url">
         <h4>영화 포스터</h4>
         <img :src="article.poster_url" alt="영화 포스터" class="poster-image" />
       </div>
       <p>게시글 번호 : {{ article.id }}</p>
-      <p>제목 : {{ article.title }}</p>
       <p>내용 : {{ article.content }}</p>
       <p>작성일 : {{ article.created_at }}</p>
       <p>수정일 : {{ article.updated_at }}</p>
