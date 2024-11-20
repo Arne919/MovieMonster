@@ -1,11 +1,15 @@
 <template>
   <div class="container">
-    <h1 class="text-center my-4">해외영화 명언</h1>
+    <h1 class="text-center my-4">해외영화 명대사</h1>
 
     <div v-if="gameOver" class="text-center">
       <h2>게임 종료!</h2>
       <p>모든 문제를 완료하였습니다.</p>
       <p>정답 수: {{ correctCount }} / {{ totalQuestions }}</p>
+
+      <!-- 포인트 획득하기 버튼 -->
+      <button class="btn btn-success mt-3" @click="claimPoints">포인트 획득하기</button>
+
       <button class="btn btn-primary mt-3" @click="restartGame">다시 시작하기</button>
     </div>
 
@@ -42,108 +46,159 @@
 </template>
 
 <script>
+import { ref, onMounted } from "vue";
 import axios from "axios";
+import { useCounterStore } from '@/stores/counter';
+import { useRouter } from 'vue-router';
 
 export default {
-  data() {
-    return {
-      reviews: [],
-      selectedQuotes: [],
-      currentquote: {},
-      currentQuestionIndex: 0,
-      totalQuestions: 5,
-      userAnswer: "",
-      isCorrect: false,
-      showResult: false,
-      gameOver: false,
-      correctCount: 0,
-    };
-  },
-  methods: {
-    async updatePoints(points) {
+  setup() {
+    // 상태 정의
+    const reviews = ref([]);
+    const selectedQuotes = ref([]);
+    const currentquote = ref({});
+    const currentQuestionIndex = ref(0);
+    const totalQuestions = ref(5);
+    const userAnswer = ref("");
+    const isCorrect = ref(false);
+    const showResult = ref(false);
+    const gameOver = ref(false);
+    const correctCount = ref(0);
+    const router = useRouter();
+    const store = useCounterStore();
+
+    // 포인트 업데이트 함수
+    const updatePoints = async (points) => {
       try {
         const response = await axios.post(
-          "/api/user/points/",
+          `${store.API_URL}/accounts/user/points/`,
           { points },
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              Authorization: `Token ${store.token}`,
             },
           }
         );
         console.log("Points updated successfully:", response.data);
+        store.points += points; // Pinia 스토어의 포인트 업데이트
       } catch (error) {
         console.error("Error updating points:", error);
       }
-    },
-    restartGame() {
-      if (this.correctCount > 0) {
-        this.updatePoints(this.correctCount * 100);
+    };
+
+    // 포인트 획득하기
+    const claimPoints = async () => {
+      if (correctCount.value > 0) {
+        await updatePoints(correctCount.value * 100);
       }
-      this.currentQuestionIndex = 0;
-      this.correctCount = 0;
-      this.gameOver = false;
-      this.userAnswer = "";
-      this.showResult = false;
-      this.isCorrect = false;
-      this.selectRandomReviews();
-      this.currentquote = this.selectedQuotes[this.currentQuestionIndex];
-    },
-    async fetchReviews() {
+      await store.fetchUserPoints(); // 사용자 포인트 최신화
+      router.push({ name: "GameView" }); // 게임 뷰로 이동
+    };
+
+    // 게임 재시작
+    const restartGame = () => {
+      if (correctCount.value > 0) {
+        updatePoints(correctCount.value * 100);
+      }
+      currentQuestionIndex.value = 0;
+      correctCount.value = 0;
+      gameOver.value = false;
+      userAnswer.value = "";
+      showResult.value = false;
+      isCorrect.value = false;
+      selectRandomReviews();
+      currentquote.value = selectedQuotes.value[currentQuestionIndex.value];
+    };
+
+    // 리뷰 데이터 가져오기
+    const fetchReviews = async () => {
       try {
         const response = await axios.get("/foreign_movies_quotes.json");
-        this.reviews = response.data;
-        this.selectRandomReviews();
-        this.currentquote = this.selectedQuotes[this.currentQuestionIndex];
+        reviews.value = response.data;
+        selectRandomReviews();
+        currentquote.value = selectedQuotes.value[currentQuestionIndex.value];
       } catch (error) {
         console.error("Error loading reviews:", error);
       }
-    },
-    selectRandomReviews() {
-      const shuffled = this.reviews.sort(() => 0.5 - Math.random());
-      this.selectedQuotes = shuffled.slice(0, this.totalQuestions);
-    },
-    checkAnswer() {
-      if (this.userAnswer.trim() === "") return;
-      this.isCorrect = this.currentquote.title.some(
+    };
+
+    // 랜덤 리뷰 선택
+    const selectRandomReviews = () => {
+      const shuffled = reviews.value.sort(() => 0.5 - Math.random());
+      selectedQuotes.value = shuffled.slice(0, totalQuestions.value);
+    };
+
+    // 정답 확인
+    const checkAnswer = () => {
+      if (userAnswer.value.trim() === "") return;
+      isCorrect.value = currentquote.value.title.some(
         (correctTitle) =>
-          this.userAnswer.trim().toLowerCase() ===
-          correctTitle.toLowerCase()
+          userAnswer.value.trim().toLowerCase() === correctTitle.toLowerCase()
       );
-      if (this.isCorrect) {
-        this.correctCount += 1;
+      if (isCorrect.value) {
+        correctCount.value += 1;
       }
-      this.showResult = true;
-    },
-    nextReview() {
-      this.userAnswer = "";
-      this.showResult = false;
-      this.isCorrect = false;
-      this.currentQuestionIndex += 1;
-      if (this.currentQuestionIndex < this.totalQuestions) {
-        this.currentquote = this.selectedQuotes[this.currentQuestionIndex];
+      showResult.value = true;
+    };
+
+    // 다음 리뷰로 이동
+    const nextReview = () => {
+      userAnswer.value = "";
+      showResult.value = false;
+      isCorrect.value = false;
+      currentQuestionIndex.value += 1;
+      if (currentQuestionIndex.value < totalQuestions.value) {
+        currentquote.value = selectedQuotes.value[currentQuestionIndex.value];
       } else {
-        this.gameOver = true;
+        gameOver.value = true;
       }
-    },
-    handleKeyPress(event) {
+    };
+
+    // 포스터 URL 가져오기
+    const getPosterUrl = (title) => `/foreign_movie_poster/${title}.jpg`;
+
+    // 키보드 입력 처리
+    const handleKeyPress = (event) => {
       if (event.key === "Enter") {
-        if (this.showResult) {
-          this.nextReview();
+        if (showResult.value) {
+          nextReview();
         } else {
-          this.checkAnswer();
+          checkAnswer();
         }
       }
-    },
-    getPosterUrl(title) {
-      return `/foreign_movie_poster/${title}.jpg`;
-    },
-  },
-  created() {
-    this.fetchReviews();
+    };
+
+    // 컴포넌트가 마운트될 때 리뷰 데이터 로드
+    onMounted(() => {
+      fetchReviews();
+    });
+
+    // 반환
+    return {
+      reviews,
+      selectedQuotes,
+      currentquote,
+      currentQuestionIndex,
+      totalQuestions,
+      userAnswer,
+      isCorrect,
+      showResult,
+      gameOver,
+      correctCount,
+      updatePoints,
+      restartGame,
+      fetchReviews,
+      selectRandomReviews,
+      checkAnswer,
+      nextReview,
+      getPosterUrl,
+      handleKeyPress,
+      claimPoints,
+    };
   },
 };
 </script>
+
 
 <style scoped>
 .container {

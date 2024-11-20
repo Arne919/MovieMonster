@@ -6,19 +6,19 @@
       <!-- OneLineView 링크 -->
       <div class="link-box" @click="goTo('OneLineView')">
         <h2>이동진의 한줄평</h2>
-        <p>이동진의 한줄평을 보고 영화 맞추기!</p>
+        <p>이동진의 한줄평 보고 영화 맞추기!</p>
       </div>
 
       <!-- KoreaQuotesView 링크 -->
       <div class="link-box" @click="goTo('KoreaQuotesView')">
-        <h2>한국영화 명언</h2>
-        <p>한국영화 명언 보고 영화 맞추기!</p>
+        <h2>한국영화 명대사</h2>
+        <p>한국영화 명대사 보고 영화 맞추기!</p>
       </div>
 
       <!-- ForeignQuotesView 링크 -->
       <div class="link-box" @click="goTo('ForeignQuotesView')">
-        <h2>해외영화 명언</h2>
-        <p>해외영화 명언을 보고 영화 맞추기! (어려움)</p>
+        <h2>해외영화 명대사</h2>
+        <p>해외영화 명대사 보고 영화 맞추기! (어려움)</p>
       </div>
     </div>
   </div>
