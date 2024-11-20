@@ -7,6 +7,9 @@ import LogInView from '@/views/LogInView.vue'
 import MovieList from '@/components/MovieList.vue'; // MovieList 컴포넌트 추가
 import MovieDetail from '@/components/MovieDetail.vue'; // MovieDetail 컴포넌트 추가
 import GameView from '@/views/GameView.vue'
+import OneLineView from "@/views/OneLineView.vue"
+import KoreaQuotesView from "@/views/KoreaQuotesView.vue"
+import ForeignQuotesView from "@/views/ForeignQuotesView.vue"
 import RankView from '@/views/RankView.vue'
 import { useCounterStore } from '@/stores/counter'
 
@@ -55,6 +58,21 @@ const router = createRouter({
       path: '/game',
       name: 'GameView',
       component: GameView,
+    },
+    {
+      path: "/game/one-line",
+      name: "OneLineView",
+      component: OneLineView,
+    },
+    {
+      path: "/game/korea-quotes",
+      name: "KoreaQuotesView",
+      component: KoreaQuotesView,
+    },
+    {
+      path: "/game/foreign-quotes",
+      name: "ForeignQuotesView",
+      component: ForeignQuotesView,
     },
     {
       path: '/rank',
