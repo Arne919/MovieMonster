@@ -52,8 +52,8 @@ const user = computed(() => store.user);
 
 // 로그아웃 함수
 const logOut = () => {
-  localStorage.removeItem('token'); // JWT 토큰 제거
-  // user.value = { username: '', points: 0 }; // 사용자 정보 초기화
+  store.logOut();  // store에서 로그아웃 처리
+  user.value = { username: '', points: 0 }; // 유저 정보 초기화
 };
 
 onMounted(() => {
