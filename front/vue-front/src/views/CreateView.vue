@@ -96,6 +96,8 @@ const createArticle = function () {
     }
   })
     .then((res) => {
+      // 게시글 작성 성공 시, 유저 포인트 업데이트
+      store.fetchUserPoints()  // 작성 후 사용자 포인트를 갱신
       // 게시글 작성 성공 시, ArticleView 페이지로 이동
       router.push({ name: 'ArticleView' })
     })
