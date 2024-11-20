@@ -12,6 +12,7 @@
       <p>내용 : {{ article.content }}</p>
       <p>작성일 : {{ article.created_at }}</p>
       <p>수정일 : {{ article.updated_at }}</p>
+      <button v-if="isAuthor" @click="goToEdit">게시글 수정</button> <!-- 수정 버튼 -->
       <button v-if="isAuthor" @click="deleteArticle">게시글 삭제</button> <!-- 삭제 버튼 -->
       <p>좋아요 수: {{ article.like_count }}</p> <!-- 좋아요 수 표시 -->
       <button @click="toggleLike">좋아요</button> <!-- 좋아요 버튼 추가 -->
@@ -56,7 +57,10 @@ const isAuthor = ref(false)  // 사용자가 작성자인지 여부
 onMounted(() => {
   axios({
     method: 'get',
-    url: `${store.API_URL}/api/v1/communities/${route.params.id}/`
+    url: `${store.API_URL}/api/v1/communities/${route.params.id}/`,
+    headers: {
+      Authorization: `Token ${store.token}`  // 토큰 추가
+    }
   })
     .then((res) => {
       // console.log(res.data)
@@ -68,6 +72,9 @@ onMounted(() => {
       console.log(err)
     })
 })
+const goToEdit = () => {
+  router.push({ name: 'EditView', params: { id: article.value.id } })
+}
 
 
   // 댓글 목록 로드

@@ -47,16 +47,26 @@ def article_list(request):
 #             serializer.save(user=request.user)
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
-
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
+@permission_classes([IsAuthenticated])
 def article_detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
 
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
-        print(serializer.data)
         return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        # 요청자가 작성자인지 확인
+        if request.user != article.user:
+            return Response({"error": "본인의 게시글만 수정할 수 있습니다."}, status=status.HTTP_403_FORBIDDEN)
+        
+        # 수정 처리
+        serializer = ArticleSerializer(article, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])  # 인증된 사용자만 접근 가능
