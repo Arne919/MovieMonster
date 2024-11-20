@@ -17,7 +17,20 @@
       <h3>영화 포스터</h3>
       <img :src="moviePoster" alt="영화 포스터" class="poster-image" />
     </div>
-
+    <!-- 별점 매기기 -->
+    <div class="stars">
+        <div
+          v-for="n in 10"
+          :key="n"
+          class="star"
+          :class="{ filled: n <= hoverRating || n <= selectedRating }"
+          @mouseover="hoverStar(n)"
+          @mouseleave="clearHover"
+          @click="selectRating(n)"
+        ></div>
+    </div>
+    <p>선택한 별점: {{ selectedRating }} / 10</p>
+    <button @click="submitRating">별점 확인</button>
     <!-- 게시글 작성 폼 -->
     <form @submit.prevent="createArticle">
       <div>
@@ -30,6 +43,7 @@
       </div>
       <input type="submit">
     </form>
+     
   </div>
 </template>
 
@@ -44,6 +58,29 @@ const title = ref(null)
 const content = ref(null)
 const store = useCounterStore()
 const router = useRouter()
+
+// 별점 관련 함수 ---------------
+
+const hoverRating = ref(0); // 마우스 위치에 따라 표시되는 별점
+
+// 마우스 오버 함수
+const hoverStar = (value) => {
+  hoverRating.value = value; // 마우스 위치에 따라 별점 변경
+};
+
+// 마우스 아웃 함수
+const clearHover = () => {
+  hoverRating.value = 0; // 마우스가 별에서 떠나면 초기화
+};
+const selectedRating = ref(0);
+
+const selectRating = (rating) => {
+  selectedRating.value = rating; // 선택한 별점 업데이트
+};
+
+const submitRating = () => {
+  console.log(`선택한 별점은: ${selectedRating.value}`);
+};
 
 // 영화 검색 관련 변수
 const searchQuery = ref('')  // 영화 제목을 입력받는 변수
@@ -89,7 +126,8 @@ const createArticle = function () {
     data: {
       title: title.value,
       content: content.value,
-      poster_url: moviePoster.value  // 영화 포스터 URL을 게시글에 추가
+      poster_url: moviePoster.value,  // 영화 포스터 URL을 게시글에 추가
+      rating: selectedRating.value,
     },
     headers: {
       Authorization: `Token ${store.token}`  // 인증 헤더에 토큰 추가
@@ -98,6 +136,7 @@ const createArticle = function () {
     .then((res) => {
       // 게시글 작성 성공 시, 유저 포인트 업데이트
       store.fetchUserPoints()  // 작성 후 사용자 포인트를 갱신
+      alert('리뷰 작성이 완료되었습니다.');
       // 게시글 작성 성공 시, ArticleView 페이지로 이동
       router.push({ name: 'ArticleView' })
     })
@@ -109,6 +148,30 @@ const createArticle = function () {
 </script>
 
 <style>
+.star-rating {
+  display: flex;
+  direction: row;
+  gap: 4px;
+}
+
+.stars {
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  width: 24px;
+  height: 24px;
+  background: url('/assets/images/gray-star.png') no-repeat center;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.star.filled {
+  background: url('/assets/images/yellow-star.png') no-repeat center;
+  background-size: contain;
+}
+
 .error-message {
   color: red;
   margin-top: 10px;
