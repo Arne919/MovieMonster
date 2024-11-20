@@ -141,7 +141,9 @@ export const useCounterStore = defineStore('counter', () => {
         console.log(res.data)
         token.value = null
         Username.value = null  // 로그아웃 시 사용자 이름 초기화
-        router.push({ name: 'ArticleView' })
+        localStorage.removeItem('token')  // 로컬 스토리지에서 토큰 제거
+        user.value = { username: '', points: 0 } // 유저 정보 초기화
+        router.push({ name: 'ArticleView' }) // 로그아웃 후 리다이렉트
       })
       .catch((err) => {
         console.log(err)
