@@ -13,6 +13,7 @@ import KoreaQuotesView from "@/views/KoreaQuotesView.vue"
 import ForeignQuotesView from "@/views/ForeignQuotesView.vue"
 import RankView from '@/views/RankView.vue'
 import { useCounterStore } from '@/stores/counter'
+import EditView from '@/views/EditView.vue'
 
 
 const router = createRouter({
@@ -22,6 +23,11 @@ const router = createRouter({
       path: '/',
       name: 'ArticleView',
       component: ArticleView
+    },
+    {
+      path: '/articles/:id/edit',
+      name: 'EditView',
+      component: EditView
     },
     {
       path: '/articles/:id',
