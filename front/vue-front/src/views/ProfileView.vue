@@ -1,26 +1,92 @@
 <template>
-  <div class="profile">
-    <h1>내 프로필</h1>
-    <p>사용자 이름: {{ user.username }}</p>
-    <p>포인트: {{ user.current_points }}</p>
+  <div>
+    <h1>{{ user.username }}의 프로필 페이지</h1>
+    <p>포인트: {{ user.points }}</p>
+    <p>팔로잉: <span id="followings-count">{{ user.followingsCount }}</span></p>
+    <p>팔로워: <span id="followers-count">{{ user.followersCount }}</span></p>
+    <div v-if="!isOwnProfile">
+      <button @click="toggleFollow" id="followBtn">
+        {{ isFollowed ? '언팔로우' : '팔로우' }}
+      </button>
+    </div>
   </div>
 </template>
 
+
 <script setup>
+import { ref, computed, onMounted } from 'vue';
+import axios from 'axios';
+import { useRoute } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
-import { computed, onMounted } from 'vue';
 
+
+// Vue Router와 Pinia 스토어 사용
+const route = useRoute();
 const store = useCounterStore();
-const user = computed(() => store.user);
 
-// 유저 정보를 마운트 시 업데이트
-onMounted(() => {
-  store.fetchUserPoints();
+// 유저 데이터 상태 관리
+const user = ref({
+  username: '',
+  followingsCount: 0,
+  followersCount: 0,
 });
+const isFollowed = ref(false);
+
+// 현재 프로필이 로그인된 사용자의 것인지 확인
+const isOwnProfile = computed(() => store.user.username === route.params.username);
+
+// API를 통해 프로필 데이터 가져오기
+const fetchProfile = async () => {
+  try {
+    const { data } = await axios.get(`http://127.0.0.1:8000/accounts/profile/${route.params.username}/`, {
+      headers: {
+        Authorization: `Token ${store.token}`,
+      },
+    });
+    user.value = {
+      id: data.id,
+      username: data.username,
+      points: data.points,
+      followingsCount: data.followings_count,
+      followersCount: data.followers_count,
+    };
+    isFollowed.value = data.is_followed;
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+  }
+};
+
+// 팔로우/언팔로우 상태 변경
+const toggleFollow = async () => {
+  try {
+    const { data } = await axios.post(`http://127.0.0.1:8000/accounts/${user.value.id}/follow/`, null, {
+      headers: {
+        Authorization: `Token ${store.token}`,
+      },
+    });
+    isFollowed.value = data.is_followed;
+    user.value.followersCount = data.followers_count;
+    user.value.followingsCount = data.followings_count;
+  } catch (error) {
+    console.error('Error toggling follow:', error);
+  }
+};
+
+// 컴포넌트가 마운트될 때 데이터 로드
+onMounted(fetchProfile);
+
 </script>
 
 <style scoped>
-.profile {
-  padding: 20px;
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
 }
 </style>

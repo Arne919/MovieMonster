@@ -87,8 +87,13 @@ const router = createRouter({
       name: 'RankView',
       component: RankView,
     },
+    // {
+    //   path: '/profile',
+    //   name: 'ProfileView',
+    //   component: ProfileView,
+    // },
     {
-      path: '/profile',
+      path: '/profile/:username',
       name: 'ProfileView',
       component: ProfileView,
     },
