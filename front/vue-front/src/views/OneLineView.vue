@@ -116,6 +116,15 @@ export default {
         this.gameOver = true; // 게임 종료
       }
     },
+    handleKeyPress(event) {
+      if (event.key === "Enter") {
+        if (this.showResult) {
+          this.nextReview(); // 결과 화면에서는 다음으로 이동
+        } else {
+          this.checkAnswer(); // 입력 화면에서는 제출 동작
+        }
+      }
+    },
     
     // 영화 포스터 URL 생성 (id 기반)
     getPosterUrl(id) {
