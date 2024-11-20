@@ -3,11 +3,12 @@
     <nav class="navbar">
       <div class="container">
         <!-- Navigation Links -->
-        <RouterLink :to="{ name: 'SignUpView' }">SignUpView</RouterLink> | 
-        <RouterLink :to="{ name: 'LogInView' }">LogInView</RouterLink> | 
-        <RouterLink :to="{ name: 'ArticleView' }" class="nav-link">Articles</RouterLink> | 
-        <!-- <RouterLink to="/movies" class="nav-link">Movies</RouterLink> -->
-        <RouterLink :to="{ name: 'MovieList' }" class="nav-link">Movies</RouterLink>
+        <RouterLink :to="{ name: 'SignUpView' }" class="nav-link">SignUp</RouterLink>|
+        <RouterLink :to="{ name: 'LogInView' }" class="nav-link">LogIn</RouterLink>|
+        <RouterLink :to="{ name: 'ArticleView' }" class="nav-link">Reviews</RouterLink>|
+        <RouterLink :to="{ name: 'MovieList' }" class="nav-link">Movies</RouterLink>|
+        <RouterLink :to="{ name: 'GameView' }" class="nav-link">Game</RouterLink>|
+        <RouterLink :to="{ name: 'RankView' }" class="nav-link">Rank</RouterLink>
         <form @submit.prevent="logOut">
           <input type="submit" value="Logout">
         </form>
