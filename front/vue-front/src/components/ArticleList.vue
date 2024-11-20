@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Article List</h3>
+    <h3>리뷰 목록</h3>
     <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     <ArticleListItem 
       v-for="article in store.articles"
