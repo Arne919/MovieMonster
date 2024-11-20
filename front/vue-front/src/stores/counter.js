@@ -8,6 +8,7 @@ export const useCounterStore = defineStore('counter', () => {
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
   const Username = ref(null)  // 사용자 이름 저장 변수 추가
+  const user = ref({ username: '', points: 0 }); // 유저 정보
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -17,6 +18,20 @@ export const useCounterStore = defineStore('counter', () => {
   })
   const router = useRouter()
 
+  
+  const fetchUserPoints = async () => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/accounts/user/points/`, {
+        headers: {
+          Authorization: `Token ${token.value}`, // JWT 토큰 추가
+        },
+      });
+      console.log(response.data)
+      user.value = response.data;
+    } catch (error) {
+      console.error('Error fetching user points:', error);
+    }
+  };
   // DRF로 전체 게시글 요청을 보내고 응답을 받아 articles에 저장하는 함수
       const getArticles = async function () {
         console.log("getArticles function called");
@@ -154,5 +169,5 @@ export const useCounterStore = defineStore('counter', () => {
       data: { content: commentContent }
     })
   }
-  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut, Username }
+  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut, Username, fetchUserPoints, user}
 }, { persist: true })
