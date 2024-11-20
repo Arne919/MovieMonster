@@ -11,7 +11,7 @@
         <RouterLink :to="{ name: 'RankView' }" class="nav-link">Rank</RouterLink>
 
         <div class="user-info" v-if="user.username">
-          {{ user.username }} | Points: {{ user.points }}
+          {{ user.username }} | Points: {{ user.current_points }}
         </div>
         <form @submit.prevent="logOut">
           <input type="submit" value="Logout">
@@ -28,16 +28,20 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { RouterView, RouterLink } from 'vue-router';
+import { useCounterStore } from '@/stores/counter'
+
+const store = useCounterStore()
 
 const user = ref({ username: '', points: 0 }); // 유저 정보
 
 const fetchUserPoints = async () => {
   try {
-    const response = await axios.get('/api/user/points/', {
+    const response = await axios.get(`http://127.0.0.1:8000/accounts/user/points/`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`, // JWT 토큰 추가
+        Authorization: `Token ${store.token}`, // JWT 토큰 추가
       },
     });
+    console.log(response.data)
     user.value = response.data;
   } catch (error) {
     console.error('Error fetching user points:', error);

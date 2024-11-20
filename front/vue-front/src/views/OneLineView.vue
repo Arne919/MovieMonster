@@ -48,6 +48,9 @@
 
 <script>
 import axios from "axios";
+import { useCounterStore } from '@/stores/counter'
+
+const store = useCounterStore()
 
 export default {
   data() {
@@ -56,7 +59,7 @@ export default {
       selectedReviews: [], // 랜덤으로 선택된 20개의 대사
       currentReview: {}, // 현재 대사
       currentQuestionIndex: 0, // 현재 문제 번호
-      totalQuestions: 20, // 총 문제 수
+      totalQuestions: 5, // 총 문제 수
       userAnswer: "", // 사용자 입력
       isCorrect: false, // 정답 여부
       showResult: false, // 결과 화면 표시 여부
@@ -69,11 +72,11 @@ export default {
     async updatePoints(points) {
       try { 
         const response = await axios.post(
-          '/api/user/points/',
+          `http://127.0.0.1:8000/accounts/user/points/`,
           { points },
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
+              Authorization: `Token ${store.token}`,
             },
           }
         );
@@ -85,7 +88,7 @@ export default {
     // 게임 재시작 메서드 수정
     restartGame() {
       if (this.correctCount > 0) {
-        this.updateUserPoints(this.correctCount * 100); // 정답 수 × 100점을 백엔드에 전달
+        this.updatePoints(this.correctCount * 100); // 정답 수 × 100점을 백엔드에 전달
       }
       this.currentQuestionIndex = 0;
       this.correctCount = 0;
