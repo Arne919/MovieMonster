@@ -90,6 +90,36 @@ def manage_games(request):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['POST', 'GET'])  # POST와 GET 모두 지원
+@permission_classes([IsAuthenticated])  # 인증된 사용자만 접근 가능
+def user_points(request):
+    user = request.user  # 현재 로그인한 유저
+
+    if request.method == 'POST':
+        # 프론트에서 받은 추가 점수 처리
+        points_to_add = request.data.get('points', 0)
+        user.points += points_to_add
+        user.save()
+        return Response(
+            {
+                'message': 'Points updated successfully!',
+                'username': user.username,
+                'current_points': user.points
+            },
+            status=status.HTTP_200_OK
+        )
+
+    elif request.method == 'GET':
+        # 유저 정보 반환
+        return Response(
+            {
+                'username': user.username,
+                'current_points': user.points
+            },
+            status=status.HTTP_200_OK
+        )
+
 
 from django.middleware.csrf import get_token
 

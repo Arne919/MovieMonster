@@ -65,8 +65,28 @@ export default {
     };
   },
   methods: {
-    // 게임 재시작
+    // 유저 점수를 백엔드에 전달하는 메서드
+    async updatePoints(points) {
+      try { 
+        const response = await axios.post(
+          '/api/user/points/',
+          { points },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          }
+        );
+        console.log('Points updated successfully:', response.data);
+      } catch (error) {
+        console.error('Error updating points:', error);
+      }
+    },
+    // 게임 재시작 메서드 수정
     restartGame() {
+      if (this.correctCount > 0) {
+        this.updateUserPoints(this.correctCount * 100); // 정답 수 × 100점을 백엔드에 전달
+      }
       this.currentQuestionIndex = 0;
       this.correctCount = 0;
       this.gameOver = false;
