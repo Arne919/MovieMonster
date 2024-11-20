@@ -2,11 +2,14 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
+from django.http.response import JsonResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from .models import User, Category, Ranking, Game
 from .serializers import UserSerializer, CategorySerializer, RankingSerializer, GameSerializer
-from django.shortcuts import get_object_or_404
+
 from django.middleware.csrf import get_token
 
 # 회원가입
@@ -119,6 +122,72 @@ def user_points(request):
             },
             status=status.HTTP_200_OK
         )
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+    return Response({
+        'id': user.id,
+        'username': user.username,
+        'points': user.points,  # 포인트 추가
+        'followers_count': user.followers.count(),
+        'followings_count': user.followings.count(),
+        'is_followed': request.user in user.followers.all(),
+    })
+
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def profile(request, username):
+#     User = get_user_model()
+#     person = User.objects.get(username=username)
+#     context = {
+#         "person": person,
+#     }
+#     return render(request, "accounts/profile.html", context)
+
+
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def follow(request, user_pk):
+#     person = get_object_or_404(User, pk=user_pk)
+#     user = request.user
+
+#     if person != user:
+#         if person.followers.filter(pk=user.pk).exists():
+#             person.followers.remove(user)
+#             is_followed = False
+#         else:
+#             person.followers.add(user)
+#             is_followed = True
+
+#         return Response({
+#             'is_followed': is_followed,
+#             'followings_count': person.followings.count(),
+#             'followers_count': person.followers.count(),
+#         })
+
+#     return Response({'error': 'You cannot follow yourself.'}, status=400)
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def follow(request, user_pk):
+    User = get_user_model()
+    person = User.objects.get(pk=user_pk)
+    user = request.user
+    if person != user:
+        if person.followers.filter(pk=user.pk).exists():
+            person.followers.remove(user)
+            is_followed = False
+        else:
+            person.followers.add(user)
+            is_followed = True
+        context = {
+            'is_followed': is_followed,
+            'followings_count': person.followings.count(),
+            'followers_count': person.followers.count(),
+        }
+        return JsonResponse(context)
+    return redirect('accounts:profile', person.username)
 
 
 from django.middleware.csrf import get_token

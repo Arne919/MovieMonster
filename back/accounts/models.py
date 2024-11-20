@@ -4,8 +4,11 @@ from django.db import models
 class User(AbstractUser):
     profile_picture = models.URLField(max_length=100, blank=True)
     points = models.IntegerField(default=500)
-    follower = models.IntegerField(default=0)
-    following = models.IntegerField(default=0)
+    # followers = models.IntegerField(default=0)
+    # following = models.IntegerField(default=0)
+    followings = models.ManyToManyField(
+        "self", symmetrical=False, related_name="followers"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
 class Category(models.Model):

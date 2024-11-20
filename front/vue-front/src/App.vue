@@ -9,7 +9,7 @@
         <RouterLink :to="{ name: 'MovieList' }" class="nav-link">영화</RouterLink> |
         <RouterLink :to="{ name: 'GameView' }" class="nav-link">게임</RouterLink> |
         <RouterLink :to="{ name: 'RankView' }" class="nav-link">랭크</RouterLink> |
-        <RouterLink v-if="isLogin" :to="{ name: 'ProfileView' }" class="nav-link">내 프로필</RouterLink>
+        <RouterLink v-if="isLogin" :to="{ name: 'ProfileView', params: { username: user.username } }" class="nav-link">내 프로필</RouterLink>
         <RouterLink v-else :to="{ name: 'LogInView' }" class="nav-link">로그인</RouterLink>
 
 
@@ -24,7 +24,8 @@
   </header>
 
   <!-- Dynamic Route View -->
-  <RouterView />
+  <!-- <RouterView /> -->
+  <RouterView :key="$route.fullPath" />
 </template>
 
 <script setup>
