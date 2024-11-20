@@ -41,9 +41,11 @@ import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { useCounterStore } from '@/stores/counter'
 import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const store = useCounterStore()
 const route = useRoute()
+const router = useRouter() 
 const article = ref(null)
 const comments = ref([])  // 댓글 목록 (이 부분을 ref()로 정의)
 const newComment = ref('')  // 새로운 댓글 내용
@@ -126,21 +128,23 @@ const toggleLike = () => {
     })
 }
 
-const deleteArticle = () => {
-  axios({
-    method: 'delete',
-    url: `${store.API_URL}/api/v1/communities/${route.params.id}/delete/`,
-    headers: {
-      Authorization: `Token ${store.token}`
-    }
-  })
-    .then(() => {
-      alert('게시글이 삭제되었습니다.')
-      router.push({ name: 'ArticleList' })  // 게시글 목록 페이지로 이동
+const deleteArticle = async () => {
+  try {
+    await axios({
+      method: 'delete',
+      url: `${store.API_URL}/api/v1/communities/${route.params.id}/delete/`,
+      headers: {
+        Authorization: `Token ${store.token}`
+      }
     })
-    .catch((err) => {
-      console.log(err)
-    })
+    alert('게시글이 삭제되었습니다.')
+
+    // 게시글 목록을 새로 고친 후에 페이지 이동
+    await store.getArticles()  // 전체 게시글 목록을 새로고침하고 기다림
+    router.push({ name: 'ArticleView' })  // 게시글 목록 페이지로 이동
+  } catch (err) {
+    console.log(err)
+  }
 }
 </script>
 
