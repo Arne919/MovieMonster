@@ -3,6 +3,9 @@ import json
 from django.http import JsonResponse
 from django.views import View
 from .models import Movie, Genre
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 
 # 모든 영화 조회
 class MovieListView(View):
@@ -84,3 +87,22 @@ class GenreListView(View):
     def get(self, request):
         genres = Genre.objects.all().values('id', 'name')  # id와 name만 반환
         return JsonResponse(list(genres), safe=False)
+    
+@api_view(['GET'])
+def search_movie(request):
+    movie_title = request.query_params.get('title', None)
+
+    if not movie_title:
+        return Response({"error": "영화 제목을 입력해 주세요."}, status=status.HTTP_400_BAD_REQUEST)
+
+    # 영화 제목이 정확히 일치하는 영화 찾기
+    try:
+        movie = Movie.objects.get(title__iexact=movie_title)  # 대소문자 구분 없이 정확히 일치하는 영화 찾기
+        return Response({
+            "id": movie.id,
+            "title": movie.title,
+            "poster": movie.poster_url,  # 포스터 URL이 저장되어 있다고 가정
+            "description": movie.description
+        })
+    except Movie.DoesNotExist:
+        return Response({"error": "영화가 존재하지 않습니다."}, status=status.HTTP_404_NOT_FOUND)
