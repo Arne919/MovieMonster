@@ -28,6 +28,9 @@ def article_list(request):
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
+            user = request.user
+            user.points += 100  # 100 포인트 추가
+            user.save()  # 사용자 정보 저장
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
 # @api_view(['GET', 'POST'])
