@@ -7,6 +7,7 @@ export const useCounterStore = defineStore('counter', () => {
   const articles = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
+  const Username = ref(null)  // 사용자 이름 저장 변수 추가
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -74,9 +75,22 @@ export const useCounterStore = defineStore('counter', () => {
     })
       .then((res) => {
         token.value = res.data.key
-        router.push({ name: 'ArticleView' })
-        console.log(res.data)
-        // console.log('로그인 성공')
+        // 사용자 정보를 가져오는 추가 요청
+        axios({
+          method: 'get',
+          url: `${API_URL}/accounts/user/`,  // 사용자 정보를 가져오는 엔드포인트
+          headers: {
+            Authorization: `Token ${token.value}`
+          }
+        })
+          .then((userRes) => {
+            console.log(userRes.data)
+            Username.value = userRes.data.username  // 사용자 이름 저장
+            router.push({ name: 'ArticleView' })
+          })
+          .catch((err) => {
+            console.log('Error fetching user information:', err)
+          })
       })
       .catch((err) => {
         console.log(err)
@@ -92,6 +106,7 @@ export const useCounterStore = defineStore('counter', () => {
       .then((res) => {
         console.log(res.data)
         token.value = null
+        username.value = null  // 로그아웃 시 사용자 이름 초기화
         router.push({ name: 'ArticleView' })
       })
       .catch((err) => {
@@ -120,5 +135,5 @@ export const useCounterStore = defineStore('counter', () => {
       data: { content: commentContent }
     })
   }
-  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut }
+  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut, Username }
 }, { persist: true })

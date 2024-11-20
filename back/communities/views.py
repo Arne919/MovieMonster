@@ -39,6 +39,18 @@ def article_detail(request, article_pk):
         serializer = ArticleSerializer(article)
         print(serializer.data)
         return Response(serializer.data)
+    
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])  # 인증된 사용자만 접근 가능
+def delete_article(request, article_pk):
+    article = get_object_or_404(Article, pk=article_pk)
+    
+    # 요청한 사용자가 게시글 작성자인지 확인
+    if request.user != article.user:
+        return Response({"error": "본인의 게시글만 삭제할 수 있습니다."}, status=status.HTTP_403_FORBIDDEN)
+    
+    article.delete()  # 게시글 삭제
+    return Response({"message": "게시글이 삭제되었습니다."}, status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
