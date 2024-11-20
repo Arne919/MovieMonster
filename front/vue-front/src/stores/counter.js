@@ -88,6 +88,10 @@ export const useCounterStore = defineStore('counter', () => {
         // console.log('회원가입 성공')
         const password = password1
         logIn({ username, password })
+        // console.log("로그인됐나요?:", isLogin)
+      })
+      .then(() => {
+        fetchUserPoints(); // 로그인 이후 즉시 사용자 포인트 정보를 가져옴
       })
       .catch((err) => {
         console.log(err)
@@ -108,7 +112,7 @@ export const useCounterStore = defineStore('counter', () => {
       }
     })
       .then((res) => {
-        token.value = res.data.key
+        token.value = res.data.key;
         // 사용자 정보를 가져오는 추가 요청
         axios({
           method: 'get',
@@ -117,6 +121,7 @@ export const useCounterStore = defineStore('counter', () => {
             Authorization: `Token ${token.value}`
           }
         })
+
           .then((userRes) => {
             console.log(userRes.data)
             Username.value = userRes.data.username  // 사용자 이름 저장
@@ -125,6 +130,7 @@ export const useCounterStore = defineStore('counter', () => {
           .catch((err) => {
             console.log('Error fetching user information:', err)
           })
+        return fetchUserPoints()
       })
       .catch((err) => {
         console.log(err)
