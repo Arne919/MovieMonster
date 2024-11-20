@@ -2,11 +2,17 @@
   <div>
     <h1>Detail</h1>
     <div v-if="article">
+       <!-- 포스터 이미지 출력 -->
+       <div v-if="article.poster_url">
+        <h4>영화 포스터</h4>
+        <img :src="article.poster_url" alt="영화 포스터" class="poster-image" />
+      </div>
       <p>게시글 번호 : {{ article.id }}</p>
       <p>제목 : {{ article.title }}</p>
       <p>내용 : {{ article.content }}</p>
       <p>작성일 : {{ article.created_at }}</p>
       <p>수정일 : {{ article.updated_at }}</p>
+      <button v-if="isAuthor" @click="deleteArticle">게시글 삭제</button> <!-- 삭제 버튼 -->
       <p>좋아요 수: {{ article.like_count }}</p> <!-- 좋아요 수 표시 -->
       <button @click="toggleLike">좋아요</button> <!-- 좋아요 버튼 추가 -->
       <!-- 댓글 목록 표시 -->
@@ -41,6 +47,8 @@ const route = useRoute()
 const article = ref(null)
 const comments = ref([])  // 댓글 목록 (이 부분을 ref()로 정의)
 const newComment = ref('')  // 새로운 댓글 내용
+const isAuthor = ref(false)  // 사용자가 작성자인지 여부
+
 
 // DetailView가 마운트되기전에 DRF로 단일 게시글 조회를 요청 후 응답데이터를 저장
 onMounted(() => {
@@ -51,6 +59,8 @@ onMounted(() => {
     .then((res) => {
       // console.log(res.data)
       article.value = res.data
+      isAuthor.value = article.value.user === store.Username  // 작성자인지 확인
+      console.log(article.value)
     })
     .catch((err) => {
       console.log(err)
@@ -98,42 +108,6 @@ const submitComment = () => {
       console.log(err)
     })
 }
-// axios({
-//     method: 'get',
-//     url: `${store.API_URL}/api/v1/communities/${route.params.id}/comments/`,
-//     headers: {
-//       Authorization: `Token ${store.token}`
-//     }
-//   })
-//     .then((res) => {
-//       comments.value = res.data  // 댓글 목록 업데이트
-//     })
-//     .catch((err) => {
-//       console.log(err)
-//     })
-
-// // 댓글 작성 함수
-// const submitComment = () => {
-//   if (!newComment.value.trim()) {
-//     return
-//   }
-
-//   axios({
-//     method: 'post',
-//     url: `${store.API_URL}/api/v1/communities/${route.params.id}/comments/`,
-//     headers: {
-//       Authorization: `Token ${store.token}`
-//     },
-//     data: { content: newComment.value }
-//   })
-//     .then((res) => {
-//       comments.value.push(res.data)  // 새로운 댓글 추가
-//       newComment.value = ''  // 댓글 작성 후 입력 필드 초기화
-//     })
-//     .catch((err) => {
-//       console.log(err)
-//     })
-// }
 
 const toggleLike = () => {
   // 좋아요 토글 요청
@@ -152,6 +126,22 @@ const toggleLike = () => {
     })
 }
 
+const deleteArticle = () => {
+  axios({
+    method: 'delete',
+    url: `${store.API_URL}/api/v1/communities/${route.params.id}/delete/`,
+    headers: {
+      Authorization: `Token ${store.token}`
+    }
+  })
+    .then(() => {
+      alert('게시글이 삭제되었습니다.')
+      router.push({ name: 'ArticleList' })  // 게시글 목록 페이지로 이동
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
 </script>
 
 <style>

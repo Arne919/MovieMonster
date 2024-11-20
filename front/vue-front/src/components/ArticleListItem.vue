@@ -1,5 +1,7 @@
 <template>
   <div>
+     <!-- 포스터 이미지 출력 -->
+    <img v-if="article.poster_url" :src="article.poster_url" alt="포스터 이미지" class="poster-image" />
     <h5>{{ article.id }}</h5>
     <p>{{ article.title }}</p>
     <p>{{ article.content }}</p>
@@ -42,3 +44,11 @@ const toggleLike = () => {
     })
 }
 </script>
+
+<style scoped>
+.poster-image {
+  width: 150px;
+  height: auto;
+  margin-bottom: 10px;
+}
+</style>
