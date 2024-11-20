@@ -19,16 +19,34 @@ from .models import Article, Comment
 @permission_classes([IsAuthenticated])
 def article_list(request):
     if request.method == 'GET':
-        articles = get_list_or_404(Article.objects.annotate(comment_count=Count('comments')))  # 댓글 수 계산
+        # 수정: get_list_or_404를 사용하지 않고 all()을 사용하여 모든 게시글을 가져옴
+        articles = Article.objects.annotate(comment_count=Count('comments')).all()
         serializer = ArticleListSerializer(articles, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            # serializer.save()
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+# @api_view(['GET', 'POST'])
+# def article_list(request):
+#     if request.method == 'GET':
+#         articles = get_list_or_404(Article.objects.annotate(comment_count=Count('comments')))
+#         serializer = ArticleListSerializer(articles, many=True)
+#         return Response(serializer.data)
+
+#     elif request.method == 'POST':
+#         # 인증된 사용자만 게시글을 작성할 수 있도록 설정
+#         if not request.user.is_authenticated:
+#             return Response({"error": "인증된 사용자만 게시글을 작성할 수 있습니다."}, status=status.HTTP_403_FORBIDDEN)
+
+#         serializer = ArticleSerializer(data=request.data)
+#         if serializer.is_valid(raise_exception=True):
+#             serializer.save(user=request.user)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 
 @api_view(['GET'])

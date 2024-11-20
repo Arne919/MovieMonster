@@ -18,22 +18,41 @@ export const useCounterStore = defineStore('counter', () => {
   const router = useRouter()
 
   // DRF로 전체 게시글 요청을 보내고 응답을 받아 articles에 저장하는 함수
-  const getArticles = function () {
-    axios({
-      method: 'get',
-      url: `${API_URL}/api/v1/communities/`,
-      headers: {
-        Authorization: `Token ${token.value}`
+      const getArticles = async function () {
+        console.log("getArticles function called");
+        try {
+          const response = await axios({
+            method: 'get',
+            url: `${API_URL}/api/v1/communities/`,
+            headers: {
+              Authorization: `Token ${token.value}`
+            }
+          })
+          articles.value = response.data
+          console.log(articles.value)
+          console.log("Updated articles:", articles.value)
+        } catch (err) {
+          console.log(err)
+        }
       }
-    })
-      .then((res) => {
-        // console.log(res.data)
-        articles.value = res.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  
+  // const getArticles = function () {
+  //   axios({
+  //     method: 'get',
+  //     url: `${API_URL}/api/v1/communities/`,
+  //     headers: {
+  //       Authorization: `Token ${token.value}`
+  //     }
+  //   })
+  //     .then((res) => {
+  //       // console.log(res.data)
+  //       articles.value = res.data
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
+
 
   // 회원가입 요청 액션
   const signUp = function (payload) {
@@ -106,7 +125,7 @@ export const useCounterStore = defineStore('counter', () => {
       .then((res) => {
         console.log(res.data)
         token.value = null
-        username.value = null  // 로그아웃 시 사용자 이름 초기화
+        Username.value = null  // 로그아웃 시 사용자 이름 초기화
         router.push({ name: 'ArticleView' })
       })
       .catch((err) => {
