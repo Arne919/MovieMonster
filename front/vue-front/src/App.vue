@@ -29,24 +29,26 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import { RouterView, RouterLink } from 'vue-router';
 import { useCounterStore } from '@/stores/counter'
+import { computed } from 'vue';
 
 const store = useCounterStore()
+const user = computed(() => store.user);
 
-const user = ref({ username: '', points: 0 }); // 유저 정보
+// const user = ref({ username: '', points: 0 }); // 유저 정보
 
-const fetchUserPoints = async () => {
-  try {
-    const response = await axios.get(`http://127.0.0.1:8000/accounts/user/points/`, {
-      headers: {
-        Authorization: `Token ${store.token}`, // JWT 토큰 추가
-      },
-    });
-    console.log(response.data)
-    user.value = response.data;
-  } catch (error) {
-    console.error('Error fetching user points:', error);
-  }
-};
+// const fetchUserPoints = async () => {
+//   try {
+//     const response = await axios.get(`http://127.0.0.1:8000/accounts/user/points/`, {
+//       headers: {
+//         Authorization: `Token ${store.token}`, // JWT 토큰 추가
+//       },
+//     });
+//     console.log(response.data)
+//     user.value = response.data;
+//   } catch (error) {
+//     console.error('Error fetching user points:', error);
+//   }
+// };
 
 // 로그아웃 함수
 const logOut = () => {
@@ -55,7 +57,7 @@ const logOut = () => {
 };
 
 onMounted(() => {
-  fetchUserPoints(); // 컴포넌트가 마운트되면 유저 정보 가져오기
+  store.fetchUserPoints(); // 컴포넌트가 마운트되면 유저 정보 가져오기
 });
 </script>
 

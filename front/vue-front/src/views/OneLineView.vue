@@ -6,7 +6,11 @@
       <h2>게임 종료!</h2>
       <p>모든 문제를 완료하였습니다.</p>
       <p>정답 수: {{ correctCount }} / {{ totalQuestions }}</p>
-      <!-- 필요에 따라 다시 시작하거나 다른 동작을 추가할 수 있습니다 -->
+
+      <!-- 포인트 획득하기 버튼 -->
+      <button class="btn btn-success mt-3" @click="claimPoints">포인트 획득하기</button>
+
+      <!-- 재시작 버튼 -->
       <button class="btn btn-primary mt-3" @click="restartGame">다시 시작하기</button>
     </div>
 
@@ -15,9 +19,9 @@
       <p class="text-center">문제 {{ currentQuestionIndex + 1 }} / {{ totalQuestions }}</p>
 
       <!-- 랜덤 대사 출력 -->
-      <div v-if="!showResult" class="review-container text-center">
-        <p class="review-text">{{ currentReview.review }}</p>
-
+      <div v-if="!showResult && currentReview" class="review-container text-center">
+        <p class="review-text">{{ currentReview?.review }}</p> <!-- 방어적 접근 -->
+        
         <!-- 정답 입력 -->
         <div class="input-container text-center">
           <input
@@ -32,11 +36,11 @@
       </div>
 
       <!-- 결과 출력 -->
-      <div v-if="showResult" class="result-container text-center mt-4">
+      <div v-if="showResult && currentReview" class="result-container text-center mt-4">
         <p v-if="isCorrect" class="text-success">정답입니다! 🎉</p>
-        <p v-else class="text-danger">틀렸습니다. 정답은 "{{ currentReview.title[0] }}" 입니다. ❌</p>
+        <p v-else class="text-danger">틀렸습니다. 정답은 "{{ currentReview?.title[0] }}" 입니다. ❌</p> <!-- 방어적 접근 -->
         <img
-          :src="getPosterUrl(currentReview.id)"
+          :src="getPosterUrl(currentReview?.id)"
           class="img-fluid mt-3"
           alt="영화 포스터"
         />
@@ -46,33 +50,33 @@
   </div>
 </template>
 
-<script>
-import axios from "axios";
-import { useCounterStore } from '@/stores/counter'
 
-const store = useCounterStore()
+<script>
+import { ref, onMounted } from "vue";
+import axios from "axios";
+import { useCounterStore } from '@/stores/counter';
+import { useRouter } from 'vue-router';
+
 
 export default {
-  data() {
-    return {
-      reviews: [], // 모든 대사 데이터
-      selectedReviews: [], // 랜덤으로 선택된 20개의 대사
-      currentReview: {}, // 현재 대사
-      currentQuestionIndex: 0, // 현재 문제 번호
-      totalQuestions: 5, // 총 문제 수
-      userAnswer: "", // 사용자 입력
-      isCorrect: false, // 정답 여부
-      showResult: false, // 결과 화면 표시 여부
-      gameOver: false, // 게임 종료 여부
-      correctCount: 0, // 정답 개수
-    };
-  },
-  methods: {
-    // 유저 점수를 백엔드에 전달하는 메서드
-    async updatePoints(points) {
-      try { 
+  setup() {
+    const reviews = ref([]);
+    const selectedReviews = ref([]);
+    const currentReview = ref({});
+    const currentQuestionIndex = ref(0);
+    const totalQuestions = ref(5);
+    const userAnswer = ref("");
+    const isCorrect = ref(false);
+    const showResult = ref(false);
+    const gameOver = ref(false);
+    const correctCount = ref(0);
+    const router = useRouter();
+    const store = useCounterStore();
+
+    const updatePoints = async (points) => {
+      try {
         const response = await axios.post(
-          `http://127.0.0.1:8000/accounts/user/points/`,
+          `${store.API_URL}/accounts/user/points/`,
           { points },
           {
             headers: {
@@ -80,82 +84,95 @@ export default {
             },
           }
         );
-        console.log('Points updated successfully:', response.data);
+        console.log("Points updated successfully:", response.data);
+        store.points += points;
       } catch (error) {
-        console.error('Error updating points:', error);
+        console.error("Error updating points:", error);
       }
-    },
-    // 게임 재시작 메서드 수정
-    restartGame() {
-      if (this.correctCount > 0) {
-        this.updatePoints(this.correctCount * 100); // 정답 수 × 100점을 백엔드에 전달
+    };
+
+    const claimPoints = async () => {
+      if (correctCount.value > 0) {
+        await updatePoints(correctCount.value * 100);
       }
-      this.currentQuestionIndex = 0;
-      this.correctCount = 0;
-      this.gameOver = false;
-      this.userAnswer = "";
-      this.showResult = false;
-      this.isCorrect = false;
-      this.selectRandomReviews(); // 새로운 랜덤 리뷰 선택
-      this.currentReview = this.selectedReviews[this.currentQuestionIndex];
-    },
-    // JSON 파일에서 대사 데이터 가져오기
-    async fetchReviews() {
+      await store.fetchUserPoints();
+      router.push({ name: "GameView" });
+    };
+
+    const restartGame = () => {
+      currentQuestionIndex.value = 0;
+      correctCount.value = 0;
+      gameOver.value = false;
+      userAnswer.value = "";
+      showResult.value = false;
+      isCorrect.value = false;
+      selectRandomReviews();
+      currentReview.value = selectedReviews.value[currentQuestionIndex.value];
+    };
+
+    const fetchReviews = async () => {
       try {
         const response = await axios.get("/one_line_review2.json");
-        this.reviews = response.data; // JSON 데이터를 reviews 배열에 저장
-        this.selectRandomReviews(); // 랜덤으로 20개 선택
-        this.currentReview = this.selectedReviews[this.currentQuestionIndex];
+        reviews.value = response.data;
+        selectRandomReviews();
+        currentReview.value = selectedReviews.value[currentQuestionIndex.value];
       } catch (error) {
         console.error("Error loading reviews:", error);
       }
-    },
-    // 랜덤으로 20개의 리뷰 선택 (중복 없이)
-    selectRandomReviews() {
-      const shuffled = this.reviews.sort(() => 0.5 - Math.random());
-      this.selectedReviews = shuffled.slice(0, this.totalQuestions);
-    },
-    // 정답 확인
-    checkAnswer() {
-      if (this.userAnswer.trim() === "") return; // 빈 입력은 무시
-      this.isCorrect = this.currentReview.title.some(
+    };
+
+    const selectRandomReviews = () => {
+      const shuffled = reviews.value.sort(() => 0.5 - Math.random());
+      selectedReviews.value = shuffled.slice(0, totalQuestions.value);
+    };
+
+    const checkAnswer = () => {
+      if (userAnswer.value.trim() === "") return;
+      isCorrect.value = currentReview.value.title.some(
         (correctTitle) =>
-          this.userAnswer.trim().toLowerCase() === correctTitle.toLowerCase()
+          userAnswer.value.trim().toLowerCase() === correctTitle.toLowerCase()
       );
-      if (this.isCorrect) {
-        this.correctCount += 1;
+      if (isCorrect.value) {
+        correctCount.value += 1;
       }
-      this.showResult = true; // 결과 화면 표시
-    },
-    // 다음 대사로 이동
-    nextReview() {
-      this.userAnswer = "";
-      this.showResult = false;
-      this.isCorrect = false;
-      this.currentQuestionIndex += 1;
-      if (this.currentQuestionIndex < this.totalQuestions) {
-        this.currentReview = this.selectedReviews[this.currentQuestionIndex];
+      showResult.value = true;
+    };
+
+    const nextReview = () => {
+      userAnswer.value = "";
+      showResult.value = false;
+      isCorrect.value = false;
+      currentQuestionIndex.value += 1;
+      if (currentQuestionIndex.value < totalQuestions.value) {
+        currentReview.value = selectedReviews.value[currentQuestionIndex.value];
       } else {
-        this.gameOver = true; // 게임 종료
+        gameOver.value = true;
       }
-    },
-    handleKeyPress(event) {
-      if (event.key === "Enter") {
-        if (this.showResult) {
-          this.nextReview(); // 결과 화면에서는 다음으로 이동
-        } else {
-          this.checkAnswer(); // 입력 화면에서는 제출 동작
-        }
-      }
-    },
-    
-    // 영화 포스터 URL 생성 (id 기반)
-    getPosterUrl(id) {
-      return `/one_line_poster/${id}.jpg`; // 포스터 파일 경로
-    },
-  },
-  created() {
-    this.fetchReviews(); // 컴포넌트 생성 시 대사 데이터 가져오기
+    };
+
+    const getPosterUrl = (id) => `/one_line_poster/${id}.jpg`;
+
+    onMounted(() => {
+      fetchReviews();
+    });
+
+    return {
+      reviews,
+      selectedReviews,
+      currentReview,
+      currentQuestionIndex,
+      totalQuestions,
+      userAnswer,
+      isCorrect,
+      showResult,
+      gameOver,
+      correctCount,
+      claimPoints,
+      restartGame,
+      checkAnswer,
+      nextReview,
+      getPosterUrl,
+    };
   },
 };
 </script>
