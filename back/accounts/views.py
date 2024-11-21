@@ -8,39 +8,66 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.db.models import Count
+<<<<<<< HEAD
 from .models import User, Category, Ranking, Game
 from .serializers import UserSerializer, CategorySerializer, RankingSerializer, GameSerializer, ProfileSerializer, UserRankSerializer
 
 
+=======
+from .models import User, Category, CategoryMovie, Ranking, Game
+from .serializers import UserSerializer, CategorySerializer, RankingSerializer, GameSerializer, ProfileSerializer
+from movies.models import Movie
+>>>>>>> 93df6fa738f8bb026b443f395dbe5bf36993edb5
 from django.middleware.csrf import get_token
 
-# 회원가입
-# @api_view(['POST'])
-# @permission_classes([AllowAny])
-# def register_user(request):
-#     data = request.data
-#     serializer = UserSerializer(data=data)
-#     if serializer.is_valid():
-#         serializer.save(password=make_password(data['password']))
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_category(request):
+    user = request.user
+    name = request.data.get('name')
 
-# # 로그인
-# @api_view(['POST'])
-# @permission_classes([AllowAny])
-# def login_user(request):
-#     username = request.data.get('username')
-#     password = request.data.get('password')
-#     user = authenticate(request, username=username, password=password)
-#     if user is not None:
-#         login(request, user)
-#         csrf_token = get_token(request)
-#         return Response({
-#             "message": "Login successful!",
-#              "csrf_token": csrf_token
-#              }, status=status.HTTP_200_OK)
-#     else:
-#         return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+    if not name or not name.strip():
+        return Response({'error': 'Category name cannot be empty.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    if Category.objects.filter(user=user, name=name).exists():
+        return Response({'error': 'Category with this name already exists.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        category = Category.objects.create(user=user, name=name.strip())
+        serializer = CategorySerializer(category)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    except Exception as e:
+        return Response({'error': f'Failed to create category: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_movie_to_category(request):
+    user = request.user
+    category_id = request.data.get('category_id')
+    movie_id = request.data.get('movie_id')
+
+    category = Category.objects.filter(user=user, id=category_id).first()
+    if not category:
+        return Response({'error': 'Category not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    movie = Movie.objects.filter(id=movie_id).first()
+    if not movie:
+        return Response({'error': 'Movie not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    if CategoryMovie.objects.filter(category=category, movie=movie).exists():
+        return Response({'error': 'Movie already in category.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    CategoryMovie.objects.create(category=category, movie=movie)
+    return Response({'message': 'Movie added to category successfully.'}, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_categories(request):
+    user = request.user
+    categories = Category.objects.filter(user=user)
+    serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 # 사용자 프로필 정보 조회
 @api_view(['GET'])
@@ -58,21 +85,6 @@ def get_users(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
-# 카테고리 조회 및 생성
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-def manage_categories(request):
-    if request.method == 'GET':
-        categories = Category.objects.filter(user=request.user)
-        serializer = CategorySerializer(categories, many=True)
-        return Response(serializer.data)
-    elif request.method == 'POST':
-        serializer = CategorySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 # 사용자 랭킹 조회
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -80,22 +92,28 @@ def get_user_rankings(request):
     rankings = User.objects.order_by('-points')[:10]  # 상위 10명
     serializer = UserRankSerializer(rankings, many=True)
     return Response(serializer.data)
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def get_user_rankings(request):
+#     rankings = Ranking.objects.filter(user=request.user)
+#     serializer = RankingSerializer(rankings, many=True)
+#     return Response(serializer.data)
 
 
 # 게임 기록 조회 및 생성
-@api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
-def manage_games(request):
-    if request.method == 'GET':
-        games = Game.objects.filter(user=request.user)
-        serializer = GameSerializer(games, many=True)
-        return Response(serializer.data)
-    elif request.method == 'POST':
-        serializer = GameSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# @api_view(['GET', 'POST'])
+# @permission_classes([IsAuthenticated])
+# def manage_games(request):
+#     if request.method == 'GET':
+#         games = Game.objects.filter(user=request.user)
+#         serializer = GameSerializer(games, many=True)
+#         return Response(serializer.data)
+#     elif request.method == 'POST':
+#         serializer = GameSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save(user=request.user)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['POST', 'GET'])  # POST와 GET 모두 지원
 @permission_classes([IsAuthenticated])  # 인증된 사용자만 접근 가능
@@ -156,38 +174,6 @@ def profile(request, username):
         'is_followed': request.user in user.followers.all(),  # 현재 사용자가 팔로우 중인지 여부
     })
 
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
-# def profile(request, username):
-#     User = get_user_model()
-#     person = User.objects.get(username=username)
-#     context = {
-#         "person": person,
-#     }
-#     return render(request, "accounts/profile.html", context)
-
-
-# @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
-# def follow(request, user_pk):
-#     person = get_object_or_404(User, pk=user_pk)
-#     user = request.user
-
-#     if person != user:
-#         if person.followers.filter(pk=user.pk).exists():
-#             person.followers.remove(user)
-#             is_followed = False
-#         else:
-#             person.followers.add(user)
-#             is_followed = True
-
-#         return Response({
-#             'is_followed': is_followed,
-#             'followings_count': person.followings.count(),
-#             'followers_count': person.followers.count(),
-#         })
-
-#     return Response({'error': 'You cannot follow yourself.'}, status=400)
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def follow(request, user_pk):

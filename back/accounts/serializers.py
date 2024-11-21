@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User, Category, Ranking, Game
+from movies.models import Movie
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -30,12 +31,18 @@ class ProfileSerializer(serializers.ModelSerializer):
             'likes_count',  # sum_likes 매핑
         ]
 
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = ['id', 'title', 'poster_url']
+        
 class CategorySerializer(serializers.ModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(read_only=True)
-    
+    movies = MovieSerializer(many=True, read_only=True, source='category_movies.movie')
+
     class Meta:
         model = Category
-        fields = ['id', 'user', 'name']
+        fields = ['id', 'name', 'movies']
+
 
 class RankingSerializer(serializers.ModelSerializer):
     class Meta:
