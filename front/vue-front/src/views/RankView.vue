@@ -7,7 +7,7 @@
           <th>#</th>
           <th>프로필</th>
           <th>이름</th>
-          <th>포인트</th>
+          <th>랭크</th>
           <th>게시물 수</th>
           <th>좋아요 수</th>
           <th>팔로워 수</th>
@@ -15,6 +15,7 @@
       </thead>
       <tbody>
         <tr v-for="(user, index) in rankings" :key="user.id">
+          <!-- 순위 -->
           <td>
             <div v-if="index === 0">
               <img src="@/assets/gold.png" alt="Gold Medal" class="medal-icon" />
@@ -27,19 +28,30 @@
             </div>
             <div v-else>{{ index + 1 }}</div>
           </td>
+          <!-- 프로필 -->
           <td>
             <div class="profile-picture">
               <img :src="user.profile_picture || placeholderImage" alt="Profile" class="profile-img" />
             </div>
           </td>
+          <!-- 이름 -->
           <td>
             <RouterLink :to="{ name: 'ProfileView', params: { username: user.username } }">
               {{ user.username }}
             </RouterLink>
           </td>
-          <td>{{ user.points }}</td>
+          <!-- 랭크 -->
+          <td>
+            <div class="rank-display">
+              <img :src="getRankImage(user.rank_title)" :alt="user.rank_title" class="rank-icon" />
+              {{ user.points }}
+            </div>
+          </td>
+          <!-- 게시물 수 -->
           <td>{{ user.articles_count }}</td>
+          <!-- 좋아요 수 -->
           <td>{{ user.likes_count }}</td>
+          <!-- 팔로워 수 -->
           <td>{{ user.followers_count }}</td>
         </tr>
       </tbody>
@@ -50,12 +62,37 @@
 <script setup>
 import { computed, onMounted } from 'vue';
 import { useCounterStore } from '@/stores/counter';
-import { ref } from 'vue';
 
+// Pinia 상태 관리
 const store = useCounterStore();
 const rankings = computed(() => store.rankings);
-const placeholderImage = '@/assets/profile-placeholder.png'; // 기본 이미지 경로
+const placeholderImage = '@/assets/profile-placeholder.png';
 
+import bronzeRank from '@/assets/BronzeRank.png';
+import silverRank from '@/assets/SilverRank.png';
+import goldRank from '@/assets/GoldRank.png';
+import platinumRank from '@/assets/PlatinumRank.png';
+import diamondRank from '@/assets/DiamondRank.png';
+
+// 랭크 이미지를 가져오는 함수
+const getRankImage = (rankTitle) => {
+  switch (rankTitle) {
+    case "Bronze":
+      return bronzeRank;
+    case "Silver":
+      return silverRank;
+    case "Gold":
+      return goldRank;
+    case "Platinum":
+      return platinumRank;
+    case "Diamond":
+      return diamondRank;
+    default:
+      return bronzeRank; // 기본값
+  }
+};
+
+// 컴포넌트가 로드될 때 실행
 onMounted(() => {
   if (!store.isLogin) {
     alert('로그인이 필요합니다.');
@@ -63,35 +100,19 @@ onMounted(() => {
     return;
   }
 
-  store.fetchRankings().then(() => {
-    console.log('Rankings from Store (after fetch):', store.rankings);
-  });
+  store.fetchRankings();
 });
-
-// onMounted(() => {
-//     rankings.value = [
-//     { id: 1, username: 'user1', points: 100, articles_count: 5, likes_count: 10, followers_count: 3 },
-//     { id: 2, username: 'user2', points: 80, articles_count: 3, likes_count: 8, followers_count: 1 },
-//   ];
-//     console.log(rankings.value)
-//   if (!store.isLogin) {
-//     // 로그인 상태가 아니면 로그인 페이지로 리다이렉트
-//     alert('로그인이 필요합니다.');
-//     store.router.push({ name: 'LogInView' });
-//     return;
-//   }
-//   store.fetchRankings();
-//   console.log(store.rankings);
-// });
 </script>
 
 <style scoped>
+/* 컨테이너 스타일 */
 .ranking-container {
   max-width: 800px;
   margin: 20px auto;
   text-align: center;
 }
 
+/* 테이블 스타일 */
 .ranking-table {
   width: 100%;
   border-collapse: collapse;
@@ -104,11 +125,13 @@ onMounted(() => {
   text-align: center;
 }
 
+/* 메달 스타일 */
 .medal-icon {
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
 }
 
+/* 프로필 이미지 스타일 */
 .profile-img {
   width: 40px;
   height: 40px;
@@ -119,5 +142,17 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* 랭크 디스플레이 스타일 */
+.rank-display {
+  display: flex;
+  align-items: center;
+}
+
+.rank-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }
 </style>

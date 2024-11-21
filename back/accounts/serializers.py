@@ -46,3 +46,22 @@ class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
         fields = ['id', 'user', 'game_type', 'score', 'created_at']
+
+class UserRankSerializer(serializers.ModelSerializer):
+    rank_title = serializers.SerializerMethodField()
+
+    def get_rank_title(self, obj):
+        if obj.points <= 1000:
+            return "Bronze"
+        elif obj.points <= 2000:
+            return "Silver"
+        elif obj.points <= 3000:
+            return "Gold"
+        elif obj.points <= 4000:
+            return "Platinum"
+        else:
+            return "Diamond"
+
+    class Meta:
+        model = User
+        fields = ['username', 'points', 'rank_title', 'articles_count', 'likes_count', 'followers_count']
