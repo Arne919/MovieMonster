@@ -9,7 +9,8 @@ export const useCounterStore = defineStore('counter', () => {
   const token = ref(null)
   const rankings = ref([]); // 랭킹 데이터를 저장
   const Username = ref(null)  // 사용자 이름 저장 변수 추가
-  const user = ref({ username: '', points: 0 }); // 유저 정보
+  // const user = ref({ username: '', points: 0 }); // 유저 정보
+  const user = ref({});
   const isLogin = computed(() => {
     if (token.value === null) {
       return false
@@ -44,7 +45,78 @@ export const useCounterStore = defineStore('counter', () => {
     return stars
   }
 
+  //////////////////////////////////////////////
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/accounts/user/`, {
+        headers: {
+          Authorization: `Token ${token.value}`,
+        },
+      });
+      user.value = { ...response.data, id: response.data.pk }; // 사용자 정보 저장
+      //->개빡치네
+      //백엔드에서 사용자 ID를 pk로 보내주는데, 프론트엔드에서는 id로 사용하려고 했기 때문임
+      console.log("User fetched:", user.value);
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      user.value = {};
+    }
+  };
+  
+  // 카테고리 이름 수정
+const updateCategoryName = async (categoryId, newName) => {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/accounts/categories/${categoryId}/update/`,
+      { name: newName },
+      {
+        headers: {
+          Authorization: `Token ${token.value}`,
+        },
+      }
+    );
+    console.log("Category name updated:", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating category name:", error);
+    throw error;
+  }
+};
 
+// 카테고리 삭제
+const deleteCategory = async (categoryId) => {
+  try {
+    await axios.delete(`${API_URL}/accounts/categories/${categoryId}/delete/`, {
+      headers: {
+        Authorization: `Token ${token.value}`,
+      },
+    });
+    console.log("Category deleted successfully.");
+  } catch (error) {
+    console.error("Error deleting category:", error);
+    throw error;
+  }
+};
+
+// 카테고리에서 영화 삭제
+const removeMovieFromCategory = async (categoryId, movieId) => {
+  try {
+    await axios.post(
+      `${API_URL}/accounts/categories/remove-movie/`,
+      { category_id: categoryId, movie_id: movieId },
+      {
+        headers: {
+          Authorization: `Token ${token.value}`,
+        },
+      }
+    );
+    console.log("Movie removed from category successfully.");
+  } catch (error) {
+    console.error("Error removing movie from category:", error);
+    throw error;
+  }
+};
+//////////////////////////////////////////////
   
   const fetchUserPoints = async () => {
     try {
@@ -230,5 +302,28 @@ const deleteComment = (articleId, commentId) => {
     },
   });
 };
-  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut, Username, fetchUserPoints, user, displayStars, fetchRankings, rankings, updateComment, deleteComment}
+  return { 
+    articles, 
+    API_URL, 
+    addComment, 
+    getComments, 
+    getArticles, 
+    signUp, 
+    logIn, 
+    token, 
+    isLogin, 
+    logOut, 
+    Username, 
+    fetchUserPoints, 
+    user, 
+    fetchUser, // 사용자 정보 가져오기
+    updateCategoryName, // 카테고리 이름 수정
+    deleteCategory, // 카테고리 삭제
+    removeMovieFromCategory, // 카테고리에서 영화 삭제
+    displayStars, 
+    fetchRankings, 
+    rankings, 
+    updateComment, 
+    deleteComment
+  }
 }, { persist: true })
