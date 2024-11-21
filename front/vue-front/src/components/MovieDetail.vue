@@ -19,7 +19,12 @@
         <p><strong>장르:</strong> {{ movie.genres.join(", ") }}</p>
         <p><strong>배우:</strong> {{ movie.actors.join(", ") }}</p>
         <p><strong>감독:</strong> {{ movie.director }}</p>
+        <!-- 카테고리 추가 버튼 -->
+        <button class="btn btn-primary" @click="showCategoryModal = true">
+          카테고리 추가
+        </button>
       </div>
+
 
       <div class="movie-youtube">
       <h3>공식 예고편</h3>
@@ -31,17 +36,24 @@
         data-bs-target="#youtubeTrailerModal"
       >
         <img :src="youtubeLogo" alt="YouTube" class="youtube-logo" />
-      </button>
+        </button>
 
-      <YoutubeTrailerModal :movieTitle="movie.title" />
-    </div>
+        <YoutubeTrailerModal :movieTitle="movie.title" />
+      </div>
 
     </div>
+    <!-- 카테고리 추가 모달 -->
+    <AddToCategoryModal
+      v-if="showCategoryModal"
+      :movie-id="movie.id"
+      @close="showCategoryModal = false"
+    />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import AddToCategoryModal from "@/components/AddToCategoryModal.vue";
 import youtubeLogo from "@/assets/youtubeLogo.svg";
 import YoutubeTrailerModal from "./YoutubeTrailerModal.vue";
 
@@ -50,26 +62,46 @@ export default {
   data() {
     return {
       movie: {}, // 영화 데이터를 저장할 객체
+      // categories: [], // 사용자 카테고리 목록
+      showCategoryModal: false, // 모달 표시 여부
     };
   },
+  components: {
+    AddToCategoryModal,
+  },
+  mounted() {
+    // API 호출로 영화 데이터를 가져옴
+    this.fetchMovie();
+  },
   methods: {
+    fetchMovie() {
+      // API 호출로 영화 데이터 가져오는 로직
+    },
     // TMDB 이미지 URL 생성
     getFullPosterUrl(posterUrl) {
       const baseUrl = "https://image.tmdb.org/t/p/w500"; // TMDB 이미지 베이스 URL
       return `${baseUrl}${posterUrl}`;
     },
+  // 카테고리 모달 열기
+  openCategoryModal() {
+      this.showCategoryModal = true;
+    },
+  // 카테고리 모달 닫기
+  closeCategoryModal() {
+      this.showCategoryModal = false;
+    },
   },
   created() {
     const movieId = this.$route.params.id; // 라우터에서 영화 ID 가져오기
     axios
-      .get(`http://127.0.0.1:8000/api/v1/movies/${movieId}/`) // API 요청
-      .then((response) => {
-        this.movie = response.data; // 응답 데이터 저장
-        console.log("Movie Data Loaded:", this.movie); // 디버깅용 로그
-      })
-      .catch((error) => {
-        console.error("Error loading movie:", error);
-      });
+    .get(`http://127.0.0.1:8000/api/v1/movies/${movieId}/`) // API 요청
+    .then((response) => {
+      this.movie = response.data; // 응답 데이터 저장
+      console.log("Movie Data Loaded:", this.movie); // 디버깅용 로그
+    })
+    .catch((error) => {
+      console.error("Error loading movie:", error);
+    });
   },
 };
 </script>
@@ -114,5 +146,11 @@ p {
   padding-right: 10rem;
   text-align: center;
   margin-bottom: 5rem;
+}
+
+.modal {
+  display: block;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
 }
 </style>
