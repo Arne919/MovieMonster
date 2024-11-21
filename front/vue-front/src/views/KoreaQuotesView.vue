@@ -11,6 +11,9 @@
       <button class="btn btn-success mt-3" @click="claimPoints">포인트 획득하기</button>
 
       <button class="btn btn-primary mt-3" @click="restartGame">다시 시작하기</button>
+
+      <!-- <랭크 확인하기> 버튼 -->
+      <button class="btn btn-info mt-3" @click="goToRank">랭크 확인하기</button>
     </div>
 
     <div v-else>
@@ -65,6 +68,10 @@ export default {
     const correctCount = ref(0);
     const router = useRouter();
     const store = useCounterStore();
+
+    const goToRank = () => {
+      router.push({ name: "RankView" }); // RankView 페이지로 이동
+    };
 
     // 포인트 업데이트 함수
     const updatePoints = async (points) => {
@@ -185,6 +192,7 @@ export default {
       nextReview,
       getPosterUrl,
       handleKeyPress,
+      goToRank,
     };
   },
 };
