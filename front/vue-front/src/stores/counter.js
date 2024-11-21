@@ -102,61 +102,64 @@ export const useCounterStore = defineStore('counter', () => {
       user.value = {};
     }
   };
+  // axios 요청 공통 헤더 설정 (인터셉터 사용)
+axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
+
   
   // 카테고리 이름 수정
-const updateCategoryName = async (categoryId, newName) => {
-  try {
-    const response = await axios.patch(
-      `${API_URL}/accounts/categories/${categoryId}/update/`,
-      { name: newName },
-      {
+  const updateCategoryName = async (categoryId, newName) => {
+    try {
+      const response = await axios.patch(
+        `${API_URL}/accounts/categories/${categoryId}/update/`,
+        { name: newName },
+        {
+          headers: {
+            Authorization: `Token ${token.value}`,
+          },
+        }
+      );
+      console.log("Category name updated:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error updating category name:", error);
+      throw error;
+    }
+  };
+
+  // 카테고리 삭제
+  const deleteCategory = async (categoryId) => {
+    try {
+      await axios.delete(`${API_URL}/accounts/categories/${categoryId}/delete/`, {
         headers: {
           Authorization: `Token ${token.value}`,
         },
-      }
-    );
-    console.log("Category name updated:", response.data);
-    return response.data;
-  } catch (error) {
-    console.error("Error updating category name:", error);
-    throw error;
-  }
-};
+      });
+      console.log("Category deleted successfully.");
+    } catch (error) {
+      console.error("Error deleting category:", error);
+      throw error;
+    }
+  };
 
-// 카테고리 삭제
-const deleteCategory = async (categoryId) => {
-  try {
-    await axios.delete(`${API_URL}/accounts/categories/${categoryId}/delete/`, {
-      headers: {
-        Authorization: `Token ${token.value}`,
-      },
-    });
-    console.log("Category deleted successfully.");
-  } catch (error) {
-    console.error("Error deleting category:", error);
-    throw error;
-  }
-};
-
-// 카테고리에서 영화 삭제
-const removeMovieFromCategory = async (categoryId, movieId) => {
-  try {
-    await axios.post(
-      `${API_URL}/accounts/categories/remove-movie/`,
-      { category_id: categoryId, movie_id: movieId },
-      {
-        headers: {
-          Authorization: `Token ${token.value}`,
-        },
-      }
-    );
-    console.log("Movie removed from category successfully.");
-  } catch (error) {
-    console.error("Error removing movie from category:", error);
-    throw error;
-  }
-};
-//////////////////////////////////////////////
+  // 카테고리에서 영화 삭제
+  const removeMovieFromCategory = async (categoryId, movieId) => {
+    try {
+      await axios.post(
+        `${API_URL}/accounts/categories/remove-movie/`,
+        { category_id: categoryId, movie_id: movieId },
+        {
+          headers: {
+            Authorization: `Token ${token.value}`,
+          },
+        }
+      );
+      console.log("Movie removed from category successfully.");
+    } catch (error) {
+      console.error("Error removing movie from category:", error);
+      throw error;
+    }
+  };
+  //////////////////////////////////////////////
   
   const fetchUserPoints = async () => {
     try {
@@ -238,7 +241,7 @@ const removeMovieFromCategory = async (categoryId, movieId) => {
       .catch((err) => {
         console.log(err)
       })
-  }
+    }
 
   // 로그인 요청 액션
   const logIn = function (payload) {
@@ -320,29 +323,28 @@ const removeMovieFromCategory = async (categoryId, movieId) => {
     })
   }
 
-  // 댓글 수정 API 호출
-const updateComment = (articleId, commentId, updatedContent) => {
-  return axios({
-    method: 'put',
-    url: `${API_URL}/api/v1/communities/${articleId}/comments/${commentId}/update/`,
-    headers: {
-      Authorization: `Token ${token.value}`,
-    },
-    data: { content: updatedContent },
-  });
-};
+    // 댓글 수정 API 호출
+  const updateComment = (articleId, commentId, updatedContent) => {
+    return axios({
+      method: 'put',
+      url: `${API_URL}/api/v1/communities/${articleId}/comments/${commentId}/update/`,
+      headers: {
+        Authorization: `Token ${token.value}`,
+      },
+      data: { content: updatedContent },
+    });
+  };
 
-// 댓글 삭제 API 호출
-const deleteComment = (articleId, commentId) => {
-  return axios({
-    method: 'delete',
-    url: `${API_URL}/api/v1/communities/${articleId}/comments/${commentId}/delete/`,
-    headers: {
-      Authorization: `Token ${token.value}`,
-    },
-  });
-};
-<<<<<<< front/vue-front/src/stores/counter.js
+  // 댓글 삭제 API 호출
+  const deleteComment = (articleId, commentId) => {
+    return axios({
+      method: 'delete',
+      url: `${API_URL}/api/v1/communities/${articleId}/comments/${commentId}/delete/`,
+      headers: {
+        Authorization: `Token ${token.value}`,
+      },
+    });
+  };
   return { 
     articles, 
     API_URL, 
@@ -367,5 +369,6 @@ const deleteComment = (articleId, commentId) => {
     updateComment, 
     deleteComment,
     formatDate,
-    getSortedArticles
+    getSortedArticles,
   }
+}, { persist: true })
