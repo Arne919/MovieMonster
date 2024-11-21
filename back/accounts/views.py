@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.db.models import Count
 from .models import User, Category, Ranking, Game
-from .serializers import UserSerializer, CategorySerializer, RankingSerializer, GameSerializer, ProfileSerializer, UserRankSerializer
+from .serializers import UserSerializer, CategorySerializer, MovieSerializer, RankingSerializer, GameSerializer, ProfileSerializer, UserRankSerializer
 
 from django.middleware.csrf import get_token
 
@@ -31,6 +31,14 @@ def create_category(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     except Exception as e:
         return Response({'error': f'Failed to create category: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_categories(request):
+    user = request.user
+    categories = Category.objects.filter(user=user)
+    serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 from movies.models import Movie
 @api_view(['POST'])
@@ -72,11 +80,27 @@ def add_movie_to_category(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_categories(request):
-    user = request.user
-    categories = Category.objects.filter(user=user)
-    serializer = CategorySerializer(categories, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+def category_detail(request, category_id):
+    """
+    특정 카테고리의 상세 정보 및 연결된 영화 반환
+    """
+    try:
+        # 요청한 유저 소유의 카테고리인지 확인
+        category = Category.objects.get(id=category_id, user=request.user)
+    except Category.DoesNotExist:
+        return Response({'error': '해당 카테고리를 찾을 수 없습니다.'}, status=404)
+
+    # 카테고리에 연결된 영화 가져오기
+    movies = category.movies.all()
+    movie_serializer = MovieSerializer(movies, many=True)
+    return Response({
+        'id': category.id,
+        'name': category.name,
+        'movies': movie_serializer.data,  # 영화 데이터 포함
+    }, status=200)
+
+
+
 
 # 사용자 프로필 정보 조회
 @api_view(['GET'])
@@ -94,21 +118,6 @@ def get_users(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
-# 게임 기록 조회 및 생성
-# @api_view(['GET', 'POST'])
-# @permission_classes([IsAuthenticated])
-# def manage_games(request):
-#     if request.method == 'GET':
-#         games = Game.objects.filter(user=request.user)
-#         serializer = GameSerializer(games, many=True)
-#         return Response(serializer.data)
-#     elif request.method == 'POST':
-#         serializer = GameSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save(user=request.user)
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
 @api_view(['POST', 'GET'])  # POST와 GET 모두 지원
 @permission_classes([IsAuthenticated])  # 인증된 사용자만 접근 가능
 def user_points(request):
@@ -145,17 +154,16 @@ from communities.models import Article  # Article 모델 임포트
 def profile(request, username):
     # 사용자 객체 가져오기
     user = get_object_or_404(User, username=username)
-    
+
+    # 해당 유저의 카테고리 가져오기
+    categories = Category.objects.filter(user=user)
+    category_serializer = CategorySerializer(categories, many=True)
+
     # 게시글 수와 좋아요 수 계산
-    # articles_count = user.articles.count()  # 작성한 게시글 수
     articles_count = Article.objects.filter(user=user).count()
-    # likes_count = user.articles.aggregate(total_likes=Count('like_users'))['total_likes'] or 0  # 총 좋아요 수
     likes_count = Article.objects.filter(user=user).aggregate(
         total_likes=Count('like_users')
         )['total_likes'] or 0
-
-    # 사용자 데이터 직렬화
-    # serializer = ProfileSerializer(user)
     
     return Response({
         'id': user.id,
@@ -166,6 +174,7 @@ def profile(request, username):
         'articles_count': articles_count,  # 작성한 게시글 수
         'likes_count': likes_count,  # 총 좋아요 수
         'is_followed': request.user in user.followers.all(),  # 현재 사용자가 팔로우 중인지 여부
+        'categories': category_serializer.data,  # 유저 카테고리 포함
     })
 
 @api_view(['POST'])

@@ -101,7 +101,7 @@ const router = createRouter({
       component: CategoryList,
     },
     {
-      path: '/categories/:id',
+      path: '/categories/:categoryId',
       name: 'CategoryDetail',
       component: CategoryDetail,
     },{

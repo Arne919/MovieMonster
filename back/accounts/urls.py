@@ -13,6 +13,7 @@ urlpatterns = [
     path('categories/', views.get_categories, name='get_categories'),
     path('categories/create/', views.create_category, name='create_category'),
     path('categories/add-movie/', views.add_movie_to_category, name='add_movie_to_category'),
+    path('categories/<int:category_id>/', views.category_detail, name='category_detail'),
     # path('rankings/', views.get_user_rankings, name='get_user_rankings'),
     # path('games/', views.manage_games, name='manage_games'),
     path('csrf-token/', views.get_csrf_token, name='get_csrf_token'),
