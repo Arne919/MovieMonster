@@ -20,6 +20,46 @@ export const useCounterStore = defineStore('counter', () => {
   })
   const router = useRouter()
 
+  // 서버에서 데이터 가져오기
+  const fetchArticles = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/v1/communities/`, {
+        headers: { Authorization: `Token ${token.value}` },
+      })
+      articles.value = response.data
+    } catch (error) {
+      console.error('Error fetching articles:', error)
+    }
+  }
+
+  // 클라이언트 정렬 로직
+  const sortArticles = (sortOrder) => {
+    if (sortOrder === 'popular') {
+      articles.value.sort((a, b) => b.like_count - a.like_count) // 좋아요 많은 순
+    } else if (sortOrder === 'recent') {
+      articles.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // 최신순
+    }
+  }
+
+  // 정렬된 데이터 가져오기
+  const getSortedArticles = async (sortOrder = 'recent') => {
+    await fetchArticles() // 데이터를 서버에서 먼저 가져옴
+    console.log('Before sorting:', articles.value)
+    sortArticles(sortOrder)
+    console.log('After sorting:', articles.value)
+  }
+
+  // 날짜 포맷팅 함수 추가
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+    return `${year}-${month}-${day} ${hours}:${minutes}`
+  }
+
   // 랭킹 데이터를 가져오는 함수
   const fetchRankings = async () => {
     try {
@@ -302,6 +342,7 @@ const deleteComment = (articleId, commentId) => {
     },
   });
 };
+<<<<<<< front/vue-front/src/stores/counter.js
   return { 
     articles, 
     API_URL, 
@@ -324,6 +365,7 @@ const deleteComment = (articleId, commentId) => {
     fetchRankings, 
     rankings, 
     updateComment, 
-    deleteComment
+    deleteComment,
+    formatDate,
+    getSortedArticles
   }
-}, { persist: true })

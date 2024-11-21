@@ -17,6 +17,8 @@
         </div>
     </p>
     <p>작성자: {{ article.user }}</p>
+    <p>작성일 : {{ store.formatDate(article.created_at) }}</p>
+    <p>수정일 : {{ store.formatDate(article.updated_at) }}</p>
     <p>좋아요 수: {{ article.like_count }}</p> <!-- 좋아요 수 표시 -->
     <p>댓글 수: {{ article.comment_count }}</p> <!-- 댓글 수 표시 -->
     <RouterLink 
