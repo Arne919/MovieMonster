@@ -4,6 +4,8 @@
     <p>포인트: {{ user.points }}</p>
     <p>팔로잉: <span id="followings-count">{{ user.followingsCount }}</span></p>
     <p>팔로워: <span id="followers-count">{{ user.followersCount }}</span></p>
+    <p>게시글 수: <span id="articles-count">{{ user.articlesCount }}</span></p>
+    <p>받은 좋아요 수: <span id="like-count">{{ user.likeCount }}</span></p>
     <div v-if="!isOwnProfile">
       <button @click="toggleFollow" id="followBtn">
         {{ isFollowed ? '언팔로우' : '팔로우' }}
@@ -12,13 +14,11 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import { useRoute } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
-
 
 // Vue Router와 Pinia 스토어 사용
 const route = useRoute();
@@ -29,6 +29,8 @@ const user = ref({
   username: '',
   followingsCount: 0,
   followersCount: 0,
+  articlesCount: 0, // 작성한 게시글 수
+  likeCount: 0, // 받은 좋아요 수
 });
 const isFollowed = ref(false);
 
@@ -49,6 +51,8 @@ const fetchProfile = async () => {
       points: data.points,
       followingsCount: data.followings_count,
       followersCount: data.followers_count,
+      articlesCount: data.articles_count, // API 응답에서 게시글 수 추가
+      likesCount: data.likes_count, // API 응답에서 받은 좋아요 수 추가
     };
     isFollowed.value = data.is_followed;
   } catch (error) {
@@ -74,7 +78,6 @@ const toggleFollow = async () => {
 
 // 컴포넌트가 마운트될 때 데이터 로드
 onMounted(fetchProfile);
-
 </script>
 
 <style scoped>
