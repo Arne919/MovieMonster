@@ -7,6 +7,7 @@ export const useCounterStore = defineStore('counter', () => {
   const articles = ref([])
   const API_URL = 'http://127.0.0.1:8000'
   const token = ref(null)
+  const rankings = ref([]); // 랭킹 데이터를 저장
   const Username = ref(null)  // 사용자 이름 저장 변수 추가
   const user = ref({ username: '', points: 0 }); // 유저 정보
   const isLogin = computed(() => {
@@ -17,6 +18,20 @@ export const useCounterStore = defineStore('counter', () => {
     }
   })
   const router = useRouter()
+
+  // 랭킹 데이터를 가져오는 함수
+  const fetchRankings = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/api/v1/communities/ranking/`, {
+        headers: { Authorization: `Token ${token.value}` },
+      });
+      rankings.value = response.data;
+      console.log('Fetching rankings...');
+      console.log('Rankings fetched:', response.data);
+    } catch (error) {
+      console.error('Error fetching rankings:', error);
+    }
+  };
 
   // 별점 표시 함수
   const displayStars = (rating) => {
@@ -189,5 +204,5 @@ export const useCounterStore = defineStore('counter', () => {
       data: { content: commentContent }
     })
   }
-  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut, Username, fetchUserPoints, user, displayStars}
+  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut, Username, fetchUserPoints, user, displayStars, fetchRankings, rankings}
 }, { persist: true })

@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from django.db.models import Count
+from accounts.models import User
 
 # permission Decorators
 from rest_framework.decorators import permission_classes
@@ -11,7 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from django.shortcuts import get_object_or_404, get_list_or_404
 
-from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer
+from .serializers import ArticleListSerializer, ArticleSerializer, CommentSerializer, RankingSerializer
 from .models import Article, Comment
 
 
@@ -120,3 +121,16 @@ def get_comments(request, article_pk):
     comments = article.comments.all()  # 해당 게시글에 대한 댓글 가져오기
     serializer = CommentSerializer(comments, many=True)  # 댓글 목록 직렬화
     return Response(serializer.data)  # 댓글 목록 반환
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_ranking(request):
+    # 사용자 리스트: 게시물 수, 좋아요 수, 팔로워 수와 함께 정렬
+    users = User.objects.annotate(
+        articles_count=Count('article'),  # 게시물 수
+        likes_count=Count('article__like_users'),  # 좋아요 수
+        followers_count=Count('followers')  # 팔로워 수
+    ).order_by('-points')[:10]  # 포인트 순으로 정렬, 상위 10명만
+
+    serializer = RankingSerializer(users, many=True)
+    return Response(serializer.data)
