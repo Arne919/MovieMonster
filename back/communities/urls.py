@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:article_pk>/comments/', views.create_comment, name='create-comment'),
     path('<int:article_pk>/comments/list/', views.get_comments, name='get-comments'),  # 댓글 목록 요청 추가
     path('<int:article_pk>/delete/', views.delete_article, name='delete_article'),  # 삭제 엔드포인트 추가
+    path('ranking/', views.get_ranking, name='get_ranking'),
 ]

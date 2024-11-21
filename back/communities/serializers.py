@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Article, Comment
+from accounts.models import User  # 사용자 모델 가져오기
 
 
 class ArticleListSerializer(serializers.ModelSerializer):
@@ -28,3 +29,12 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('id', 'user', 'content', 'created_at')  # 댓글 ID, 작성자, 내용, 작성시간 반환
+
+class RankingSerializer(serializers.ModelSerializer):
+    articles_count = serializers.IntegerField()  # 게시물 수
+    likes_count = serializers.IntegerField()  # 좋아요 수
+    followers_count = serializers.IntegerField()  # 팔로워 수
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'points', 'articles_count', 'likes_count', 'followers_count')

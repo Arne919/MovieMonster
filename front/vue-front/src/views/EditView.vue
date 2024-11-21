@@ -6,7 +6,19 @@
       <div v-if="posterUrl">
         <img :src="posterUrl" alt="영화 포스터" class="poster-image" />
       </div>
-  
+      <!-- 별점 매기기 -->
+      <div class="stars">
+          <div
+            v-for="n in 10"
+            :key="n"
+            class="star"
+            :class="{ filled: n <= hoverRating || n <= selectedRating }"
+            @mouseover="hoverStar(n)"
+            @mouseleave="clearHover"
+            @click="selectRating(n)"
+          ></div>
+      </div>
+       <p>선택한 별점: {{ selectedRating }} / 10</p>
       <form @submit.prevent="submitEdit" class="edit-form">
         <div class="form-group">
           <label for="title">제목</label>
@@ -54,7 +66,8 @@
   const submitEdit = () => {
     axios.put(`${store.API_URL}/api/v1/communities/${route.params.id}/`, {
       title: title.value,
-      content: content.value
+      content: content.value,
+      rating: selectedRating.value
     }, {
       headers: { Authorization: `Token ${store.token}` }
     })
@@ -64,9 +77,50 @@
       })
       .catch((err) => console.log(err))
   }
+  // 별점 관련 함수 ---------------
+
+const hoverRating = ref(0); // 마우스 위치에 따라 표시되는 별점
+
+// 마우스 오버 함수
+const hoverStar = (value) => {
+  hoverRating.value = value; // 마우스 위치에 따라 별점 변경
+};
+
+// 마우스 아웃 함수
+const clearHover = () => {
+  hoverRating.value = 0; // 마우스가 별에서 떠나면 초기화
+};
+const selectedRating = ref(0);
+
+const selectRating = (rating) => {
+  selectedRating.value = rating; // 선택한 별점 업데이트
+};
   </script>
   
   <style scoped>
+  .star-rating {
+  display: flex;
+  direction: row;
+  gap: 4px;
+}
+
+.stars {
+  display: flex;
+  gap: 5px;
+}
+
+.star {
+  width: 24px;
+  height: 24px;
+  background: url('/assets/images/gray-star.png') no-repeat center;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.star.filled {
+  background: url('/assets/images/yellow-star.png') no-repeat center;
+  background-size: contain;
+}
   .edit-form {
     display: flex;
     flex-direction: column; /* 폼을 세로 배치 */

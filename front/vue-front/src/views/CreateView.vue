@@ -30,7 +30,6 @@
         ></div>
     </div>
     <p>선택한 별점: {{ selectedRating }} / 10</p>
-    <button @click="submitRating">별점 확인</button>
     <!-- 게시글 작성 폼 -->
     <form @submit.prevent="createArticle">
       <div>
