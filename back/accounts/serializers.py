@@ -58,6 +58,7 @@ class UserRankSerializer(serializers.ModelSerializer):
     rank_title = serializers.SerializerMethodField()
 
     def get_rank_title(self, obj):
+        print(f"User: {obj.username}, Points: {obj.points}")  # 디버깅용 로그
         if obj.points <= 1000:
             return "Bronze"
         elif obj.points <= 2000:

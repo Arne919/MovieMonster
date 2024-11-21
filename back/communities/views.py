@@ -122,15 +122,47 @@ def get_comments(request, article_pk):
     serializer = CommentSerializer(comments, many=True)  # 댓글 목록 직렬화
     return Response(serializer.data)  # 댓글 목록 반환
 
+def get_rank_title(points):
+    """
+    포인트 기준으로 랭크 타이틀 반환
+    """
+    if points <= 1000:
+        return "Bronze"
+    elif points <= 2000:
+        return "Silver"
+    elif points <= 3000:
+        return "Gold"
+    elif points <= 4000:
+        return "Platinum"
+    else:
+        return "Diamond"
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_ranking(request):
-    # 사용자 리스트: 게시물 수, 좋아요 수, 팔로워 수와 함께 정렬
-    users = User.objects.annotate(
-        articles_count=Count('article'),  # 게시물 수
-        likes_count=Count('article__like_users'),  # 좋아요 수
-        followers_count=Count('followers')  # 팔로워 수
-    ).order_by('-points')[:10]  # 포인트 순으로 정렬, 상위 10명만
+    """
+    사용자 랭킹 데이터를 반환
+    """
+    users = (
+        User.objects.annotate(
+            articles_count=Count('article'),
+            likes_count=Count('article__like_users'),
+            followers_count=Count('followers'),
+        )
+        .order_by('-points')[:10]  # 상위 10명
+    )
 
-    serializer = RankingSerializer(users, many=True)
-    return Response(serializer.data)
+    ranking_data = []
+    for user in users:
+        rank_title = get_rank_title(user.points)  # 랭크 계산
+        ranking_data.append({
+            "id": user.id,
+            "username": user.username,
+            "points": user.points,
+            "rank_title": rank_title,
+            "articles_count": user.articles_count,
+            "likes_count": user.likes_count,
+            "followers_count": user.followers_count,
+        })
+
+    return Response(ranking_data)
