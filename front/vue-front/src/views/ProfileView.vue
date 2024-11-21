@@ -12,7 +12,7 @@
       </button>
     </div>
 
-    <h2>내가 만든 카테고리</h2>
+    <h2>{{ user.username }}의 카테고리</h2>
     <div v-if="categories.length === 0" class="empty-message">
       <p>아직 카테고리가 없습니다.</p>
     </div>
