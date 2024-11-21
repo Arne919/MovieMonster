@@ -33,6 +33,9 @@
         <h3>댓글</h3>
         <div v-for="comment in comments" :key="comment.id">
           <p><strong>{{ comment.user }}</strong>: {{ comment.content }}</p>
+          <!-- 댓글 수정 및 삭제 버튼 -->
+    <button v-if="comment.user === store.Username" @click="editComment(comment)">수정</button>
+    <button v-if="comment.user === store.Username" @click="removeComment(comment.id)">삭제</button>
         </div>
       </div>
       <!-- 댓글이 없으면 표시할 메시지 -->
@@ -44,6 +47,12 @@
       <div>
         <textarea v-model="newComment" placeholder="댓글을 작성하세요"></textarea>
         <button @click="submitComment">댓글 작성</button> <!-- 댓글 작성 버튼 -->
+      </div>
+      <!-- 댓글 수정 폼 -->
+      <div v-if="editingComment">
+        <textarea v-model="updatedCommentContent"></textarea>
+        <button @click="submitUpdatedComment">수정 완료</button>
+        <button @click="cancelEdit">취소</button>
       </div>
     </div>
   </div>
@@ -129,6 +138,49 @@ const submitComment = () => {
       console.log(err)
     })
 }
+// 댓글 수정 상태 관리
+const editingComment = ref(null); // 현재 수정 중인 댓글
+const updatedCommentContent = ref(''); // 수정 내용 저장
+
+// 댓글 수정 시작
+const editComment = (comment) => {
+  editingComment.value = comment; // 현재 수정 중인 댓글 설정
+  updatedCommentContent.value = comment.content; // 기존 댓글 내용 채우기
+};
+
+// 수정 취소
+const cancelEdit = () => {
+  editingComment.value = null;
+  updatedCommentContent.value = '';
+};
+
+// 댓글 수정 API 호출
+const submitUpdatedComment = async () => {
+  try {
+    const response = await store.updateComment(route.params.id, editingComment.value.id, updatedCommentContent.value);
+    // 댓글 목록 업데이트
+    const updatedCommentIndex = comments.value.findIndex((c) => c.id === editingComment.value.id);
+    if (updatedCommentIndex !== -1) {
+      comments.value[updatedCommentIndex] = response.data;
+    }
+    editingComment.value = null;
+    updatedCommentContent.value = '';
+  } catch (error) {
+    console.error('댓글 수정 실패:', error);
+  }
+};
+
+// 댓글 삭제 API 호출
+const removeComment = async (commentId) => {
+  try {
+    await store.deleteComment(route.params.id, commentId);
+    // 댓글 목록에서 삭제
+    comments.value = comments.value.filter((comment) => comment.id !== commentId);
+  } catch (error) {
+    console.error('댓글 삭제 실패:', error);
+  }
+};
+
 
 const toggleLike = () => {
   // 좋아요 토글 요청

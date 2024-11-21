@@ -166,3 +166,33 @@ def get_ranking(request):
         })
 
     return Response(ranking_data)
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_comment(request, article_pk, comment_pk):
+    """
+    댓글 수정 뷰. 작성자만 수정 가능.
+    """
+    comment = get_object_or_404(Comment, pk=comment_pk, article_id=article_pk)
+    if comment.user != request.user:
+        return Response({"error": "본인의 댓글만 수정할 수 있습니다."}, status=status.HTTP_403_FORBIDDEN)
+    
+    serializer = CommentSerializer(comment, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_comment(request, article_pk, comment_pk):
+    """
+    댓글 삭제 뷰. 작성자만 삭제 가능.
+    """
+    comment = get_object_or_404(Comment, pk=comment_pk, article_id=article_pk)
+    if comment.user != request.user:
+        return Response({"error": "본인의 댓글만 삭제할 수 있습니다."}, status=status.HTTP_403_FORBIDDEN)
+    
+    comment.delete()
+    return Response({"message": "댓글이 삭제되었습니다."}, status=status.HTTP_204_NO_CONTENT)
