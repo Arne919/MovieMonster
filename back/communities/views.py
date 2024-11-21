@@ -145,9 +145,9 @@ def get_ranking(request):
     """
     users = (
         User.objects.annotate(
-            articles_count=Count('article'),
-            likes_count=Count('article__like_users'),
-            followers_count=Count('followers'),
+            articles_count=Count('article', distinct=True),
+            likes_count=Count('article__like_users', distinct=True),
+            followers_count=Count('followers', distinct=True),
         )
         .order_by('-points')[:10]  # 상위 10명
     )

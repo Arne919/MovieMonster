@@ -26,7 +26,7 @@ export const useCounterStore = defineStore('counter', () => {
         headers: { Authorization: `Token ${token.value}` },
       });
       rankings.value = response.data;
-      console.log('Fetching rankings...');
+      console.log('Fetching rankings...', rankings.value);
       console.log('Rankings fetched:', response.data);
     } catch (error) {
       console.error('Error fetching rankings:', error);
