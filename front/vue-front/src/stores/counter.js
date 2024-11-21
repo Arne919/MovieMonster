@@ -55,6 +55,9 @@ export const useCounterStore = defineStore('counter', () => {
       });
       console.log(response.data)
       user.value = response.data;
+      // fetchRankings 함수에서 데이터를 로깅합니다.
+      console.log('Rankings fetched:', response.data);
+
     } catch (error) {
       console.error('Error fetching user points:', error);
     }

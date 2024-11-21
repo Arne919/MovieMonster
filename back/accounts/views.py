@@ -94,22 +94,6 @@ def get_users(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
-# 사용자 랭킹 조회
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def get_user_rankings(request):
-    rankings = User.objects.order_by('-points')[:10]  # 상위 10명
-    serializer = UserRankSerializer(rankings, many=True)
-    return Response(serializer.data)
-
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
-# def get_user_rankings(request):
-#     rankings = Ranking.objects.filter(user=request.user)
-#     serializer = RankingSerializer(rankings, many=True)
-#     return Response(serializer.data)
-
-
 # 게임 기록 조회 및 생성
 # @api_view(['GET', 'POST'])
 # @permission_classes([IsAuthenticated])
