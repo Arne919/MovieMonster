@@ -85,22 +85,74 @@ def category_detail(request, category_id):
     특정 카테고리의 상세 정보 및 연결된 영화 반환
     """
     try:
-        # 요청한 유저 소유의 카테고리인지 확인
-        category = Category.objects.get(id=category_id, user=request.user)
+        category = Category.objects.get(id=category_id)
     except Category.DoesNotExist:
         return Response({'error': '해당 카테고리를 찾을 수 없습니다.'}, status=404)
 
-    # 카테고리에 연결된 영화 가져오기
     movies = category.movies.all()
     movie_serializer = MovieSerializer(movies, many=True)
     return Response({
         'id': category.id,
         'name': category.name,
+        'owner_id': category.user.id,  # 소유자 ID
         'movies': movie_serializer.data,  # 영화 데이터 포함
     }, status=200)
 
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def update_category_name(request, category_id):
+    """
+    카테고리 이름 수정
+    """
+    try:
+        category = Category.objects.get(id=category_id, user=request.user)
+        print(f"Category belongs to: {category.user.id}, Request user: {request.user.id}")
+    except Category.DoesNotExist:
+        return Response({'error': '해당 카테고리를 찾을 수 없습니다.'}, status=404)
 
+    new_name = request.data.get('name', '').strip()
+    if not new_name:
+        return Response({'error': '새 이름을 입력해야 합니다.'}, status=400)
 
+    category.name = new_name
+    category.save()
+    return Response({'message': '카테고리 이름이 수정되었습니다.', 'name': category.name}, status=200)
+
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_category(request, category_id):
+    """
+    사용자의 카테고리 삭제
+    """
+    try:
+        category = Category.objects.get(id=category_id, user=request.user)
+        category.delete()
+        return Response({'message': '카테고리가 삭제되었습니다.'}, status=200)
+    except Category.DoesNotExist:
+        return Response({'error': '해당 카테고리를 찾을 수 없습니다.'}, status=404)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def remove_movie_from_category(request):
+    """
+    카테고리에서 특정 영화 삭제
+    """
+    category_id = request.data.get('category_id')
+    movie_id = request.data.get('movie_id')
+
+    if not category_id or not movie_id:
+        return Response({'error': 'category_id와 movie_id는 필수 항목입니다.'}, status=400)
+
+    try:
+        category = Category.objects.get(id=category_id, user=request.user)
+        movie = Movie.objects.get(id=movie_id)
+        category.movies.remove(movie)
+        return Response({'message': f'영화 "{movie.title}"가 카테고리 "{category.name}"에서 삭제되었습니다.'}, status=200)
+    except Category.DoesNotExist:
+        return Response({'error': '해당 카테고리를 찾을 수 없습니다.'}, status=404)
+    except Movie.DoesNotExist:
+        return Response({'error': '해당 영화를 찾을 수 없습니다.'}, status=404)
+    
 
 # 사용자 프로필 정보 조회
 @api_view(['GET'])
