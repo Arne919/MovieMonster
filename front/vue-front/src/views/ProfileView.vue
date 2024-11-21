@@ -5,7 +5,7 @@
     <p>팔로잉: <span id="followings-count">{{ user.followingsCount }}</span></p>
     <p>팔로워: <span id="followers-count">{{ user.followersCount }}</span></p>
     <p>게시글 수: <span id="articles-count">{{ user.articlesCount }}</span></p>
-    <p>받은 좋아요 수: <span id="like-count">{{ user.likeCount }}</span></p>
+    <p>받은 좋아요 수: <span id="like-count">{{ user.likesCount }}</span></p>
     <div v-if="!isOwnProfile">
       <button @click="toggleFollow" id="followBtn">
         {{ isFollowed ? '언팔로우' : '팔로우' }}
@@ -30,7 +30,7 @@ const user = ref({
   followingsCount: 0,
   followersCount: 0,
   articlesCount: 0, // 작성한 게시글 수
-  likeCount: 0, // 받은 좋아요 수
+  likesCount: 0, // 받은 좋아요 수
 });
 const isFollowed = ref(false);
 
