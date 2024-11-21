@@ -11,7 +11,6 @@ from django.db.models import Count
 from .models import User, Category, Ranking, Game
 from .serializers import UserSerializer, CategorySerializer, RankingSerializer, GameSerializer, ProfileSerializer, UserRankSerializer
 
-
 from django.middleware.csrf import get_token
 
 @api_view(['POST'])
@@ -33,7 +32,7 @@ def create_category(request):
     except Exception as e:
         return Response({'error': f'Failed to create category: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
+from movies.models import Movie
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def add_movie_to_category(request):
@@ -41,19 +40,35 @@ def add_movie_to_category(request):
     category_id = request.data.get('category_id')
     movie_id = request.data.get('movie_id')
 
-    category = Category.objects.filter(user=user, id=category_id).first()
-    if not category:
-        return Response({'error': 'Category not found.'}, status=status.HTTP_404_NOT_FOUND)
+    if not category_id or not movie_id:
+        return Response(
+            {'error': 'category_id와 movie_id는 필수 항목입니다.'},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
-    movie = Movie.objects.filter(id=movie_id).first()
-    if not movie:
-        return Response({'error': 'Movie not found.'}, status=status.HTTP_404_NOT_FOUND)
+    try:
+        category = Category.objects.get(id=category_id, user=user)
+    except Category.DoesNotExist:
+        return Response(
+            {'error': '해당 카테고리를 찾을 수 없습니다.'},
+            status=status.HTTP_404_NOT_FOUND,
+        )
 
-    if CategoryMovie.objects.filter(category=category, movie=movie).exists():
-        return Response({'error': 'Movie already in category.'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        movie = Movie.objects.get(id=movie_id)
+    except Movie.DoesNotExist:
+        return Response(
+            {'error': '해당 영화를 찾을 수 없습니다.'},
+            status=status.HTTP_404_NOT_FOUND,
+        )
 
-    CategoryMovie.objects.create(category=category, movie=movie)
-    return Response({'message': 'Movie added to category successfully.'}, status=status.HTTP_201_CREATED)
+    # ManyToManyField 또는 Custom 관계 추가
+    category.movies.add(movie)
+
+    return Response(
+        {'message': f'영화 "{movie.title}"가 카테고리 "{category.name}"에 추가되었습니다.'},
+        status=status.HTTP_200_OK,
+    )
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
