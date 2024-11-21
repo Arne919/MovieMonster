@@ -24,8 +24,8 @@
   </header>
 
   <!-- Dynamic Route View -->
-  <!-- <RouterView /> -->
-  <RouterView :key="$route.fullPath" />
+  <RouterView />
+  <!-- <RouterView :key="$route.fullPath" /> -->
 </template>
 
 <script setup>

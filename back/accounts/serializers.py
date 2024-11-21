@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, User, Category, Ranking, Game
+from .models import User, Category, Ranking, Game
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,6 +13,21 @@ class UserSerializer(serializers.ModelSerializer):
             'follower',
             'following',
             'created_at',
+        ]
+class ProfileSerializer(serializers.ModelSerializer):
+    articles_count = serializers.IntegerField(source='articles.count', read_only=True)  # 게시글 수
+    likes_count = serializers.IntegerField(source='sum_likes', read_only=True)  # 총 좋아요 수
+
+    class Meta:
+        model = User
+        fields = [
+            'id',
+            'username',
+            'points',
+            'follower',
+            'following',
+            'articles_count',
+            'likes_count',  # sum_likes 매핑
         ]
 
 class CategorySerializer(serializers.ModelSerializer):

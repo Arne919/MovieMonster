@@ -7,8 +7,9 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
+from django.db.models import Count
 from .models import User, Category, Ranking, Game
-from .serializers import UserSerializer, CategorySerializer, RankingSerializer, GameSerializer
+from .serializers import UserSerializer, CategorySerializer, RankingSerializer, GameSerializer, ProfileSerializer
 
 from django.middleware.csrf import get_token
 
@@ -122,18 +123,35 @@ def user_points(request):
             },
             status=status.HTTP_200_OK
         )
+        
+from communities.models import Article  # Article 모델 임포트
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def profile(request, username):
+    # 사용자 객체 가져오기
     user = get_object_or_404(User, username=username)
+    
+    # 게시글 수와 좋아요 수 계산
+    # articles_count = user.articles.count()  # 작성한 게시글 수
+    articles_count = Article.objects.filter(user=user).count()
+    # likes_count = user.articles.aggregate(total_likes=Count('like_users'))['total_likes'] or 0  # 총 좋아요 수
+    likes_count = Article.objects.filter(user=user).aggregate(
+        total_likes=Count('like_users')
+        )['total_likes'] or 0
+
+    # 사용자 데이터 직렬화
+    # serializer = ProfileSerializer(user)
+    
     return Response({
         'id': user.id,
         'username': user.username,
-        'points': user.points,  # 포인트 추가
-        'followers_count': user.followers.count(),
-        'followings_count': user.followings.count(),
-        'is_followed': request.user in user.followers.all(),
+        'points': user.points,  # 포인트
+        'followers_count': user.followers.count(),  # 팔로워 수
+        'followings_count': user.followings.count(),  # 팔로잉 수
+        'articles_count': articles_count,  # 작성한 게시글 수
+        'likes_count': likes_count,  # 총 좋아요 수
+        'is_followed': request.user in user.followers.all(),  # 현재 사용자가 팔로우 중인지 여부
     })
 
 # @api_view(['GET'])
