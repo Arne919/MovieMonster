@@ -8,16 +8,10 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.db.models import Count
-<<<<<<< HEAD
 from .models import User, Category, Ranking, Game
 from .serializers import UserSerializer, CategorySerializer, RankingSerializer, GameSerializer, ProfileSerializer, UserRankSerializer
 
 
-=======
-from .models import User, Category, CategoryMovie, Ranking, Game
-from .serializers import UserSerializer, CategorySerializer, RankingSerializer, GameSerializer, ProfileSerializer
-from movies.models import Movie
->>>>>>> 93df6fa738f8bb026b443f395dbe5bf36993edb5
 from django.middleware.csrf import get_token
 
 @api_view(['POST'])
@@ -92,6 +86,7 @@ def get_user_rankings(request):
     rankings = User.objects.order_by('-points')[:10]  # 상위 10명
     serializer = UserRankSerializer(rankings, many=True)
     return Response(serializer.data)
+
 # @api_view(['GET'])
 # @permission_classes([IsAuthenticated])
 # def get_user_rankings(request):
