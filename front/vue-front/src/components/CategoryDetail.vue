@@ -28,7 +28,11 @@
       >
         <h3>{{ movie.title }}</h3> <!-- 영화 제목 표시 -->
         <p>개봉일: {{ movie.release_date }}</p> <!-- 영화 개봉일 표시 -->
-        <button v-if="isOwner" @click="removeMovie(movie.id)" class="remove-movie-btn">삭제</button>
+        <button 
+          v-if="isOwner" 
+          @click="removeMovie(movie.id, $event)" 
+          class="remove-movie-btn"
+        >삭제</button>
       </div>
     </div>
   </div>
@@ -49,7 +53,7 @@ const isEditingName = ref(false); // 이름 수정 상태
 const newCategoryName = ref(""); // 새로운 카테고리 이름
 
 // 현재 로그인한 유저와 카테고리 소유자 비교
-const isOwner = computed(() => store.user.id === category.value?.owner_id); // owner_id는 백엔드에서 반환
+const isOwner = computed(() => store.user?.id === category.value?.owner_id); // owner_id는 백엔드에서 반환
 
 // 카테고리 상세 데이터 가져오기
 const fetchCategoryDetails = async () => {
@@ -67,11 +71,6 @@ const fetchCategoryDetails = async () => {
     category.value = response.data;
     movies.value = response.data.movies; // 영화 데이터 설정
     newCategoryName.value = response.data.name; // 기존 이름 설정
-    console.log("Category Details Loaded:", category.value);
-    console.log("isOwner:", isOwner.value);
-console.log("Current User ID:", store.user.id);
-console.log("Category Owner ID:", category.value?.owner_id);
-
   } catch (error) {
     console.error("Error fetching category details:", error);
   }
@@ -137,8 +136,9 @@ const deleteCategory = async () => {
 };
 
 // 카테고리에서 영화 삭제
-const removeMovie = async (movieId) => {
-  if (!isOwner.value) return;
+const removeMovie = async (movieId, event) => {
+  event.stopPropagation();
+  // if (!isOwner.value) return;
   try {
     await axios.post(
       `http://127.0.0.1:8000/accounts/categories/remove-movie/`,
@@ -167,7 +167,24 @@ const goToMovieDetail = (movieId) => {
 };
 
 // 컴포넌트 마운트 시 데이터 로드
-onMounted(fetchCategoryDetails);
+// onMounted(fetchCategoryDetails);
+// 컴포넌트 마운트 시 데이터 로드
+onMounted(async () => {
+  try {
+    console.log("Fetching user...");
+    await store.fetchUser(); // 사용자 정보 먼저 가져오기
+    console.log("Current User:", store.user); // 디버깅 로그
+
+    await fetchCategoryDetails(); // 카테고리 정보 가져오기
+
+    // 디버깅 로그
+    console.log("isOwner:", isOwner.value);
+    console.log("Current User ID:", store.user?.id);
+    console.log("Category Owner ID:", category.value?.owner_id);
+  } catch (error) {
+    console.error("Error in onMounted:", error);
+  }
+});
 </script>
 
 <style scoped>
