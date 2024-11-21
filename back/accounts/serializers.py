@@ -34,10 +34,10 @@ class ProfileSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = ['id', 'title', 'poster_url']
+        fields = ['id', 'title', 'poster_url', 'release_date']
         
 class CategorySerializer(serializers.ModelSerializer):
-    movies = MovieSerializer(many=True, read_only=True, source='category_movies.movie')
+    movies = MovieSerializer(many=True, read_only=True)
 
     class Meta:
         model = Category
