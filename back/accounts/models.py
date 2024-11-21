@@ -20,10 +20,10 @@ class User(AbstractUser):
         return Article.objects.filter(user=self).aggregate(total_likes=Count('like_users'))['total_likes'] or 0
 
 class Category(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='categories')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='categories')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='categories')
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='categories')
     name = models.CharField(max_length=30)
-
+    movies = models.ManyToManyField(Movie, related_name='categories')  # ManyToMany 관계 추가
     def __str__(self):
         return self.name
     

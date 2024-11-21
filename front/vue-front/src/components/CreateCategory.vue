@@ -14,31 +14,41 @@
 </template>
 
 <script>
-import axios from "@/axios"; // axios.js 파일에서 설정된 Axios 인스턴스 불러오기
+import { ref } from "vue";
+import axiosInstance from "@/axios";
+import {useCounterStore} from "@/stores/counter.js"
 
 export default {
-  data() {
-    return {
-      categoryName: "", // 입력된 카테고리 이름
-      message: "", // 사용자 메시지
-    };
-  },
-  methods: {
-    async createCategory() {
+  setup() {
+    const categoryName = ref(""); // 입력된 카테고리 이름
+    const message = ref(""); // 사용자 메시지
+
+    const createCategory = async () => {
       try {
-        const response = await axios.post("/accounts/categories/", {
-          name: this.categoryName,
+        const response = await axiosInstance.post("http://127.0.0.1:8000/accounts/categories/",{
+            headers: {
+              Authorization: `Token ${store.token}`,
+            },
+          }, {
+          name: categoryName.value,
         });
-        this.message = `카테고리 "${response.data.name}"가 생성되었습니다.`;
-        this.categoryName = ""; // 입력 필드 초기화
+        message.value = `카테고리 "${response.data.name}"가 생성되었습니다.`;
+        categoryName.value = ""; // 입력 필드 초기화
       } catch (error) {
         if (error.response && error.response.data) {
-          this.message = error.response.data.error || "카테고리 생성에 실패했습니다.";
+          message.value =
+            error.response.data.error || "카테고리 생성에 실패했습니다.";
         } else {
-          this.message = "서버와의 연결에 문제가 발생했습니다.";
+          message.value = "서버와의 연결에 문제가 발생했습니다.";
         }
       }
-    },
+    };
+
+    return {
+      categoryName,
+      message,
+      createCategory,
+    };
   },
 };
 </script>
