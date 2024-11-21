@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button @click="goBack">전체 리뷰로 돌아가기</button> <!-- 뒤로가기 버튼 추가 -->
     <div v-if="article">
       <h2>제목 : {{ article.title }}</h2>
       <!-- 작성자 정보 출력 -->
@@ -93,6 +94,12 @@ onMounted(() => {
       console.log(err)
     })
 })
+
+// 뒤로가기
+const goBack = () => {
+  router.go(-1); // 이전 페이지로 이동
+};
+
 const goToEdit = () => {
   router.push({ name: 'EditView', params: { id: article.value.id } })
 }
