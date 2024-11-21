@@ -15,6 +15,9 @@ import RankView from '@/views/RankView.vue'
 import { useCounterStore } from '@/stores/counter'
 import EditView from '@/views/EditView.vue'
 import ProfileView from '@/views/ProfileView.vue';
+import CategoryDetail from '@/components/CategoryDetail.vue';
+import CategoryList from '@/components/CategoryList.vue';
+import CreateCategory from "@/components/CreateCategory.vue";
 
 
 const router = createRouter({
@@ -87,15 +90,24 @@ const router = createRouter({
       name: 'RankView',
       component: RankView,
     },
-    // {
-    //   path: '/profile',
-    //   name: 'ProfileView',
-    //   component: ProfileView,
-    // },
     {
       path: '/profile/:username',
       name: 'ProfileView',
       component: ProfileView,
+    },
+    {
+      path: '/profile/:username/categories',
+      name: 'CategoryList',
+      component: CategoryList,
+    },
+    {
+      path: '/categories/:id',
+      name: 'CategoryDetail',
+      component: CategoryDetail,
+    },{
+      path: '/categories/create',
+      name: 'CreateCategory',
+      component: CreateCategory,
     },
   ]
 })
