@@ -2,6 +2,8 @@
   <div>
     <h1>리뷰 작성</h1>
 
+    <button @click="goBack">리뷰 작성 취소</button> <!-- 뒤로가기 버튼 추가 -->
+
     <!-- 영화 검색 영역 추가 -->
     <div>
       <label for="movie-search">영화 제목 검색 : </label>
@@ -58,6 +60,9 @@ const content = ref(null)
 const store = useCounterStore()
 const router = useRouter()
 
+const goBack = () => {
+  router.go(-1); // 이전 페이지로 이동
+};
 // 별점 관련 함수 ---------------
 
 const hoverRating = ref(0); // 마우스 위치에 따라 표시되는 별점
