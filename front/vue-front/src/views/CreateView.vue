@@ -137,7 +137,8 @@ const createArticle = function () {
       store.fetchUserPoints()  // 작성 후 사용자 포인트를 갱신
       alert('리뷰 작성이 완료되었습니다.');
       // 게시글 작성 성공 시, ArticleView 페이지로 이동
-      router.push({ name: 'ArticleView' })
+      const createdArticleId = res.data.id
+      router.push({ name: 'DetailView', params: { id: createdArticleId } })
     })
     .catch((err) => {
       // 오류 발생 시 콘솔에 오류 메시지 출력

@@ -207,5 +207,28 @@ export const useCounterStore = defineStore('counter', () => {
       data: { content: commentContent }
     })
   }
-  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut, Username, fetchUserPoints, user, displayStars, fetchRankings, rankings}
+
+  // 댓글 수정 API 호출
+const updateComment = (articleId, commentId, updatedContent) => {
+  return axios({
+    method: 'put',
+    url: `${API_URL}/api/v1/communities/${articleId}/comments/${commentId}/update/`,
+    headers: {
+      Authorization: `Token ${token.value}`,
+    },
+    data: { content: updatedContent },
+  });
+};
+
+// 댓글 삭제 API 호출
+const deleteComment = (articleId, commentId) => {
+  return axios({
+    method: 'delete',
+    url: `${API_URL}/api/v1/communities/${articleId}/comments/${commentId}/delete/`,
+    headers: {
+      Authorization: `Token ${token.value}`,
+    },
+  });
+};
+  return { articles, API_URL, addComment, getComments, getArticles, signUp, logIn, token, isLogin, logOut, Username, fetchUserPoints, user, displayStars, fetchRankings, rankings, updateComment, deleteComment}
 }, { persist: true })
