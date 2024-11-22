@@ -45,16 +45,17 @@
       </div>
 
       <!-- 댓글 작성 폼 -->
-      <div>
-        <textarea v-model="newComment" placeholder="댓글을 작성하세요"></textarea>
-        <button @click="submitComment">댓글 작성</button> <!-- 댓글 작성 버튼 -->
-      </div>
+    <div v-if="!editingComment">
+      <textarea v-model="newComment" placeholder="댓글을 작성하세요"></textarea>
+      <button @click="submitComment">댓글 작성</button> <!-- 댓글 작성 버튼 -->
+    </div>
+
       <!-- 댓글 수정 폼 -->
-      <div v-if="editingComment">
-        <textarea v-model="updatedCommentContent"></textarea>
-        <button @click="submitUpdatedComment">수정 완료</button>
-        <button @click="cancelEdit">취소</button>
-      </div>
+    <div v-if="editingComment">
+      <textarea v-model="updatedCommentContent"></textarea>
+      <button @click="submitUpdatedComment">수정 완료</button>
+      <button @click="cancelEdit">취소</button>
+    </div>
     </div>
   </div>
 </template>
@@ -122,29 +123,27 @@ const goToEdit = () => {
 
 // 댓글 작성 함수
 const submitComment = () => {
-  if (!newComment.value.trim()) {
-    return
+  if (!newComment.value.trim() || editingComment.value) {
+    // 댓글 작성 중에는 수정 폼이 활성화되지 않도록 제한
+    return;
   }
 
   axios({
     method: 'post',
     url: `${store.API_URL}/api/v1/communities/${route.params.id}/comments/`,
     headers: {
-      Authorization: `Token ${store.token}`  // 토큰 추가
+      Authorization: `Token ${store.token}`, // 토큰 추가
     },
-    data: { content: newComment.value }
+    data: { content: newComment.value },
   })
     .then((res) => {
-      comments.value.push(res.data)  // 새로운 댓글 추가
-      newComment.value = ''  // 댓글 작성 후 입력 필드 초기화
-
-      // 댓글 작성 후, 전체 게시글 목록을 갱신
-      store.getArticles();  // 댓글 추가 후 전체 게시글 리스트를 새로고침
+      comments.value.push(res.data); // 새로운 댓글 추가
+      newComment.value = ''; // 댓글 작성 후 입력 필드 초기화
     })
     .catch((err) => {
-      console.log(err)
-    })
-}
+      console.log(err);
+    });
+};
 // 댓글 수정 상태 관리
 const editingComment = ref(null); // 현재 수정 중인 댓글
 const updatedCommentContent = ref(''); // 수정 내용 저장
@@ -155,14 +154,11 @@ const editComment = (comment) => {
   updatedCommentContent.value = comment.content; // 기존 댓글 내용 채우기
 };
 
-// 수정 취소
-const cancelEdit = () => {
-  editingComment.value = null;
-  updatedCommentContent.value = '';
-};
-
-// 댓글 수정 API 호출
+// 댓글 수정 완료
 const submitUpdatedComment = async () => {
+  if (!updatedCommentContent.value.trim()) {
+    return; // 공백 수정 방지
+  }
   try {
     const response = await store.updateComment(route.params.id, editingComment.value.id, updatedCommentContent.value);
     // 댓글 목록 업데이트
@@ -170,12 +166,34 @@ const submitUpdatedComment = async () => {
     if (updatedCommentIndex !== -1) {
       comments.value[updatedCommentIndex] = response.data;
     }
-    editingComment.value = null;
-    updatedCommentContent.value = '';
+    editingComment.value = null; // 수정 상태 초기화
+    updatedCommentContent.value = ''; // 입력 필드 초기화
   } catch (error) {
     console.error('댓글 수정 실패:', error);
   }
 };
+
+// 댓글 수정 취소
+const cancelEdit = () => {
+  editingComment.value = null;
+  updatedCommentContent.value = '';
+};
+
+// // 댓글 수정 API 호출
+// const submitUpdatedComment = async () => {
+//   try {
+//     const response = await store.updateComment(route.params.id, editingComment.value.id, updatedCommentContent.value);
+//     // 댓글 목록 업데이트
+//     const updatedCommentIndex = comments.value.findIndex((c) => c.id === editingComment.value.id);
+//     if (updatedCommentIndex !== -1) {
+//       comments.value[updatedCommentIndex] = response.data;
+//     }
+//     editingComment.value = null;
+//     updatedCommentContent.value = '';
+//   } catch (error) {
+//     console.error('댓글 수정 실패:', error);
+//   }
+// };
 
 // 댓글 삭제 API 호출
 const removeComment = async (commentId) => {
