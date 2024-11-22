@@ -210,6 +210,51 @@ def user_points(request):
         
 from communities.models import Article  # Article 모델 임포트
 
+from django.db.models import Count
+
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+# def profile(request, username):
+#     """
+#     사용자 프로필 데이터를 반환하며,
+#     각 카테고리의 첫 번째 영화 포스터를 포함합니다.
+#     """
+#     user = get_object_or_404(User, username=username)
+
+#     # 사용자 카테고리 데이터
+#     categories = Category.objects.filter(user=user)
+#     category_data = []
+#     for category in categories:
+#         # 카테고리에서 첫 번째 영화 가져오기
+#         first_movie = category.movies.first()  # ManyToMany 관계
+#         category_data.append({
+#             'id': category.id,
+#             'name': category.name,
+#             'movies_count': category.movies.count(),  # 영화 개수
+#             'first_movie_poster': first_movie.poster_url if first_movie else '/media/default_categories/default-category.png',  # 첫 번째 영화 포스터 또는 디폴트 이미지
+#         })
+
+#     # 게시글 및 좋아요 데이터
+#     articles_count = Article.objects.filter(user=user).count()
+#     likes_count = Article.objects.filter(user=user).aggregate(
+#         total_likes=Count('like_users')
+#     )['total_likes'] or 0
+
+#     # 응답 데이터
+#     return Response({
+#         'id': user.id,
+#         'username': user.username,
+#         'points': user.points,
+#         'followers_count': user.followers.count(),
+#         'followings_count': user.followings.count(),
+#         'articles_count': articles_count,
+#         'likes_count': likes_count,
+#         'is_followed': request.user in user.followers.all(),
+#         'categories': category_data,
+#         'profile_image': user.profile_picture.url if user.profile_picture else '/media/profile_pictures/default-profile.png',
+#     })
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def profile(request, username):
@@ -218,6 +263,16 @@ def profile(request, username):
 
     # 해당 유저의 카테고리 가져오기
     categories = Category.objects.filter(user=user)
+    category_data = []
+    for category in categories:
+        # 카테고리에서 첫 번째 영화 가져오기
+        first_movie = category.movies.first()  # ManyToMany 관계
+        category_data.append({
+            'id': category.id,
+            'name': category.name,
+            'movies_count': category.movies.count(),  # 영화 개수
+            'first_movie_poster': first_movie.poster_url if first_movie else '/media/default_categories/default-category.png',  # 첫 번째 영화 포스터 또는 디폴트 이미지
+        })
     category_serializer = CategorySerializer(categories, many=True)
 
     # 게시글 수와 좋아요 수 계산
@@ -237,6 +292,7 @@ def profile(request, username):
         'is_followed': request.user in user.followers.all(),  # 현재 사용자가 팔로우 중인지 여부
         'categories': category_serializer.data,  # 유저 카테고리 포함
         'profile_image': user.profile_picture.url if user.profile_picture else '/media/profile_pictures/default-profile.png',
+        'category_image': category_data,
     })
 
 @api_view(['POST'])

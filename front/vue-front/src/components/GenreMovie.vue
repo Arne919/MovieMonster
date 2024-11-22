@@ -3,7 +3,7 @@
     <!-- 장르 선택 섹션 -->
     <div class="mb-4">
       <label for="genre-select" class="form-label">장르 선택</label> |
-      <select id="genre-select" class="form-select" @change="handleGenreChange">
+      <select id="genre-select" class="form-select" @change="goToGenre">
         <option value="home">영화 홈</option>
         <option v-for="genre in genres" :key="genre" :value="genre">
           {{ genre }}
@@ -56,6 +56,12 @@ export default {
     const filteredMovies = ref([]); // 필터링된 영화 리스트
     const selectedGenre = ref(""); // 선택된 장르
     const router = useRouter();
+
+    const goToGenre = (genre) => {
+      console.log(aa)
+      router.push({ name: "GenreSection", params: { genre } });
+    };
+
 
     // JSON 파일에서 영화 데이터 가져오기
     const fetchMovies = async () => {
