@@ -10,11 +10,11 @@ from django.contrib.auth.hashers import make_password
 from django.db.models import Count
 from .models import User, Category, Ranking, Game
 from .serializers import UserSerializer, CategorySerializer, MovieSerializer, RankingSerializer, GameSerializer, ProfileSerializer, UserRankSerializer
-
+from movies.models import Movie
 from django.middleware.csrf import get_token
 
 from dj_rest_auth.registration.views import RegisterView
-from .serializers import CustomRegisterSerializer
+from .serializers import CustomRegisterSerializer, MovieSerializer
 from rest_framework.parsers import MultiPartParser, FormParser
 
 class CustomRegisterView(RegisterView):
@@ -323,3 +323,40 @@ from django.middleware.csrf import get_token
 def get_csrf_token(request):
     csrf_token = get_token(request)
     return Response({'csrfToken': csrf_token})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def search_movies(request):
+    """
+    영화 제목으로 검색
+    """
+    title = request.query_params.get('title', '').strip()
+    if not title:
+        return Response({'error': '영화 제목을 입력해주세요.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    movies = Movie.objects.filter(title__icontains=title)[:10]  # 제목에 검색어가 포함된 영화 10개 제한
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_movie_to_category(request):
+    """
+    카테고리에 영화 추가
+    """
+    category_id = request.data.get('category_id')
+    movie_id = request.data.get('movie_id')
+
+    if not category_id or not movie_id:
+        return Response({'error': 'category_id와 movie_id는 필수 항목입니다.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        category = Category.objects.get(id=category_id, user=request.user)
+        movie = Movie.objects.get(id=movie_id)
+    except Category.DoesNotExist:
+        return Response({'error': '카테고리를 찾을 수 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
+    except Movie.DoesNotExist:
+        return Response({'error': '영화를 찾을 수 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
+
+    category.movies.add(movie)
+    return Response({'message': f'영화 "{movie.title}"가 카테고리 "{category.name}"에 추가되었습니다.'}, status=status.HTTP_200_OK)
