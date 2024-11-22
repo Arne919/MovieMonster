@@ -3,15 +3,8 @@
     <!-- 장르 선택 섹션 -->
     <div class="mb-4">
       <label for="genre-select" class="form-label">장르 선택</label> |
-      <select
-        id="genre-select"
-        class="form-select"
-        v-model="selectedGenre"
-        @change="filterMovies"
-      >
-        <option value="" disabled selected>장르를 선택하시오</option>
-        <option value="home">영화 홈페이지</option>
-        <option value="all">영화 전체</option>
+      <select id="genre-select" class="form-select" @change="handleGenreChange">
+        <option value="home">영화 홈</option>
         <option v-for="genre in genres" :key="genre" :value="genre">
           {{ genre }}
         </option>
@@ -23,7 +16,6 @@
       <h2 class="text-center mb-4">
         {{ selectedGenre === "all" ? "전체 영화" : `장르: ${selectedGenre}` }}
       </h2>
-      <!-- <h2 class="text-center mb-4">장르: {{ selectedGenre }}</h2> -->
       <div class="grid-container">
         <div
           class="card"
@@ -47,30 +39,29 @@
 
     <!-- 선택된 장르에 해당하는 영화가 없을 때 -->
     <div v-else-if="selectedGenre && selectedGenre !== 'all'" class="mt-4 text-center">
-    <!-- <div v-else-if="selectedGenre" class="mt-4 text-center"> -->
       <h2>해당 장르에 맞는 영화가 없습니다.</h2>
     </div>
   </div>
 </template>
 
 <script>
+import { ref, computed, onMounted } from "vue";
+import { useRouter } from "vue-router";
 import axios from "axios";
 
 export default {
-  data() {
-    return {
-      movies: [], // 모든 영화 데이터
-      genres: [], // 고유한 장르 리스트
-      selectedGenre: "", // 선택된 장르
-      filteredMovies: [], // 선택된 장르에 따른 필터링된 영화 리스트
-    };
-  },
-  methods: {
+  setup() {
+    const genres = ref([]); // 장르 리스트
+    const movies = ref([]); // 모든 영화 데이터
+    const filteredMovies = ref([]); // 필터링된 영화 리스트
+    const selectedGenre = ref(""); // 선택된 장르
+    const router = useRouter();
+
     // JSON 파일에서 영화 데이터 가져오기
-    async fetchMovies() {
+    const fetchMovies = async () => {
       try {
-        const response = await axios.get("/movie_data.json"); // JSON 파일 경로
-        this.movies = response.data.map((item) => ({
+        const response = await axios.get("/movie_data.json");
+        movies.value = response.data.map((item) => ({
           movie_id: item.fields.movie_id,
           title: item.fields.title,
           poster_url: item.fields.poster_url,
@@ -79,42 +70,68 @@ export default {
 
         // 고유한 장르 추출
         const genreSet = new Set();
-        this.movies.forEach((movie) => {
+        movies.value.forEach((movie) => {
           movie.genres.forEach((genre) => genreSet.add(genre));
         });
-        this.genres = ["all", ...Array.from(genreSet)]; // "전체" 추가
-        // this.genres = Array.from(genreSet); // 고유한 장르 배열로 변환
-        this.filterMovies(); // 초기 필터링
-        console.log("Genres Loaded:", this.genres); // 디버깅용 로그
+        genres.value = ["all", ...Array.from(genreSet)]; // "전체" 추가
+        filterMovies(); // 초기 필터링
+        console.log("Genres Loaded:", genres.value); // 디버깅 로그
       } catch (error) {
         console.error("Error loading movies:", error);
       }
-    },
+    };
 
-    
-    filterMovies() {
-      if (this.selectedGenre === "all") {
-        this.filteredMovies = this.movies; // 전체 영화 출력
-      } else if (this.selectedGenre) {
-        this.filteredMovies = this.movies.filter((movie) =>
-          movie.genres.includes(this.selectedGenre)
+    // 선택된 장르에 따른 영화 필터링
+    const filterMovies = () => {
+      if (selectedGenre.value === "all") {
+        filteredMovies.value = movies.value; // 전체 영화 출력
+      } else if (selectedGenre.value) {
+        filteredMovies.value = movies.value.filter((movie) =>
+          movie.genres.includes(selectedGenre.value)
         );
       } else {
-        this.filteredMovies = []; // 선택 해제 시 필터링된 리스트 초기화
+        filteredMovies.value = []; // 선택 해제 시 필터링 초기화
       }
-    },
+    };
+
+    // 장르 선택 시 처리
+    const handleGenreChange = (event) => {
+      const selected = event.target.value;
+      console.log(selected)
+
+      if (selected === "home") {
+        // 영화 홈으로 이동
+        console.log(selected)
+        router.push({ name: "MovieView" });
+      } else {
+        console.log(selected)
+        selectedGenre.value = selected;
+        filterMovies(); // 장르에 따른 필터링
+      }
+    };
+
     // 영화 상세 페이지 이동
-    goToDetail(movieId) {
-      this.$router.push({ name: "MovieDetail", params: { id: movieId } });
-    },
+    const goToDetail = (movieId) => {
+      router.push({ name: "MovieDetail", params: { id: movieId } });
+    };
+
     // TMDB 포스터 URL 생성
-    getFullPosterUrl(posterUrl) {
+    const getFullPosterUrl = (posterUrl) => {
       const baseUrl = "https://image.tmdb.org/t/p/w500";
       return `${baseUrl}${posterUrl}`;
-    },
-  },
-  created() {
-    this.fetchMovies(); // 영화 데이터 가져오기
+    };
+
+    onMounted(fetchMovies);
+
+    return {
+      genres,
+      movies,
+      filteredMovies,
+      selectedGenre,
+      handleGenreChange,
+      goToDetail,
+      getFullPosterUrl,
+    };
   },
 };
 </script>
@@ -125,12 +142,11 @@ export default {
 }
 
 .genre-label {
-  font-size: 2rem; /* h2와 동일한 폰트 크기 */
-  font-weight: bold; /* h2의 기본 굵기 */
-  display: block; /* label을 블록 요소로 표시 */
+  font-size: 2rem;
+  font-weight: bold;
+  display: block;
   margin-bottom: 15px;
 }
-
 
 .grid-container {
   display: flex;
