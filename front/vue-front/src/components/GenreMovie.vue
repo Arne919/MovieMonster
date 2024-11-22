@@ -10,6 +10,8 @@
         @change="filterMovies"
       >
         <option value="" disabled selected>장르를 선택하시오</option>
+        <option value="home">영화 홈페이지</option>
+        <option value="all">영화 전체</option>
         <option v-for="genre in genres" :key="genre" :value="genre">
           {{ genre }}
         </option>
@@ -18,7 +20,10 @@
 
     <!-- 필터링된 영화 리스트 -->
     <div v-if="filteredMovies.length" class="mt-4">
-      <h2 class="text-center mb-4">장르: {{ selectedGenre }}</h2>
+      <h2 class="text-center mb-4">
+        {{ selectedGenre === "all" ? "전체 영화" : `장르: ${selectedGenre}` }}
+      </h2>
+      <!-- <h2 class="text-center mb-4">장르: {{ selectedGenre }}</h2> -->
       <div class="grid-container">
         <div
           class="card"
@@ -41,7 +46,8 @@
     </div>
 
     <!-- 선택된 장르에 해당하는 영화가 없을 때 -->
-    <div v-else-if="selectedGenre" class="mt-4 text-center">
+    <div v-else-if="selectedGenre && selectedGenre !== 'all'" class="mt-4 text-center">
+    <!-- <div v-else-if="selectedGenre" class="mt-4 text-center"> -->
       <h2>해당 장르에 맞는 영화가 없습니다.</h2>
     </div>
   </div>
@@ -76,15 +82,20 @@ export default {
         this.movies.forEach((movie) => {
           movie.genres.forEach((genre) => genreSet.add(genre));
         });
-        this.genres = Array.from(genreSet); // 고유한 장르 배열로 변환
+        this.genres = ["all", ...Array.from(genreSet)]; // "전체" 추가
+        // this.genres = Array.from(genreSet); // 고유한 장르 배열로 변환
+        this.filterMovies(); // 초기 필터링
         console.log("Genres Loaded:", this.genres); // 디버깅용 로그
       } catch (error) {
         console.error("Error loading movies:", error);
       }
     },
-    // 선택된 장르에 따른 영화 필터링
+
+    
     filterMovies() {
-      if (this.selectedGenre) {
+      if (this.selectedGenre === "all") {
+        this.filteredMovies = this.movies; // 전체 영화 출력
+      } else if (this.selectedGenre) {
         this.filteredMovies = this.movies.filter((movie) =>
           movie.genres.includes(this.selectedGenre)
         );

@@ -1,11 +1,10 @@
 <template>
   <div class="container">
-    <h2 class="text-center mb-4">{{ sectionTitle }} 영화</h2>
-    <button @click="goBack">뒤로가기</button> <!-- 뒤로가기 버튼 추가 -->
+    <h2 class="text-center mb-4">{{ genreTitle }} 영화</h2>
     <div class="grid-container">
       <div
         class="card"
-        v-for="movie in movies"
+        v-for="movie in filteredMovies"
         :key="movie.movie_id"
         @click="goToDetail(movie.movie_id)"
       >
@@ -27,60 +26,49 @@ import { ref, computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
 
-// 상태 관리
 const route = useRoute();
 const router = useRouter();
-
-// 현재 섹션과 영화 데이터
-const section = ref(route.params.section);
+const genre = ref(route.params.genre);
 const movies = ref([]);
+const filteredMovies = ref([]);
 
-const goBack = () => {
-  router.go(-1); // 이전 페이지로 이동
-};
-
-// 섹션 제목 계산
-const sectionTitle = computed(() => {
-  return section.value === "popular"
-    ? "인기"
-    : section.value === "recent"
-    ? "최신"
-    : "개봉예정";
-});
-
-// 영화 데이터 가져오기
 const fetchMovies = async () => {
   try {
-    const apiEndpoint =
-      section.value === "popular"
-        ? "/popular.json"
-        : section.value === "recent"
-        ? "/recent.json"
-        : "/upcoming.json";
-
-    const response = await axios.get(apiEndpoint);
+    const response = await axios.get("/movie_data.json");
     movies.value = response.data.map((item) => ({
       movie_id: item.fields.movie_id,
       title: item.fields.title,
       poster_url: item.fields.poster_url,
+      genres: item.fields.genres,
     }));
+    filterMovies();
   } catch (error) {
-    console.error("Error fetching movies:", error);
+    console.error("Error loading movies:", error);
   }
 };
 
-// 영화 포스터 URL 생성
+const filterMovies = () => {
+  filteredMovies.value = movies.value.filter((movie) =>
+    movie.genres.includes(genre.value)
+  );
+};
+
+const goToDetail = (movieId) => {
+  router.push({ name: "MovieDetail", params: { id: movieId } });
+};
+
 const getFullPosterUrl = (posterUrl) => {
   const baseUrl = "https://image.tmdb.org/t/p/w500";
   return `${baseUrl}${posterUrl}`;
 };
 
-// 영화 디테일 페이지로 이동
-const goToDetail = (movieId) => {
-  router.push({ name: "MovieDetail", params: { id: movieId } });
-};
+const genreTitle = computed(() => {
+  if (genre.value === "all") {
+    return "전체";
+  }
+  return genre.value.charAt(0).toUpperCase() + genre.value.slice(1);
+});
 
-// 컴포넌트가 마운트될 때 데이터 가져오기
 onMounted(fetchMovies);
 </script>
 
