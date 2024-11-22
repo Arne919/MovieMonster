@@ -31,7 +31,7 @@
           <!-- 프로필 -->
           <td>
             <div class="profile-picture">
-              <img :src="user.profile_picture || placeholderImage" alt="Profile" class="profile-img" />
+              <img :src="`http://127.0.0.1:8000${user.profile_picture}`" alt="프로필 사진" class="profile-img" />
             </div>
           </td>
           <!-- 이름 -->
