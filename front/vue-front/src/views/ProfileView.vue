@@ -73,6 +73,30 @@ const route = useRoute();
 const router = useRouter();
 const store = useCounterStore();
 
+const toggleFollow = async () => {
+  console.log("Toggle Follow clicked"); // 디버깅용
+  try {
+    const response = await axios.post(
+      `http://127.0.0.1:8000/accounts/${user.value.id}/follow/`,
+      null,
+      {
+        headers: {
+          Authorization: `Token ${store.token}`,
+        },
+      }
+    );
+    // 응답 데이터를 사용하여 상태 업데이트
+    isFollowed.value = response.data.is_followed;
+    user.value.followersCount = response.data.followers_count;
+    user.value.followingsCount = response.data.followings_count;
+
+    console.log("Follow toggle success:", response.data); // 디버깅용
+  } catch (error) {
+    console.error("Error toggling follow:", error);
+  }
+};
+
+
 const getFullPosterUrl = (posterUrl) => {
   const baseUrl = "https://image.tmdb.org/t/p/w500"; // TMDB 이미지 베이스 URL
   return `${baseUrl}${posterUrl}`;
