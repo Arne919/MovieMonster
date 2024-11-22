@@ -37,12 +37,14 @@ export const useCounterStore = defineStore('counter', () => {
     if (sortOrder === 'popular') {
       articles.value.sort((a, b) => b.like_count - a.like_count) // 좋아요 많은 순
     } else if (sortOrder === 'recent') {
-      articles.value.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // 최신순
+      console.log('a',articles.value)
+      articles.value.sort((a, b) => b.id - a.id); // id 내림차순
     }
   }
 
   // 정렬된 데이터 가져오기
   const getSortedArticles = async (sortOrder = 'recent') => {
+    console.log('getSortedArticles called with:', sortOrder);
     await fetchArticles() // 데이터를 서버에서 먼저 가져옴
     console.log('Before sorting:', articles.value)
     sortArticles(sortOrder)
@@ -178,40 +180,29 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     }
   };
   // DRF로 전체 게시글 요청을 보내고 응답을 받아 articles에 저장하는 함수
-      const getArticles = async function () {
-        console.log("getArticles function called");
-        try {
-          const response = await axios({
-            method: 'get',
-            url: `${API_URL}/api/v1/communities/`,
-            headers: {
-              Authorization: `Token ${token.value}`
-            }
-          })
-          articles.value = response.data
-          console.log(articles.value)
-          console.log("Updated articles:", articles.value)
-        } catch (err) {
-          console.log(err)
-        }
-      }
+  const getArticles = (forceReload = false) => {
+    console.log("getArticles function called");
   
-  // const getArticles = function () {
-  //   axios({
-  //     method: 'get',
-  //     url: `${API_URL}/api/v1/communities/`,
-  //     headers: {
-  //       Authorization: `Token ${token.value}`
-  //     }
-  //   })
-  //     .then((res) => {
-  //       // console.log(res.data)
-  //       articles.value = res.data
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }
+    if (!forceReload && articles.value.length > 0) {
+      console.log("Articles already loaded, skipping reload");
+      return;
+    }
+  
+    axios({
+      method: "get",
+      url: `${API_URL}/api/v1/communities/`,
+      headers: {
+        Authorization: `Token ${token.value}`,
+      },
+    })
+      .then((response) => {
+        articles.value = response.data; // 데이터를 Vue의 반응형 상태로 설정
+        console.log("Updated articles:", articles.value);
+      })
+      .catch((err) => {
+        console.error("Error fetching articles:", err);
+      });
+  };
 
 
   // 회원가입 요청 액션
