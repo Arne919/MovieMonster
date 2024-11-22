@@ -6,6 +6,7 @@
       <h2>게임 종료!</h2>
       <p>모든 문제를 완료하였습니다.</p>
       <p>정답 수: {{ correctCount }} / {{ totalQuestions }}</p>
+      <p>획득 가능한 포인트 : {{ 100*correctCount }}</p>
 
       <!-- 포인트 획득하기 버튼 -->
       <button class="btn btn-success mt-3" @click="claimPoints">포인트 획득하기</button>
@@ -69,8 +70,12 @@ export default {
     const router = useRouter();
     const store = useCounterStore();
 
-    const goToRank = () => {
-      router.push({ name: "RankView" }); // RankView 페이지로 이동
+    const goToRank = async () => {
+      if (correctCount.value > 0) {
+        await updatePoints(correctCount.value * 100);
+      }
+      await store.fetchUserPoints();
+      router.push({ name: "RankView" });
     };
 
     // 포인트 업데이트 함수

@@ -43,8 +43,9 @@ const setSortOrder = (order) => {
 }
 
 // 컴포넌트 마운트 시 초기 데이터 로드
-onMounted(() => {
-  store.getSortedArticles('recent')
+onMounted(async () => {
+  console.log('hihi')
+  await store.getSortedArticles('recent')
 })
 </script>
 
