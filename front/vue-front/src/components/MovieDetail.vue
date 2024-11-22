@@ -25,22 +25,18 @@
         </button>
       </div>
 
-
-      <div class="movie-youtube">
+      <!-- 공식 예고편 섹션 -->
+      <div class="movie-youtube mt-4 text-center">
       <h3>공식 예고편</h3>
       <button
         type="button"
         class="btn"
-        @click="openModal"
         data-bs-toggle="modal"
         data-bs-target="#youtubeTrailerModal"
       >
-        <img :src="youtubeLogo" alt="YouTube" class="youtube-logo" />
+      <img :src="youtubeLogo" alt="YouTube" class="youtube-logo" />
         </button>
-
-        <YoutubeTrailerModal :movieTitle="movie.title" />
       </div>
-
     </div>
     <!-- 카테고리 추가 모달 -->
     <AddToCategoryModal
@@ -48,60 +44,46 @@
       :movie-id="movie.id"
       @close="showCategoryModal = false"
     />
+    <YoutubeTrailerModal :movieTitle="movie.title" />
   </div>
 </template>
 
 
-<script>
+<script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import AddToCategoryModal from "@/components/AddToCategoryModal.vue";
 import youtubeLogo from "@/assets/youtubeLogo.svg";
-import YoutubeTrailerModal from "./YoutubeTrailerModal.vue";
+import YoutubeTrailerModal from "@/components/YoutubeTrailerModal.vue";
 
-export default {
-  components: {
-    AddToCategoryModal,
-    YoutubeTrailerModal,
-  },
-  setup() {
-    const movie = ref({}); // 영화 데이터를 저장할 객체
-    const showCategoryModal = ref(false); // 모달 표시 여부
-    const route = useRoute();
 
-    // TMDB 이미지 URL 생성
-    const getFullPosterUrl = (posterUrl) => {
-      const baseUrl = "https://image.tmdb.org/t/p/w500"; // TMDB 이미지 베이스 URL
-      return `${baseUrl}${posterUrl}`;
-    };
+const route = useRoute();
 
-    // 영화 데이터 가져오기
-    const fetchMovie = async () => {
-      const movieId = route.params.id; // 라우터에서 영화 ID 가져오기
-      console.log("Route Params ID:", movieId); // 디버깅용
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/v1/movies/${movieId}/`
-        );
-        movie.value = response.data; // 응답 데이터 저장
-        console.log("Movie Data Loaded:", movie.value); // 디버깅용 로그
-      } catch (error) {
-        console.error("Error loading movie:", error);
-      }
-    };
+const movie = ref({}); // 영화 데이터를 저장할 객체
+const showCategoryModal = ref(false); // 카테고리 모달 상태
 
-    // 컴포넌트 마운트 시 영화 데이터 로드
-    onMounted(fetchMovie);
-
-    return {
-      movie,
-      showCategoryModal,
-      getFullPosterUrl,
-      youtubeLogo,
-    };
-  },
+// TMDB 이미지 URL 생성
+const getFullPosterUrl = (posterUrl) => {
+  const baseUrl = "https://image.tmdb.org/t/p/w500";
+  return `${baseUrl}${posterUrl}`;
 };
+
+// 영화 데이터 가져오기
+const fetchMovie = async () => {
+  const movieId = route.params.id; // 라우터에서 영화 ID 가져오기
+  try {
+    const response = await axios.get(
+      `http://127.0.0.1:8000/api/v1/movies/${movieId}/`
+    );
+    movie.value = response.data; // 응답 데이터 저장
+  } catch (error) {
+    console.error("Error loading movie:", error);
+  }
+};
+
+// 컴포넌트 마운트 시 영화 데이터 로드
+onMounted(fetchMovie);
 </script>
 
 
@@ -117,7 +99,7 @@ export default {
 .img-fluid {
   max-height: 500px; /* 포스터 최대 높이 */
   object-fit: cover; /* 이미지 비율 유지 */
-  margin-bottom: 20px; /* 모바일에서 여백 */
+  margin-bottom: 20px;
 }
 
 .col-md-4 {
@@ -134,6 +116,7 @@ p {
   font-size: 1rem;
   margin-bottom: 10px;
 }
+
 .youtube-logo {
   width: 36px;
   height: 36px;
@@ -141,15 +124,6 @@ p {
 
 .movie-youtube {
   margin-top: 20px;
-  padding-left: 10rem;
-  padding-right: 10rem;
   text-align: center;
-  margin-bottom: 5rem;
-}
-
-.modal {
-  display: block;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 20px;
 }
 </style>
