@@ -13,6 +13,7 @@
       <button v-if="isEditingName" @click="saveCategoryName" class="save-btn">저장</button>
       <button v-if="isEditingName" @click="cancelEditingName" class="cancel-btn">취소</button>
       <button @click="openAddMovieModal" class="add-movie-btn">이 카테고리에 영화 추가</button>
+      <button @click="deleteCategory" class="delete-category-btn">카테고리 삭제</button>
     </div>
 
     <!-- 영화 추가 모달 -->
@@ -214,6 +215,28 @@ const addMovieToCategory = async (movie) => {
     closeAddMovieModal();
   } catch (error) {
     console.error("Error adding movie to category:", error);
+  }
+};
+
+// **카테고리 삭제 함수**
+const deleteCategory = async () => {
+  const confirmed = confirm("진짜 삭제하시겠습니까?");
+  if (confirmed) {
+    try {
+      await axios.delete(
+        `${store.API_URL}/accounts/categories/${category.value.id}/delete/`,
+        {
+          headers: {
+            Authorization: `Token ${store.token}`,
+          },
+        }
+      );
+      alert("카테고리가 삭제되었습니다.");
+      router.push(`/profile/${store.user.username}`);
+    } catch (error) {
+      console.error("Error deleting category:", error);
+      alert("카테고리 삭제에 실패했습니다.");
+    }
   }
 };
 
