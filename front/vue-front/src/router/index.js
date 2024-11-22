@@ -5,7 +5,9 @@ import DetailView from '@/views/DetailView.vue'
 import CreateView from '@/views/CreateView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import LogInView from '@/views/LogInView.vue'
-import MovieList from '@/components/MovieList.vue'; // MovieList 컴포넌트 추가
+// import MovieList from '@/components/MovieList.vue'; // MovieList 컴포넌트 추가
+import MovieView from '@/views/MovieView.vue';
+import MovieMore from '@/components/MovieMore.vue';
 import MovieDetail from '@/components/MovieDetail.vue'; // MovieDetail 컴포넌트 추가
 import GameView from '@/views/GameView.vue'
 import OneLineView from "@/views/OneLineView.vue"
@@ -54,10 +56,20 @@ const router = createRouter({
       component: LogInView
     },
     // 영화 리스트 페이지 추가
+    // {
+    //   path: '/movies',
+    //   name: 'MovieList',
+    //   component: MovieList,
+    // },
     {
       path: '/movies',
-      name: 'MovieList',
-      component: MovieList,
+      name: 'MovieView',
+      component: MovieView,
+    },
+    {
+      path: "/movies/more/:section",
+      name: "MovieMore",
+      component: MovieMore,
     },
     // 영화 상세 페이지 추가
     {
@@ -116,7 +128,7 @@ router.beforeEach((to, from) => {
   const store = useCounterStore();
 
   // 로그인 상태 확인이 필요한 경로들
-  const protectedRoutes = ['ArticleView', 'MovieList', 'GameView', 'RankView'];
+  const protectedRoutes = ['ArticleView', 'MovieView', 'GameView', 'RankView'];
 
   if (protectedRoutes.includes(to.name) && !store.isLogin) {
     window.alert('로그인이 필요합니다.');
