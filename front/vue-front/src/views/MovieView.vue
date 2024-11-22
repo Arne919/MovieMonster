@@ -17,7 +17,7 @@
       <div class="grid-container">
         <div
           class="card"
-          v-for="movie in getRandomMovies(section.movies, 5)"
+          v-for="movie in getMoviesInOrder(section.movies, 5)"
           :key="movie.movie_id"
           @click="goToDetail(movie.movie_id)"
         >
@@ -74,9 +74,9 @@ export default {
       }
     };
 
-    const getRandomMovies = (movies, count) => {
-      const shuffled = [...movies].sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, count);
+    // 순서대로 영화 가져오기
+    const getMoviesInOrder = (movies, count) => {
+      return movies.slice(0, count);
     };
 
     const goToDetail = (movieId) => {
@@ -89,7 +89,10 @@ export default {
 
     const goToGenre = (genre) => {
       if (genre === "home") {
-        router.push({ name: "MovieView" });
+        router.push({ name: "MovieView" }).then(() => {
+          // 같은 경로일 경우 상태를 초기화
+          window.location.reload();
+        });
       } else {
         router.push({ name: "GenreMovie", params: { genre } });
       }
@@ -107,11 +110,11 @@ export default {
 
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/v1/movies/search/",
-          {
-            params: { title: searchQuery.value },
-          }
-        );
+        "http://127.0.0.1:8000/api/v1/movies/search/",
+        {
+          params: { title: searchQuery.value },
+        }
+      );
         const movie = response.data;
 
         // 영화가 정확히 일치하면 디테일 페이지로 이동
@@ -133,13 +136,12 @@ export default {
       goToMore,
       goToGenre,
       getFullPosterUrl,
-      getRandomMovies,
+      getMoviesInOrder,
       searchMovie, // searchMovie 메서드 추가
     };
   },
 };
 </script>
-
 
 <style scoped>
 .container {

@@ -3,7 +3,7 @@
     <!-- 장르 선택 섹션 -->
     <div class="mb-4">
       <label for="genre-select" class="form-label">장르 선택</label> |
-      <select id="genre-select" class="form-select" @change="goToGenre">
+      <select id="genre-select" class="form-select" @change="handleGenreChange">
         <option value="home">영화 홈</option>
         <option v-for="genre in genres" :key="genre" :value="genre">
           {{ genre }}
@@ -12,7 +12,7 @@
     </div>
 
     <!-- 필터링된 영화 리스트 -->
-    <div v-if="filteredMovies.length" class="mt-4">
+    <div v-if="genre && filteredMovies.length" class="mt-4">
       <h2 class="text-center mb-4">
         {{ genre === "all" ? "전체 영화" : `${genreTitle} 영화` }}
       </h2>
@@ -36,7 +36,7 @@
     </div>
 
     <!-- 선택된 장르에 해당하는 영화가 없을 때 -->
-    <div v-else class="mt-4 text-center">
+    <div v-else-if="genre" class="mt-4 text-center">
       <h2>해당 장르에 맞는 영화가 없습니다.</h2>
     </div>
   </div>
@@ -52,12 +52,12 @@ export default {
     const router = useRouter();
     const route = useRoute();
 
-    const genres = ref([]); // 모든 장르 리스트
+    const genres = ref([]); // 장르 리스트
     const movies = ref([]); // 전체 영화 데이터
     const filteredMovies = ref([]); // 필터링된 영화 리스트
-    const genre = ref(route.params.genre || "all"); // 현재 장르
+    const genre = ref(route.params.genre || null); // 현재 장르 (홈일 때 null)
 
-    // 영화 데이터를 JSON에서 가져오기
+    // 영화 데이터 가져오기
     const fetchMovies = async () => {
       try {
         const response = await axios.get("/movie_data.json");
@@ -68,7 +68,7 @@ export default {
           genres: item.fields.genres,
         }));
 
-        // 장르 목록 생성
+        // 장르 목록 설정
         const genreSet = new Set();
         movies.value.forEach((movie) => {
           movie.genres.forEach((g) => genreSet.add(g));
@@ -81,10 +81,13 @@ export default {
       }
     };
 
-    // 현재 선택된 장르에 따라 필터링
+    // 장르에 따라 영화 필터링
     const filterMovies = () => {
-      if (genre.value === "all") {
-        filteredMovies.value = movies.value; // 전체 영화 출력
+      if (!genre.value) {
+        // 홈일 때 빈 배열
+        filteredMovies.value = [];
+      } else if (genre.value === "all") {
+        filteredMovies.value = movies.value; // 전체 영화
       } else {
         filteredMovies.value = movies.value.filter((movie) =>
           movie.genres.includes(genre.value)
@@ -92,16 +95,12 @@ export default {
       }
     };
 
-    // 장르 제목 표시
-    const genreTitle = computed(() =>
-      genre.value.charAt(0).toUpperCase() + genre.value.slice(1)
-    );
-
     // 장르 변경 처리
     const handleGenreChange = (event) => {
       const selected = event.target.value;
       if (selected === "home") {
-        router.push({ name: "MovieView" }); // 홈으로 이동
+        genre.value = null; // 홈으로 이동 시 장르 null로 설정
+        router.push({ name: "MovieView" });
       } else {
         router.push({ name: "GenreMovie", params: { genre: selected } });
       }
@@ -112,15 +111,20 @@ export default {
       router.push({ name: "MovieDetail", params: { id: movieId } });
     };
 
-    // TMDB 포스터 URL 생성
+    // 포스터 URL 생성
     const getFullPosterUrl = (posterUrl) => {
       const baseUrl = "https://image.tmdb.org/t/p/w500";
       return `${baseUrl}${posterUrl}`;
     };
 
+    // 장르 제목 표시
+    const genreTitle = computed(() =>
+      genre.value ? genre.value.charAt(0).toUpperCase() + genre.value.slice(1) : ""
+    );
+
     // URL 변경 시 필터링 업데이트
     watch(route, (newRoute) => {
-      genre.value = newRoute.params.genre || "all";
+      genre.value = newRoute.params.genre || null;
       filterMovies();
     });
 
