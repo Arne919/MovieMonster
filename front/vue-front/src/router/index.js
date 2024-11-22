@@ -22,6 +22,7 @@ import CategoryList from '@/components/CategoryList.vue'
 import CreateCategory from "@/components/CreateCategory.vue"
 
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

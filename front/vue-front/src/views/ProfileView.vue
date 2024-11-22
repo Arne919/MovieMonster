@@ -28,13 +28,19 @@
         class="category-card"
         @click="goToCategoryDetail(category.id)"
       >
+      <div class="image-container">
+        <!-- 영화 포스터 또는 디폴트 이미지 -->
+        <img :src="category.movies.length > 0 ? getFullPosterUrl(category.movies[0].poster_url) : 'http://127.0.0.1:8000/media/default_categories/default-category.png'" 
+     alt="카테고리 이미지" 
+     class="category-poster">
+    </div>
         <h3>{{ category.name }}</h3>
         <p>영화 개수: {{ category.movies.length }}</p>
-        <ul>
+        <!-- <ul>
           <li v-for="movie in category.movies" :key="movie.id">
             {{ movie.title }}
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
       <!-- 새 카테고리 추가 버튼 -->
@@ -64,6 +70,12 @@ import CreateCategoryModal from "@/components/CreateCategoryModal.vue";
 const route = useRoute();
 const router = useRouter();
 const store = useCounterStore();
+
+const getFullPosterUrl = (posterUrl) => {
+  const baseUrl = "https://image.tmdb.org/t/p/w500"; // TMDB 이미지 베이스 URL
+  return `${baseUrl}${posterUrl}`;
+};
+
 
 // 유저 데이터 상태 관리
 const user = ref({
@@ -106,6 +118,7 @@ const fetchProfile = async () => {
     // console.log(data)
     isFollowed.value = data.is_followed;
     categories.value = data.categories;
+    console.log(categories.value)
   } catch (error) {
     console.error('Error fetching profile:', error);
   }
@@ -158,6 +171,26 @@ fetchProfile()
 </script>
 
 <style scoped>
+/* 카드 내용 */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+}
+/* 이미지 컨테이너 */
+.image-container {
+  width: 300px; /* 고정된 가로 크기 */
+  height: 300px; /* 고정된 세로 크기 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* 이미지가 컨테이너를 넘어서지 않도록 */
+  border-radius: 8px;
+  margin: 0 auto 10px auto;
+}
+
 button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -179,10 +212,11 @@ button:hover {
 .category-card {
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  width: calc(33.333% - 20px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* 카드 안에서 이미지가 넘치지 않도록 */
+  width: calc(33.333% - 20px);
+  margin: 10px;
+  background-color: #fff;
 }
 
 .category-card h3 {
@@ -197,6 +231,12 @@ button:hover {
 
 .category-card li {
   font-size: 0.9em;
+}
+/* 이미지 스타일 */
+.category-poster {
+  max-width: 100%; /* 컨테이너의 너비에 맞게 축소 */
+  max-height: 100%; /* 컨테이너의 높이에 맞게 축소 */
+  object-fit: contain; /* 비율을 유지하며 축소/확대 */
 }
 
 .modal-overlay {
