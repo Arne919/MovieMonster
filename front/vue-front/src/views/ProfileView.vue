@@ -33,8 +33,20 @@
         </ul>
       </div>
     </div>
-
-  </div>
+      <!-- 새 카테고리 추가 버튼 -->
+      <div v-if="isOwnProfile"class="add-category">
+        <button class="btn btn-primary" @click="showCreateCategoryModal = true">
+          새 카테고리 만들기
+        </button>
+      </div>
+      <!-- 새 카테고리 추가 모달 -->
+      <CreateCategoryModal
+        v-if="showCreateCategoryModal"
+        @close="closeCreateCategoryModal"
+        @categoryCreated="addCategory"
+      />
+    </div>
+  
 </template>
 
 <script setup>
@@ -42,6 +54,7 @@ import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import { useRoute, useRouter  } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
+import CreateCategoryModal from "@/components/CreateCategoryModal.vue";
 
 // Vue Router와 Pinia 스토어 사용
 const route = useRoute();
@@ -58,6 +71,7 @@ const user = ref({
 });
 const isFollowed = ref(false);
 const categories = ref([]);
+const showCreateCategoryModal = ref(false); // 모달 표시 여부
 
 // 현재 프로필이 로그인된 사용자의 것인지 확인
 const isOwnProfile = computed(() => store.user.username === route.params.username);
@@ -88,19 +102,6 @@ const fetchProfile = async () => {
   }
 };
 
-// API를 통해 내가 만든 카테고리 데이터 가져오기
-const fetchCategories = async () => {
-  try {
-    const { data } = await axios.get('http://127.0.0.1:8000/accounts/categories/', {
-      headers: {
-        Authorization: `Token ${store.token}`,
-      },
-    });
-    categories.value = data;
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-  }
-};
 
 // 팔로우/언팔로우 상태 변경
 const toggleFollow = async () => {
@@ -122,10 +123,26 @@ const toggleFollow = async () => {
 const goToCategoryDetail = (categoryId) => {
   router.push(`/categories/${categoryId}`);
 };
+
+// 새 카테고리 모달 열기/닫기
+const openCreateCategoryModal = () => {
+  showCreateCategoryModal.value = true;
+};
+const closeCreateCategoryModal = () => {
+  showCreateCategoryModal.value = false;
+};
+
+// 새 카테고리 목록에 추가
+const addCategory = (category) => {
+  categories.value.push(category);
+};
+
+
+onMounted(fetchProfile);
 // 데이터 병렬로 가져오기
-onMounted(async () => {
-  await Promise.all([fetchProfile(), fetchCategories()]);
-});
+// onMounted(async () => {
+//   await Promise.all([fetchProfile(), fetchCategories()]);
+// });
 </script>
 
 <style scoped>
@@ -168,5 +185,31 @@ button:hover {
 
 .category-card li {
   font-size: 0.9em;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 </style>
