@@ -188,6 +188,16 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     }
   };
   //////////////////////////////////////////////
+
+  // 랭크 계산 함수
+  const getRankTitle = (points) => {
+    if (points < 1000) return "Bronze";
+    if (points < 2000) return "Silver";
+    if (points < 3000) return "Gold";
+    if (points < 4000) return "Platinum";
+    return "Diamond";
+  };
+
   
   const fetchUserPoints = async () => {
     try {
@@ -197,7 +207,7 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
         },
       });
       console.log(response.data)
-      user.value = response.data;
+      user.value = {...response.data, rank_title: getRankTitle(response.data.current_points)}
       // fetchRankings 함수에서 데이터를 로깅합니다.
       console.log('Rankings fetched:', response.data);
 
@@ -390,5 +400,6 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     signUp,
     signUpResponse,
     error,
+    getRankTitle,
   }
 }, { persist: true })

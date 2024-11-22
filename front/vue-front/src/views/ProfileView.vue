@@ -5,6 +5,14 @@
 
       <h1>{{ user.username }}의 프로필 페이지</h1>
     </div>
+    <!-- 사용자 랭크 -->
+    <p>
+      랭크: 
+      <span class="rank-display">
+        <img :src="getRankImage(user.rank_title)" :alt="user.rank_title" class="rank-icon" />
+        {{ user.rank_title }}
+      </span>
+    </p>
     <p>포인트: {{ user.points }}</p>
     <p>팔로잉: <span id="followings-count">{{ user.followingsCount }}</span></p>
     <p>팔로워: <span id="followers-count">{{ user.followersCount }}</span></p>
@@ -36,15 +44,10 @@
     </div>
         <h3>{{ category.name }}</h3>
         <p>영화 개수: {{ category.movies.length }}</p>
-        <!-- <ul>
-          <li v-for="movie in category.movies" :key="movie.id">
-            {{ movie.title }}
-          </li>
-        </ul> -->
       </div>
     </div>
       <!-- 새 카테고리 추가 버튼 -->
-      <div v-if="isOwnProfile"class="add-category">
+      <div v-if="isOwnProfile" class="add-category">
         <button class="btn btn-primary" @click="showCreateCategoryModal = true">
           새 카테고리 만들기
         </button>
@@ -56,13 +59,12 @@
         @categoryCreated="addCategory"
       />
     </div>
-  
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
-import { useRoute, useRouter  } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
 import CreateCategoryModal from "@/components/CreateCategoryModal.vue";
 
@@ -76,10 +78,34 @@ const getFullPosterUrl = (posterUrl) => {
   return `${baseUrl}${posterUrl}`;
 };
 
+// 랭크 이미지를 가져오는 함수
+import bronzeRank from '@/assets/BronzeRank.png';
+import silverRank from '@/assets/SilverRank.png';
+import goldRank from '@/assets/GoldRank.png';
+import platinumRank from '@/assets/PlatinumRank.png';
+import diamondRank from '@/assets/DiamondRank.png';
+
+const getRankImage = (rankTitle) => {
+  switch (rankTitle) {
+    case "Bronze":
+      return bronzeRank;
+    case "Silver":
+      return silverRank;
+    case "Gold":
+      return goldRank;
+    case "Platinum":
+      return platinumRank;
+    case "Diamond":
+      return diamondRank;
+    default:
+      return bronzeRank; // 기본값
+  }
+};
 
 // 유저 데이터 상태 관리
 const user = ref({
   username: '',
+  rank_title: '',
   followingsCount: 0,
   followersCount: 0,
   articlesCount: 0, // 작성한 게시글 수
@@ -94,7 +120,6 @@ const isOwnProfile = computed(() => store.user.username === route.params.usernam
 
 // API를 통해 프로필 데이터 가져오기
 const fetchProfile = async () => {
-  console.log('ddddddddddd')
   try {
     const { data } = await axios.get(
       `http://127.0.0.1:8000/accounts/profile/${route.params.username}/`, 
@@ -102,42 +127,29 @@ const fetchProfile = async () => {
         headers: {
           Authorization: `Token ${store.token}`,
         },
-      });
-      console.log('ddddddddddd',data)
+      }
+    );
+
+    // Use store.getRankTitle to calculate the rank_title if not provided
+    const rankTitle = data.rank_title || store.getRankTitle(data.points);
+
     user.value = {
       id: data.id,
       username: data.username,
       points: data.points,
+      rank_title: rankTitle, // Use calculated rank_title
       followingsCount: data.followings_count,
       followersCount: data.followers_count,
-      articlesCount: data.articles_count, // API 응답에서 게시글 수 추가
-      likesCount: data.likes_count, // API 응답에서 받은 좋아요 수 추가
+      articlesCount: data.articles_count,
+      likesCount: data.likes_count,
       profile_picture: data.profile_image,
     };
-    console.log('ddd', user.value.profile_picture)
-    // console.log(data)
+
+    console.log(user.value);
     isFollowed.value = data.is_followed;
     categories.value = data.categories;
-    console.log(categories.value)
   } catch (error) {
     console.error('Error fetching profile:', error);
-  }
-};
-
-
-// 팔로우/언팔로우 상태 변경
-const toggleFollow = async () => {
-  try {
-    const { data } = await axios.post(`http://127.0.0.1:8000/accounts/${user.value.id}/follow/`, null, {
-      headers: {
-        Authorization: `Token ${store.token}`,
-      },
-    });
-    isFollowed.value = data.is_followed;
-    user.value.followersCount = data.followers_count;
-    user.value.followingsCount = data.followings_count;
-  } catch (error) {
-    console.error('Error toggling follow:', error);
   }
 };
 
@@ -159,15 +171,9 @@ const addCategory = (category) => {
   categories.value.push(category);
 };
 
-
-onMounted(() =>{ 
-console.log('onMounted is being called');
-fetchProfile()
+onMounted(() => {
+  fetchProfile();
 });
-// 데이터 병렬로 가져오기
-// onMounted(async () => {
-//   await Promise.all([fetchProfile(), fetchCategories()]);
-// });
 </script>
 
 <style scoped>
@@ -181,12 +187,12 @@ fetchProfile()
 }
 /* 이미지 컨테이너 */
 .image-container {
-  width: 300px; /* 고정된 가로 크기 */
-  height: 300px; /* 고정된 세로 크기 */
+  width: 300px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* 이미지가 컨테이너를 넘어서지 않도록 */
+  overflow: hidden;
   border-radius: 8px;
   margin: 0 auto 10px auto;
 }
@@ -213,7 +219,7 @@ button:hover {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* 카드 안에서 이미지가 넘치지 않도록 */
+  overflow: hidden;
   width: calc(33.333% - 20px);
   margin: 10px;
   background-color: #fff;
@@ -224,44 +230,21 @@ button:hover {
   font-size: 1.2em;
 }
 
-.category-card ul {
-  padding-left: 20px;
-  margin: 10px 0 0;
-}
-
-.category-card li {
-  font-size: 0.9em;
-}
-/* 이미지 스타일 */
 .category-poster {
-  max-width: 100%; /* 컨테이너의 너비에 맞게 축소 */
-  max-height: 100%; /* 컨테이너의 높이에 맞게 축소 */
-  object-fit: contain; /* 비율을 유지하며 축소/확대 */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
+/* 랭크 표시 스타일 */
+.rank-display {
+  display: inline-flex;
   align-items: center;
 }
 
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  text-align: center;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+.rank-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
 </style>
