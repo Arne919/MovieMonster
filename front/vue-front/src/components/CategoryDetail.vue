@@ -79,6 +79,40 @@ const searchResults = ref([]); // 검색 결과
 const isEditingName = ref(false); // 이름 수정 상태
 const newCategoryName = ref(""); // 새로운 카테고리 이름
 
+const startEditingName = () => {
+  isEditingName.value = true;
+};
+
+const saveCategoryName = async () => {
+  if (!newCategoryName.value.trim()) {
+    alert("새 카테고리 이름을 입력해주세요.");
+    return;
+  }
+  try {
+    const response = await axios.patch(
+      `${store.API_URL}/accounts/categories/${category.value.id}/update/`,
+      { name: newCategoryName.value.trim() },
+      {
+        headers: {
+          Authorization: `Token ${store.token}`,
+        },
+      }
+    );
+    category.value.name = response.data.name;
+    isEditingName.value = false; // 저장 후 수정 모드 종료
+    alert("카테고리 이름이 수정되었습니다.");
+  } catch (error) {
+    console.error("Error saving category name:", error);
+    alert("카테고리 이름 저장에 실패했습니다.");
+  }
+};
+
+const cancelEditingName = () => {
+  newCategoryName.value = category.value.name; // 기존 이름 복원
+  isEditingName.value = false; // 수정 모드 종료
+};
+
+
 // 현재 로그인한 유저와 카테고리 소유자 비교
 const isOwner = computed(() => store.user?.id === category.value?.owner_id); // owner_id는 백엔드에서 반환
 
@@ -177,7 +211,6 @@ const addMovieToCategory = async (movie) => {
   try {
     await store.addMovieToCategory(route.params.categoryId, movie.id);
     await fetchCategoryDetails(); // 카테고리 데이터 갱신
-    alert(`영화 "${movie.title}"가 카테고리에 추가되었습니다.`);
     closeAddMovieModal();
   } catch (error) {
     console.error("Error adding movie to category:", error);
