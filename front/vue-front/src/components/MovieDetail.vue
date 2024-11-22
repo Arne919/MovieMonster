@@ -16,8 +16,8 @@
         <p><strong>개봉일:</strong> {{ movie.release_date }}</p>
         <p><strong>평점:</strong> {{ movie.vote_avg }}</p>
         <p><strong>줄거리:</strong> {{ movie.description }}</p>
-        <!-- <p><strong>장르:</strong> {{ movie.genres.join(", ") }}</p> -->
-        <!-- <p><strong>배우:</strong> {{ movie.actors.join(", ") }}</p> -->
+        <p><strong>장르:</strong> {{ movie.genres?.join(", ") }}</p>
+        <p><strong>배우:</strong> {{ movie.actors?.join(", ") }}</p>
         <p><strong>감독:</strong> {{ movie.director }}</p>
         <!-- 카테고리 추가 버튼 -->
         <button class="btn btn-primary" @click="showCategoryModal = true">
