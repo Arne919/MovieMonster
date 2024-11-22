@@ -6,16 +6,16 @@
       <h2>게임 종료!</h2>
       <p>모든 문제를 완료하였습니다.</p>
       <p>정답 수: {{ correctCount }} / {{ totalQuestions }}</p>
-      <p>획득 가능한 포인트 : {{ 100*correctCount }}</p>
+      <p>획득 가능한 포인트 : {{ 100 * correctCount }}</p>
 
       <!-- 포인트 획득하기 버튼 -->
-      <button class="btn btn-success mt-3" @click="claimPoints">포인트 획득하기</button>
+      <button class="btn btn-success mt-3" @click="openConfirmModal('claim')">포인트 획득하기</button>
 
       <!-- 재시작 버튼 -->
       <button class="btn btn-primary mt-3" @click="restartGame">다시 시작하기</button>
 
-      <!-- <랭크 확인하기> 버튼 -->
-      <button class="btn btn-info mt-3" @click="goToRank">랭크 확인하기</button>
+      <!-- 랭크 확인하기 버튼 -->
+      <button class="btn btn-info mt-3" @click="openConfirmModal('rank')">랭크 확인하기</button>
     </div>
 
     <div v-else>
@@ -24,7 +24,7 @@
 
       <!-- 랜덤 대사 출력 -->
       <div v-if="!showResult && currentReview" class="review-container text-center">
-        <p class="review-text">{{ currentReview?.review }}</p> <!-- 방어적 접근 -->
+        <p class="review-text">{{ currentReview?.review }}</p>
         
         <!-- 정답 입력 -->
         <div class="input-container text-center">
@@ -42,7 +42,7 @@
       <!-- 결과 출력 -->
       <div v-if="showResult && currentReview" class="result-container text-center mt-4">
         <p v-if="isCorrect" class="text-success">정답입니다! 🎉</p>
-        <p v-else class="text-danger">틀렸습니다. 정답은 "{{ currentReview?.title[0] }}" 입니다. ❌</p> <!-- 방어적 접근 -->
+        <p v-else class="text-danger">틀렸습니다. 정답은 "{{ currentReview?.title[0] }}" 입니다. ❌</p>
         <img
           :src="getPosterUrl(currentReview?.id)"
           class="img-fluid mt-3"
@@ -51,16 +51,23 @@
         <button class="btn btn-secondary mt-4" @click="nextReview">다음</button>
       </div>
     </div>
+
+    <!-- 모달 -->
+    <div v-if="isModalOpen" class="modal-overlay">
+      <div class="modal">
+        <p>{{ modalMessage }}</p>
+        <button class="btn btn-success" @click="handleModalConfirm">Yes</button>
+        <button class="btn btn-danger" @click="handleModalCancel">No</button>
+      </div>
+    </div>
   </div>
 </template>
-
 
 <script>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import { useCounterStore } from '@/stores/counter';
-import { useRouter } from 'vue-router';
-
+import { useCounterStore } from "@/stores/counter";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
@@ -76,6 +83,38 @@ export default {
     const correctCount = ref(0);
     const router = useRouter();
     const store = useCounterStore();
+
+    // 모달 관련 상태
+    const isModalOpen = ref(false);
+    const modalMessage = ref("");
+    const modalAction = ref("");
+
+    const openConfirmModal = (action) => {
+      modalAction.value = action;
+      modalMessage.value = `${100 * correctCount.value}p를 획득 하시겠어요?`;
+      isModalOpen.value = true;
+    };
+
+    const handleModalConfirm = async () => {
+      isModalOpen.value = false;
+      if (modalAction.value === "claim") {
+        await claimPoints();
+      } else if (modalAction.value === "rank") {
+        await goToRank();
+      }
+    };
+
+    const handleModalCancel = () => {
+      isModalOpen.value = false;
+    };
+
+    const claimPoints = async () => {
+      if (correctCount.value > 0) {
+        await updatePoints(correctCount.value * 100);
+      }
+      await store.fetchUserPoints();
+      router.push({ name: "GameView" });
+    };
 
     const goToRank = async () => {
       if (correctCount.value > 0) {
@@ -101,14 +140,6 @@ export default {
       } catch (error) {
         console.error("Error updating points:", error);
       }
-    };
-
-    const claimPoints = async () => {
-      if (correctCount.value > 0) {
-        await updatePoints(correctCount.value * 100);
-      }
-      await store.fetchUserPoints();
-      router.push({ name: "GameView" });
     };
 
     const restartGame = () => {
@@ -185,6 +216,11 @@ export default {
       nextReview,
       getPosterUrl,
       goToRank,
+      isModalOpen,
+      modalMessage,
+      openConfirmModal,
+      handleModalConfirm,
+      handleModalCancel,
     };
   },
 };
@@ -195,22 +231,28 @@ export default {
   margin-top: 40px;
 }
 
-.review-container {
-  font-size: 1.2rem;
-  font-style: italic;
-  margin-bottom: 20px;
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-.input-container {
-  margin-top: 20px;
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
-.result-container img {
-  max-width: 300px;
-  margin-top: 20px;
-}
-
-.result-container p {
-  font-size: 1.2rem;
+.modal button {
+  margin: 10px;
 }
 </style>
