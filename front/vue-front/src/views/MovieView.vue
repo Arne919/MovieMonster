@@ -89,7 +89,10 @@ export default {
 
     const goToGenre = (genre) => {
       if (genre === "home") {
-        router.push({ name: "MovieView" });
+        router.push({ name: "MovieView" }).then(() => {
+          // 같은 경로일 경우 상태를 초기화
+          window.location.reload();
+        });
       } else {
         router.push({ name: "GenreMovie", params: { genre } });
       }
@@ -139,7 +142,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .container {
