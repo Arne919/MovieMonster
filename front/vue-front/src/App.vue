@@ -4,7 +4,6 @@
       <div class="container">
         <!-- Navigation Links -->
         <RouterLink :to="{ name: 'SignUpView' }" class="nav-link">회원가입</RouterLink> |
-        <!-- <RouterLink :to="{ name: 'LogInView' }" class="nav-link">LogIn</RouterLink> | -->
         <RouterLink :to="{ name: 'ArticleView' }" class="nav-link">리뷰</RouterLink> |
         <RouterLink :to="{ name: 'MovieView' }" class="nav-link">영화</RouterLink> |
         <RouterLink :to="{ name: 'GameView' }" class="nav-link">게임</RouterLink> |

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!-- 장르 선택 섹션 -->
-    <GenreMovie @genre-selected="filterMovies" />
+    <GenreMovie @genre-selected="goToGenre" />
     <input v-model="searchQuery" type="text" placeholder="영화 제목 검색" />
     <button @click="searchMovie">검색</button>
 
@@ -132,12 +132,19 @@ const randomPopularMovies = computed(() => getRandomMovies(popularMovies.value, 
 const randomRecentMovies = computed(() => getRandomMovies(recentMovies.value, 5));
 const randomUpcomingMovies = computed(() => getRandomMovies(upcomingMovies.value, 5));
 
+// 영화 상세 페이지 이동
 const goToDetail = (movieId) => {
   router.push({ name: "MovieDetail", params: { id: movieId } });
 };
 
+// 특정 섹션으로 이동
 const goToMore = (section) => {
   router.push({ name: "MovieMore", params: { section } });
+};
+
+// 장르 선택 시 해당 장르 페이지로 이동
+const goToGenre = (genre) => {
+  router.push({ name: "GenreSection", params: { genre } });
 };
 
 // 영화 포스터 URL 생성

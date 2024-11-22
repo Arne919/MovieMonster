@@ -5,10 +5,10 @@ import DetailView from '@/views/DetailView.vue'
 import CreateView from '@/views/CreateView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import LogInView from '@/views/LogInView.vue'
-// import MovieList from '@/components/MovieList.vue'; // MovieList 컴포넌트 추가
-import MovieView from '@/views/MovieView.vue';
-import MovieMore from '@/components/MovieMore.vue';
-import MovieDetail from '@/components/MovieDetail.vue'; // MovieDetail 컴포넌트 추가
+import MovieView from '@/views/MovieView.vue'
+import MovieMore from '@/components/MovieMore.vue'
+import MovieDetail from '@/components/MovieDetail.vue'
+import GenreSection from '@/views/GenreSection.vue'
 import GameView from '@/views/GameView.vue'
 import OneLineView from "@/views/OneLineView.vue"
 import KoreaQuotesView from "@/views/KoreaQuotesView.vue"
@@ -16,10 +16,10 @@ import ForeignQuotesView from "@/views/ForeignQuotesView.vue"
 import RankView from '@/views/RankView.vue'
 import { useCounterStore } from '@/stores/counter'
 import EditView from '@/views/EditView.vue'
-import ProfileView from '@/views/ProfileView.vue';
-import CategoryDetail from '@/components/CategoryDetail.vue';
-import CategoryList from '@/components/CategoryList.vue';
-import CreateCategory from "@/components/CreateCategory.vue";
+import ProfileView from '@/views/ProfileView.vue'
+import CategoryDetail from '@/components/CategoryDetail.vue'
+import CategoryList from '@/components/CategoryList.vue'
+import CreateCategory from "@/components/CreateCategory.vue"
 
 
 const router = createRouter({
@@ -55,12 +55,6 @@ const router = createRouter({
       name: 'LogInView',
       component: LogInView
     },
-    // 영화 리스트 페이지 추가
-    // {
-    //   path: '/movies',
-    //   name: 'MovieList',
-    //   component: MovieList,
-    // },
     {
       path: '/movies',
       name: 'MovieView',
@@ -70,6 +64,11 @@ const router = createRouter({
       path: "/movies/more/:section",
       name: "MovieMore",
       component: MovieMore,
+    },
+    {
+      path: '/movies/genre/:genre',
+      name: 'GenreSection',
+      component: GenreSection,
     },
     // 영화 상세 페이지 추가
     {

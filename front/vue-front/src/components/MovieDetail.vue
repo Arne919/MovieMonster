@@ -79,6 +79,7 @@ export default {
     // 영화 데이터 가져오기
     const fetchMovie = async () => {
       const movieId = route.params.id; // 라우터에서 영화 ID 가져오기
+      console.log("Route Params ID:", movieId); // 디버깅용
       try {
         const response = await axios.get(
           `http://127.0.0.1:8000/api/v1/movies/${movieId}/`
@@ -97,6 +98,7 @@ export default {
       movie,
       showCategoryModal,
       getFullPosterUrl,
+      youtubeLogo,
     };
   },
 };
