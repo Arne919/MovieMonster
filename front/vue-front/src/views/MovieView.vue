@@ -88,8 +88,11 @@ export default {
     };
 
     const goToGenre = (genre) => {
-      console.log(aa)
-      router.push({ name: "GenreSection", params: { genre } });
+      if (genre === "home") {
+        router.push({ name: "MovieView" });
+      } else {
+        router.push({ name: "GenreMovie", params: { genre } });
+      }
     };
 
     const getFullPosterUrl = (posterUrl) =>
