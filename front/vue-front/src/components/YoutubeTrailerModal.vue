@@ -22,11 +22,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <div
-            v-if="isLoading"
-            class="spinner-border text-primary"
-            role="status"
-          >
+          <div v-if="isLoading" class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
           <iframe
@@ -36,6 +32,9 @@
             frameborder="0"
             allowfullscreen
           ></iframe>
+          <div v-else>
+            <p>해당 영화의 예고편을 찾을 수 없습니다.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -43,7 +42,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, ref } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import axios from "axios";
 
 const props = defineProps({
@@ -53,44 +52,60 @@ const props = defineProps({
 const videoData = ref("");
 const isLoading = ref(false);
 const modalRef = ref(null);
-const youtubeKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+const youtubeKey = "AIzaSyAvDN5ECAKK-StTzlh97JIt_daHFyimQlY"; // API 키
 
 const stopVideo = () => {
-  videoData.value = "";
+  videoData.value = ""; // 비디오 정지
 };
 
-const fetchTrailer = () => {
+// 트레일러 로드 함수
+const fetchTrailer = async () => {
   isLoading.value = true;
-  const baseURL = "https://www.googleapis.com/youtube/v3/search";
-  axios
-    .get(baseURL, {
+  try {
+    const response = await axios.get("https://www.googleapis.com/youtube/v3/search", {
       params: {
         key: youtubeKey,
         part: "snippet",
         type: "video",
-        q: props.movieTitle + "공식 예고편",
+        q: `${props.movieTitle} 예고편 OR trailer`,
         maxResults: 1,
       },
-    })
-    .then((response) => {
-      const videoId = response.data.items[0].id.videoId;
-      videoData.value = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
-    })
-    .catch((error) => {
-      console.error("서버에러:", error);
     });
-  isLoading.value = false;
+
+    const videoId = response.data.items[0]?.id?.videoId || null;
+    if (videoId) {
+      videoData.value = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
+    } else {
+      videoData.value = null;
+    }
+  } catch (error) {
+    console.error("YouTube API 호출 에러:", error);
+    videoData.value = null;
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+// 포커스 관리
+const disableBackground = () => {
+  document.body.setAttribute("inert", "true");
+};
+
+const enableBackground = () => {
+  document.body.removeAttribute("inert");
 };
 
 onMounted(() => {
   if (modalRef.value) {
     modalRef.value.addEventListener("show.bs.modal", fetchTrailer);
+    modalRef.value.addEventListener("hidden.bs.modal", stopVideo);
   }
 });
 
 onBeforeUnmount(() => {
   if (modalRef.value) {
     modalRef.value.removeEventListener("show.bs.modal", fetchTrailer);
+    modalRef.value.removeEventListener("hidden.bs.modal", stopVideo);
   }
 });
 </script>
@@ -101,7 +116,7 @@ onBeforeUnmount(() => {
 }
 
 .trailer-iframe {
-  width: 720px;
+  width: 100%;
   height: 450px;
   display: block;
   margin: 0 auto;
