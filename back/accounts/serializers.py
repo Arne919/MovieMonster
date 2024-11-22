@@ -59,13 +59,13 @@ class UserRankSerializer(serializers.ModelSerializer):
 
     def get_rank_title(self, obj):
         print(f"User: {obj.username}, Points: {obj.points}")  # 디버깅용 로그
-        if obj.points <= 1000:
+        if obj.points < 1000:
             return "Bronze"
-        elif obj.points <= 2000:
+        elif obj.points < 2000:
             return "Silver"
-        elif obj.points <= 3000:
+        elif obj.points < 3000:
             return "Gold"
-        elif obj.points <= 4000:
+        elif obj.points < 4000:
             return "Platinum"
         else:
             return "Diamond"

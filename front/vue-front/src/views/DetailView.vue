@@ -97,7 +97,7 @@ onMounted(() => {
 
 // 뒤로가기
 const goBack = () => {
-  router.go(-1); // 이전 페이지로 이동
+  router.push({ name: 'ArticleView'}) // 메인 페이지로 이동
 };
 
 const goToEdit = () => {
