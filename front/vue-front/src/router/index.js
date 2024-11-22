@@ -8,7 +8,8 @@ import LogInView from '@/views/LogInView.vue'
 import MovieView from '@/views/MovieView.vue'
 import MovieMore from '@/components/MovieMore.vue'
 import MovieDetail from '@/components/MovieDetail.vue'
-import GenreSection from '@/views/GenreSection.vue'
+import GenreMovie from '@/components/GenreMovie.vue'
+import GenreSection from '@/components/GenreSection.vue'
 import GameView from '@/views/GameView.vue'
 import OneLineView from "@/views/OneLineView.vue"
 import KoreaQuotesView from "@/views/KoreaQuotesView.vue"
@@ -61,12 +62,18 @@ const router = createRouter({
       component: MovieView,
     },
     {
-      path: "/movies/more/:section",
+      path: "/movies/:section",
       name: "MovieMore",
       component: MovieMore,
+      props: true,
     },
+    // {
+    //   path: '/movies/genre/:genre',
+    //   name: 'GenreMovie',
+    //   component: GenreMovie,
+    // },
     {
-      path: '/movies/genre/:genre',
+      path: '/movies/:genre',
       name: 'GenreSection',
       component: GenreSection,
     },

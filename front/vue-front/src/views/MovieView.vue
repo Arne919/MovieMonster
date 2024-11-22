@@ -1,70 +1,23 @@
 <template>
   <div class="container">
-    <!-- 장르 선택 섹션 -->
+    <!-- 장르 선택 -->
     <GenreMovie @genre-selected="goToGenre" />
+
+    <!-- 검색 -->
     <input v-model="searchQuery" type="text" placeholder="영화 제목 검색" />
     <button @click="searchMovie">검색</button>
+    <p v-if="errorMessage" class="text-danger">{{ errorMessage }}</p>
 
-    <!-- 인기영화 섹션 -->
-    <div class="mt-5">
+    <!-- 인기/최신/개봉예정 섹션 -->
+    <div v-for="section in sections" :key="section.name" class="mt-5">
       <div class="d-flex justify-content-between align-items-center">
-        <h2>인기영화</h2>
-        <button class="btn btn-link" @click="goToMore('popular')">더보기</button>
+        <h2>{{ section.title }}</h2>
+        <button class="btn btn-link" @click="goToMore(section.name)">더보기</button>
       </div>
       <div class="grid-container">
         <div
           class="card"
-          v-for="movie in randomPopularMovies"
-          :key="movie.movie_id"
-          @click="goToDetail(movie.movie_id)"
-        >
-          <img
-            :src="getFullPosterUrl(movie.poster_url)"
-            class="card-img-top"
-            :alt="movie.title"
-          />
-          <div class="card-body text-center">
-            <h5 class="card-title">{{ movie.title }}</h5>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 최신영화 섹션 -->
-    <div class="mt-5">
-      <div class="d-flex justify-content-between align-items-center">
-        <h2>최신영화</h2>
-        <button class="btn btn-link" @click="goToMore('recent')">더보기</button>
-      </div>
-      <div class="grid-container">
-        <div
-          class="card"
-          v-for="movie in randomRecentMovies"
-          :key="movie.movie_id"
-          @click="goToDetail(movie.movie_id)"
-        >
-          <img
-            :src="getFullPosterUrl(movie.poster_url)"
-            class="card-img-top"
-            :alt="movie.title"
-          />
-          <div class="card-body text-center">
-            <h5 class="card-title">{{ movie.title }}</h5>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 개봉예정영화 섹션 -->
-    <div class="mt-5">
-      <div class="d-flex justify-content-between align-items-center">
-        <h2>개봉예정영화</h2>
-        <button class="btn btn-link" @click="goToMore('upcoming')">더보기</button>
-      </div>
-      <div class="grid-container">
-        <div
-          class="card"
-          v-for="movie in randomUpcomingMovies"
+          v-for="movie in getRandomMovies(section.movies, 5)"
           :key="movie.movie_id"
           @click="goToDetail(movie.movie_id)"
         >
@@ -82,79 +35,108 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed, onMounted } from "vue";
+<script>
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import axios from "axios";
 import GenreMovie from "@/components/GenreMovie.vue";
+import axios from "axios";
 
-const searchQuery = ref("");
-const popularMovies = ref([]);
-const recentMovies = ref([]);
-const upcomingMovies = ref([]);
+export default {
+  components: { GenreMovie },
+  setup() {
+    const router = useRouter();
+    const searchQuery = ref("");
+    const errorMessage = ref(""); // 오류 메시지 상태 추가
+    const sections = ref([
+      { name: "popular", title: "인기영화", movies: [] },
+      { name: "recent", title: "최신영화", movies: [] },
+      { name: "upcoming", title: "개봉예정영화", movies: [] },
+    ]);
 
-const router = useRouter();
+    const fetchMovies = async () => {
+      const endpoints = {
+        popular: "/popular.json",
+        recent: "/recent.json",
+        upcoming: "/upcoming.json",
+      };
 
-const fetchMovies = async () => {
-  try {
-    const popularResponse = await axios.get("/popular.json");
-    popularMovies.value = popularResponse.data.map((item) => ({
-      movie_id: item.fields.movie_id,
-      title: item.fields.title,
-      poster_url: item.fields.poster_url,
-    }));
+      for (const section of sections.value) {
+        try {
+          const response = await axios.get(endpoints[section.name]);
+          section.movies = response.data.map((item) => ({
+            movie_id: item.fields.movie_id,
+            title: item.fields.title,
+            poster_url: item.fields.poster_url,
+          }));
+        } catch (error) {
+          console.error(`Error fetching ${section.name}:`, error);
+        }
+      }
+    };
 
-    const recentResponse = await axios.get("/recent.json");
-    recentMovies.value = recentResponse.data.map((item) => ({
-      movie_id: item.fields.movie_id,
-      title: item.fields.title,
-      poster_url: item.fields.poster_url,
-    }));
+    const getRandomMovies = (movies, count) => {
+      const shuffled = [...movies].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    };
 
-    const upcomingResponse = await axios.get("/upcoming.json");
-    upcomingMovies.value = upcomingResponse.data.map((item) => ({
-      movie_id: item.fields.movie_id,
-      title: item.fields.title,
-      poster_url: item.fields.poster_url,
-    }));
-  } catch (error) {
-    console.error("Error loading movies:", error);
-  }
+    const goToDetail = (movieId) => {
+      router.push({ name: "MovieDetail", params: { id: movieId } });
+    };
+
+    const goToMore = (section) => {
+      router.push({ name: "MovieMore", params: { section } });
+    };
+
+    const goToGenre = (genre) => {
+      console.log(aa)
+      router.push({ name: "GenreSection", params: { genre } });
+    };
+
+    const getFullPosterUrl = (posterUrl) =>
+      `https://image.tmdb.org/t/p/w500${posterUrl}`;
+
+    // 영화 검색
+    const searchMovie = async () => {
+      if (!searchQuery.value.trim()) {
+        errorMessage.value = "영화 제목을 입력해 주세요.";
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/v1/movies/search/",
+          {
+            params: { title: searchQuery.value },
+          }
+        );
+        const movie = response.data;
+
+        // 영화가 정확히 일치하면 디테일 페이지로 이동
+        router.push({ name: "MovieDetail", params: { id: movie.id } });
+        errorMessage.value = ""; // 오류 메시지 초기화
+      } catch (error) {
+        errorMessage.value =
+          error.response?.data?.error || "영화 검색에 실패했습니다.";
+      }
+    };
+
+    onMounted(fetchMovies);
+
+    return {
+      sections,
+      searchQuery,
+      errorMessage,
+      goToDetail,
+      goToMore,
+      goToGenre,
+      getFullPosterUrl,
+      getRandomMovies,
+      searchMovie, // searchMovie 메서드 추가
+    };
+  },
 };
-
-const getRandomMovies = (movies, count) => {
-  const shuffled = [...movies].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-};
-
-// 랜덤 5개 영화 가져오기
-const randomPopularMovies = computed(() => getRandomMovies(popularMovies.value, 5));
-const randomRecentMovies = computed(() => getRandomMovies(recentMovies.value, 5));
-const randomUpcomingMovies = computed(() => getRandomMovies(upcomingMovies.value, 5));
-
-// 영화 상세 페이지 이동
-const goToDetail = (movieId) => {
-  router.push({ name: "MovieDetail", params: { id: movieId } });
-};
-
-// 특정 섹션으로 이동
-const goToMore = (section) => {
-  router.push({ name: "MovieMore", params: { section } });
-};
-
-// 장르 선택 시 해당 장르 페이지로 이동
-const goToGenre = (genre) => {
-  router.push({ name: "GenreSection", params: { genre } });
-};
-
-// 영화 포스터 URL 생성
-const getFullPosterUrl = (posterUrl) => {
-  const baseUrl = "https://image.tmdb.org/t/p/w500";
-  return `${baseUrl}${posterUrl}`;
-};
-
-onMounted(fetchMovies);
 </script>
+
 
 <style scoped>
 .container {
