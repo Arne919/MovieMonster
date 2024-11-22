@@ -62,7 +62,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
@@ -196,6 +196,12 @@ const addCategory = (category) => {
 };
 
 onMounted(() => {
+  fetchProfile();
+});
+
+// 라우트 변경을 감지하고 새 데이터를 로드
+watch(() => route.params.username, (newUsername, oldUsername) => {
+  console.log(`Route username changed: ${oldUsername} -> ${newUsername}`);
   fetchProfile();
 });
 </script>
