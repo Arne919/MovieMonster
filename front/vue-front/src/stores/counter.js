@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import LogInView from '@/views/LogInView.vue'
 
 export const useCounterStore = defineStore('counter', () => {
   const articles = ref([])
@@ -19,6 +20,8 @@ export const useCounterStore = defineStore('counter', () => {
     }
   })
   const router = useRouter()
+  const signUpResponse = ref(null); // 회원가입 성공/실패 응답 데이터 저장
+  const error = ref(null); // 에러 메시지 저장
 
   // 서버에서 데이터 가져오기
   const fetchArticles = async () => {
@@ -31,6 +34,29 @@ export const useCounterStore = defineStore('counter', () => {
       console.error('Error fetching articles:', error)
     }
   }
+
+  // 회원가입 함수
+    const signUp = (payload) => {
+      return axios
+        .post(`${API_URL}/accounts/signup/`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // FormData 처리
+      },
+    })
+    .then((response) => {
+      signUpResponse.value = response.data; // 성공 응답 데이터 저장
+      console.log('회원가입 성공:', response.data);
+
+      router.push({ name: 'LogInView'})
+      // // fetchUserPoints 호출
+      // fetchUserPoints(); // 로그인 이후 사용자 포인트 정보 가져오기
+    })
+    .catch((err) => {
+      error.value = err.response?.data || err.message; // 실패 시 에러 저장
+      console.error('회원가입 실패:', error.value);
+      throw err; // 에러 재발생
+    });
+};
 
   // 클라이언트 정렬 로직
   const sortArticles = (sortOrder) => {
@@ -206,33 +232,33 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
 
 
   // 회원가입 요청 액션
-  const signUp = function (payload) {
-    // const username = payload.username
-    // const password1 = payload.password1
-    // const password2 = payload.password2
-    const { username, password1, password2 } = payload
+  // const signUp = function (payload) {
+  //   // const username = payload.username
+  //   // const password1 = payload.password1
+  //   // const password2 = payload.password2
+  //   const { username, password1, password2 } = payload
 
-    axios({
-      method: 'post',
-      url: `${API_URL}/accounts/signup/`,
-      data: {
-        username, password1, password2
-      }
-    })
-      .then((res) => {
-        // console.log(res)
-        // console.log('회원가입 성공')
-        const password = password1
-        logIn({ username, password })
-        // console.log("로그인됐나요?:", isLogin)
-      })
-      .then(() => {
-        fetchUserPoints(); // 로그인 이후 즉시 사용자 포인트 정보를 가져옴
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    }
+  //   axios({
+  //     method: 'post',
+  //     url: `${API_URL}/accounts/signup/`,
+  //     data: {
+  //       username, password1, password2
+  //     }
+  //   })
+  //     .then((res) => {
+  //       // console.log(res)
+  //       // console.log('회원가입 성공')
+  //       const password = password1
+  //       logIn({ username, password })
+  //       // console.log("로그인됐나요?:", isLogin)
+  //     })
+  //     .then(() => {
+  //       fetchUserPoints(); // 로그인 이후 즉시 사용자 포인트 정보를 가져옴
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  //   }
 
   // 로그인 요청 액션
   const logIn = function (payload) {
@@ -361,5 +387,8 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     deleteComment,
     formatDate,
     getSortedArticles,
+    signUp,
+    signUpResponse,
+    error,
   }
 }, { persist: true })
