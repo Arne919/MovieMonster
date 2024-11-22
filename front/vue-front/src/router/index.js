@@ -62,18 +62,18 @@ const router = createRouter({
       component: MovieView,
     },
     {
-      path: "/movies/:section",
+      path: "/movies/section/:section",
       name: "MovieMore",
       component: MovieMore,
       props: true,
     },
     {
-      path: '/movies/:genre',
+      path: '/movies/genre/:genre',
       name: 'GenreMovie',
       component: GenreMovie,
     },
     {
-      path: '/movies/:id',
+      path: '/movies/detail/:id',
       name: 'MovieDetail',
       component: MovieDetail,
     },
