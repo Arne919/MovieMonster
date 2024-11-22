@@ -13,6 +13,15 @@ from .serializers import UserSerializer, CategorySerializer, MovieSerializer, Ra
 
 from django.middleware.csrf import get_token
 
+from dj_rest_auth.registration.views import RegisterView
+from .serializers import CustomRegisterSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
+
+class CustomRegisterView(RegisterView):
+    serializer_class = CustomRegisterSerializer
+    parser_classes = [MultiPartParser, FormParser]
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_category(request):
@@ -227,6 +236,7 @@ def profile(request, username):
         'likes_count': likes_count,  # 총 좋아요 수
         'is_followed': request.user in user.followers.all(),  # 현재 사용자가 팔로우 중인지 여부
         'categories': category_serializer.data,  # 유저 카테고리 포함
+        'profile_image': user.profile_picture.url if user.profile_picture else '/media/profile_pictures/default-profile.png',
     })
 
 @api_view(['POST'])

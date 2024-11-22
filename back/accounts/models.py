@@ -5,7 +5,12 @@ from django.db.models import Count
 from movies.models import Movie  # Movie 모델 참조
 
 class User(AbstractUser):
-    profile_picture = models.URLField(max_length=100, blank=True)
+    profile_picture = models.ImageField(
+        upload_to='profile_pictures/',
+        blank=True,
+        null=True,
+        # default='profile_pictures/default-profile.png'  # 기본 이미지 경로 설정
+    )
     points = models.IntegerField(default=500)
     followings = models.ManyToManyField(
         "self", symmetrical=False, related_name="followers"

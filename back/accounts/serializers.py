@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User, Category, Ranking, Game
 from movies.models import Movie
+from dj_rest_auth.registration.serializers import RegisterSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,6 +16,19 @@ class UserSerializer(serializers.ModelSerializer):
             'following',
             'created_at',
         ]
+
+class CustomRegisterSerializer(RegisterSerializer):
+    profile_picture = serializers.ImageField(required=False)  # 프로필 사진 필드 추가
+
+    def custom_signup(self, request, user):
+        profile_picture = self.validated_data.get('profile_picture')
+        print("DEBUG: Profile Picture -", profile_picture)
+        if profile_picture:
+            user.profile_picture = profile_picture
+            print(user.profile_picture)  # 저장된 경로 출력
+            user.save()
+
+
 class ProfileSerializer(serializers.ModelSerializer):
     articles_count = serializers.IntegerField(source='articles.count', read_only=True)  # 게시글 수
     likes_count = serializers.IntegerField(source='sum_likes', read_only=True)  # 총 좋아요 수

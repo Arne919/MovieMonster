@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h1>{{ user.username }}의 프로필 페이지</h1>
+    <div>
+      <img :src="`http://127.0.0.1:8000${user.profile_picture}`" alt="프로필 사진">
+
+      <h1>{{ user.username }}의 프로필 페이지</h1>
+    </div>
     <p>포인트: {{ user.points }}</p>
     <p>팔로잉: <span id="followings-count">{{ user.followingsCount }}</span></p>
     <p>팔로워: <span id="followers-count">{{ user.followersCount }}</span></p>
@@ -78,6 +82,7 @@ const isOwnProfile = computed(() => store.user.username === route.params.usernam
 
 // API를 통해 프로필 데이터 가져오기
 const fetchProfile = async () => {
+  console.log('ddddddddddd')
   try {
     const { data } = await axios.get(
       `http://127.0.0.1:8000/accounts/profile/${route.params.username}/`, 
@@ -86,6 +91,7 @@ const fetchProfile = async () => {
           Authorization: `Token ${store.token}`,
         },
       });
+      console.log('ddddddddddd',data)
     user.value = {
       id: data.id,
       username: data.username,
@@ -94,7 +100,10 @@ const fetchProfile = async () => {
       followersCount: data.followers_count,
       articlesCount: data.articles_count, // API 응답에서 게시글 수 추가
       likesCount: data.likes_count, // API 응답에서 받은 좋아요 수 추가
+      profile_picture: data.profile_image,
     };
+    console.log('ddd', user.value.profile_picture)
+    // console.log(data)
     isFollowed.value = data.is_followed;
     categories.value = data.categories;
   } catch (error) {
@@ -138,7 +147,10 @@ const addCategory = (category) => {
 };
 
 
-onMounted(fetchProfile);
+onMounted(() =>{ 
+console.log('onMounted is being called');
+fetchProfile()
+});
 // 데이터 병렬로 가져오기
 // onMounted(async () => {
 //   await Promise.all([fetchProfile(), fetchCategories()]);
