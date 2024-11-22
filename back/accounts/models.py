@@ -3,6 +3,8 @@ from django.db import models
 from django.conf import settings
 from django.db.models import Count
 from movies.models import Movie  # Movie 모델 참조
+from PIL import Image  # Pillow 라이브러리
+import os
 
 class User(AbstractUser):
     profile_picture = models.ImageField(
@@ -23,6 +25,22 @@ class User(AbstractUser):
         """
         from communities.models import Article  # 순환 참조 방지
         return Article.objects.filter(user=self).aggregate(total_likes=Count('like_users'))['total_likes'] or 0
+    
+    # 이미지 크기 조정
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # 먼저 모델 저장
+
+        if self.profile_picture:
+            image_path = self.profile_picture.path
+            with Image.open(image_path) as img:
+                img.thumbnail((300, 300))  # 원하는 크기로 조정 (예: 300x300)
+                img.save(image_path)  # 이미지 저장
+        
+        default_image_path = os.path.join('media', 'profile_pictures', 'default-profile.png')
+        if os.path.exists(default_image_path):
+            with Image.open(default_image_path) as default_img:
+                default_img.thumbnail((300, 300))
+                default_img.save(default_image_path)
 
 class Category(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='categories')

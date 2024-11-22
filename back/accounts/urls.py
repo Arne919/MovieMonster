@@ -1,10 +1,12 @@
 from django.urls import path, include
 from . import views
+from .views import CustomRegisterView
 
 urlpatterns = [
     # path('register/', views.register_user, name='register_user'),
     # path('login/', views.login_user, name='login_user'),
     path('', include('dj_rest_auth.urls')),  # 로그인, 로그아웃, 패스워드 변경 등
+    path('custom-signup/', CustomRegisterView.as_view(), name='custom_signup'),  # 커스텀 경로
     path('signup/', include('dj_rest_auth.registration.urls')),  # 회원가입 관련 URL
     # path('profile/', views.get_user_profile, name='get_user_profile'),
     path("profile/<username>/", views.profile, name="profile"),

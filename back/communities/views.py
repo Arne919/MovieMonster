@@ -155,6 +155,11 @@ def get_ranking(request):
     ranking_data = []
     for user in users:
         rank_title = get_rank_title(user.points)  # 랭크 계산
+        profile_image_url = (
+            user.profile_picture.url
+            if user.profile_picture
+            else '/media/profile_pictures/default-profile.png'  # 디폴트 이미지 URL
+        )
         ranking_data.append({
             "id": user.id,
             "username": user.username,
@@ -163,6 +168,7 @@ def get_ranking(request):
             "articles_count": user.articles_count,
             "likes_count": user.likes_count,
             "followers_count": user.followers_count,
+            "profile_picture": profile_image_url,  # 프로필 사진 URL 추가
         })
 
     return Response(ranking_data)

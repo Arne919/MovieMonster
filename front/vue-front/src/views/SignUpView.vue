@@ -56,6 +56,11 @@ const signUp = async () => {
     formData.append('profile_picture', profilePicture.value);
   }
 
+  console.log("DEBUG: FormData content:");
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}:`, value);
+  }
+
   try {
     await store.signUp(formData); // 스토어에서 FormData 처리
     alert('회원가입 성공!');
