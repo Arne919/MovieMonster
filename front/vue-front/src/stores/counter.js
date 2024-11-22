@@ -372,6 +372,31 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
       },
     });
   };
+
+  const fetchCategoryDetails = async (categoryId) => {
+    const response = await axios.get(`${API_URL}/accounts/categories/${categoryId}/`, {
+      headers: { Authorization: `Token ${token.value}` },
+    });
+    return response.data; // { category: { ... }, movies: [ ... ] }
+  };
+
+  const searchMovies = async (title) => {
+    const response = await axios.get(`${API_URL}/accounts/movies/search/`, {
+      params: { title },
+      headers: { Authorization: `Token ${token.value}` },
+    });
+    return response.data; // 검색된 영화 리스트 반환
+  };
+
+
+  const addMovieToCategory = async (categoryId, movieId) => {
+    await axios.post(
+      `${API_URL}/accounts/categories/add-movie/`,
+      { category_id: categoryId, movie_id: movieId },
+      { headers: { Authorization: `Token ${token.value}` } }
+    );
+    alert("영화가 카테고리에 추가되었습니다.");
+  };
   return { 
     articles, 
     API_URL, 
@@ -401,5 +426,8 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     signUpResponse,
     error,
     getRankTitle,
+    fetchCategoryDetails,
+    searchMovies,
+    addMovieToCategory
   }
 }, { persist: true })

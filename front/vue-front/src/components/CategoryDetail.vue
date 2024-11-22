@@ -12,7 +12,22 @@
       />
       <button v-if="isEditingName" @click="saveCategoryName" class="save-btn">저장</button>
       <button v-if="isEditingName" @click="cancelEditingName" class="cancel-btn">취소</button>
-      <button @click="deleteCategory" class="delete-category-btn">카테고리 삭제</button>
+      <button @click="openAddMovieModal" class="add-movie-btn">이 카테고리에 영화 추가</button>
+    </div>
+
+    <!-- 영화 추가 모달 -->
+    <div v-if="showAddMovieModal" class="modal">
+      <div class="modal-content">
+        <h2>영화 검색</h2>
+        <input v-model="searchQuery" @input="searchMovies" placeholder="영화 제목 입력" />
+        <ul>
+          <li v-for="movie in searchResults" :key="movie.id">
+            {{ movie.title }}
+            <button @click="confirmAddMovie(movie)">추가</button>
+          </li>
+        </ul>
+        <button @click="closeAddMovieModal" class="close-modal-btn">닫기</button>
+      </div>
     </div>
 
     <div v-if="movies.length === 0">
@@ -47,7 +62,6 @@
   </div>
 </template>
 
-
 <script setup>
 import { ref, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
@@ -59,6 +73,9 @@ const router = useRouter();
 const category = ref({}); // 카테고리 데이터
 const movies = ref([]); // 영화 데이터
 const store = useCounterStore();
+const showAddMovieModal = ref(false);
+const searchQuery = ref(""); // 영화 검색어
+const searchResults = ref([]); // 검색 결과
 const isEditingName = ref(false); // 이름 수정 상태
 const newCategoryName = ref(""); // 새로운 카테고리 이름
 
@@ -116,21 +133,98 @@ const removeMovie = async (movieId) => {
 
 // 영화 디테일 페이지로 이동
 const goToMovieDetail = (movieId) => {
-  router.push(`/movies/${movieId}`);
+  router.push({ name: "MovieDetail", params: { id: movieId } });
+};
+
+// 영화 추가 모달 열기/닫기
+const openAddMovieModal = () => (showAddMovieModal.value = true);
+const closeAddMovieModal = () => {
+  showAddMovieModal.value = false;
+  searchQuery.value = "";
+  searchResults.value = [];
+};
+
+// 영화 검색
+const searchMovies = async () => {
+  if (!searchQuery.value.trim()) {
+    searchResults.value = [];
+    return;
+  }
+
+  try {
+    const response = await axios.get(`${store.API_URL}/accounts/movies/search/`, {
+      params: { title: searchQuery.value.trim() },
+      headers: {
+        Authorization: `Token ${store.token}`,
+      },
+    });
+    searchResults.value = response.data;
+  } catch (error) {
+    console.error("Error searching movies:", error);
+  }
+};
+
+// 영화 추가 확인 및 추가
+const confirmAddMovie = async (movie) => {
+  const confirmed = confirm(`영화 "${movie.title}"를 카테고리에 추가하시겠습니까?`);
+  if (confirmed) {
+    await addMovieToCategory(movie);
+  }
+};
+
+// 영화 추가
+const addMovieToCategory = async (movie) => {
+  try {
+    await store.addMovieToCategory(route.params.categoryId, movie.id);
+    await fetchCategoryDetails(); // 카테고리 데이터 갱신
+    alert(`영화 "${movie.title}"가 카테고리에 추가되었습니다.`);
+    closeAddMovieModal();
+  } catch (error) {
+    console.error("Error adding movie to category:", error);
+  }
 };
 
 // 컴포넌트 마운트 시 데이터 로드
 onMounted(async () => {
   try {
     await fetchCategoryDetails();
+    await store.fetchUser()
+    console.log("isOwner:", isOwner.value);
+    console.log("store.user:", store.user);
+    console.log("category.value:", category.value);
+
+
   } catch (error) {
     console.error("Error in onMounted:", error);
   }
 });
 </script>
 
-
 <style scoped>
+/* 모달 스타일 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+
+.close-modal-btn {
+  margin-top: 10px;
+}
+
 .movie-list {
   display: flex;
   flex-wrap: wrap;
@@ -158,26 +252,6 @@ onMounted(async () => {
   margin: 5px 0 0;
 }
 
-.delete-category-btn {
-  background-color: red;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
-
-.edit-category-input {
-  padding: 5px;
-  font-size: 1em;
-}
-
-.edit-btn, .save-btn, .cancel-btn {
-  margin-left: 10px;
-  padding: 5px 10px;
-  font-size: 0.9em;
-  cursor: pointer;
-}
 .image-container {
   width: 300px;
   height: 300px;
@@ -188,9 +262,10 @@ onMounted(async () => {
   border-radius: 8px;
   margin: 0 auto 10px auto;
 }
+
 .movie-poster {
-  width: 100%; /* 가로를 컨테이너에 맞춤 */
-  height: 100%; /* 세로를 컨테이너에 맞춤 */
-  object-fit: contain; /* 이미지 비율을 유지하며 축소/확대 */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 </style>
