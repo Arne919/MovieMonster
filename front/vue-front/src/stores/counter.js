@@ -38,7 +38,7 @@ export const useCounterStore = defineStore('counter', () => {
   // 회원가입 함수
     const signUp = (payload) => {
       return axios
-        .post(`${API_URL}/accounts/signup/`, payload, {
+        .post(`${API_URL}/accounts/custom-signup/`, payload, {
       headers: {
         'Content-Type': 'multipart/form-data', // FormData 처리
       },
