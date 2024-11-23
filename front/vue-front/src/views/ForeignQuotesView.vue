@@ -9,13 +9,27 @@
       <p>획득 가능한 포인트 : {{ 100 * correctCount }}</p>
 
       <!-- 포인트 획득하기 버튼 -->
-      <button class="btn btn-success mt-3" @click="openConfirmModal('claim')">포인트 획득하기</button>
+      <button
+        class="btn btn-success mt-3"
+        @click="openConfirmModal('claim')"
+        data-bs-toggle="modal"
+        data-bs-target="#confirmModal"
+      >
+        포인트 획득하기
+      </button>
 
       <!-- 게임 재시작 버튼 -->
       <button class="btn btn-primary mt-3" @click="restartGame">다시 시작하기</button>
 
       <!-- 랭크 확인 버튼 -->
-      <button class="btn btn-info mt-3" @click="openConfirmModal('rank')">랭크 확인하기</button>
+      <button
+        class="btn btn-info mt-3"
+        @click="openConfirmModal('rank')"
+        data-bs-toggle="modal"
+        data-bs-target="#confirmModal"
+      >
+        랭크 확인하기
+      </button>
     </div>
 
     <div v-else>
@@ -48,12 +62,45 @@
       </div>
     </div>
 
-    <!-- 모달 -->
-    <div v-if="isModalOpen" class="modal-overlay">
-      <div class="modal">
-        <p>{{ modalMessage }}</p>
-        <button class="btn btn-success" @click="handleModalConfirm">Yes</button>
-        <button class="btn btn-danger" @click="handleModalCancel">No</button>
+    <!-- Bootstrap 모달 -->
+    <div
+      class="modal fade"
+      id="confirmModal"
+      tabindex="-1"
+      aria-labelledby="confirmModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmModalLabel">확인</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>{{ modalMessage }}</p>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-success"
+              @click="handleModalConfirm"
+              data-bs-dismiss="modal"
+            >
+              확인
+            </button>
+            <button
+              class="btn btn-danger"
+              @click="handleModalCancel"
+              data-bs-dismiss="modal"
+            >
+              취소
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -77,7 +124,6 @@ export default {
     const showResult = ref(false);
     const gameOver = ref(false);
     const correctCount = ref(0);
-    const isModalOpen = ref(false);
     const modalMessage = ref("");
     const modalAction = ref("");
 
@@ -87,11 +133,9 @@ export default {
     const openConfirmModal = (action) => {
       modalAction.value = action;
       modalMessage.value = `${100 * correctCount.value}p를 획득 하시겠어요?`;
-      isModalOpen.value = true;
     };
 
     const handleModalConfirm = async () => {
-      isModalOpen.value = false;
       if (modalAction.value === "claim") {
         await claimPoints();
       } else if (modalAction.value === "rank") {
@@ -100,7 +144,7 @@ export default {
     };
 
     const handleModalCancel = () => {
-      isModalOpen.value = false;
+      modalMessage.value = "";
     };
 
     const claimPoints = async () => {
@@ -215,7 +259,6 @@ export default {
       checkAnswer,
       nextReview,
       getPosterUrl,
-      isModalOpen,
       modalMessage,
     };
   },
@@ -227,24 +270,12 @@ export default {
   margin-top: 40px;
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
 .modal {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1055;
   text-align: center;
 }
 
