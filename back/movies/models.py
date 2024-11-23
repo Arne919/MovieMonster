@@ -15,7 +15,7 @@ class Actor(models.Model):
 class Movie(models.Model):
     movie_id = models.IntegerField(unique=True)
     title = models.CharField(max_length=255)
-    release_date = models.DateField()
+    release_date = models.DateField(null=True, blank=True)
     popularity = models.FloatField(null=True, blank=True)
     vote_avg = models.FloatField(null=True, blank=True)
     description = models.TextField(blank=True, null=True)

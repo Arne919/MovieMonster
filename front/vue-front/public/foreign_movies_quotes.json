@@ -3,13 +3,13 @@
         "id": 1,
         "title": ["Avengers", "어벤져스: 엔드게임", "Avengers: Endgame", "어벤져스", "엔드게임"],
         "movietext": "I love you 3000.",
-        "translatedMovietext": "나는 너를 3000만큼 사랑해."
+        "translatedMovietext": "3000만큼 널 사랑해."
     },
     {
         "id": 2,
         "title": ["Avatar", "아바타"],
         "movietext": "I see you.",
-        "translatedMovietext": "나는 너를 본다."
+        "translatedMovietext": "당신을 봅니다."
     },
     {
         "id": 3,
@@ -33,26 +33,26 @@
         "id": 6,
         "title": ["Furious 7", "분노의 질주: 더 세븐", "분노의 질주", "분노의질주", "분노의질주7","분노의질주 7", "분노의 질주7", "분노의 질주 7"],
         "movietext": "I don't have friends. I got family.",
-        "translatedMovietext": "나는 친구가 없다. 가족이 있을 뿐."
+        "translatedMovietext": "난 친구따윈 없어. 가족이 있을뿐이지."
     },
     {
         "id": 7,
         "title": ["Black Panther", "블랙 팬서", "블랙팬서"],
         "movietext": "Wakanda forever!",
-        "translatedMovietext": "와칸다 영원하라!"
+        "translatedMovietext": "와칸다 포에버!"
     },
     {
         "id": 8,
         "title": ["Harry Potter and the Deathly Hallows", "해리 포터와 죽음의 성물 - 2부", "Harry Potter and the Deathly Hallows – Part 2",
                     "해리 포터와 죽음의 성물", "해리 포터와 죽음의 성물2", "해리 포터와 죽음의 성물 2" ],
-        "movietext": "After all this time? Always.",
-        "translatedMovietext": "이 모든 시간이 지나서도? 항상."
+        "movietext": "Always.",
+        "translatedMovietext": "영원히."
     },
     {
         "id": 9,
         "title": ["Frozen", "겨울왕국", "겨울 왕국"],
         "movietext": "Let it go!",
-        "translatedMovietext": "다 잊어버려!"
+        "translatedMovietext": "렛 잇 고!"
     },
     {
         "id": 10,
@@ -64,7 +64,7 @@
         "id": 11,
         "title": ["Incredibles 2", "인크레더블 2", "인크레더블2", "인크래더블 2", "인크래더블2"],
         "movietext": "Done properly, parenting is a heroic act.",
-        "translatedMovietext": "올바르게 한다면, 양육은 영웅적인 행위다."
+        "translatedMovietext": "제대로만 한다면 육아도 영웅적인 일이야, 제대로만 한다면 말이지."
     },
     {
         "id": 12,
@@ -93,20 +93,20 @@
     {
         "id": 16,
         "title": ["Captain Marvel", "캡틴 마블", "캡틴마블"],
-        "movietext": "I'm not gonna fight your war. I'm gonna end it.",
-        "translatedMovietext": "너희 전쟁을 싸우지 않을 거야. 내가 끝내버릴 거야."
+        "movietext": "I have nothing to prove to you.",
+        "translatedMovietext": "난 너에게 증명할 것이 없어."
     },
     {
         "id": 17,
         "title": ["Transformer 3", "트랜스포머 3", "트랜스포머3", "Transformers: Dark of the Moon"],
         "movietext": "We will kill them all.",
-        "translatedMovietext": "우리가 그들을 모두 없앨 것이다."
+        "translatedMovietext": "우리가 그들을 모두 처단할 것이다."
     },
     {
         "id": 18,
         "title": ["The Lord of the Rings", "반지의 제왕: 왕의 귀환", "반지의 제왕", "반지의제왕", "The Lord of the Rings: The Return of the King"],
-        "movietext": "My friends, you bow to no one.",
-        "translatedMovietext": "내 친구들이여, 당신들은 아무에게도 절하지 않는다."
+        "movietext": "It's mine! My precious!",
+        "translatedMovietext": "이건 내 거야! 내 소중한 반지야!"
     },
     {
         "id": 19,
@@ -124,60 +124,60 @@
         "id": 21,
         "title": ["The Dark Knight Rises", "다크나이트 라이즈"],
         "movietext": "A hero can be anyone.",
-        "translatedMovietext": "영웅은 누구나 될 수 있다."
+        "translatedMovietext": "영웅은 특별한 사람이 아니라, 누구나 될 수 있는 존재다."
     },
     {
         "id": 22,
         "title": ["Toy Story 3", "토이스토리 3", "토이스토리3"],
         "movietext": "So long, partner.",
-        "translatedMovietext": "잘 가라, 친구."
+        "translatedMovietext": "잘 가, 나의 오랜 친구여."
     },
     {
         "id": 23,
         "title": ["Pirates of the Caribbean", "캐리비안의 해적: 망자의 함", "캐리비안의 해적", "캐리비안의해적", "Pirates of the Caribbean: Dead Man's Chest"],
         "movietext": "Why is the rum always gone?",
-        "translatedMovietext": "럼주는 왜 항상 없어지는 거야?"
+        "translatedMovietext": "럼주는 대체 왜 맨날 사라지는 거야?"
     },
     {
         "id": 24,
         "title": ["Despicable Me 3", "슈퍼배드 3", "슈퍼배드3"],
         "movietext": "Life is full of disappointments.",
-        "translatedMovietext": "삶은 실망으로 가득하다."
+        "translatedMovietext": "삶은 실망투성이야."
     },
     {
         "id": 25,
         "title": ["Finding Dory", "도리를 찾아서", "도리를찾아서"],
-        "movietext": "Just keep swimming.",
-        "translatedMovietext": "계속 헤엄쳐."
+        "movietext": "I’m a nice fish. I just want to be your friend.",
+        "translatedMovietext": "난 너랑 친구하고 싶은 물고기야"
     },
     {
         "id": 26,
         "title": ["Alice in Wonderland", "이상한 나라의 앨리스", "이상한 나라의 엘리스"],
         "movietext": "We're all mad here.",
-        "translatedMovietext": "여기 있는 모두가 미쳤어."
+        "translatedMovietext": "여긴 모두 제정신이 아니야."
     },
     {
         "id": 27,
         "title": ["Zootopia", "주토피아"],
         "movietext": "Anyone can be anything.",
-        "translatedMovietext": "누구나 무엇이든 될 수 있다."
+        "translatedMovietext": "누구나 어떤 꿈이든 이룰 수 있어."
     },
     {
         "id": 28,
         "title": ["The Dark Knight", "다크나이트"],
         "movietext": "Why so serious?",
-        "translatedMovietext": "왜 그렇게 심각해?"
+        "translatedMovietext": "뭐가 그렇게 심각해?"
     },
     {
         "id": 29,
         "title": ["Aladdin", "알라딘"],
         "movietext": "Do you trust me?",
-        "translatedMovietext": "나를 믿나요?"
+        "translatedMovietext": "날 믿어줄래?"
     },
     {
         "id": 30,
         "title": ["Spiderman", "스파이더맨: 파 프롬 홈", "스파이더맨", "스파이더맨: 파프롬홈", "Spider-Man: Far From Home"],
         "movietext": "With great power, comes great responsibility.",
-        "translatedMovietext": "큰 힘에는 큰 책임이 따른다."
+        "translatedMovietext": "위대한 힘에는 그에 걸맞은 책임이 따른다."
     }
 ]
