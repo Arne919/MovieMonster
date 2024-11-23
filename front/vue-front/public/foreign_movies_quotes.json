@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "title": ["Avengers", "어벤져스: 엔드게임", "Avengers: Endgame", "어벤져스"],
+        "title": ["Avengers", "어벤져스: 엔드게임", "Avengers: Endgame", "어벤져스", "엔드게임"],
         "movietext": "I love you 3000.",
         "translatedMovietext": "나는 너를 3000만큼 사랑해."
     },
@@ -86,7 +86,7 @@
     },
     {
         "id": 15,
-        "title": ["Aquaman", "아쿠아맨"],
+        "title": ["Aquaman", "아쿠아맨", "아쿠아 맨"],
         "movietext": "My parents made me what I am. I am the protector of the deep.",
         "translatedMovietext": "부모님이 나를 지금의 나로 만들었어. 나는 심해의 수호자다."
     },
