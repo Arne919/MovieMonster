@@ -4,36 +4,66 @@
     <GenreMovie @genre-selected="goToGenre" />
 
     <!-- 검색 -->
-    <input v-model="searchQuery" type="text" placeholder="영화 제목 검색" />
-    <button @click="searchMovie">검색</button>
+    <div class="search-container">
+      <input v-model="searchQuery" type="text" placeholder="영화 제목 검색" />
+      <button @click="searchMovie">검색</button>
+    </div>
     <p v-if="errorMessage" class="text-danger">{{ errorMessage }}</p>
 
-    <!-- 인기/최신/개봉예정 섹션 -->
-    <div v-for="section in sections" :key="section.name" class="mt-5">
-      <div class="d-flex justify-content-between align-items-center">
-        <h2>{{ section.title }}</h2>
-        <button class="btn btn-link" @click="goToMore(section.name)">더보기</button>
-      </div>
+    <!-- 검색 결과 -->
+    <div v-if="searchResults.length > 0" class="search-results">
+      <h2>검색 결과</h2>
       <div class="grid-container">
         <div
           class="card"
-          v-for="movie in getMoviesInOrder(section.movies, 5)"
-          :key="movie.movie_id"
-          @click="goToDetail(movie.movie_id)"
+          v-for="movie in searchResults"
+          :key="movie.id"
+          @click="goToDetail(movie.id)"
         >
           <img
             :src="getFullPosterUrl(movie.poster_url)"
             class="card-img-top"
             :alt="movie.title"
           />
-          <div class="card-body text-center">
+          <div class="card-body">
             <h5 class="card-title">{{ movie.title }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 검색 결과가 없을 때만 기존 섹션 표시 -->
+    <div v-else>
+      <p v-if="searchQuery" class="text-center text-muted">검색 결과가 없습니다.</p>
+
+      <!-- 인기/최신/개봉예정 섹션 -->
+      <div v-for="section in sections" :key="section.name" class="mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>{{ section.title }}</h2>
+          <button class="btn btn-link" @click="goToMore(section.name)">더보기</button>
+        </div>
+        <div class="grid-container">
+          <div
+            class="card"
+            v-for="movie in getMoviesInOrder(section.movies, 5)"
+            :key="movie.movie_id"
+            @click="goToDetail(movie.movie_id)"
+          >
+            <img
+              :src="getFullPosterUrl(movie.poster_url)"
+              class="card-img-top"
+              :alt="movie.title"
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ movie.title }}</h5>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import { ref, onMounted } from "vue";
@@ -47,6 +77,8 @@ export default {
     const router = useRouter();
     const searchQuery = ref("");
     const errorMessage = ref(""); // 오류 메시지 상태 추가
+    const searchResults = ref([]); // 검색 결과 상태
+    const defaultPoster = "http://127.0.0.1:8000/media/default_movies/default-movie.png";
     const sections = ref([
       { name: "popular", title: "인기영화", movies: [] },
       { name: "recent", title: "최신영화", movies: [] },
@@ -103,28 +135,38 @@ export default {
 
     // 영화 검색
     const searchMovie = async () => {
-      if (!searchQuery.value.trim()) {
-        errorMessage.value = "영화 제목을 입력해 주세요.";
-        return;
-      }
+  if (!searchQuery.value.trim()) {
+    searchResults.value = []; // 검색어가 없으면 결과를 초기화
+    errorMessage.value = "영화 제목을 입력해 주세요.";
+    return;
+  }
 
-      try {
-        const response = await axios.get(
-        "http://127.0.0.1:8000/api/v1/movies/search/",
-        {
-          params: { title: searchQuery.value },
-        }
-      );
-        const movie = response.data;
+  try {
+    // 공백을 제거하여 검색어 전처리
+    const processedQuery = searchQuery.value.replace(/\s+/g, "");
+    console.log("전송된 검색어:", processedQuery); // 디버깅 로그
 
-        // 영화가 정확히 일치하면 디테일 페이지로 이동
-        router.push({ name: "MovieDetail", params: { id: movie.id } });
-        errorMessage.value = ""; // 오류 메시지 초기화
-      } catch (error) {
-        errorMessage.value =
-          error.response?.data?.error || "영화 검색에 실패했습니다.";
+
+    const response = await axios.get(
+      "http://127.0.0.1:8000/api/v1/movies/search/",
+      {
+        params: { title: processedQuery }, // 전처리된 검색어로 요청
       }
-    };
+    );
+
+    searchResults.value = response.data.map((movie) => ({
+      id: movie.id,
+      title: movie.title,
+      poster_url: movie.poster_url,
+      description: movie.description,
+    }));
+    errorMessage.value = ""; // 오류 메시지 초기화
+  } catch (error) {
+    errorMessage.value =
+      error.response?.data?.error || "영화 검색에 실패했습니다.";
+    searchResults.value = []; // 실패 시 빈 배열로 초기화
+  }
+};
 
     onMounted(fetchMovies);
 
@@ -138,6 +180,8 @@ export default {
       getFullPosterUrl,
       getMoviesInOrder,
       searchMovie, // searchMovie 메서드 추가
+      defaultPoster,
+      searchResults
     };
   },
 };
