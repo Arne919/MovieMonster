@@ -94,31 +94,36 @@ const errorMessage = ref('')  // 오류 메시지를 저장하는 변수
 // 영화 검색 함수
 const searchMovie = async () => {
   if (!searchQuery.value.trim()) {
-    // 사용자가 영화 제목을 입력하지 않은 경우 오류 메시지 표시
-    errorMessage.value = "영화 제목을 입력해 주세요."
-    return
+    errorMessage.value = "영화 제목을 입력해 주세요.";
+    return;
   }
 
   try {
     // 영화 검색 API 요청
     const response = await axios.get(`${store.API_URL}/api/v1/movies/search/`, {
-      params: { title: searchQuery.value }
-    })
+      params: { title: searchQuery.value },
+    });
 
-    // 디버깅: API 응답 확인
-    console.log("API 응답:", response.data)
+    console.log("API 응답:", response.data); // API 응답 구조 확인
 
-    const movie = response.data
-    console.log(movie.poster)
-    // 검색된 영화의 포스터 URL 저장
-    moviePoster.value = `https://image.tmdb.org/t/p/w500${movie.poster}`  // 포스터 URL 필드는 실제 API에 맞게 수정 필요
-    errorMessage.value = ''  // 오류 메시지 초기화
+    const movie = response.data; // API 응답 데이터 사용
+    if (movie.poster_url) {
+      moviePoster.value = `https://image.tmdb.org/t/p/w500${movie.poster_url}`; // 포스터 URL 설정
+    } else if (movie.poster) {
+      moviePoster.value = `https://image.tmdb.org/t/p/w500${movie.poster}`; // 다른 키를 사용할 경우
+    } else {
+      throw new Error("포스터 URL이 응답에 없습니다.");
+    }
+
+    console.log("포스터 URL:", moviePoster.value); // 디버깅 로그
+    errorMessage.value = ""; // 오류 메시지 초기화
   } catch (error) {
-    // 오류가 발생한 경우 오류 메시지를 표시
-    errorMessage.value = error.response?.data?.error || "영화 검색에 실패했습니다."
-    moviePoster.value = null  // 포스터 이미지 초기화
+    errorMessage.value = error.response?.data?.error || "영화 검색에 실패했습니다.";
+    moviePoster.value = null; // 포스터 이미지 초기화
+    console.error("Error:", error); // 디버깅용
   }
-}
+};
+
 
 // 게시글 생성 함수 (DRF 요청)
 const createArticle = function () {

@@ -88,6 +88,8 @@ class GenreListView(View):
         genres = Genre.objects.all().values('id', 'name')  # id와 name만 반환
         return JsonResponse(list(genres), safe=False)
     
+from django.db.models import Q
+
 @api_view(['GET'])
 def search_movie(request):
     movie_title = request.query_params.get('title', None)
@@ -95,14 +97,28 @@ def search_movie(request):
     if not movie_title:
         return Response({"error": "영화 제목을 입력해 주세요."}, status=status.HTTP_400_BAD_REQUEST)
 
-    # 영화 제목이 정확히 일치하는 영화 찾기
     try:
-        movie = Movie.objects.get(title__iexact=movie_title)  # 대소문자 구분 없이 정확히 일치하는 영화 찾기
-        return Response({
-            "id": movie.id,
-            "title": movie.title,
-            "poster": movie.poster_url,  # 포스터 URL이 저장되어 있다고 가정
-            "description": movie.description
-        })
-    except Movie.DoesNotExist:
-        return Response({"error": "영화가 존재하지 않습니다."}, status=status.HTTP_404_NOT_FOUND)
+        # 공백 없는 제목을 공백으로 분리
+        title_query = movie_title.replace(" ", "")
+        movies = Movie.objects.filter(
+            title__icontains=title_query  # 부분 매칭 수행
+        ) | Movie.objects.filter(
+            title__iregex=r"".join(f"{char}.*" for char in title_query)  # 각 글자를 순차 매칭
+        )
+
+        if movies.exists():
+            results = [
+                {
+                    "id": movie.id,
+                    "title": movie.title,
+                    "poster_url": movie.poster_url,
+                    "description": movie.description,
+                }
+                for movie in movies
+            ]
+            return Response(results)
+        else:
+            return Response({"error": "영화가 존재하지 않습니다."}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
