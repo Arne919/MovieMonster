@@ -397,6 +397,22 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     );
     alert("영화가 카테고리에 추가되었습니다.");
   };
+
+  const createArticle = async (articleData) => {
+    try {
+      const response = await axios.post(`${API_URL}/api/v1/communities/`, articleData, {
+        headers: {
+          Authorization: `Token ${token.value}`,
+        },
+      });
+      console.log("Article created successfully:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error creating article:", error);
+      throw error;
+    }
+  };
+  
   return { 
     articles, 
     API_URL, 
@@ -428,6 +444,7 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     getRankTitle,
     fetchCategoryDetails,
     searchMovies,
-    addMovieToCategory
+    addMovieToCategory,
+    createArticle
   }
 }, { persist: true })

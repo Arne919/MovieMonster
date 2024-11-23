@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from django.db.models import Count
 from accounts.models import User
+from movies.models import Movie
 
 # permission Decorators
 from rest_framework.decorators import permission_classes
@@ -26,9 +27,12 @@ def article_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
+        movie_id = request.data.get('movie_id')  # movie_id를 요청에서 가져옴
+        movie = get_object_or_404(Movie, id=movie_id) if movie_id else None  # Movie 객체 가져오기
+
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user)
+            serializer.save(user=request.user, movie=movie)
             user = request.user
             user.points += 100  # 100 포인트 추가
             user.save()  # 사용자 정보 저장

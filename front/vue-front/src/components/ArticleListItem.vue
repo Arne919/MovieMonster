@@ -3,6 +3,7 @@
      <!-- 포스터 이미지 출력 -->
     <img v-if="article.poster_url" :src="article.poster_url" alt="포스터 이미지" class="poster-image" />
     <p>글 번호: {{ article.id }}</p>
+    <p v-if="article.movie_title">영화 제목: {{ article.movie_title }}</p>
     <p>제목 :{{ article.title }}</p>
     <p>내용 : {{ article.content }}</p>
     <p class="rating-container">
