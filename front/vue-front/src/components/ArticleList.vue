@@ -46,6 +46,7 @@ const setSortOrder = (order) => {
 onMounted(async () => {
   console.log('hihi')
   await store.getSortedArticles('recent')
+  console.log('aa',store.articles)
 })
 </script>
 

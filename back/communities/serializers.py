@@ -7,21 +7,23 @@ class ArticleListSerializer(serializers.ModelSerializer):
     like_count = serializers.IntegerField(read_only=True)
     comment_count = serializers.IntegerField(read_only=True)  # 댓글 수 추가
     user = serializers.StringRelatedField()
+    movie_title = serializers.CharField(source='movie.title', read_only=True)  # 외래 키로 연결된 title
 
     class Meta:
         model = Article
-        fields = ('id', 'title', 'content', 'like_count', 'comment_count', 'poster_url', 'user', 'rating', 'created_at', 'updated_at' )
+        fields = ('id', 'title', 'content', 'like_count', 'comment_count', 'poster_url', 'user', 'rating', 'created_at', 'updated_at', 'movie_title', )
 
 
 class ArticleSerializer(serializers.ModelSerializer):
     like_count = serializers.IntegerField(read_only=True)
     comment_count = serializers.IntegerField(read_only=True)  # 댓글 수 추가
     user = serializers.StringRelatedField()
+    movie_title = serializers.CharField(source='movie.title', read_only=True)  # Movie 모델의 title 가져오기
 
     class Meta:
         model = Article
         fields = '__all__'
-        read_only_fields = ('user','like_users',)
+        read_only_fields = ('user','like_users', 'movie_title')
 
 class CommentSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField()  # 댓글 작성자 이름을 문자열로 반환
