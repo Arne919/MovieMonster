@@ -106,6 +106,8 @@
 </template>
 
 <script>
+const COOLDOWN_KEY = "KoreaQuotesView"; // 고유 키 설정
+
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useCounterStore } from "@/stores/counter";
@@ -129,6 +131,11 @@ export default {
     const router = useRouter();
     const store = useCounterStore();
 
+    const setCooldown = () => {
+      // 현재 시간을 localStorage에 저장
+      localStorage.setItem(COOLDOWN_KEY, Date.now());
+    };
+
     const openConfirmModal = (action) => {
       modalAction.value = action;
       modalMessage.value = `${100 * correctCount.value}p를 획득 하시겠어요?`;
@@ -137,8 +144,10 @@ export default {
     const handleModalConfirm = async () => {
       if (modalAction.value === "claim") {
         await claimPoints();
+        setCooldown(); // 제한 시간 설정
       } else if (modalAction.value === "rank") {
         await goToRank();
+        setCooldown(); // 제한 시간 설정
       }
     };
 
@@ -259,6 +268,7 @@ export default {
       nextReview,
       getPosterUrl,
       modalMessage,
+      setCooldown,
     };
   },
 };
