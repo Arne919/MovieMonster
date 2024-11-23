@@ -3,10 +3,15 @@
     <!-- 장르 선택 섹션 -->
     <div class="mb-4">
       <label for="genre-select" class="form-label">장르 선택</label> |
-      <select id="genre-select" class="form-select" @change="handleGenreChange">
+      <select
+        id="genre-select"
+        class="form-select"
+        v-model="genre"
+        @change="handleGenreChange"
+      >
         <option value="home">영화 홈</option>
-        <option v-for="genre in genres" :key="genre" :value="genre">
-          {{ genre }}
+        <option v-for="genreItem in genres" :key="genreItem" :value="genreItem">
+          {{ genreItem }}
         </option>
       </select>
     </div>
@@ -36,9 +41,9 @@
     </div>
 
     <!-- 선택된 장르에 해당하는 영화가 없을 때 -->
-    <div v-else-if="genre" class="mt-4 text-center">
+    <!-- <div v-else-if="genre" class="mt-4 text-center">
       <h2>해당 장르에 맞는 영화가 없습니다.</h2>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -55,7 +60,7 @@ export default {
     const genres = ref([]); // 장르 리스트
     const movies = ref([]); // 전체 영화 데이터
     const filteredMovies = ref([]); // 필터링된 영화 리스트
-    const genre = ref(route.params.genre || null); // 현재 장르 (홈일 때 null)
+    const genre = ref(route.params.genre || "home"); // 현재 장르 (홈일 때 'home')
 
     // 영화 데이터 가져오기
     const fetchMovies = async () => {
@@ -83,7 +88,7 @@ export default {
 
     // 장르에 따라 영화 필터링
     const filterMovies = () => {
-      if (!genre.value) {
+      if (!genre.value || genre.value === "home") {
         // 홈일 때 빈 배열
         filteredMovies.value = [];
       } else if (genre.value === "all") {
@@ -96,13 +101,11 @@ export default {
     };
 
     // 장르 변경 처리
-    const handleGenreChange = (event) => {
-      const selected = event.target.value;
-      if (selected === "home") {
-        genre.value = null; // 홈으로 이동 시 장르 null로 설정
+    const handleGenreChange = () => {
+      if (genre.value === "home") {
         router.push({ name: "MovieView" });
       } else {
-        router.push({ name: "GenreMovie", params: { genre: selected } });
+        router.push({ name: "GenreMovie", params: { genre: genre.value } });
       }
     };
 
@@ -124,7 +127,7 @@ export default {
 
     // URL 변경 시 필터링 업데이트
     watch(route, (newRoute) => {
-      genre.value = newRoute.params.genre || null;
+      genre.value = newRoute.params.genre || "home";
       filterMovies();
     });
 
