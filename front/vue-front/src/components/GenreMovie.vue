@@ -1,16 +1,20 @@
 <template>
   <div class="container">
     <!-- 장르 선택 섹션 -->
-    <div class="mb-4">
-      <label for="genre-select" class="form-label">장르 선택</label> |
+    <div class="genre-select-container">
+      <label for="genre-select" class="genre-label">장르</label>
       <select
         id="genre-select"
-        class="form-select"
+        class="genre-select"
         v-model="genre"
         @change="handleGenreChange"
       >
         <option value="home">영화 홈</option>
-        <option v-for="genreItem in genres" :key="genreItem" :value="genreItem">
+        <option
+          v-for="genreItem in genres"
+          :key="genreItem"
+          :value="genreItem"
+        >
           {{ genreTranslations[genreItem] || genreItem }}
         </option>
       </select>
@@ -164,6 +168,59 @@ export default {
 <style scoped>
 .container {
   margin-top: 20px;
+  width: 100%; /* 전체 화면 너비 */
+  padding: 0; /* 기본 패딩 제거 */
+}
+
+/* 장르 선택 섹션 */
+.genre-select-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 라벨과 셀렉트 간 간격 */
+  margin-bottom: 20px;
+}
+
+.genre-label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff; /* 라벨 텍스트 색상 */
+}
+
+.genre-select {
+  width: 150px; /* 드롭다운 너비 */
+  padding: 8px;
+  border: 1px solid #1a1a1a; /* 테두리를 배경과 동일하게 설정 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  background-color: #2a2a2a; /* 연한 검은색 배경 */
+  color: #ffffff; /* 텍스트 색상 */
+  font-size: 14px;
+  appearance: none; /* 기본 화살표 제거 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24'%3E%3Cpath fill='%23ffffff' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.genre-select:hover {
+  background-color: #3a3a3a; /* 드롭다운 호버 시 연한 검은색 */
+}
+
+.genre-select option {
+  background-color: #1a1a1a; /* 옵션 배경색 */
+  color: #ffffff; /* 옵션 텍스트 색상 */
+  border: none; /* 테두리 제거 */
+}
+
+.genre-select option:hover {
+  background-color: #3a3a3a;
+  color: #ffffff; /* 텍스트 유지 */
+}
+
+.genre-select:focus {
+  outline: none; /* 포커스 시 흰색 틀 제거 */
+  border-color: #3a3a3a; /* 포커스 테두리를 연한 검은색으로 */
 }
 
 .genre-title {
