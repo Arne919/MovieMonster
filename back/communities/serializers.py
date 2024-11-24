@@ -14,6 +14,11 @@ class ArticleListSerializer(serializers.ModelSerializer):
     movie_overview = serializers.CharField(source='movie.description', read_only=True)  # 영화 설명
     movie_rating = serializers.FloatField(source='movie.vote_avg', read_only=True)  # 영화 평점
     user_profile_image = serializers.SerializerMethodField()  # 사용자 프로필 이미지 추가
+    is_liked = serializers.SerializerMethodField()  # 좋아요 상태 추가
+
+    def get_is_liked(self, obj):
+        user = self.context.get('request').user
+        return user in obj.like_users.all()  # 현재 사용자가 좋아요한 상태 반환
 
     class Meta:
         model = Article
@@ -45,6 +50,11 @@ class ArticleSerializer(serializers.ModelSerializer):
     movie_genres = serializers.SerializerMethodField()  # 영화 장르 리스트
     movie_rating = serializers.FloatField(source='movie.vote_avg', read_only=True)  # 영화 평점
     movie_overview = serializers.CharField(source='movie.description', read_only=True)  # 영화 설명
+    is_liked = serializers.SerializerMethodField()  # 좋아요 상태 추가
+
+    def get_is_liked(self, obj):
+        user = self.context.get('request').user
+        return user in obj.like_users.all()  # 현재 사용자가 좋아요한 상태 반환
 
     def get_movie_genres(self, obj):
         """
@@ -53,7 +63,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         if obj.movie and obj.movie.genres:
             return obj.movie.genres.split(", ")
         return []
-
+    
     class Meta:
         model = Article
         fields = '__all__'

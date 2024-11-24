@@ -13,11 +13,12 @@
     </div>
 
     <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
-    <div v-else>
+    <div v-if="articles.length > 0">
       <ArticleListItem
-        v-for="article in store.articles"
+        v-for="article in articles"
         :key="article.id"
         :article="article"
+        @update-article="updateArticle"
       />
     </div>
   </div>
@@ -46,10 +47,23 @@ const setSortOrder = (order) => {
   store.getSortedArticles(order) // 정렬된 데이터 가져오기
 }
 
+const updateArticle = (updatedArticle) => {
+  const index = store.articles.findIndex((article) => article.id === updatedArticle.id);
+  if (index !== -1) {
+    store.articles[index] = { ...updatedArticle };
+    console.log("Updated article in parent component:", store.articles[index]);
+  }
+};
+
+
+
 // 컴포넌트 마운트 시 초기 데이터 로드
 onMounted(async () => {
   try {
-    await store.getSortedArticles(sortOrder.value);
+    // 데이터가 없거나 강제로 새로 고침이 필요한 경우만 호출
+    if (!store.articles.length) {
+      await store.getSortedArticles(sortOrder.value);
+    }
   } catch (err) {
     console.error("Error loading articles:", err);
     errorMessage.value = "게시글을 불러오는 중 오류가 발생했습니다.";

@@ -23,7 +23,7 @@ def article_list(request):
     if request.method == 'GET':
         # 댓글 수 포함하여 모든 게시글 가져오기
         articles = Article.objects.annotate(comment_count=Count('comments')).select_related('movie')
-        serializer = ArticleListSerializer(articles, many=True)
+        serializer = ArticleListSerializer(articles, many=True, context={'request': request})
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -61,7 +61,7 @@ def article_detail(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
 
     if request.method == 'GET':
-        serializer = ArticleSerializer(article)
+        serializer = ArticleSerializer(article, context={'request': request})
         return Response(serializer.data)
 
     elif request.method == 'PUT':
