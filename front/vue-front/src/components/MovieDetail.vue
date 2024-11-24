@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <div
+    class="container movie-detail"
+    :style="getBackdropStyle(movie.backdrop_url)"
+  >
     <div class="row">
       <!-- 좌측: 포스터 섹션 -->
       <div class="col-md-4 text-center">
@@ -69,6 +72,14 @@ const getFullPosterUrl = (posterUrl) => {
   return `${baseUrl}${posterUrl}`;
 };
 
+// 배경 이미지 URL 생성
+const getBackdropStyle = (backdropUrl) => {
+  const baseUrl = "https://image.tmdb.org/t/p/original";
+  return backdropUrl
+    ? { backgroundImage: `url(${baseUrl}${backdropUrl})` }
+    : {};
+};
+
 // 영화 데이터 가져오기
 const fetchMovie = async () => {
   const movieId = route.params.id; // 라우터에서 영화 ID 가져오기
@@ -90,8 +101,17 @@ onMounted(fetchMovie);
 <style scoped>
 .container {
   margin-top: 40px;
+  padding: 20px;
+  border-radius: 8px;
 }
-
+.movie-detail {
+  background-size: cover; /* 배경 이미지 크기를 전체 화면에 맞춤 */
+  background-position: center; /* 배경 이미지 위치를 중앙에 맞춤 */
+  background-repeat: no-repeat; /* 배경 이미지 반복 방지 */
+  background-color: rgba(0, 0, 0, 0.5); /* 배경색 (이미지가 없을 경우 대비) */
+  color: white; /* 텍스트 색상을 흰색으로 변경 */
+  border-radius: 15px;
+}
 .row {
   align-items: center; /* 세로 정렬 */
 }
