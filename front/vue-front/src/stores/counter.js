@@ -36,27 +36,32 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   // 회원가입 함수
-    const signUp = (payload) => {
-      return axios
-        .post(`${API_URL}/accounts/custom-signup/`, payload, {
-      headers: {
-        'Content-Type': 'multipart/form-data', // FormData 처리
-      },
-    })
-    .then((response) => {
-      signUpResponse.value = response.data; // 성공 응답 데이터 저장
-      console.log('회원가입 성공:', response.data);
-
-      router.push({ name: 'LogInView'})
-      // // fetchUserPoints 호출
-      // fetchUserPoints(); // 로그인 이후 사용자 포인트 정보 가져오기
-    })
-    .catch((err) => {
+  const signUp = async (payload) => {
+    try {
+      const response = await axios.post(`${API_URL}/accounts/custom-signup/`, payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // FormData 처리
+        },
+      });
+      signUpResponse.value = response.data; // 회원가입 성공 응답 데이터 저장
+      console.log("회원가입 성공:", response.data);
+  
+      // 회원가입 성공 후 자동으로 로그인 처리
+      const loginPayload = {
+        username: payload.get("username"), // FormData에서 username 가져오기
+        password: payload.get("password1"), // password1 가져오기
+      };
+      await logIn(loginPayload); // 로그인 처리
+  
+      // 로그인 성공 후 홈으로 이동
+      router.push({ name: "HomeView" });
+    } catch (err) {
       error.value = err.response?.data || err.message; // 실패 시 에러 저장
-      console.error('회원가입 실패:', error.value);
+      console.error("회원가입 실패:", error.value);
       throw err; // 에러 재발생
-    });
-};
+    }
+  };
+  
 
   // 클라이언트 정렬 로직
   const sortArticles = (sortOrder) => {
@@ -207,7 +212,11 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
         },
       });
       console.log(response.data)
-      user.value = {...response.data, rank_title: getRankTitle(response.data.current_points)}
+      user.value = {
+        ...user.value, // 기존 사용자 데이터 유지
+        current_points: response.data.current_points,
+        rank_title: getRankTitle(response.data.current_points),
+      };
       // fetchRankings 함수에서 데이터를 로깅합니다.
       console.log('Rankings fetched:', response.data);
 
@@ -215,6 +224,7 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
       console.error('Error fetching user points:', error);
     }
   };
+
   // DRF로 전체 게시글 요청을 보내고 응답을 받아 articles에 저장하는 함수
   const getArticles = (forceReload = false) => {
     console.log("getArticles function called");
@@ -270,44 +280,63 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
   //     })
   //   }
 
-  // 로그인 요청 액션
-  const logIn = function (payload) {
-    // const username = payload.username
-    // const password1 = payload.password
-    const { username, password } = payload
+  // // 로그인 요청 액션
+  // const logIn = function (payload) {
+  //   // const username = payload.username
+  //   // const password1 = payload.password
+  //   const { username, password } = payload
 
-    axios({
-      method: 'post',
-      url: `${API_URL}/accounts/login/`,
-      data: {
-        username, password
-      }
-    })
-      .then((res) => {
-        token.value = res.data.key;
-        // 사용자 정보를 가져오는 추가 요청
-        axios({
-          method: 'get',
-          url: `${API_URL}/accounts/user/`,  // 사용자 정보를 가져오는 엔드포인트
-          headers: {
-            Authorization: `Token ${token.value}`
-          }
-        })
+  //   axios({
+  //     method: 'post',
+  //     url: `${API_URL}/accounts/login/`,
+  //     data: {
+  //       username, password
+  //     }
+  //   })
+  //     .then((res) => {
+  //       token.value = res.data.key;
+  //       // 사용자 정보를 가져오는 추가 요청
+  //       axios({
+  //         method: 'get',
+  //         url: `${API_URL}/accounts/user/`,  // 사용자 정보를 가져오는 엔드포인트
+  //         headers: {
+  //           Authorization: `Token ${token.value}`
+  //         }
+  //       })
 
-          .then((userRes) => {
-            console.log(userRes.data)
-            Username.value = userRes.data.username  // 사용자 이름 저장
-            router.push({ name: 'ArticleView' })
-          })
-          .catch((err) => {
-            console.log('Error fetching user information:', err)
-          })
-        return fetchUserPoints()
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  //         .then((userRes) => {
+  //           console.log(userRes.data)
+  //           Username.value = userRes.data.username  // 사용자 이름 저장
+  //           router.push({ name: 'HomeView' })
+  //         })
+  //         .catch((err) => {
+  //           console.log('Error fetching user information:', err)
+  //         })
+  //       return fetchUserPoints()
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
+  const logIn = async function (payload) {
+    try {
+      const { username, password } = payload;
+      const res = await axios.post(`${API_URL}/accounts/login/`, {
+        username,
+        password,
+      });
+      token.value = res.data.key; // 토큰 저장
+  
+      await fetchUser(); // 사용자 정보 비동기 로드
+      await fetchUserPoints(); // 포인트 정보 업데이트
+  
+      router.push({ name: "HomeView" }); // 홈페이지로 리다이렉트
+    } catch (err) {
+      console.error("Login error:", err);
+      alert("로그인에 실패했습니다. 사용자 이름과 비밀번호를 확인해주세요.");
+    }
+  };
+  
   
   // [추가기능] 로그아웃
   const logOut = function () {

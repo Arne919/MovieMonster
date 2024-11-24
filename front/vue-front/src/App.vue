@@ -4,27 +4,28 @@
       <div class="container">
         <!-- 네비게이션 링크 -->
         <RouterLink :to="{ name: 'SignUpView' }" class="nav-link">회원가입</RouterLink> |
+        <RouterLink :to="{ name: 'HomeView' }" class="nav-link">홈</RouterLink> |
         <RouterLink :to="{ name: 'ArticleView' }" class="nav-link">리뷰</RouterLink> |
         <RouterLink :to="{ name: 'MovieView' }" class="nav-link">영화</RouterLink> |
         <RouterLink :to="{ name: 'GameView' }" class="nav-link">게임</RouterLink> |
         <RouterLink :to="{ name: 'RankView' }" class="nav-link">랭크</RouterLink> |
 
         <RouterLink
-          v-if="isLogin"
-          :to="{ name: 'ProfileView', params: { username: user.username } }"
-          class="nav-link"
+        v-if="isLogin && user.username"
+        :to="{ name: 'ProfileView', params: { username: user.username || '' } }"
+        class="nav-link"
         >
-          내 프로필
-        </RouterLink>
+        내 프로필
+      </RouterLink>
+
         <RouterLink v-else :to="{ name: 'LogInView' }" class="nav-link">로그인</RouterLink>
 
         <!-- 사용자 정보 -->
-        <div class="user-info" v-if="user.username">
+        <div class="user-info" v-if="!isLoading && user.username">
           <div v-if="user.rank_title" class="rank-display">
             <img :src="getRankImage(user.rank_title)" :alt="user.rank_title" class="rank-icon" />
           </div> |
           {{ user.username }} | 포인트: {{ user.current_points }}
-
         </div>
 
         <form @submit.prevent="logOut" v-if="isLogin">
@@ -34,24 +35,31 @@
     </nav>
   </header>
 
+  <!-- 로딩 상태 -->
+  <div v-if="isLoading" class="loading">
+    <p>Loading...</p>
+  </div>
+
   <!-- 동적 라우터 뷰 -->
-  <RouterView />
+  <RouterView v-else />
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue';
-import { useCounterStore } from '@/stores/counter';
+import { computed, ref, watchEffect } from "vue";
+import { useCounterStore } from "@/stores/counter";
 
 const store = useCounterStore();
 const isLogin = computed(() => store.isLogin);
 const user = computed(() => store.user);
 
+const isLoading = ref(true); // 로딩 상태 관리
+
 // 랭크 이미지 불러오기
-import bronzeRank from '@/assets/BronzeRank.png';
-import silverRank from '@/assets/SilverRank.png';
-import goldRank from '@/assets/GoldRank.png';
-import platinumRank from '@/assets/PlatinumRank.png';
-import diamondRank from '@/assets/DiamondRank.png';
+import bronzeRank from "@/assets/BronzeRank.png";
+import silverRank from "@/assets/SilverRank.png";
+import goldRank from "@/assets/GoldRank.png";
+import platinumRank from "@/assets/PlatinumRank.png";
+import diamondRank from "@/assets/DiamondRank.png";
 
 // 랭크 이미지를 반환하는 함수
 const getRankImage = (rankTitle) => {
@@ -76,14 +84,17 @@ const logOut = () => {
   store.logOut();
 };
 
-// 마운트 시 사용자 정보 가져오기
-onMounted(() => {
-  if (isLogin.value) {
-    store.fetchUserPoints(); // 사용자 포인트 정보 가져오기
+// 상태값이 로드되었는지 감지
+watchEffect(async () => {
+  if (store.token) {
+    await store.fetchUser(); // 사용자 정보 로드
+    await store.fetchUserPoints(); // 사용자 포인트 로드
+    isLoading.value = false; // 로드 완료
+  } else {
+    isLoading.value = false; // 토큰이 없는 경우도 로드 완료로 처리
   }
 });
 </script>
-
 <style scoped>
 body {
   margin: 0;
