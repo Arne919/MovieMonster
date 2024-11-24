@@ -1,4 +1,5 @@
 <template>
+  <div class="app-wrapper">
   <header>
     <nav class="navbar">
       <div class="container">
@@ -34,14 +35,34 @@
       </div>
     </nav>
   </header>
+  <main class="content">
+      <!-- 로딩 상태 -->
+      <div v-if="isLoading" class="loading">
+        <p>Loading...</p>
+      </div>
+      <!-- 동적 라우터 뷰 -->
+      <RouterView v-else />
+    </main>
+  
 
-  <!-- 로딩 상태 -->
-  <div v-if="isLoading" class="loading">
-    <p>Loading...</p>
-  </div>
 
-  <!-- 동적 라우터 뷰 -->
-  <RouterView v-else />
+  
+
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- 왼쪽 섹션 -->
+      <div class="footer-left">
+        <p><strong>MovieMoster</strong> | 팀장 하건수 | <a href="mailto:rjs4013@naver.com">rjs4013@naver.com</a></p>
+        <p>팀원 강혜경 | <a href="mailto:ghgghg96@naver.com">ghgghg96@naver.com</a> | 대표전화 010-1234-5678</p>
+      </div>
+
+      <!-- 오른쪽 섹션 -->
+      <div class="footer-right">
+        <p>Copyright &copy; 2024 by MovieMoster, Inc. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>
 </template>
 
 <script setup>
@@ -135,4 +156,8 @@ body {
   height: 20px;
   margin-right: 5px;
 }
+
+
+
+
 </style>
