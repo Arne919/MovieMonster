@@ -169,7 +169,8 @@ export default {
 .grid-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  row-gap: 2rem; /* 위아래 간격 */
+  column-gap: 1.5rem; /* 좌우 간격 */
   justify-content: start;
 }
 
@@ -180,6 +181,7 @@ export default {
   overflow: hidden;
   text-align: center;
   transition: transform 0.2s ease-in-out;
+  background-color: transparent; /* 카드 배경을 투명하게 설정 */
 }
 
 .card:hover {
