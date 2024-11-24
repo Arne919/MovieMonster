@@ -90,43 +90,18 @@
       </div>
     </div>
 
-    <!-- Bootstrap 모달 -->
-    <div
-      class="modal fade"
-      id="confirmModal"
-      tabindex="-1"
-      aria-labelledby="confirmModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="confirmModalLabel">확인</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p>{{ modalMessage }}</p>
-          </div>
-          <div class="modal-footer">
-            <button
-              class="btn btn-success"
-              @click="handleModalConfirm"
-              data-bs-dismiss="modal"
-            >
-              확인
-            </button>
-            <button
-              class="btn btn-danger"
-              @click="handleModalCancel"
-              data-bs-dismiss="modal"
-            >
-              취소
-            </button>
+    <div v-if="showModal" class="modal-overlay">
+      <div class="modal-content">
+        <div class="modal-header">
+          <p class="modal-title">포인트 획득하기</p>
+          <button class="btn-close" @click="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>{{ modalMessage }}</p>
+          <p>포인트를 획득하시면 12시간에 재도전 가능합니다!</p>
+          <div class="modal-actions">
+            <button class="btn btn-create" @click="handleModalConfirm">확인</button>
+            <button class="btn btn-cancel" @click="closeModal">취소</button>
           </div>
         </div>
       </div>
@@ -155,8 +130,11 @@ export default {
     const showResult = ref(false);
     const gameOver = ref(false);
     const correctCount = ref(0);
-    const modalMessage = ref("");
-    const modalAction = ref("");
+
+    // 모달 관련 데이터와 메서드
+    const showModal = ref(false); // 모달 표시 여부
+    const modalMessage = ref(""); // 모달 메시지
+    const modalAction = ref(""); // 모달에서 수행할 액션
 
     const router = useRouter();
     const store = useCounterStore();
@@ -168,6 +146,11 @@ export default {
     const openConfirmModal = (action) => {
       modalAction.value = action;
       modalMessage.value = `${100 * correctCount.value}p를 획득 하시겠어요?`;
+      showModal.value = true; // 모달 열기
+    };
+
+    const closeModal = () => {
+      showModal.value = false; // 모달 닫기
     };
 
     const handleModalConfirm = async () => {
@@ -178,6 +161,7 @@ export default {
         await goToRank();
         setCooldown();
       }
+      closeModal();
     };
 
     const handleModalCancel = () => {
@@ -311,7 +295,11 @@ export default {
       showResult,
       gameOver,
       correctCount,
+      showModal,
+      modalMessage,
+      modalAction,
       openConfirmModal,
+      closeModal,
       handleModalConfirm,
       handleModalCancel,
       claimPoints,
@@ -376,19 +364,6 @@ export default {
 .text-center-title {
   color: #4caf50;
   text-align: center;
-}
-
-.modal-backdrop {
-  background-color: rgba(0, 0, 0, 0.2) !important;
-}
-
-.modal {
-  z-index: 1055;
-  text-align: center;
-}
-
-.modal button {
-  margin: 10px;
 }
 
 #typing-box {
@@ -732,4 +707,100 @@ export default {
     bottom: 100%;
   }
 }
+/* 모달 전체 배경 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+/* 모달 컨테이너 */
+.modal-content {
+  background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 500px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* 모달 헤더 */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 10px;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* 닫기 버튼 */
+.btn-close {
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.btn-close:hover {
+  color: #fff;
+}
+
+/* 모달 본문 */
+.modal-body p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #eee;
+}
+
+/* 모달 하단 버튼 */
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-create {
+  background: #3a3a3a;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.btn-create:hover {
+  background: #555555;
+}
+
+.btn-cancel {
+  background: #c0392b;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.btn-cancel:hover {
+  background: #e74c3c;
+}
+
 </style>
