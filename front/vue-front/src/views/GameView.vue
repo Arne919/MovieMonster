@@ -124,8 +124,9 @@ export default {
 .game-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 그리드 레이아웃 */
-  gap: 20px;
+  gap: 25px;
   width: 100%;
+  margin: 10px;
   padding: 20px;
 }
 
@@ -138,7 +139,7 @@ export default {
   padding: 15px;
   border-radius: 15px;
   background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  box-shadow: 6px 6px 12px #c8c8c8, -6px -6px 12px #ffffff;
+  /* box-shadow: 6px 6px 12px #c8c8c8, -6px -6px 12px #ffffff; */
   transition: all 0.3s ease-in-out;
   animation: fadeIn 0.5s ease-in-out; /* 등장 애니메이션 */
   height: 500px; /* 세로 길이를 기존보다 늘림 */
@@ -146,12 +147,12 @@ export default {
 
 .game-card:hover {
   transform: translateY(-5px);
-  box-shadow: 10px 10px 20px #c8c8c8, -10px -10px 20px #ffffff;
+  box-shadow: 6px 6px 12px #c8c8c8, -6px -6px 12px #ffffff;
   border-color: #4caf50;
 }
 
 .game-card.disabled {
-  background-color: #ccc;
+  background-color: #777777;
   cursor: not-allowed;
   opacity: 0.5;
 }
@@ -176,7 +177,7 @@ export default {
   left: 10px;
   background: #4caf50;
   color: white;
-  padding: 5px 10px;
+  padding: 10px 20px;
   border-radius: 5px;
   font-size: 0.9rem;
   font-weight: bold;
@@ -191,16 +192,18 @@ export default {
 }
 
 .game-info {
-  color: #555;
+  color: #222222;
 }
 
 .game-info h2 {
-  font-size: 1.5rem;
-  margin-top: 10px;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 50px;
 }
 
 .game-info p {
-  font-size: 1rem;
+  margin-top: 20px;
+  font-size: 1.2rem;
 }
 
 .modal-overlay {

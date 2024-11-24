@@ -61,28 +61,27 @@
         <div id="typing-box">
           <span class="typing-text"></span><span class="blink">|</span>
         </div>
-
-        <div class="input-container text-center">
+        <div class="input-container">
           <input
             v-model="userAnswer"
-            class="form-control w-50 mx-auto"
+            class="form-control input-field"
             type="text"
             placeholder="정답(영화 제목)을 입력하세요"
             @keyup.enter="checkAnswer"
           />
-          <button class="btn btn-primary mt-3" @click="checkAnswer">제출</button>
+          <button class="btn btn-primary submit-btn" @click="checkAnswer">></button>
         </div>
       </div>
 
       <div v-if="showResult" class="result-container text-center mt-4">
-        <p v-if="isCorrect" class="text-success">정답입니다! 🎉</p>
-        <p v-else class="text-danger">틀렸습니다. 정답은 "{{ currentquote.title[0] }}" 입니다. ❌</p>
+        <h5 v-if="isCorrect" class="text-success">정답입니다! 🎉</h5>
+        <h5 v-else class="text-danger">틀렸습니다. 정답은 "{{ currentquote.title[0] }}" 입니다. ❌</h5>
         <img
           :src="getPosterUrl(currentquote.title[0])"
-          class="img-fluid mt-3"
+          class="img-fluid poster"
           alt="영화 포스터"
         />
-        <button class="btn btn-secondary mt-4" @click="nextReview">다음</button>
+        <button class="btn btn-secondary next-btn" @click="nextReview">></button>
       </div>
     </div>
 
@@ -322,6 +321,46 @@ export default {
   margin-top: 40px;
 }
 
+.poster {
+  width: 350px; /* 고정 너비 */
+  height: 525px; /* 고정 높이 */
+  object-fit: cover; /* 이미지가 고정 크기에 맞게 잘림 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 약간의 그림자 추가 */
+  margin-top: 15px; /* 위아래 간격 */
+  margin-right: 20px;
+}
+
+.input-container {
+  display: flex; /* Flexbox로 정렬 */
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center; /* 수직 정렬 */
+  gap: 10px; /* 텍스트 입력란과 버튼 사이 간격 */
+}
+
+.input-field {
+  margin-top: 155px;
+  width: 350px; /* 입력란의 너비를 줄임 */
+  height: 40px; /* 입력란 높이 조정 */
+  font-size: 14px; /* 글자 크기 조정 */
+}
+
+.submit-btn {
+  margin-top: 155px;
+  margin-left: 10px;
+  height: 40px; /* 버튼 높이 입력란과 동일하게 설정 */
+  font-size: 18px; /* 버튼 글자 크기 조정 */
+  padding: 0 15px; /* 좌우 여백 추가 */
+}
+
+.next-btn {
+  margin-top: 10px;
+  height: 40px; /* 버튼 높이 입력란과 동일하게 설정 */
+  font-size: 18px; /* 버튼 글자 크기 조정 */
+  padding: 0 15px; /* 좌우 여백 추가 */
+}
+
+
 .text-center-title {
   color: #4caf50;
   text-align: center;
@@ -343,6 +382,7 @@ export default {
 #typing-box {
   font-size: 1.5rem;
   color: #dddddd;
+  margin-top: 120px;
 }
 
 .blink {
