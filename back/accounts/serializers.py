@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Category, Ranking, Game
+from .models import User, Category, Ranking, Game, RecommendedMovie
 from movies.models import Movie
 from dj_rest_auth.registration.serializers import RegisterSerializer
 
@@ -87,3 +87,16 @@ class UserRankSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'points', 'rank_title', 'articles_count', 'likes_count', 'followers_count']
+
+class RecommendedMovieSerializer(serializers.ModelSerializer):
+    movie = MovieSerializer()  # Nested serializer to include movie details
+
+    class Meta:
+        model = RecommendedMovie
+        fields = ['id', 'movie', 'reason']
+
+class RecommendedMovieCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RecommendedMovie
+        fields = ['movie', 'reason']
+

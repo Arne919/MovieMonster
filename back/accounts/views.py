@@ -8,8 +8,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from django.db.models import Count
-from .models import User, Category, Ranking, Game
-from .serializers import UserSerializer, CategorySerializer, MovieSerializer, RankingSerializer, GameSerializer, ProfileSerializer, UserRankSerializer
+from .models import User, Category, Ranking, Game, RecommendedMovie
+from .serializers import UserSerializer, CategorySerializer, MovieSerializer, RankingSerializer, GameSerializer, ProfileSerializer, UserRankSerializer, RecommendedMovieSerializer, RecommendedMovieCreateSerializer
 from movies.models import Movie
 from django.middleware.csrf import get_token
 
@@ -279,8 +279,24 @@ def profile(request, username):
     articles_count = Article.objects.filter(user=user).count()
     likes_count = Article.objects.filter(user=user).aggregate(
         total_likes=Count('like_users')
-        )['total_likes'] or 0
-    
+    )['total_likes'] or 0
+
+    # 추천 영화 데이터 가져오기
+    try:
+        recommended_movie = RecommendedMovie.objects.get(user=user)
+        movie_data = recommended_movie.movie
+        recommended_movie_data = {
+            'movie': {
+                'id': movie_data.id,
+                'title': movie_data.title,
+                'poster_url': movie_data.poster_url if movie_data.poster_url else '/media/default_movie_poster.png',  # 기본 이미지 제공
+            },
+            'reason': recommended_movie.reason or '추천 이유가 없습니다.',
+        }
+    except RecommendedMovie.DoesNotExist:
+        recommended_movie_data = None
+
+
     return Response({
         'id': user.id,
         'username': user.username,
@@ -292,6 +308,7 @@ def profile(request, username):
         'is_followed': request.user in user.followers.all(),  # 현재 사용자가 팔로우 중인지 여부
         'categories': category_serializer.data,  # 유저 카테고리 포함
         'profile_image': user.profile_picture.url if user.profile_picture else '/media/profile_pictures/default-profile.png',
+        'recommended_movie': recommended_movie_data,  # 추천 영화 데이터 포함
         'category_image': category_data,
     })
 
@@ -360,3 +377,45 @@ def add_movie_to_category(request):
 
     category.movies.add(movie)
     return Response({'message': f'영화 "{movie.title}"가 카테고리 "{category.name}"에 추가되었습니다.'}, status=status.HTTP_200_OK)
+
+
+## 추천 영화 기능
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def recommend_movie(request):
+    user = request.user
+
+    if request.method == 'GET':
+        try:
+            recommendation = RecommendedMovie.objects.get(user=user)
+            serializer = RecommendedMovieSerializer(recommendation)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except RecommendedMovie.DoesNotExist:
+            return Response({'detail': '추천 영화가 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
+
+    elif request.method == 'POST':
+        movie_id = request.data.get('movie_id')  # movie_id 필드 확인
+        reason = request.data.get('reason')  # reason 필드 확인
+
+        if not movie_id or not reason:
+            return Response(
+                {'error': 'movie_id와 reason 필드는 필수입니다.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            movie = Movie.objects.get(id=movie_id)  # 영화 존재 여부 확인
+        except Movie.DoesNotExist:
+            return Response(
+                {'error': '해당 영화를 찾을 수 없습니다.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # 기존 추천 수정 또는 새로운 추천 생성
+        recommendation, created = RecommendedMovie.objects.update_or_create(
+            user=user,
+            defaults={'movie': movie, 'reason': reason}
+        )
+
+        serializer = RecommendedMovieSerializer(recommendation)
+        return Response(serializer.data, status=status.HTTP_200_OK)  # 수정: 메시지 제거
