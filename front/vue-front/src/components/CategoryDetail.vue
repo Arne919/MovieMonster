@@ -245,6 +245,7 @@ onMounted(async () => {
   try {
     await fetchCategoryDetails();
     await store.fetchUser()
+    await store.fetchUserPoints(); // 사용자 포인트 정보 가져오기
     console.log("isOwner:", isOwner.value);
     console.log("store.user:", store.user);
     console.log("category.value:", category.value);
