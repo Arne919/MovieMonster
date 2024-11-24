@@ -13,18 +13,20 @@
     </div>
 
     <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
-    <ArticleListItem 
-      v-for="article in store.articles"
-      :key="article.id"
-      :article="article"
-    />
+    <div v-else>
+      <ArticleListItem
+        v-for="article in store.articles"
+        :key="article.id"
+        :article="article"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
 import ArticleListItem from '@/components/ArticleListItem.vue'
 import { useCounterStore } from '@/stores/counter'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 
@@ -33,6 +35,8 @@ const errorMessage = ref('')
 const router = useRouter()
 
 const store = useCounterStore()
+
+const articles = computed(() => store.articles);
 
 const sortOrder = ref('recent') // 기본 정렬 기준: 최신순
 
@@ -44,9 +48,14 @@ const setSortOrder = (order) => {
 
 // 컴포넌트 마운트 시 초기 데이터 로드
 onMounted(async () => {
-  console.log('hihi')
-  await store.getSortedArticles('recent')
-})
+  try {
+    await store.getSortedArticles(sortOrder.value);
+  } catch (err) {
+    console.error("Error loading articles:", err);
+    errorMessage.value = "게시글을 불러오는 중 오류가 발생했습니다.";
+  }
+});
+
 </script>
 
 <style scoped>

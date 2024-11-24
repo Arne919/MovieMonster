@@ -40,42 +40,86 @@
         <p class="movie-rating">⭐ {{ article.movie_rating.toFixed(1) }}</p>
       </div>
     </div>
+
+     <!-- 좋아요 기능 -->
+    <div class="like-container">
+      <button class="like-button" @click="toggleLike">
+        <span v-if="article.is_liked" class="liked-icon">❤️</span>
+        <span v-else class="like-icon">🤍</span>
+      </button>
+      <span class="like-count">{{ article.like_count }}</span>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useCounterStore } from "@/stores/counter";
+import axios from "axios"; // axios 임포트
 
-defineProps({
-  article: Object,
-});
+const props = defineProps({ article: { type: Object, required: true } });
+const emit = defineEmits(["update:article"]); // 부모에게 상태 전달 이벤트 정의
+
 
 const store = useCounterStore();
 const router = useRouter();
 
-// 리뷰 디테일 페이지로 이동
+// 반응형 데이터
+const article = ref({ ...props.article }); // props.article을 반응형으로 관리
+const isLiked = ref(article.value.is_liked);
+const likeCount = ref(article.value.like_count);
+
+// 좋아요 토글
+const toggleLike = async () => {
+  try {
+    const updatedArticle = await store.updateLikeStatus(article.value.id);
+
+    // Vue 반응성을 유지하면서 article 상태 업데이트
+    article.value.is_liked = updatedArticle.action === "added";
+    article.value.like_count = updatedArticle.like_count;
+
+    // 부모 컴포넌트에 상태 업데이트 전달
+    emit("update:article", article.value);
+  } catch (err) {
+    console.error("좋아요 상태 업데이트 실패:", err);
+  }
+};
+
+// Props 변경 감지
+watch(
+  () => props.article,
+  (newArticle) => {
+    if (newArticle) {
+      article.value = { ...newArticle }; // 새 데이터로 상태 업데이트
+    }
+  },
+  { immediate: true } // 초기에도 실행
+);
+
+// 디테일 페이지 이동
 const navigateToReviewDetail = (articleId) => {
   router.push({ name: "DetailView", params: { id: articleId } });
 };
 
-// 작성자의 프로필 페이지로 이동
+// 프로필 페이지 이동
 const navigateToProfile = (username) => {
   router.push({ name: "ProfileView", params: { username } });
 };
 
-// 영화 디테일 페이지로 이동
+// 영화 디테일 페이지 이동
 const navigateToMovieDetail = (movieId) => {
   router.push({ name: "MovieDetail", params: { id: movieId } });
 };
 
-// 영화 포스터 URL 생성
+// 포스터 URL 생성
 const getFullPosterUrl = (posterUrl) => {
   const baseUrl = "https://image.tmdb.org/t/p/w500";
   return `${baseUrl}${posterUrl}`;
 };
 </script>
+
+
 
 <style scoped>
 /* 동일한 스타일 유지 */
@@ -182,5 +226,32 @@ const getFullPosterUrl = (posterUrl) => {
 .movie-rating {
   font-weight: bold;
   color: #f39c12;
+}
+
+/* 좋아요 기능 스타일 */
+.like-container {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  gap: 8px;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.like-icon,
+.liked-icon {
+  color: #ff6b6b;
+}
+
+.like-count {
+  font-size: 16px;
+  color: #333;
 }
 </style>

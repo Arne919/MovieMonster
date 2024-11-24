@@ -442,7 +442,32 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
       throw error;
     }
   };
+
+  const updateLikeStatus = async (articleId) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/api/v1/communities/${articleId}/like/`,
+        {}, // POST 요청의 body를 비워둠
+        {
+          headers: { Authorization: `Token ${token.value}` }, // headers를 올바르게 설정
+        }
+      );
   
+      const updatedArticle = response.data;
+  
+      // articles 배열에서 해당 article을 업데이트
+      const articleIndex = articles.value.findIndex((article) => article.id === articleId);
+      if (articleIndex !== -1) {
+        articles.value[articleIndex].is_liked = updatedArticle.action === "added";
+        articles.value[articleIndex].like_count = updatedArticle.like_count;
+      }
+  
+      return updatedArticle;
+    } catch (err) {
+      console.error("좋아요 상태 업데이트 실패:", err);
+      throw err;
+    }
+  };
   return { 
     articles, 
     API_URL, 
@@ -475,6 +500,7 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     fetchCategoryDetails,
     searchMovies,
     addMovieToCategory,
-    createArticle
+    createArticle,
+    updateLikeStatus
   }
 }, { persist: true })
