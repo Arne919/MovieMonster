@@ -60,11 +60,14 @@
 
     <!-- 모달 -->
     <div v-if="showModal" class="modal-overlay">
-      <div class="modal-content">
-        <p>{{ modalMessage }}</p>
-        <button class="btn" @click="closeModal">닫기</button>
-      </div>
+  <div class="modal-content">
+    <p>{{ modalMessage }}</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" @click="closeModal">닫기</button>
     </div>
+  </div>
+</div>
+
   </div>
 </template>
 
@@ -206,57 +209,55 @@ export default {
   font-size: 1.2rem;
 }
 
+/* 모달 전체 배경 */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.8);
   display: flex;
-  align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px); /* 배경 흐림 효과 */
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
 }
 
+/* 모달 컨테이너 */
 .modal-content {
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1), -6px -6px 12px rgba(255, 255, 255, 0.6);
+  background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 500px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 
-.modal-content p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  color: #333;
+/* 닫기 버튼 컨테이너 */
+.modal-actions {
+  display: flex;
+  justify-content: center; /* 버튼 중앙 정렬 */
+  margin-top: 20px; /* 버튼 상단 여백 */
 }
 
-.modal-content .btn {
-  padding: 10px 20px;
-  background: #4caf50;
-  color: #fff;
-  border-radius: 10px;
+/* 닫기 버튼 */
+.btn-cancel {
+  align-items: center;
+  background: #c0392b;
   border: none;
+  width: 100px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
   cursor: pointer;
-  transition: background 0.3s ease;
+  font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-.modal-content .btn:hover {
-  background: #45a049;
-}
-
-/* 등장 애니메이션 */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.btn-cancel:hover {
+  background: #e74c3c;
 }
 
 </style>

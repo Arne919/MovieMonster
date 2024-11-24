@@ -100,7 +100,7 @@ export default {
 }
 
 .modal-title {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: white;
 }
