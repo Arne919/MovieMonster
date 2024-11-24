@@ -15,7 +15,7 @@
 
     <!-- 검색 결과 -->
     <div v-if="searchResults.length > 0" class="search-results">
-      <h2>검색 결과</h2>
+      <h4>검색 결과</h4>
       <div class="grid-container">
         <div
           class="card"
@@ -34,12 +34,12 @@
 
     <!-- 검색 결과가 없을 때만 기존 섹션 표시 -->
     <div v-else>
-      <p v-if="searchQuery" class="text-center text-muted">검색 결과가 없습니다.</p>
+      <!-- <p v-if="searchQuery" class="text-center text-muted">검색 결과가 없습니다.</p> -->
 
       <!-- 인기/최신/개봉예정 섹션 -->
       <div v-for="section in sections" :key="section.name" class="mt-5">
         <div class="d-flex justify-content-between align-items-center">
-          <h2>{{ section.title }}</h2>
+          <h3>{{ section.title }}</h3>
           <button class="btn-more" @click="goToMore(section.name)">
             더보기 <span class="arrow">&gt;</span>
           </button>
@@ -370,11 +370,7 @@ body {
 	height: 100vh;
 }
 
-.search-bar {
-  display: flex;
-  align-items: center;
-  max-width: 30em;
-}
+
 
 .search-bar input {
   background: #fff;
@@ -472,8 +468,12 @@ body {
 .search-bar {
 	margin: auto;
 	padding: 1.5em;
-	justify-content: center;
-	max-width: 30em;
+	justify-content: flex-end;
+	/*  60em; */
+  max-width: none;
+  width: 60em;
+  display: flex;
+  align-items: center;
 }
 .search-bar input {
 	background: transparent;
