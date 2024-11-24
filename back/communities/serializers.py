@@ -25,7 +25,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'title', 'content', 'like_count', 'comment_count', 'poster_url',
             'user', 'user_profile_image', 'rating', 'created_at', 'updated_at', 'movie_id', 'movie_title',
-            'movie_genres', 'movie_overview', 'movie_rating'
+            'movie_genres', 'movie_overview', 'movie_rating', 'is_liked',
         )
 
     def get_movie_genres(self, obj):
