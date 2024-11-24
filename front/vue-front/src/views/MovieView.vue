@@ -37,30 +37,47 @@
       <div v-for="section in sections" :key="section.name" class="mt-5">
         <div class="d-flex justify-content-between align-items-center">
           <h2>{{ section.title }}</h2>
-          <!-- <button class="btn btn-link" @click="goToMore(section.name)">더보기 ></button> -->
           <button class="btn-more" @click="goToMore(section.name)">
             더보기 <span class="arrow">&gt;</span>
           </button>
-
         </div>
-        <div class="grid-container">
-          <div
-            class="card"
-            v-for="movie in getMoviesInOrder(section.movies, 5)"
-            :key="movie.movie_id"
-            @click="goToDetail(movie.movie_id)"
-          >
-            <img
-              :src="getFullPosterUrl(movie.poster_url)"
-              class="card-img-top"
-              :alt="movie.title"
-            />
+
+        <!-- 캐러셀 -->
+        <div class="carousel-wrapper">
+          <button class="carousel-btn prev" @click="prevSlide(section.name)">
+            &lt;
+          </button>
+          <div class="carousel-track-container">
+            <div
+              class="carousel-track"
+              :style="{
+                transform: `translateX(-${currentIndex[section.name] * 100}%)`,
+              }"
+            >
+              <div
+                class="carousel-slide"
+                v-for="(chunk, index) in getChunks(section.movies, 5)"
+                :key="index"
+              >
+                <div class="card" v-for="movie in chunk" :key="movie.movie_id">
+                  <img
+                    :src="getFullPosterUrl(movie.poster_url)"
+                    class="card-img-top"
+                    :alt="movie.title"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
+          <button class="carousel-btn next" @click="nextSlide(section.name)">
+            &gt;
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import { ref, onMounted } from "vue";
@@ -82,6 +99,12 @@ export default {
       { name: "upcoming", title: "개봉예정영화", movies: [] },
     ]);
 
+    const currentIndex = ref({
+      popular: 0,
+      recent: 0,
+      upcoming: 0,
+    });
+
     const fetchMovies = async () => {
       const endpoints = {
         popular: "/popular.json",
@@ -100,6 +123,29 @@ export default {
         } catch (error) {
           console.error(`Error fetching ${section.name}:`, error);
         }
+      }
+    };
+
+    const getChunks = (movies, size) => {
+      const chunks = [];
+      for (let i = 0; i < movies.length; i += size) {
+        chunks.push(movies.slice(i, i + size));
+      }
+      return chunks;
+    };
+
+    const nextSlide = (sectionName) => {
+      const totalSlides = Math.ceil(
+        sections.value.find((s) => s.name === sectionName).movies.length / 5
+      );
+      if (currentIndex.value[sectionName] < totalSlides - 1) {
+        currentIndex.value[sectionName]++;
+      }
+    };
+
+    const prevSlide = (sectionName) => {
+      if (currentIndex.value[sectionName] > 0) {
+        currentIndex.value[sectionName]--;
       }
     };
 
@@ -164,6 +210,10 @@ export default {
       sections,
       searchQuery,
       errorMessage,
+      currentIndex,
+      getChunks,
+      nextSlide,
+      prevSlide,
       goToDetail,
       goToMore,
       goToGenre,
@@ -177,41 +227,47 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .container {
   margin-top: 20px;
+  overflow: hidden; /* 넘치는 콘텐츠 숨김 */
+  width: 100%; /* 컨테이너 너비를 화면에 맞춤 */
 }
 
 .grid-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: start;
+  display: flex; /* Flexbox로 가로 배치 */
+  gap: 1rem; /* 카드 간의 간격 */
+  width: calc(240px * 5 + 1rem * 4); /* 카드 5개 크기 + 간격 4개 */
+  overflow: hidden; /* 넘치는 부분 숨김 */
 }
 
 .card {
-  width: 240px;
+  flex: 0 0 auto; /* 크기 고정 */
+  width: 240px; /* 카드 너비 */
+  height: 360px; /* 카드 높이 */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
-  text-align: center;
   transition: transform 0.2s ease-in-out;
+  background-color: transparent; /* 카드 배경을 투명하게 설정 */
 }
+
+.card img {
+  width: 100%; /* 카드 크기에 맞춰 이미지 크기 */
+  height: 100%; /* 고정된 높이 맞춤 */
+  object-fit: cover; /* 이미지 비율 유지 */
+} 
 
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* 호버 시 살짝 확대 */
 }
 
-.card-img-top {
-  width: 100%;
-  height: 360px;
-  object-fit: cover;
-}
 
 .btn-more {
   display: inline-flex;
   align-items: center; /* 텍스트와 아이콘 정렬 */
-  color: #e5e5e5; /* 평소 텍스트 색상 (연한 흰색) */
+  color: #e5e5e5; /* 평소 텍스트 색상 */
   font-size: 16px; /* 글자 크기 */
   font-weight: 500; /* 적당한 두께 */
   background: none; /* 배경 제거 */
@@ -227,4 +283,54 @@ export default {
   font-size: 18px; /* 화살표 크기 */
   color: inherit; /* 부모의 텍스트 색상 상속 */
 }
+
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.carousel-track-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* 부드러운 이동 효과 */
+  gap: 0; /* 각 슬라이드 사이의 간격 제거 */
+}
+
+.carousel-slide {
+  display: flex;
+  flex-shrink: 0; /* 크기 축소 방지 */
+  width: 100%; /* 슬라이드 하나의 너비를 컨테이너의 100%로 설정 */
+  justify-content: space-between; /* 내부 카드 간격 유지 */
+}
+
+.card {
+  width: 240px;
+  height: 360px;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  z-index: 10;
+}
+
+.carousel-btn.prev {
+  left: 0;
+}
+
+.carousel-btn.next {
+  right: 0;
+}
+
 </style>
