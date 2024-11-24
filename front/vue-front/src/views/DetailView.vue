@@ -46,10 +46,10 @@
       <!-- 좋아요 -->
       <div class="like-container">
         <button class="like-button" @click="toggleLike">
-          <span v-if="isLiked" class="liked-icon">❤️</span>
+          <span v-if="article.is_liked" class="liked-icon">❤️</span>
           <span v-else class="like-icon">🤍</span>
         </button>
-        <span class="like-count">{{ likeCount }}</span>
+        <span class="like-count">{{ article.like_count }}</span>
       </div>
 
       <!-- 댓글 목록 표시 -->
@@ -96,7 +96,7 @@ const router = useRouter();
 const article = ref(null);
 const comments = ref([]); // 댓글 목록
 const newComment = ref(""); // 새로운 댓글 내용
-const isAuthor = ref(false); // 사용자가 작성자인지 여부
+const isAuthor = ref(true); // 사용자가 작성자인지 여부
 
 const isLiked = ref(false); // 좋아요 상태
 const likeCount = ref(0); // 좋아요 수
@@ -120,29 +120,50 @@ onMounted(() => {
 
 const fetchArticle = async (articleId) => {
   try {
-    const response = await axios.get(`${store.API_URL}/api/v1/communities/${articleId}/`, {
-      headers: { Authorization: `Token ${store.token}` },
-    });
-    article.value = response.data;
-    isLiked.value = article.value.is_liked;
-    likeCount.value = article.value.like_count;
-  } catch (error) {
-    console.error("Error fetching article:", error);
-  }
-};
+    // store에서 캐싱된 데이터 우선 사용
+    const cachedArticle = store.articles.find((a) => a.id === articleId);
+    if (cachedArticle) {
+      article.value = { ...cachedArticle };
+    }
 
+    const response = await store.getArticleDetail(articleId); // 개별 게시글 요청
+    console.log('aaaaaaaaaaaa', response)
+    article.value = response;
+    const index = store.articles.findIndex((a) => a.id === article.value.id);
+    if (index !== -1) {
+      store.articles[index] = { ...article.value };
+    }
+    // API 응답 데이터 출력 (디버깅)
+    console.log("Fetched article data:", response);
+
+    // 작성자 확인
+    isAuthor.value = article.value.user === store.Username;
+    console.log("isAuthor 상태:", isAuthor.value);
+  }
+   catch (error) {
+    console.error("Error fetching article:", error);
+  }}
+
+
+// 좋아요 토글
 const toggleLike = async () => {
   try {
     const updatedArticle = await store.updateLikeStatus(article.value.id);
+
+    // Local state 업데이트
     article.value.is_liked = updatedArticle.action === "added";
     article.value.like_count = updatedArticle.like_count;
 
-    // Pinia Store에 변경된 데이터를 반영
-    store.getArticles(true); // 새로 데이터를 동기화
+    // store의 articles 상태도 업데이트
+    const index = store.articles.findIndex((a) => a.id === article.value.id);
+    if (index !== -1) {
+      store.articles[index] = { ...article.value };
+    }
   } catch (err) {
     console.error("좋아요 상태 업데이트 실패:", err);
   }
 };
+
 
 // const toggleLike = async () => {
 //   try {
@@ -169,6 +190,7 @@ const goBack = () => {
   router.push({ name: "ArticleView" }); // 메인 페이지로 이동
 };
 
+// 게시글 수정 페이지 이동
 const goToEdit = () => {
   router.push({ name: "EditView", params: { id: article.value.id } });
 };
@@ -251,18 +273,14 @@ const removeComment = async (commentId) => {
 // 게시글 삭제
 const deleteArticle = async () => {
   try {
-    await axios({
-      method: "delete",
-      url: `${store.API_URL}/api/v1/communities/${route.params.id}/delete/`,
-      headers: {
-        Authorization: `Token ${store.token}`,
-      },
+    await axios.delete(`${store.API_URL}/api/v1/communities/${article.value.id}/delete/`, {
+      headers: { Authorization: `Token ${store.token}` },
     });
     alert("게시글이 삭제되었습니다.");
-    await store.getArticles();
-    router.push({ name: "ArticleView" });
-  } catch (err) {
-    console.log(err);
+    router.push({ name: "ArticleView" }); // 전체 리뷰로 이동
+  } catch (error) {
+    console.error("게시글 삭제 실패:", error);
+    alert("게시글 삭제 중 오류가 발생했습니다.");
   }
 };
 </script>
@@ -355,17 +373,12 @@ const deleteArticle = async () => {
 .like-container {
   display: flex;
   align-items: center;
-  margin-top: 15px;
-  gap: 8px;
+  gap: 10px;
 }
-
 .like-button {
-  background: none;
   border: none;
+  background: transparent;
   cursor: pointer;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
 }
 
 .like-icon,

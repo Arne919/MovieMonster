@@ -42,12 +42,13 @@
     </div>
 
      <!-- 좋아요 기능 -->
-    <div class="like-container">
+     <div class="like-container">
       <button class="like-button" @click="toggleLike">
-        <span v-if="article.is_liked" class="liked-icon">❤️</span>
+        <!-- props.article.is_liked 대신 로컬 상태 isLiked 사용 -->
+        <span v-if="isLiked" class="liked-icon">❤️</span>
         <span v-else class="like-icon">🤍</span>
       </button>
-      <span class="like-count">{{ article.like_count }}</span>
+      <span class="like-count">{{ likeCount }}</span>
     </div>
   </div>
 </template>
@@ -67,31 +68,37 @@ const router = useRouter();
 
 // 반응형 데이터
 const article = ref({ ...props.article }); // props.article을 반응형으로 관리
-const isLiked = ref(article.value.is_liked);
-const likeCount = ref(article.value.like_count);
+
+// 초기화: props.article.is_liked를 기반으로 isLiked를 설정
+const isLiked = ref(props.article.is_liked ?? false); // nullish coalescing: 없으면 false
+const likeCount = ref(props.article.like_count ?? 0);
 
 // 좋아요 토글
 const toggleLike = async () => {
   try {
     const updatedArticle = await store.updateLikeStatus(article.value.id);
 
-    // Vue 반응성을 유지하면서 article 상태 업데이트
+    // Local state 업데이트
     article.value.is_liked = updatedArticle.action === "added";
     article.value.like_count = updatedArticle.like_count;
 
-    // 부모 컴포넌트에 상태 업데이트 전달
-    emit("update:article", article.value);
+    // 부모 컴포넌트에 업데이트 알림
+    emit("update-article", article.value);
   } catch (err) {
     console.error("좋아요 상태 업데이트 실패:", err);
   }
 };
+
 
 // Props 변경 감지
 watch(
   () => props.article,
   (newArticle) => {
     if (newArticle) {
-      article.value = { ...newArticle }; // 새 데이터로 상태 업데이트
+      console.log("Updated props.article:", newArticle);
+      isLiked.value = newArticle.is_liked ?? false; // is_liked 반영
+      likeCount.value = newArticle.like_count ?? 0; // like_count 반영
+      console.log("Local state isLiked:", isLiked.value);
     }
   },
   { immediate: true } // 초기에도 실행

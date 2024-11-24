@@ -75,13 +75,15 @@ export const useCounterStore = defineStore('counter', () => {
   }
 
   // 정렬된 데이터 가져오기
-  const getSortedArticles = async (sortOrder = 'recent') => {
-    console.log('getSortedArticles called with:', sortOrder);
-    await fetchArticles() // 데이터를 서버에서 먼저 가져옴
-    console.log('Before sorting:', articles.value)
-    sortArticles(sortOrder)
-    console.log('After sorting:', articles.value)
-  }
+  const getSortedArticles = async (sortOrder = "recent") => {
+    if (!articles.value.length) {
+      console.log("Fetching articles from server...");
+      await fetchArticles();
+    }
+  
+    // 정렬만 수행
+    sortArticles(sortOrder);
+  };
 
   // 날짜 포맷팅 함수 추가
   const formatDate = (dateString) => {
@@ -119,6 +121,13 @@ export const useCounterStore = defineStore('counter', () => {
     return stars
   }
 
+  const syncArticle = (updatedArticle) => {
+    const index = articles.value.findIndex((a) => a.id === updatedArticle.id);
+    if (index !== -1) {
+      articles.value[index] = { ...articles.value[index], ...updatedArticle };
+    }
+  };
+
   //////////////////////////////////////////////
   const fetchUser = async () => {
     try {
@@ -128,6 +137,7 @@ export const useCounterStore = defineStore('counter', () => {
         },
       });
       user.value = { ...response.data, id: response.data.pk }; // 사용자 정보 저장
+      Username.value = response.data.username;
       //->개빡치네
       //백엔드에서 사용자 ID를 pk로 보내주는데, 프론트엔드에서는 id로 사용하려고 했기 때문임
       console.log("User fetched:", user.value);
@@ -447,19 +457,18 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     try {
       const response = await axios.post(
         `${API_URL}/api/v1/communities/${articleId}/like/`,
-        {}, // POST 요청의 body를 비워둠
+        {}, // POST 요청의 body는 비워둠
         {
-          headers: { Authorization: `Token ${token.value}` }, // headers를 올바르게 설정
+          headers: { Authorization: `Token ${token.value}` }, // headers는 config 안에 설정
         }
       );
   
       const updatedArticle = response.data;
   
       // articles 배열에서 해당 article을 업데이트
-      const articleIndex = articles.value.findIndex((article) => article.id === articleId);
-      if (articleIndex !== -1) {
-        articles.value[articleIndex].is_liked = updatedArticle.action === "added";
-        articles.value[articleIndex].like_count = updatedArticle.like_count;
+      const index = articles.value.findIndex((a) => a.id === articleId);
+      if (index !== -1) {
+        articles.value[index] = { ...articles.value[index], ...updatedArticle };
       }
   
       return updatedArticle;
@@ -467,6 +476,17 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
       console.error("좋아요 상태 업데이트 실패:", err);
       throw err;
     }
+  };
+  
+
+  const getArticleDetail = async (articleId) => {
+    const response = await axios.get(`${API_URL}/api/v1/communities/${articleId}/`,
+      {
+        headers: { Authorization: `Token ${token.value}` }, // headers를 올바르게 설정
+      }
+    );
+    console.log('ㅅㅂ', response.data)
+    return response.data;
   };
   return { 
     articles, 
@@ -501,6 +521,8 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     searchMovies,
     addMovieToCategory,
     createArticle,
-    updateLikeStatus
+    updateLikeStatus,
+    syncArticle,
+    getArticleDetail,
   }
 }, { persist: true })
