@@ -69,3 +69,12 @@ class Game(models.Model):
     game_type = models.CharField(max_length=50)
     score = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+class RecommendedMovie(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='recommended_movie')
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='recommended_by')
+    reason = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s recommendation: {self.movie.title}"
+
