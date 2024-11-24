@@ -419,3 +419,14 @@ def recommend_movie(request):
 
         serializer = RecommendedMovieSerializer(recommendation)
         return Response(serializer.data, status=status.HTTP_200_OK)  # 수정: 메시지 제거
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_categories(request, username):
+    """
+    특정 사용자의 카테고리를 반환하는 뷰
+    """
+    user = get_object_or_404(User, username=username)  # 유저 확인
+    categories = Category.objects.filter(user=user)  # 해당 유저의 카테고리 가져오기
+    serializer = CategorySerializer(categories, many=True)  # 직렬화
+    return Response(serializer.data, status=200)  # 응답 반환
