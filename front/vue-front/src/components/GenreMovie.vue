@@ -11,7 +11,7 @@
       >
         <option value="home">영화 홈</option>
         <option v-for="genreItem in genres" :key="genreItem" :value="genreItem">
-          {{ genreItem }}
+          {{ genreTranslations[genreItem] || genreItem }}
         </option>
       </select>
     </div>
@@ -19,7 +19,7 @@
     <!-- 필터링된 영화 리스트 -->
     <div v-if="genre && filteredMovies.length" class="mt-4">
       <h2 class="text-center mb-4">
-        {{ genre === "all" ? "전체 영화" : `${genreTitle} 영화` }}
+        {{ genre === "all" ? "전체 영화" : `${genreTranslations[genre] || genre} 영화` }}
       </h2>
       <div class="grid-container">
         <div
@@ -33,9 +33,6 @@
             class="card-img-top"
             :alt="movie.title"
           />
-          <div class="card-body text-center">
-            <h5 class="card-title">{{ movie.title }}</h5>
-          </div>
         </div>
       </div>
     </div>
@@ -56,6 +53,29 @@ export default {
   setup() {
     const router = useRouter();
     const route = useRoute();
+
+    const genreTranslations = {
+      all: "전체 영화",
+      Action: "액션",
+      Thriller: " 스릴러",
+      Crime: "범죄",
+      Drama: "드라마",
+      Fantasy: "판타지",
+      Romance: "로맨스",
+      Animation: "애니메이션",
+      Adventure: "모험",
+      Family: "가족",
+      Comedy: "코미디",
+      History: "역사",
+      War: "전쟁",
+      "Science Fiction": "SF", // 문자열 키로 설정
+      Mystery: "미스테리",
+      Music: "음악",
+      Horror: "공포",
+      Western: "서부",
+      Documentary: "다큐멘터리"
+      // 필요한 추가 장르를 여기에 추가
+    };
 
     const genres = ref([]); // 장르 리스트
     const movies = ref([]); // 전체 영화 데이터
@@ -120,11 +140,6 @@ export default {
       return `${baseUrl}${posterUrl}`;
     };
 
-    // 장르 제목 표시
-    const genreTitle = computed(() =>
-      genre.value ? genre.value.charAt(0).toUpperCase() + genre.value.slice(1) : ""
-    );
-
     // URL 변경 시 필터링 업데이트
     watch(route, (newRoute) => {
       genre.value = newRoute.params.genre || "home";
@@ -137,7 +152,7 @@ export default {
       genres,
       filteredMovies,
       genre,
-      genreTitle,
+      genreTranslations,
       handleGenreChange,
       goToDetail,
       getFullPosterUrl,
@@ -159,7 +174,7 @@ export default {
 }
 
 .card {
-  width: 200px;
+  width: 240px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
@@ -173,13 +188,7 @@ export default {
 
 .card-img-top {
   width: 100%;
-  height: 300px;
+  height: 360px;
   object-fit: cover;
-}
-
-.card-title {
-  font-size: 0.9rem;
-  font-weight: bold;
-  margin-top: 10px;
 }
 </style>
