@@ -1070,32 +1070,6 @@
         }
     },
     {
-        "pk": 482600,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 482600,
-            "title": "일본 엄마",
-            "release_date": "2017-02-09",
-            "popularity": 365.991,
-            "vote_avg": 6.179,
-            "description": "얼굴은 청순, 가슴은 D컵, 밤 기술은 퍼펙트! \"\"아들아, 이제부터 네 여친이 아니라 엄마다.\"\r 아들 기호가 결혼하겠다며 일본에서 데려온 그녀, 유키. 그러나 기호는 한국에 오자 전 여친을 만나며 바람을 피우기 시작한다. 처음에는 예비 며느리를 달래는 마음으로 유키를 위로하던 민철은 어느 순간부터 자신이 유키를 여자로 보고 있다는 사실을 깨닫는다. 결국, 기호 몰래 민철과 유키의 뜨거운 정사가 펼쳐지는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/hq1EaYIqUNrPM3QFYAbnH2UHoX8.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "로맨스",
-                "드라마"
-            ],
-            "actors": [
-                "Jeon Ji-hak",
-                "Choi Min-ho",
-                "Saki Mizumi",
-                "Ha Roo",
-                "Ahn So-hee"
-            ],
-            "director": "Kim Moo-won"
-        }
-    },
-    {
         "pk": 573435,
         "model": "movies.movie",
         "fields": {
@@ -2194,36 +2168,6 @@
         }
     },
     {
-        "pk": 173705,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 173705,
-            "title": "여교사: 학생의 눈앞에서",
-            "release_date": "1982-04-09",
-            "popularity": 211.555,
-            "vote_avg": 7.0,
-            "description": "사랑스러운 레이코는 소름 끼치는 오래된 고등학교에서 새로운 교직을 얻었습니다. 그녀는 매우 매력적인 여성이며 같은 반의 어린 학생들은 그녀에게 반했습니다. 어느 날 밤, 테니스 연습을 마친 그녀는 탈의실 샤워실에서 얼굴에 스타킹을 가린 남자에게 잔인하게 폭행을 당합니다. 알몸으로 충격에 빠진 채 바닥에 남겨진 그녀는 미친 남자가 남긴 퍼즐 조각 하나를 발견합니다. 며칠 후, 한 쌍의 학생이 테니스 팀에서 누군가를 쫓아낸 레이코에게 변태적인 성적 복수를 합니다. 이 학생들 중 한 명이 탈의실에서 그녀를 잔인하게 만든 남자일까요? 이상한 퍼즐 조각의 주인은 누구입니까? 수수께끼가 풀리면서 레이코는 자신의 성적 충동과 운명을 받아들여야 합니다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/rwGW7zhFKaojtJiSMnoLyVkKZnx.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/27FRFe8lu1C1LStWmzwOa87vo98.jpg",
-            "genres": [
-                "드라마",
-                "미스테리",
-                "공포"
-            ],
-            "actors": [
-                "Rushia Santô",
-                "Rina Oka",
-                "Kyôko Sagami",
-                "Toshiyuki Kitami",
-                "Toru Nakane",
-                "Hiromichi Hori",
-                "Masaaki Kishi",
-                "Toshio Yoshikawa"
-            ],
-            "director": "Yasuaki Uegaki"
-        }
-    },
-    {
         "pk": 359410,
         "model": "movies.movie",
         "fields": {
@@ -2704,30 +2648,6 @@
         }
     },
     {
-        "pk": 587727,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 587727,
-            "title": "가슴 큰 여자친구",
-            "release_date": "2019-03-08",
-            "popularity": 241.116,
-            "vote_avg": 7.0,
-            "description": "민철과 수희는 결혼을 앞두고 민철 아버지(대식)에게 인사를 드리러 간다. 대식은 예비 며느리인 수희를 반갑게 맞이하고 수희 또한 인자한 대식을 좋은 사람이라 여긴다.  하지만 결혼 전 성격차이로 민철과 수희는 파혼 되고… 결혼준비만 하던 수희는 곧 생활고를 격어….. 수희의 오랜 친구이자 벗인 민주가 일하는 키스방에서 일하게 된다.  어느 날과 마찬가지로 수희는 키스방에서 손님을 기다리는데…. 키스방 문으로 들어오는 손님인 대식과 마주치게 되는데…",
-            "poster_url": "https://image.tmdb.org/t/p/w500/f6PfAXtFEkJRcBtOjbzOgz8qqSK.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/zQKFPx03M9RKfEcRETXR2HoUZn1.jpg",
-            "genres": [
-                "로맨스"
-            ],
-            "actors": [
-                "Yoo Jung",
-                "Kang Min-sik",
-                "Kim Wan- jin",
-                "Lee Ji- su"
-            ],
-            "director": "Junsei"
-        }
-    },
-    {
         "pk": 991610,
         "model": "movies.movie",
         "fields": {
@@ -2915,38 +2835,6 @@
                 "Kit Harington"
             ],
             "director": "Dean DeBlois"
-        }
-    },
-    {
-        "pk": 1104171,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1104171,
-            "title": "다음 크리스마스에 만나요",
-            "release_date": "2024-11-05",
-            "popularity": 197.993,
-            "vote_avg": 6.358,
-            "description": "낭만에 죽고 사는 골수 로맨티스트. 이상형의 남자를 만나기 위해 뉴욕을 동분서주하는 대장정에 나선다. 그를 만나려면 이미 매진된 펜타토닉스 크리스마스 공연 티켓을 어떻게든 구해야 한다!",
-            "poster_url": "https://image.tmdb.org/t/p/w500/2CpaK4kzfAB4tIUkMV53PizJkKu.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/8jujdLr4OAQoWGgfNmaE4RR0mqb.jpg",
-            "genres": [
-                "로맨스",
-                "코미디",
-                "TV Movie"
-            ],
-            "actors": [
-                "Christina Milian",
-                "Devale Ellis",
-                "Kofi Siriboe",
-                "Kalen Allen",
-                "Mitch Grassi",
-                "Scott Hoying",
-                "Kirstin Maldonado",
-                "Kevin Olusola",
-                "Matthew Sallee",
-                "Priyanka"
-            ],
-            "director": "Rusty Cundieff"
         }
     },
     {
@@ -4818,38 +4706,6 @@
         }
     },
     {
-        "pk": 323260,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 323260,
-            "title": "쾌락지구X",
-            "release_date": "2015-01-29",
-            "popularity": 150.463,
-            "vote_avg": 5.0,
-            "description": "호궈펑은 꽃미남 외모에 남다른 신체 사이즈로 여학생들에겐 우상이자 남학생들에겐 시기 어린 질투의 대상이다. 시비를 걸어온 남학생과 싸움에 휘말려 퇴학을 당하자 병으로 몸져누운 어머니를 대신해 돈을 벌기로 결심한 펑은 사촌 누나의 클럽에서 청소부로 일하다 뜻밖의 제안을 받는다. 바로 클럽을 찾는 부잣집 사모님들을 기쁘게 해주는 것. 짧은 시간에 큰 돈을 벌 수 있는 달콤한 유혹을 뿌리치지 못하고 호스트의 길로 들어서게 된 펑은 전설의 호스트 ‘앱슨’을 만나 비법을 전수받고 한층 매력적인 남자로 거듭나면서 천명의 여자를 쥐락펴락 하게 되는데…",
-            "poster_url": "https://image.tmdb.org/t/p/w500/rtacqLGZaj0FNzTTwo31hgWNR6B.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/3W6ifzDqxINcxsZQypwupTPue8m.jpg",
-            "genres": [
-                "로맨스",
-                "드라마",
-                "코미디"
-            ],
-            "actors": [
-                "Dominic Ho",
-                "Candy Yuen",
-                "Jeana Ho Pui-Yu",
-                "Hazel Tong",
-                "Winnie Leung",
-                "Pal Sinn Lap-man",
-                "Angelina Lo Yuen-Yan",
-                "Elena Kong Mei-Yee",
-                "Tony Ho",
-                "Ricky Wong Chun-Tong"
-            ],
-            "director": "Amen Au Cheuk-Man"
-        }
-    },
-    {
         "pk": 1226578,
         "model": "movies.movie",
         "fields": {
@@ -5582,31 +5438,6 @@
         }
     },
     {
-        "pk": 464026,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 464026,
-            "title": "가자! 장미여관으로",
-            "release_date": "2013-08-14",
-            "popularity": 146.162,
-            "vote_avg": 4.0,
-            "description": "사귄 지 6개월 된 여자친구 민애와 아직까지 육체적인 관계를 가져본 적 없는 성수는 그녀와의 만남이 늘 흥분된다. 그러던 어느 날, 민애를 설득해 장미여관으로 끌어들이는데 성공한 성수. 샤워를 하기 위해 들어간 욕실에서 작은 구멍을 발견하게 되고 그 구멍을 통해 옆방을 우연히 엿보게 되고, 거기서 남녀의 성행위 장면을 목격하게 된다. 호기심이 발동한 성수는 더욱 숨죽여 그 장면을 엿보던 중 여자 연예인 사라가 거물급 정치인에게 성 상납을 하는 현장임을 알고 충격을 받게 되는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/8ogCczLG6EhQEnSWoqs6092bGm3.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/eagBKhOpfNccNm5Op4nQkWds5eP.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Sung Eun-chae",
-                "Jang Sung-won",
-                "Woo Do-hwan",
-                "Yeo Min-jeong"
-            ],
-            "director": "Sin Jeong-gyoon"
-        }
-    },
-    {
         "pk": 38757,
         "model": "movies.movie",
         "fields": {
@@ -6249,37 +6080,6 @@
         }
     },
     {
-        "pk": 17899,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 17899,
-            "title": "섹스, 파티 그리고 거짓말",
-            "release_date": "2009-03-27",
-            "popularity": 114.232,
-            "vote_avg": 4.5,
-            "description": "파티와 알콜, 섹스와 마약은 스페인의 현대 젊은이들을 가로지르는 날 것의 모습. 퇴폐적이고 불안함에 흔들리면서도 그들을 근근히 지탱하는 젊음은 단지 스페인의 현재를 적나라한 초상으로 보여주는 것을 넘어 전 세계에 던지는 진지한 물음이 된다. 알퐁소 알바사테와 데이비드 멘케스 감독이 공동으로 연출한 이 작품은 2008년 스페인 박스 오피스 2위를 차지했다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/oQoLDaGMtbv6poiJl0tcY4QhueX.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/pv82OBJIF3v5inCkpxfb2XZFYta.jpg",
-            "genres": [
-                "코미디",
-                "드라마"
-            ],
-            "actors": [
-                "Mario Casas",
-                "Ana de Armas",
-                "Yon González",
-                "Hugo Silva",
-                "Ana Polvorosa",
-                "Alejo Sauras",
-                "Maxi Iglesias",
-                "Miriam Giovanelli",
-                "Asier Etxeandia",
-                "Esmeralda Moya"
-            ],
-            "director": "Alfonso Albacete"
-        }
-    },
-    {
         "pk": 438148,
         "model": "movies.movie",
         "fields": {
@@ -6372,32 +6172,6 @@
                 "Matthew Lewis"
             ],
             "director": "David Yates"
-        }
-    },
-    {
-        "pk": 1241748,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1241748,
-            "title": "이중의 선택",
-            "release_date": "2024-03-12",
-            "popularity": 135.951,
-            "vote_avg": 6.5,
-            "description": "아넬은 삼촌의 자동차 수리점에서 파트타임으로 일하며 공학 전공 대학생으로서 마지막 학기를 준비하는 평범한 청년이다. 하지만 그의 삶은 두 명의 여성 사이에서 복잡해진다. 어린 시절 친구이자 연인인 제나는 그와의 관계를 공식화하고 싶어하지만, 아넬은 학업에 집중하고자 한다. 한편, 성숙한 매력을 지닌 교수 살은 아넬과 비밀스러운 관계를 맺으며 그의 삶에 또 다른 혼란을 가져온다. 아넬은 제나의 강요와 살의 유혹 사이에서 혼란스러워하며, 자신이 진정으로 원하는 것이 무엇인지 고민하게 된다. 하지만 제나가 살과의 관계를 알아차리면서 상황은 급격히 악화되고, 이로 인해 아넬은 중요한 선택의 기로에 놓이게 된다. 그는 사랑과 책임, 그리고 자신의 미래 사이에서 어떤 선택을 할 것인가?",
-            "poster_url": "https://image.tmdb.org/t/p/w500/wYRO8wt2S97Fyu7r38pa5JnvxhB.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/85IvBjRypL3v606cVZovsguYDaU.jpg",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "Van Allen Ong",
-                "Sheila Snow",
-                "Arah Alonzo",
-                "Raul Montesa",
-                "Unique Valdez Cajeda",
-                "Rome Fontilar"
-            ],
-            "director": "Artemio Abad"
         }
     },
     {
@@ -7868,37 +7642,6 @@
         }
     },
     {
-        "pk": 370663,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 370663,
-            "title": "빌로우 허",
-            "release_date": "2017-02-10",
-            "popularity": 120.96,
-            "vote_avg": 6.816,
-            "description": "누구나 한번 보면 빠져들 수밖에 없는 매력을 지녔지만 사랑을 믿지 않기에 늘 상처받는 그녀, 달라스. 패션 에디터로 성공한 커리어우먼의 삶을 살고 있지만 단조로운 일상에 지친 그녀, 재스민. 어느 날 우연히 한 파티에서 달라스를 만난 재스민은  그녀만을 바라보는 달라스의 강렬한 눈빛에 흔들리기 시작한다. 자신도 모르게 서로에게 운명처럼 이끌린 두 사람은  남들 시선은 신경 쓰지 않고 뜨겁게 사랑하지만 피할 수 없는 현실의 장벽에 가로막히고 마는데…",
-            "poster_url": "https://image.tmdb.org/t/p/w500/5twlT43Kt18MoUCqYgfMqppVXfa.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/xNNF4l1OVscJNchJc5xvejHzTDO.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Erika Linder",
-                "Natalie Krill",
-                "Sebastian Pigott",
-                "Mayko Nguyen",
-                "Tommie-Amber Pirie",
-                "Melanie Leishman",
-                "Andrea Stefancikova",
-                "Daniela Barbosa",
-                "Elise Bauman",
-                "Jocelyn Hudon"
-            ],
-            "director": "April Mullen"
-        }
-    },
-    {
         "pk": 550,
         "model": "movies.movie",
         "fields": {
@@ -8500,36 +8243,6 @@
         }
     },
     {
-        "pk": 387824,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 387824,
-            "title": "엄마친구",
-            "release_date": "2015-08-20",
-            "popularity": 107.554,
-            "vote_avg": 6.438,
-            "description": "“엄마한테 이런 친구도 있었어?!”  파란만장하고 판타스틱한 대학생활을 꿈꾸던 스무살 성수. 하지만 상경하자마자 부동산 사기를 당하고 만다. 얼떨결에 엄마 손에 이끌려 엄마친구 자영의 집에 얹혀 살게 된 성수는 자영을 보는 순간 믿을 수 없는 초절정 동안과 섹시한 바디 라인에 빠져 들고 만다. 매일 마주치는 자영을 보며 그녀를 향한 은밀한 상상이 점점 도를 넘는 수준에 이르던 성수는 어느 날, 그녀가 은밀하게 숨겨온 놀랍고도 화끈한 비밀을 알게 되는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/uHTE5QiHfPQLfvqgfYsgISpaqD8.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/4jnDdvXt9GAzePbUBMpGQ3gQtAg.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Heo Ye-chang",
-                "Hee-jeong",
-                "Yeong Ah",
-                "Kim Woon",
-                "Jeon Ji-hak",
-                "Jo Yong-bok",
-                "Kim Mi-na",
-                "Jeon Hyeon-soo",
-                "Kim Moon-jong"
-            ],
-            "director": "Myeong Seok Hwan"
-        }
-    },
-    {
         "pk": 296096,
         "model": "movies.movie",
         "fields": {
@@ -8622,37 +8335,6 @@
                 "Carlos Emilio Báez"
             ],
             "director": "Mel Gibson"
-        }
-    },
-    {
-        "pk": 185664,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 185664,
-            "title": "단 오니로쿠 - 밧줄 지옥의 수녀",
-            "release_date": "1984-05-25",
-            "popularity": 116.949,
-            "vote_avg": 5.4,
-            "description": "단 오니로쿠의 원작 - 타카코는 연인의 아내가 그들을 현장에서 붙잡은 후 수녀원에 들어간다. 그녀는 수녀들과 성공한 작가가 퇴폐적인 S&M에 관여하기 위해 공모했다는 것을 곧 알게 된다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/AdbDpP5vGeRX7tKFoipEreYVVRs.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/pKaS8OTLlDJPJh5jZdm8wmFSPYS.jpg",
-            "genres": [
-                "드라마",
-                "공포"
-            ],
-            "actors": [
-                "Miki Takakura",
-                "Maya Ito",
-                "Asami Ogawa",
-                "Hiroshi Unayama",
-                "Hiromi Yamaguchi",
-                "Shingo Yamamoto",
-                "Chigusa Takayama",
-                "Kazuko Honjô",
-                "Takashi Kanematsu",
-                "Hiroshi Takayama"
-            ],
-            "director": "Katsuhiko Fujii"
         }
     },
     {
@@ -9671,37 +9353,6 @@
                 "Céline Jorrion"
             ],
             "director": "Olivier Schneider"
-        }
-    },
-    {
-        "pk": 796,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 796,
-            "title": "사랑보다 아름다운 유혹",
-            "release_date": "1999-03-05",
-            "popularity": 125.769,
-            "vote_avg": 6.8,
-            "description": "맨하탄의 최상류층 자제인 캐더린(사라 미셸 겔러)과 세바스찬(라이언 필립)은 의붓 남매 사이이다. 캐더린의 남자 친구가 순진한 세실에게 마음을 빼앗기자 질투가 생긴 캐더린은 세바스찬에게 세실을 유혹해 잠자리를 같이 해 달라고 부탁한다.  세바스찬은 많은 여성을 농락한 경험이 있는 남자로 캐더린의 부탁을 들어주는데 세실은 엉뚱하게도 자신의 첼로 교습을 맡고 있는 로날드와 사랑에 빠진다.  그러던 어느 날 세바스찬에게 새로운 유혹 목표가 생기는데, 학장의 딸 아네트(리즈 위더스푼)가 바로 그 상대이다. 세바스찬은 캐더린과 가을 학기가 되기 전까지 아네트를 침대로 끌어들일 수 있다는 것에 내기를 건다. 만일 세바스찬이 실패하면 세바스찬이 아끼는 재규어를 주고 이기면 그들의 부모가 결혼하기 전부터 세바스찬이 원하던, 캐더린과의 잠자리를 허락한다는 것이다.  그러나 세바스찬은 아네트로 인해 진정한 사랑과 기쁨을 느끼게 되고, 아네트 역시 세바스찬에게 조금씩 마음을 여는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/7XczYr1AY4e1z3xUOpJoZYuR7B0.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/m2QvGozzKz5ux74gKocn4kFTGz1.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Ryan Phillippe",
-                "Sarah Michelle Gellar",
-                "Reese Witherspoon",
-                "Selma Blair",
-                "Louise Fletcher",
-                "Joshua Jackson",
-                "Eric Mabius",
-                "Sean Patrick Thomas",
-                "Alaina Reed Hall",
-                "Hiep Thi Le"
-            ],
-            "director": "Roger Kumble"
         }
     },
     {
