@@ -3,7 +3,10 @@
     <!-- 섹션 제목과 뒤로가기 버튼 -->
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="text-center">{{ sectionTitle }} 영화</h2>
-      <button class="btn btn-secondary" @click="goBack">뒤로가기</button>
+      <button class="btn-back" @click="goBack">
+        <span class="arrow">&lt;</span> 뒤로가기
+      </button>
+      <!-- <button class="btn btn-secondary" @click="goBack">뒤로가기</button> -->
     </div>
 
     <!-- 영화 리스트 -->
@@ -126,8 +129,27 @@ export default {
   object-fit: cover;
 }
 
-.btn-secondary {
-  padding: 5px 10px;
-  font-size: 0.9rem;
+.btn-back {
+  display: inline-flex;
+  align-items: center; /* 텍스트와 아이콘 정렬 */
+  color: #e5e5e5; /* 기본 텍스트 색상 */
+  font-size: 16px; /* 글자 크기 */
+  font-weight: 500; /* 텍스트 두께 */
+  background: none; /* 배경 제거 */
+  border: none; /* 테두리 제거 */
+  cursor: pointer; /* 포인터 커서 */
+  padding: 5px 10px; /* 여백 */
+  text-decoration: none; /* 밑줄 제거 */
+  transition: color 0.3s ease-in-out; /* 호버 효과 */
+}
+
+.btn-back .arrow {
+  margin-right: 5px; /* 아이콘과 텍스트 간격 */
+  font-size: 18px; /* 화살표 크기 */
+  color: inherit; /* 부모 색상 상속 */
+}
+
+.btn-back:hover {
+  color: #ffffff; /* 호버 시 색상 변경 */
 }
 </style>
