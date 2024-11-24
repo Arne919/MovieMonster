@@ -26,4 +26,5 @@ urlpatterns = [
     path('categories/add-movie/', views.add_movie_to_category, name='add_movie_to_category'),
     path('movies/search/', views.search_movies, name='search_movies'),
     path('recommend-movie/', views.recommend_movie, name='recommend_movie'),
+    path('profile/<username>/categories/', views.get_user_categories, name='get_user_categories'),
 ]

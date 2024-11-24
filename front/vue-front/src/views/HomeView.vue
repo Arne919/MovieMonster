@@ -1,5 +1,6 @@
 <template>
   <div class="main-page-container">
+    <!-- Top Ranking Section -->
     <div class="top-ranking">
       <!-- 2등 -->
       <div v-if="topThreeRankings[1]" class="second">
@@ -56,7 +57,7 @@
       </div>
     </div>
 
-    <!-- 베스트 리뷰 섹션 -->
+    <!-- Best Reviews Section -->
     <div class="best-reviews-container">
       <h2>베스트 리뷰</h2>
       <div v-if="isLoading" class="loading-message">리뷰 데이터를 불러오는 중입니다...</div>
@@ -79,17 +80,39 @@
         </div>
       </div>
     </div>
+
+    <!-- Categories of Top Ranker -->
+    <div class="top-ranker-categories-container" v-if="topRankerCategories">
+      <h2>{{ topThreeRankings[0]?.username }}님의 카테고리</h2>
+      <div class="categories">
+        <div
+          v-for="category in topRankerCategories"
+          :key="category.id"
+          class="category-card"
+          @click="navigateToCategoryDetail(category.id)"
+        >
+          <img
+            :src="category.movies.length > 0 ? getFullPosterUrl(category.movies[0].poster_url) : '/default-category.png'"
+            alt="카테고리 포스터"
+            class="category-poster"
+          />
+          <h3>{{ category.name }}</h3>
+          <p>영화 개수: {{ category.movies.length }}</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import axios from 'axios';
 import { ref, computed, onMounted } from "vue";
+import axios from "axios";
 import { useCounterStore } from "@/stores/counter";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 
 // Pinia 상태 관리
 const store = useCounterStore();
+const router = useRouter();
 
 // Top 3 랭킹 데이터 가져오기
 const topThreeRankings = computed(() => store.rankings.slice(0, 3));
@@ -97,7 +120,8 @@ const topThreeRankings = computed(() => store.rankings.slice(0, 3));
 // 상태 관리
 const topReviews = ref([]);
 const isLoading = ref(true);
-const router = useRouter();
+const topRankerCategories = ref(null);
+const isLoadingCategories = ref(false);
 
 // 날짜 포맷 함수
 const formatDate = (dateString) => {
@@ -129,27 +153,59 @@ const getRankImage = (rankTitle) => {
   }
 };
 
+// 포스터 URL 생성 함수
+const getFullPosterUrl = (posterUrl) => {
+  const baseUrl = "https://image.tmdb.org/t/p/w500";
+  return `${baseUrl}${posterUrl}`;
+};
+
 // 프로필로 이동하는 함수
 const navigateToProfile = (username) => {
   // 라우터를 사용하여 프로필 페이지로 이동
   window.location.href = `/profile/${username}`;
 };
 
-// API 호출
+// API 호출: Top Reviews
 const fetchTopReviews = async () => {
   try {
-    const response = await axios.get('http://127.0.0.1:8000/api/v1/communities/top-reviews/');
+    const response = await axios.get(
+      "http://127.0.0.1:8000/api/v1/communities/top-reviews/"
+    );
     topReviews.value = response.data;
   } catch (error) {
-    console.error('Error fetching top reviews:', error);
+    console.error("Error fetching top reviews:", error);
   } finally {
     isLoading.value = false;
   }
 };
 
+// API 호출: Top Ranker Categories
+const fetchTopRankerCategories = async () => {
+  if (!topThreeRankings.value[0]?.username) return;
+
+  isLoadingCategories.value = true;
+  try {
+    const response = await axios.get(
+      `http://127.0.0.1:8000/accounts/profile/${topThreeRankings.value[0].username}/categories/`,
+      {
+        headers: { Authorization: `Token ${store.token}` },
+      }
+    );
+    topRankerCategories.value = response.data; // 성공적으로 데이터를 받음
+  } catch (error) {
+    console.error("Failed to fetch categories:", error);
+  } finally {
+    isLoadingCategories.value = false;
+  }
+};
+
 // 상세 페이지로 이동
 const navigateToDetail = (id) => {
-  router.push({ name: 'DetailView', params: { id } });
+  router.push({ name: "DetailView", params: { id } });
+};
+
+const navigateToCategoryDetail = (categoryId) => {
+  window.location.href = `/categories/${categoryId}`;
 };
 
 // 데이터 로드
@@ -157,9 +213,11 @@ onMounted(async () => {
   if (!store.rankings.length) {
     await store.fetchRankings();
   }
-  fetchTopReviews()
+  await fetchTopReviews();
+  await fetchTopRankerCategories();
 });
 </script>
+
 
 <style scoped>
 /* 메인 페이지 컨테이너 스타일 */
@@ -169,8 +227,8 @@ onMounted(async () => {
   margin: 0 auto;
   padding: 20px;
   display: flex;
-  flex-direction: column; /* 랭킹과 베스트 리뷰 섹션을 세로로 배치 */
-  align-items: center;
+  flex-direction: column;
+  gap: 50px;
 }
 
 /* Top 랭킹 섹션 스타일 */
@@ -178,10 +236,8 @@ onMounted(async () => {
   position: relative;
   width: 400px;
   height: 300px;
-  margin-bottom: 50px; /* 베스트 리뷰와의 간격 */
 }
 
-/* 1등 */
 .first {
   position: absolute;
   top: 0;
@@ -190,7 +246,6 @@ onMounted(async () => {
   text-align: center;
 }
 
-/* 2등 */
 .second {
   position: absolute;
   top: 120px;
@@ -199,7 +254,6 @@ onMounted(async () => {
   text-align: center;
 }
 
-/* 3등 */
 .third {
   position: absolute;
   top: 120px;
@@ -208,7 +262,6 @@ onMounted(async () => {
   text-align: center;
 }
 
-/* 순위 이미지 스타일 */
 .position-icon {
   width: 50px;
   height: 50px;
@@ -217,10 +270,9 @@ onMounted(async () => {
 }
 
 .position-icon:hover {
-  transform: scale(1.1); /* 이미지 확대 효과 */
+  transform: scale(1.1);
 }
 
-/* 유저 정보 스타일 */
 .user-info {
   margin-top: 10px;
 }
@@ -237,11 +289,11 @@ onMounted(async () => {
   display: block;
 }
 
-/* 베스트 리뷰 섹션 스타일 */
+/* 베스트 리뷰 섹션 */
 .best-reviews-container {
   width: 100%;
   padding: 20px;
-  border-top: 1px solid #ddd; /* 구분선을 추가하여 랭킹과 시각적으로 분리 */
+  border-top: 1px solid #ddd;
 }
 
 .loading-message {
@@ -291,5 +343,46 @@ onMounted(async () => {
   margin: 5px 0;
   font-size: 14px;
   color: #555;
+}
+
+/* Top Ranker Categories Section */
+.top-ranker-categories-container {
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.category-card {
+  width: calc(25% - 20px);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.category-card:hover {
+  transform: scale(1.02);
+}
+
+.category-poster {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.category-card h3 {
+  font-size: 18px;
+  margin: 10px;
+}
+
+.category-card p {
+  font-size: 14px;
+  margin: 0 10px 10px;
 }
 </style>
