@@ -126,6 +126,7 @@ onUnmounted(resetBodyStyle);
 
 .movie-detail {
   padding: 40px;
+  margin-top: 40px;
 }
 
 .row {
