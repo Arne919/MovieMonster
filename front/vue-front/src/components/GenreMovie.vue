@@ -18,7 +18,7 @@
 
     <!-- 필터링된 영화 리스트 -->
     <div v-if="genre && filteredMovies.length" class="mt-4">
-      <h2 class="text-center mb-4">
+      <h2 class="genre-title">
         {{ genre === "all" ? "전체 영화" : `${genreTranslations[genre] || genre} 영화` }}
       </h2>
       <div class="grid-container">
@@ -164,6 +164,12 @@ export default {
 <style scoped>
 .container {
   margin-top: 20px;
+}
+
+.genre-title {
+  text-align: left;
+  /* margin-left: 10px; */
+  margin-bottom: 20px;
 }
 
 .grid-container {

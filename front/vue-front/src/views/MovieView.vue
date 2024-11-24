@@ -59,7 +59,8 @@
                 v-for="(chunk, index) in getChunks(section.movies, 5)"
                 :key="index"
               >
-                <div class="card" v-for="movie in chunk" :key="movie.movie_id">
+                <div class="card" v-for="movie in chunk" :key="movie.movie_id"
+                @click.stop="goToDetail(movie.movie_id)">
                   <img
                     :src="getFullPosterUrl(movie.poster_url)"
                     class="card-img-top"
@@ -230,7 +231,6 @@ export default {
 
 <style scoped>
 .container {
-  margin-top: 20px;
   overflow: hidden; /* 넘치는 콘텐츠 숨김 */
   width: 100%; /* 컨테이너 너비를 화면에 맞춤 */
 }
