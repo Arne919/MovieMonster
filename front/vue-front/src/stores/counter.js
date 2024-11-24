@@ -25,12 +25,14 @@ export const useCounterStore = defineStore('counter', () => {
 
   // 서버에서 데이터 가져오기
   const fetchArticles = async () => {
+    console.log("fetchArticles function invoked"); // 함수 호출 확인
     try {
       const response = await axios.get(`${API_URL}/api/v1/communities/`, {
         headers: { Authorization: `Token ${token.value}` },
       })
+      console.log("Articles with comment count:", response.data); // comment_count 확인
       articles.value = response.data
-      console.log('pp',articles.value)
+      console.log('ppaaaa',articles.value)
     } catch (error) {
       console.error('Error fetching articles:', error)
     }
@@ -80,6 +82,7 @@ export const useCounterStore = defineStore('counter', () => {
       console.log("Fetching articles from server...");
       await fetchArticles();
     }
+    console.log('111',articles.value)
   
     // 정렬만 수행
     sortArticles(sortOrder);
@@ -241,6 +244,7 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
     console.log("getArticles function called");
   
     if (!forceReload && articles.value.length > 0) {
+      console.log('qwe',articles.value)
       console.log("Articles already loaded, skipping reload");
       return;
     }
@@ -446,6 +450,7 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
         },
       });
       console.log("Article created successfully:", response.data);
+      articles.value.unshift(response.data); // 새 리뷰를 맨 앞에 추가
       return response.data;
     } catch (error) {
       console.error("Error creating article:", error);

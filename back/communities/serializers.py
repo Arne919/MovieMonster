@@ -43,7 +43,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     like_count = serializers.IntegerField(read_only=True)
-    comment_count = serializers.IntegerField(read_only=True)  # 댓글 수 추가
+    # comment_count = serializers.IntegerField(read_only=True)  # 댓글 수 추가
     user = serializers.StringRelatedField()
     movie_title = serializers.CharField(source='movie.title', read_only=True)  # 영화 제목
     movie_poster_url = serializers.CharField(source='movie.poster_url', read_only=True)  # 영화 포스터
@@ -51,10 +51,13 @@ class ArticleSerializer(serializers.ModelSerializer):
     movie_rating = serializers.FloatField(source='movie.vote_avg', read_only=True)  # 영화 평점
     movie_overview = serializers.CharField(source='movie.description', read_only=True)  # 영화 설명
     is_liked = serializers.SerializerMethodField()  # 좋아요 상태 추가
+    comment_count = serializers.IntegerField(read_only=True)
 
     def get_is_liked(self, obj):
-        user = self.context.get('request').user
-        return user in obj.like_users.all()  # 현재 사용자가 좋아요한 상태 반환
+        request = self.context.get('request', None)
+        if not request or not hasattr(request, 'user') or request.user.is_anonymous:
+            return False  # 요청이 없거나 인증되지 않은 경우 False 반환
+        return request.user in obj.like_users.all()
 
     def get_movie_genres(self, obj):
         """
@@ -67,7 +70,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = '__all__'
-        read_only_fields = ('user', 'like_users', 'movie_title', 'movie_poster_url', 'movie_genres', 'movie_rating', 'movie_overview')
+        read_only_fields = ('user', 'like_users', 'movie_title', 'movie_poster_url', 'movie_genres', 'movie_rating', 'movie_overview', 'comment_count')
 
 
 class CommentSerializer(serializers.ModelSerializer):
