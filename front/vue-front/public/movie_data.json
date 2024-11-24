@@ -1070,32 +1070,6 @@
         }
     },
     {
-        "pk": 482600,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 482600,
-            "title": "일본 엄마",
-            "release_date": "2017-02-09",
-            "popularity": 365.991,
-            "vote_avg": 6.179,
-            "description": "얼굴은 청순, 가슴은 D컵, 밤 기술은 퍼펙트! \"\"아들아, 이제부터 네 여친이 아니라 엄마다.\"\r 아들 기호가 결혼하겠다며 일본에서 데려온 그녀, 유키. 그러나 기호는 한국에 오자 전 여친을 만나며 바람을 피우기 시작한다. 처음에는 예비 며느리를 달래는 마음으로 유키를 위로하던 민철은 어느 순간부터 자신이 유키를 여자로 보고 있다는 사실을 깨닫는다. 결국, 기호 몰래 민철과 유키의 뜨거운 정사가 펼쳐지는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/hq1EaYIqUNrPM3QFYAbnH2UHoX8.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "로맨스",
-                "드라마"
-            ],
-            "actors": [
-                "Jeon Ji-hak",
-                "Choi Min-ho",
-                "Saki Mizumi",
-                "Ha Roo",
-                "Ahn So-hee"
-            ],
-            "director": "Kim Moo-won"
-        }
-    },
-    {
         "pk": 573435,
         "model": "movies.movie",
         "fields": {
@@ -2194,36 +2168,6 @@
         }
     },
     {
-        "pk": 173705,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 173705,
-            "title": "여교사: 학생의 눈앞에서",
-            "release_date": "1982-04-09",
-            "popularity": 211.555,
-            "vote_avg": 7.0,
-            "description": "사랑스러운 레이코는 소름 끼치는 오래된 고등학교에서 새로운 교직을 얻었습니다. 그녀는 매우 매력적인 여성이며 같은 반의 어린 학생들은 그녀에게 반했습니다. 어느 날 밤, 테니스 연습을 마친 그녀는 탈의실 샤워실에서 얼굴에 스타킹을 가린 남자에게 잔인하게 폭행을 당합니다. 알몸으로 충격에 빠진 채 바닥에 남겨진 그녀는 미친 남자가 남긴 퍼즐 조각 하나를 발견합니다. 며칠 후, 한 쌍의 학생이 테니스 팀에서 누군가를 쫓아낸 레이코에게 변태적인 성적 복수를 합니다. 이 학생들 중 한 명이 탈의실에서 그녀를 잔인하게 만든 남자일까요? 이상한 퍼즐 조각의 주인은 누구입니까? 수수께끼가 풀리면서 레이코는 자신의 성적 충동과 운명을 받아들여야 합니다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/rwGW7zhFKaojtJiSMnoLyVkKZnx.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/27FRFe8lu1C1LStWmzwOa87vo98.jpg",
-            "genres": [
-                "드라마",
-                "미스테리",
-                "공포"
-            ],
-            "actors": [
-                "Rushia Santô",
-                "Rina Oka",
-                "Kyôko Sagami",
-                "Toshiyuki Kitami",
-                "Toru Nakane",
-                "Hiromichi Hori",
-                "Masaaki Kishi",
-                "Toshio Yoshikawa"
-            ],
-            "director": "Yasuaki Uegaki"
-        }
-    },
-    {
         "pk": 359410,
         "model": "movies.movie",
         "fields": {
@@ -2704,30 +2648,6 @@
         }
     },
     {
-        "pk": 587727,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 587727,
-            "title": "가슴 큰 여자친구",
-            "release_date": "2019-03-08",
-            "popularity": 241.116,
-            "vote_avg": 7.0,
-            "description": "민철과 수희는 결혼을 앞두고 민철 아버지(대식)에게 인사를 드리러 간다. 대식은 예비 며느리인 수희를 반갑게 맞이하고 수희 또한 인자한 대식을 좋은 사람이라 여긴다.  하지만 결혼 전 성격차이로 민철과 수희는 파혼 되고… 결혼준비만 하던 수희는 곧 생활고를 격어….. 수희의 오랜 친구이자 벗인 민주가 일하는 키스방에서 일하게 된다.  어느 날과 마찬가지로 수희는 키스방에서 손님을 기다리는데…. 키스방 문으로 들어오는 손님인 대식과 마주치게 되는데…",
-            "poster_url": "https://image.tmdb.org/t/p/w500/f6PfAXtFEkJRcBtOjbzOgz8qqSK.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/zQKFPx03M9RKfEcRETXR2HoUZn1.jpg",
-            "genres": [
-                "로맨스"
-            ],
-            "actors": [
-                "Yoo Jung",
-                "Kang Min-sik",
-                "Kim Wan- jin",
-                "Lee Ji- su"
-            ],
-            "director": "Junsei"
-        }
-    },
-    {
         "pk": 991610,
         "model": "movies.movie",
         "fields": {
@@ -2883,38 +2803,6 @@
                 "Tomasz Mandes"
             ],
             "director": "Tomasz Mandes"
-        }
-    },
-    {
-        "pk": 1104171,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1104171,
-            "title": "다음 크리스마스에 만나요",
-            "release_date": "2024-11-05",
-            "popularity": 197.993,
-            "vote_avg": 6.358,
-            "description": "낭만에 죽고 사는 골수 로맨티스트. 이상형의 남자를 만나기 위해 뉴욕을 동분서주하는 대장정에 나선다. 그를 만나려면 이미 매진된 펜타토닉스 크리스마스 공연 티켓을 어떻게든 구해야 한다!",
-            "poster_url": "https://image.tmdb.org/t/p/w500/2CpaK4kzfAB4tIUkMV53PizJkKu.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/8jujdLr4OAQoWGgfNmaE4RR0mqb.jpg",
-            "genres": [
-                "로맨스",
-                "코미디",
-                "TV Movie"
-            ],
-            "actors": [
-                "Christina Milian",
-                "Devale Ellis",
-                "Kofi Siriboe",
-                "Kalen Allen",
-                "Mitch Grassi",
-                "Scott Hoying",
-                "Kirstin Maldonado",
-                "Kevin Olusola",
-                "Matthew Sallee",
-                "Priyanka"
-            ],
-            "director": "Rusty Cundieff"
         }
     },
     {
@@ -4301,40 +4189,6 @@
         }
     },
     {
-        "pk": 929563,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 929563,
-            "title": "빅 시티 그린 무비: 우주방학",
-            "release_date": "2024-06-06",
-            "popularity": 194.34,
-            "vote_avg": 7.7,
-            "description": "짜릿한 모험을 즐기는 크리켓 그린은 자신의 시골 가족을 속여 우주로 '자동차 여행'을 떠나고, 그 결과 빅 시티 전체가 위험에 빠진다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/rAzrGHgBl8m32MC2RlrwlnErB7t.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/hu6bwaSRG8GZwH3yEVtRxrgAnjq.jpg",
-            "genres": [
-                "애니메이션",
-                "가족",
-                "코미디",
-                "음악",
-                "TV Movie"
-            ],
-            "actors": [
-                "Chris Houghton",
-                "Marieve Herington",
-                "Bob Joles",
-                "Artemis Pebdani",
-                "Wendi McLendon-Covey",
-                "Anna Akana",
-                "Cheri Oteri",
-                "Renée Elise Goldsberry",
-                "Anna O'Brian",
-                "Zeno Robinson"
-            ],
-            "director": "Anna O'Brian"
-        }
-    },
-    {
         "pk": 198663,
         "model": "movies.movie",
         "fields": {
@@ -4876,38 +4730,6 @@
                 "Ping Lumpraploeng"
             ],
             "director": "Kongkiat Khomsiri"
-        }
-    },
-    {
-        "pk": 323260,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 323260,
-            "title": "쾌락지구X",
-            "release_date": "2015-01-29",
-            "popularity": 150.463,
-            "vote_avg": 5.0,
-            "description": "호궈펑은 꽃미남 외모에 남다른 신체 사이즈로 여학생들에겐 우상이자 남학생들에겐 시기 어린 질투의 대상이다. 시비를 걸어온 남학생과 싸움에 휘말려 퇴학을 당하자 병으로 몸져누운 어머니를 대신해 돈을 벌기로 결심한 펑은 사촌 누나의 클럽에서 청소부로 일하다 뜻밖의 제안을 받는다. 바로 클럽을 찾는 부잣집 사모님들을 기쁘게 해주는 것. 짧은 시간에 큰 돈을 벌 수 있는 달콤한 유혹을 뿌리치지 못하고 호스트의 길로 들어서게 된 펑은 전설의 호스트 ‘앱슨’을 만나 비법을 전수받고 한층 매력적인 남자로 거듭나면서 천명의 여자를 쥐락펴락 하게 되는데…",
-            "poster_url": "https://image.tmdb.org/t/p/w500/rtacqLGZaj0FNzTTwo31hgWNR6B.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/3W6ifzDqxINcxsZQypwupTPue8m.jpg",
-            "genres": [
-                "로맨스",
-                "드라마",
-                "코미디"
-            ],
-            "actors": [
-                "Dominic Ho",
-                "Candy Yuen",
-                "Jeana Ho Pui-Yu",
-                "Hazel Tong",
-                "Winnie Leung",
-                "Pal Sinn Lap-man",
-                "Angelina Lo Yuen-Yan",
-                "Elena Kong Mei-Yee",
-                "Tony Ho",
-                "Ricky Wong Chun-Tong"
-            ],
-            "director": "Amen Au Cheuk-Man"
         }
     },
     {
@@ -5703,31 +5525,6 @@
         }
     },
     {
-        "pk": 464026,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 464026,
-            "title": "가자! 장미여관으로",
-            "release_date": "2013-08-14",
-            "popularity": 146.162,
-            "vote_avg": 4.0,
-            "description": "사귄 지 6개월 된 여자친구 민애와 아직까지 육체적인 관계를 가져본 적 없는 성수는 그녀와의 만남이 늘 흥분된다. 그러던 어느 날, 민애를 설득해 장미여관으로 끌어들이는데 성공한 성수. 샤워를 하기 위해 들어간 욕실에서 작은 구멍을 발견하게 되고 그 구멍을 통해 옆방을 우연히 엿보게 되고, 거기서 남녀의 성행위 장면을 목격하게 된다. 호기심이 발동한 성수는 더욱 숨죽여 그 장면을 엿보던 중 여자 연예인 사라가 거물급 정치인에게 성 상납을 하는 현장임을 알고 충격을 받게 되는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/8ogCczLG6EhQEnSWoqs6092bGm3.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/eagBKhOpfNccNm5Op4nQkWds5eP.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Sung Eun-chae",
-                "Jang Sung-won",
-                "Woo Do-hwan",
-                "Yeo Min-jeong"
-            ],
-            "director": "Sin Jeong-gyoon"
-        }
-    },
-    {
         "pk": 38757,
         "model": "movies.movie",
         "fields": {
@@ -6466,37 +6263,6 @@
         }
     },
     {
-        "pk": 17899,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 17899,
-            "title": "섹스, 파티 그리고 거짓말",
-            "release_date": "2009-03-27",
-            "popularity": 114.232,
-            "vote_avg": 4.5,
-            "description": "파티와 알콜, 섹스와 마약은 스페인의 현대 젊은이들을 가로지르는 날 것의 모습. 퇴폐적이고 불안함에 흔들리면서도 그들을 근근히 지탱하는 젊음은 단지 스페인의 현재를 적나라한 초상으로 보여주는 것을 넘어 전 세계에 던지는 진지한 물음이 된다. 알퐁소 알바사테와 데이비드 멘케스 감독이 공동으로 연출한 이 작품은 2008년 스페인 박스 오피스 2위를 차지했다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/oQoLDaGMtbv6poiJl0tcY4QhueX.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/pv82OBJIF3v5inCkpxfb2XZFYta.jpg",
-            "genres": [
-                "코미디",
-                "드라마"
-            ],
-            "actors": [
-                "Mario Casas",
-                "Ana de Armas",
-                "Yon González",
-                "Hugo Silva",
-                "Ana Polvorosa",
-                "Alejo Sauras",
-                "Maxi Iglesias",
-                "Miriam Giovanelli",
-                "Asier Etxeandia",
-                "Esmeralda Moya"
-            ],
-            "director": "Alfonso Albacete"
-        }
-    },
-    {
         "pk": 438148,
         "model": "movies.movie",
         "fields": {
@@ -6589,32 +6355,6 @@
                 "Matthew Lewis"
             ],
             "director": "David Yates"
-        }
-    },
-    {
-        "pk": 1241748,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1241748,
-            "title": "이중의 선택",
-            "release_date": "2024-03-12",
-            "popularity": 135.951,
-            "vote_avg": 6.5,
-            "description": "아넬은 삼촌의 자동차 수리점에서 파트타임으로 일하며 공학 전공 대학생으로서 마지막 학기를 준비하는 평범한 청년이다. 하지만 그의 삶은 두 명의 여성 사이에서 복잡해진다. 어린 시절 친구이자 연인인 제나는 그와의 관계를 공식화하고 싶어하지만, 아넬은 학업에 집중하고자 한다. 한편, 성숙한 매력을 지닌 교수 살은 아넬과 비밀스러운 관계를 맺으며 그의 삶에 또 다른 혼란을 가져온다. 아넬은 제나의 강요와 살의 유혹 사이에서 혼란스러워하며, 자신이 진정으로 원하는 것이 무엇인지 고민하게 된다. 하지만 제나가 살과의 관계를 알아차리면서 상황은 급격히 악화되고, 이로 인해 아넬은 중요한 선택의 기로에 놓이게 된다. 그는 사랑과 책임, 그리고 자신의 미래 사이에서 어떤 선택을 할 것인가?",
-            "poster_url": "https://image.tmdb.org/t/p/w500/wYRO8wt2S97Fyu7r38pa5JnvxhB.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/85IvBjRypL3v606cVZovsguYDaU.jpg",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "Van Allen Ong",
-                "Sheila Snow",
-                "Arah Alonzo",
-                "Raul Montesa",
-                "Unique Valdez Cajeda",
-                "Rome Fontilar"
-            ],
-            "director": "Artemio Abad"
         }
     },
     {
@@ -8338,37 +8078,6 @@
         }
     },
     {
-        "pk": 370663,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 370663,
-            "title": "빌로우 허",
-            "release_date": "2017-02-10",
-            "popularity": 120.96,
-            "vote_avg": 6.816,
-            "description": "누구나 한번 보면 빠져들 수밖에 없는 매력을 지녔지만 사랑을 믿지 않기에 늘 상처받는 그녀, 달라스. 패션 에디터로 성공한 커리어우먼의 삶을 살고 있지만 단조로운 일상에 지친 그녀, 재스민. 어느 날 우연히 한 파티에서 달라스를 만난 재스민은  그녀만을 바라보는 달라스의 강렬한 눈빛에 흔들리기 시작한다. 자신도 모르게 서로에게 운명처럼 이끌린 두 사람은  남들 시선은 신경 쓰지 않고 뜨겁게 사랑하지만 피할 수 없는 현실의 장벽에 가로막히고 마는데…",
-            "poster_url": "https://image.tmdb.org/t/p/w500/5twlT43Kt18MoUCqYgfMqppVXfa.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/xNNF4l1OVscJNchJc5xvejHzTDO.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Erika Linder",
-                "Natalie Krill",
-                "Sebastian Pigott",
-                "Mayko Nguyen",
-                "Tommie-Amber Pirie",
-                "Melanie Leishman",
-                "Andrea Stefancikova",
-                "Daniela Barbosa",
-                "Elise Bauman",
-                "Jocelyn Hudon"
-            ],
-            "director": "April Mullen"
-        }
-    },
-    {
         "pk": 550,
         "model": "movies.movie",
         "fields": {
@@ -9064,38 +8773,6 @@
         }
     },
     {
-        "pk": 412520,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 412520,
-            "title": "섹스돌",
-            "release_date": "2016-12-07",
-            "popularity": 81.871,
-            "vote_avg": 5.8,
-            "description": "베르지니는 런던 상류사회의 잘 나가는 고급 콜걸이다. 돈 많은 늙은 남자들과 침대에서 뒹굴고 지갑을 두둑하게 챙겨 호화로운 생활을 즐기던 중, 우연히 클럽에서 만난 루퍼트에게 끌린다. 하지만 자신의 직업 때문에 쉽사리 루퍼트에게 다가가지 못하고, 그에게 향하는 마음이 강해질수록 자신의 직업과 삶에 염증을 느끼게 된다. 그러나 베르지니가 루퍼트에게 마음을 연 순간, 그가 그녀에게 의도적으로 접근한 사실을 알게 되는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/ygbAlpfNhxYogj62NT4XXLJy6FI.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/wFmwCrAjvsI4AUpCj0DHAuF0JuO.jpg",
-            "genres": [
-                "드라마",
-                "스릴러",
-                "미스테리"
-            ],
-            "actors": [
-                "Hafsia Herzi",
-                "Ash Stymest",
-                "Karole Rocher",
-                "Paul Hamy",
-                "Lindsay Karamoh",
-                "Ira Max",
-                "Myriam Djeljeli",
-                "Jeremy Bennett",
-                "Simon Killick",
-                "Wayne Swann"
-            ],
-            "director": "Sylvie Verheyde"
-        }
-    },
-    {
         "pk": 601796,
         "model": "movies.movie",
         "fields": {
@@ -9158,36 +8835,6 @@
                 "Pilou Asbæk"
             ],
             "director": "James Wan"
-        }
-    },
-    {
-        "pk": 387824,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 387824,
-            "title": "엄마친구",
-            "release_date": "2015-08-20",
-            "popularity": 107.554,
-            "vote_avg": 6.438,
-            "description": "“엄마한테 이런 친구도 있었어?!”  파란만장하고 판타스틱한 대학생활을 꿈꾸던 스무살 성수. 하지만 상경하자마자 부동산 사기를 당하고 만다. 얼떨결에 엄마 손에 이끌려 엄마친구 자영의 집에 얹혀 살게 된 성수는 자영을 보는 순간 믿을 수 없는 초절정 동안과 섹시한 바디 라인에 빠져 들고 만다. 매일 마주치는 자영을 보며 그녀를 향한 은밀한 상상이 점점 도를 넘는 수준에 이르던 성수는 어느 날, 그녀가 은밀하게 숨겨온 놀랍고도 화끈한 비밀을 알게 되는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/uHTE5QiHfPQLfvqgfYsgISpaqD8.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/4jnDdvXt9GAzePbUBMpGQ3gQtAg.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Heo Ye-chang",
-                "Hee-jeong",
-                "Yeong Ah",
-                "Kim Woon",
-                "Jeon Ji-hak",
-                "Jo Yong-bok",
-                "Kim Mi-na",
-                "Jeon Hyeon-soo",
-                "Kim Moon-jong"
-            ],
-            "director": "Myeong Seok Hwan"
         }
     },
     {
@@ -9380,37 +9027,6 @@
                 "Carlos Emilio Báez"
             ],
             "director": "Mel Gibson"
-        }
-    },
-    {
-        "pk": 185664,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 185664,
-            "title": "단 오니로쿠 - 밧줄 지옥의 수녀",
-            "release_date": "1984-05-25",
-            "popularity": 116.949,
-            "vote_avg": 5.4,
-            "description": "단 오니로쿠의 원작 - 타카코는 연인의 아내가 그들을 현장에서 붙잡은 후 수녀원에 들어간다. 그녀는 수녀들과 성공한 작가가 퇴폐적인 S&M에 관여하기 위해 공모했다는 것을 곧 알게 된다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/AdbDpP5vGeRX7tKFoipEreYVVRs.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/pKaS8OTLlDJPJh5jZdm8wmFSPYS.jpg",
-            "genres": [
-                "드라마",
-                "공포"
-            ],
-            "actors": [
-                "Miki Takakura",
-                "Maya Ito",
-                "Asami Ogawa",
-                "Hiroshi Unayama",
-                "Hiromi Yamaguchi",
-                "Shingo Yamamoto",
-                "Chigusa Takayama",
-                "Kazuko Honjô",
-                "Takashi Kanematsu",
-                "Hiroshi Takayama"
-            ],
-            "director": "Katsuhiko Fujii"
         }
     },
     {
@@ -12059,37 +11675,6 @@
         }
     },
     {
-        "pk": 351523,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 351523,
-            "title": "동창회의 목적",
-            "release_date": "2015-08-06",
-            "popularity": 86.492,
-            "vote_avg": 5.2,
-            "description": "밤이 너무 긴 기러기 아빠, 와이프 한 마디에 벌벌 떨며 사는 공처가 남편, 35살 모태쏠로까지! \"그것\"이 너무 고픈 남자들! 여전히 예쁜 고교 퀸카, 화끈한 골드미스, 물이 오를대로 오른 이혼녀까지! \"그것\"이 재미없어진 여자들!  오늘 밤 그들이 제대로 만났다!  15년만에 만났더니 너무 매력적으로 변했구나 우리들?!  그들의 화끈한 동창회가 지금 시작된다!",
-            "poster_url": "https://image.tmdb.org/t/p/w500/AjlwGaT6tDs2fBIgFaepYiDhL6A.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/7vy2K7cRU2RxRm2s5HTnWFFtZR8.jpg",
-            "genres": [
-                "로맨스",
-                "드라마"
-            ],
-            "actors": [
-                "Jo In-woo",
-                "Kim Yoo-yeon",
-                "Lee Hyeon-seong",
-                "Kim Neul-me",
-                "Yoo Seung-hyeon",
-                "Choi Go-eun",
-                "Lee Hyeon-joo",
-                "Kim Jang-dong",
-                "Lee Chang-soo",
-                "Seon Jeong-hwa"
-            ],
-            "director": "Jung Dae-man"
-        }
-    },
-    {
         "pk": 1024127,
         "model": "movies.movie",
         "fields": {
@@ -12526,37 +12111,6 @@
                 "Amber Gainey Meade"
             ],
             "director": "Robert Zemeckis"
-        }
-    },
-    {
-        "pk": 796,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 796,
-            "title": "사랑보다 아름다운 유혹",
-            "release_date": "1999-03-05",
-            "popularity": 125.769,
-            "vote_avg": 6.8,
-            "description": "맨하탄의 최상류층 자제인 캐더린(사라 미셸 겔러)과 세바스찬(라이언 필립)은 의붓 남매 사이이다. 캐더린의 남자 친구가 순진한 세실에게 마음을 빼앗기자 질투가 생긴 캐더린은 세바스찬에게 세실을 유혹해 잠자리를 같이 해 달라고 부탁한다.  세바스찬은 많은 여성을 농락한 경험이 있는 남자로 캐더린의 부탁을 들어주는데 세실은 엉뚱하게도 자신의 첼로 교습을 맡고 있는 로날드와 사랑에 빠진다.  그러던 어느 날 세바스찬에게 새로운 유혹 목표가 생기는데, 학장의 딸 아네트(리즈 위더스푼)가 바로 그 상대이다. 세바스찬은 캐더린과 가을 학기가 되기 전까지 아네트를 침대로 끌어들일 수 있다는 것에 내기를 건다. 만일 세바스찬이 실패하면 세바스찬이 아끼는 재규어를 주고 이기면 그들의 부모가 결혼하기 전부터 세바스찬이 원하던, 캐더린과의 잠자리를 허락한다는 것이다.  그러나 세바스찬은 아네트로 인해 진정한 사랑과 기쁨을 느끼게 되고, 아네트 역시 세바스찬에게 조금씩 마음을 여는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/7XczYr1AY4e1z3xUOpJoZYuR7B0.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/m2QvGozzKz5ux74gKocn4kFTGz1.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Ryan Phillippe",
-                "Sarah Michelle Gellar",
-                "Reese Witherspoon",
-                "Selma Blair",
-                "Louise Fletcher",
-                "Joshua Jackson",
-                "Eric Mabius",
-                "Sean Patrick Thomas",
-                "Alaina Reed Hall",
-                "Hiep Thi Le"
-            ],
-            "director": "Roger Kumble"
         }
     },
     {
@@ -13928,31 +13482,6 @@
         }
     },
     {
-        "pk": 707610,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 707610,
-            "title": "가슴 큰 울 엄마",
-            "release_date": "2020-05-06",
-            "popularity": 96.967,
-            "vote_avg": 5.9,
-            "description": "자신보다 나이가 꽤 많은 민수와 결혼하게 된 다희.  덕분에 나이차이가 얼마 나지 않은 아들을 얻게 된다. 어색한 재혁과 친해지기 위해 노력하는데..\r 나연과 함께 있다가 재혁과 만나게 되고 나연은 재혁과 데이트를 가진다. 데이트를 끝내고 집으로 돌아오는 세 사람을 발견한 민수. 재혁이 두 여자와 함께 있는 모습을 보고 작은 분노를 느낀다.\r 곧 바로 다희를 찾아가 나연에 대해 묻는 민수. 재혁 몰래 민수와 만나게 된 나연.  하지만 민수와 나연의 관계를 알고 있는 다희는 재혁에게 이 사실을 털어놓는다.​",
-            "poster_url": "https://image.tmdb.org/t/p/w500/zarhMAQRWKjjsNBR1rviIXZ5xtt.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/g4j7H4yDoCR90X1VV2IEvAZ1LAP.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Yoo Jung",
-                "Han Yi-seul",
-                "Shin Yeon-ho",
-                "James"
-            ],
-            "director": "Lee Dong-Joon"
-        }
-    },
-    {
         "pk": 62177,
         "model": "movies.movie",
         "fields": {
@@ -15287,37 +14816,6 @@
                 "Andrea Arcangeli"
             ],
             "director": "Arkasha Stevenson"
-        }
-    },
-    {
-        "pk": 37265,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 37265,
-            "title": "올 레이디 두 잇",
-            "release_date": "1992-02-21",
-            "popularity": 82.608,
-            "vote_avg": 4.933,
-            "description": "아름다운 외모와, 정열적인 남편을 둔 20대의 부인 다이아나, 어느날 시낭송회 파티에 참석한다. 그곳에서 베니스에서 왔다는 원시적인 매력을 지닌 남자 알퐁스를 만나는데. 숙모의 장례식에 참석하기 위해 베니스로 가는 다이아나. 그녀는 뜻하지 않게 숙모의 아파트를 유산으로 물려받게 되고, 베니스에 오면 들리라던 알퐁스의 말이 생각나 그에게 전화를 건다. 골동품상인 알퐁스는 엉덩이에 대한 독특한 철학을 갖고 있는 인물로, 다이아나의 엉덩이를 보자마자 그녀에게 이끌린다. 파격적인 정사를 나누고 집으로 돌아온 다이아나. 그녀는 남편과의 잠자리 분위기를 고조시키려고 늘 해온 이야기를 꺼낸다. 그것은 그녀가 다른 남자와 비정상적인 정사를 벌인 과정을 상세하게 이야기하며, 남편을 흥분 시키는 것. 그런데, 이번에는 달랐다. 다이아나는 베니스에서 실제로 있었던 일을 남편에게 이야기하고, 목에 난 상처를 우연히 본 남편은 사실을 눈치채고 다이아나를 다그친다. 질투로 화를 다스리지 못하는 남편은 다이아나와 별거를 선언하기에 이르고, 자신을 이해하지 못하는 남편에 대한 원망으로 슬픔에 잠긴 다이아나는, 어느날 밤 광란의 댄스파티에 가서 이상한 술을 마시게 되는데.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/rt1G1SXwLgo8Jcm78MzSajD8c8s.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/hkx6p7bTw2dOs4nSk6ZGTnEjCjW.jpg",
-            "genres": [
-                "코미디",
-                "드라마"
-            ],
-            "actors": [
-                "Claudia Koll",
-                "Paolo Lanza",
-                "Ornella Marcucci",
-                "Isabella Deiana",
-                "Franco Branciaroli",
-                "Renzo Rinaldi",
-                "Marco Marciani",
-                "Maurizio Martinoli",
-                "Luciana Cirenei",
-                "Rossana Di Pierro"
-            ],
-            "director": "Tinto Brass"
         }
     },
     {
@@ -16960,36 +16458,6 @@
         }
     },
     {
-        "pk": 390845,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 390845,
-            "title": "맛있는 비행",
-            "release_date": "2015-11-01",
-            "popularity": 84.402,
-            "vote_avg": 4.2,
-            "description": "홍콩(?)행 기내 서비스가 시작됩니다! 광활한 창공에서 펼쳐지는 리얼 19금 연애담! 청순가련의 대명사였지만 아이돌과의 섹스 스캔들로 도망친 여배우, 그녀의 모든 커리어를 망쳐 버린 발랑 까진 아이돌, 그녀에게 절대 충성하는 열혈 매니저, 그리고 이제는 섹시한 승무원이 된 매니저의 전 여친까지! 절대 만나선 안 될 네 사람이 비행기 안에서 마주쳤다. 도망칠 수 없는 그곳에서 지나치게 발칙하고 지독하게 화끈한 로맨스가 펼쳐진다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/xLZQdhtdQasK2LwD86xhwe19pYG.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/7MXxVfzj77qA6aV3cOnj1AZnyDg.jpg",
-            "genres": [
-                "로맨스"
-            ],
-            "actors": [
-                "Son Woo-hyuk",
-                "Jeong Yoo-jin",
-                "Shin Yu-ju",
-                "Jeon Hyeon-soo",
-                "Baek In-Kwon",
-                "Kim Dae-hyeon",
-                "Joo In-cheol",
-                "Kim Soo-yeon",
-                "Kim Soo-ji",
-                "Yeong Ah"
-            ],
-            "director": "Choi Sang-hoon"
-        }
-    },
-    {
         "pk": 615,
         "model": "movies.movie",
         "fields": {
@@ -18574,30 +18042,6 @@
                 "Nathalie Emmanuel"
             ],
             "director": "James Wan"
-        }
-    },
-    {
-        "pk": 852370,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 852370,
-            "title": "아이돌 승하의 19금 AV를 찍자",
-            "release_date": "2021-06-24",
-            "popularity": 87.202,
-            "vote_avg": 6.6,
-            "description": "AV도 연습이 필요해!  성인영화 제작비를 배상할 위기에 처한 촬영감독 나은과 연출자 영태. 엉망이 된 촬영을 서로에게 탓하기 바쁘다. 재촬영을 하기에 앞서 나은은 영태에게 직접 배우가 돼서 촬영 연습을 하자 제안한다. 부끄러워하는 영태를 능숙하게 리드해나가는 나은. 연습의 끝은 어디까지일까...?",
-            "poster_url": "https://image.tmdb.org/t/p/w500/4CVYNzGwTMgOKxycg2LQO9slwfH.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/lQYIamZ7SZR4Ufq7mKUwPZtBYWL.jpg",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "Seung Ha",
-                "Yoo Jung",
-                "Si Woo",
-                "Kang Seo"
-            ],
-            "director": "Kim Ho"
         }
     },
     {
@@ -20430,38 +19874,6 @@
         }
     },
     {
-        "pk": 112160,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 112160,
-            "title": "밝히는 가족의 섹스 스토리",
-            "release_date": "2012-05-09",
-            "popularity": 68.435,
-            "vote_avg": 5.4,
-            "description": "프랑스 교외 도시의 평범한 가족. 하지만 모든 가족에게 비밀은 있다. 자위에 집착하고 수업시간에 핸드폰으로 몰래 자신을 촬영하는 데 재미를 붙인 로맹으로 인해 가족의 평온한 일상은 흔들리기 시작하고, 가족 내에서 금기시되었던 섹스는 중요한 관심사로 변한다. 10대 청소년에서 70대 노인까지, 섹스는 누구에게나 풀리지 않는 숙제인 법.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/vQDwzFYs1T3CQ26kzJVTWSeAocQ.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/gvtGBiE4r2xCVp0qR0mbM85Doxp.jpg",
-            "genres": [
-                "코미디",
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Mathias Melloul",
-                "Valérie Maës",
-                "Stephan Hersoen",
-                "Pierre Perrier",
-                "Yan Brian",
-                "Adeline Rebeillard",
-                "Leïla Denio",
-                "Gregory Annoni",
-                "Nathan Duval",
-                "Laetitia Favart"
-            ],
-            "director": "Jean-Marc Barr"
-        }
-    },
-    {
         "pk": 615457,
         "model": "movies.movie",
         "fields": {
@@ -21668,30 +21080,6 @@
         }
     },
     {
-        "pk": 711978,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 711978,
-            "title": "가슴 큰 울 엄마 2",
-            "release_date": "2020-05-27",
-            "popularity": 73.805,
-            "vote_avg": 5.2,
-            "description": "민수와 재혁은 사이좋은 부자지간이다. 그런데 어느날 아버지 민수가 젊은 새엄마 다희를 데려오고 재혁은 방황하다 집을 나가버리게 된다. 집을 나간 재혁이를 우연히 만난 다희의 친구 나연. 재혁을 잡아 둘이 이야기를 한다. 나연은 다희를 부르고... 다희는 재혁과 함께 집으로 돌아간다. 재혁이 돌아왔지만 크게 신경을 쓰지 않는 민수. 재혁은 다희에게 품은 감정을 말해버린다. 한편, 다희와 재혁의 사이를 못마땅해 하는 민수는 나연을 불러 시간을 가진다. 한편 그런 민수를 보며 다희가 걱정되는 나연은 새로운 계획을 세우는데....​",
-            "poster_url": "https://image.tmdb.org/t/p/w500/3qotZafIXzrgq7SUmHsBY6onRcU.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/vawcE8k02PmvrAgZE4BuwOcf6Hs.jpg",
-            "genres": [
-                "로맨스"
-            ],
-            "actors": [
-                "Yoo Jung",
-                "Han Yi-seul",
-                "Shin Yeon-ho",
-                "James"
-            ],
-            "director": "Lee Dong-Joon"
-        }
-    },
-    {
         "pk": 70981,
         "model": "movies.movie",
         "fields": {
@@ -22074,38 +21462,6 @@
                 "Josh Hamilton"
             ],
             "director": "Doug Liman"
-        }
-    },
-    {
-        "pk": 345,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 345,
-            "title": "아이즈 와이드 셧",
-            "release_date": "1999-07-16",
-            "popularity": 52.047,
-            "vote_avg": 7.5,
-            "description": "뉴욕의 크리스마스, 성공한 의사 빌 하퍼드와 그의 아름다운 아내 앨리스는 빌의 친구 지글러가 여는 크리스마스 파티에 참석한다. 파티에서 두 사람은 각각 이성으로부터 강한 성적 유혹을 받는다. 그 다음날 앨리스는 빌에게 숨겨왔던 비밀을 털어 놓는다. 여름 휴가 때 우연히 마주친 한 해군 장교의 매력에 반해 그에게 강한 충동을 느껴 그와 하루밤만 보낼 수 있다면 남편과 딸 모두를 포기할 수 있을 것만 같다는 것이 그 내용이다. 평소에 아내를 정숙한 여자라 믿어 왔던 빌은 커다란 충격을 받는다. 그날 밤 환자의 부음 소식을 듣고 집을 나선 그는 앨리스가 장교와 정사를 나누는 환상에 시달린다. 얼마 후 빌은 대학 동창인 닉으로부터 부자들의 비밀 섹스 파티에 대한 이야기를 듣게 되고 닉의 반대를 무시한 채 파티장에 찾아간다. 그러나 빌의 위장 침입이 곧 밝혀지는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/aUZ7GzsPR4PlpegU2QoGgFylyZ5.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/oqxIs6674wwQ6V4omFTYRF0R6Bl.jpg",
-            "genres": [
-                "드라마",
-                "스릴러",
-                "미스테리"
-            ],
-            "actors": [
-                "Tom Cruise",
-                "Nicole Kidman",
-                "Sydney Pollack",
-                "Marie Richardson",
-                "Rade Šerbedžija",
-                "Todd Field",
-                "Vinessa Shaw",
-                "Alan Cumming",
-                "Sky du Mont",
-                "Fay Masterson"
-            ],
-            "director": "Stanley Kubrick"
         }
     },
     {
@@ -22711,37 +22067,6 @@
         }
     },
     {
-        "pk": 249397,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 249397,
-            "title": "님포매니악: 볼륨 2",
-            "release_date": "2013-12-25",
-            "popularity": 62.877,
-            "vote_avg": 6.7,
-            "description": "무수한 남성을 만난 뒤 조는 첫 남자 제롬(샤이아 러버프)과 조우하고 사랑이라는 감정을 느낀다. 그러나 아이러니하게도 사랑은 성적 쾌감을 빼앗아갔다. 조는 삶의 공허함을 느끼게 되고 가학적인 방식으로 성적 만족을 제공하는 K(제이미 벨)를 찾아간다. 조는 감각을 되찾은 대가로 제롬을 잃지만 여성으로서 자신감을 되찾는다. 아무도 믿지 않고 아무 의미도 추구하지 않던 조는 자신의 분신이자 후계자인 P(미아 고스)에게 마음을 주기 시작하면서 조금씩 달라진다. 길고 긴 조의 경험담이 다다른 결론은 자신의 욕망을 인정한다는 것이다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/tsYCG9yLRr7p2ZBqtCe3162cT4n.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/oQEAWIr3thvSICvoQnFEqyuf0Oz.jpg",
-            "genres": [
-                "드라마",
-                "미스테리"
-            ],
-            "actors": [
-                "Charlotte Gainsbourg",
-                "Stellan Skarsgård",
-                "Stacy Martin",
-                "Shia LaBeouf",
-                "Willem Dafoe",
-                "Udo Kier",
-                "Jean-Marc Barr",
-                "Jamie Bell",
-                "Mia Goth",
-                "Michaël Pas"
-            ],
-            "director": "Lars von Trier"
-        }
-    },
-    {
         "pk": 278154,
         "model": "movies.movie",
         "fields": {
@@ -23343,29 +22668,6 @@
                 "Yoo Yeon-seok"
             ],
             "director": "Park Chan-wook"
-        }
-    },
-    {
-        "pk": 1270880,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1270880,
-            "title": "캣 윌리엄스: 깨어 있거나 잠들었거나",
-            "release_date": "2024-05-04",
-            "popularity": 87.939,
-            "vote_avg": 6.0,
-            "description": "2024년 5월 4일, 넷플릭스의 두 번째 라이브 스트리밍 스탠드업 이벤트에서 코미디언 캣 윌리엄스가 무대에 올라 실시간으로 웃음 폭탄을 선사한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/hjgAEcu8JEpeF7KEtmjTzPFD3uL.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/rGiiJARZf0SkyhIqf4j0mQQdycI.jpg",
-            "genres": [
-                "코미디",
-                "다큐멘터리",
-                "TV Movie"
-            ],
-            "actors": [
-                "Katt Williams"
-            ],
-            "director": "Troy Miller"
         }
     },
     {
@@ -25449,36 +24751,6 @@
         }
     },
     {
-        "pk": 10402,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 10402,
-            "title": "듀스 비갈로",
-            "release_date": "1999-12-10",
-            "popularity": 50.98,
-            "vote_avg": 5.976,
-            "description": "가진 건 없지만 착하고 순박한 듀스 비갈로(Deuce Bigalow: 롭 슈나이더 분). 로스 엔젤레스의 수족관 청소원인 그는 물고기 뿐 아니라 자신의 직업도 사랑한다. 그에게 꿈이 있다면 물고기들과 함께 바닷가로 이사가서 바닷 속의 물고기 친구들과 이웃하며 평화로운 삶을 누리는 것. 그렇지만, 고달픈 삶은 그의 조그만 행복마저 빼앗아간다. 수족관에서 해고된 것이다.  직장을 찾아 헤메던 비갈로는 말리부의 고급 아파트에 취직한다. 아파트 단지 내의 연못 청소일을 맡은 것으로 그곳에서 듀스는 쾌남 안토안(Antoine Laconte: 오데드 페르 분)을 만난다. 세계적인 수준의 고급 지골로(남자 접대부) 안토안은 남자들이 꿈꾸는 모든 것을 갖고 있었다. 멋진 아파트, 폼나는 자동차, 예쁜 여자 친구들. 게다가 듀스에게는 특히 탐나는 수족관까지! 그런데, 듀스가 안토안의 생활을 잠시나마 누려볼 기회가 찾아온다. 안토안이 유럽 여행을 떠나야 하는데, 그가 애지중지하는 중국산 관상어가 병에 걸린 것이다. 안토안은 듀스에게 집을 좀 봐달라고 부탁하면서 두 가지만을 당부하고 여행을 떠난다. 자신의 포르셰를 몰지 말 것, 그리고 절대로 전화는 받지 말 것. 별로 무리한 부탁을 아닌 것 같은데... 그렇지만, 실수로 안토안의 전화에 응답을 해버린데다가, 사소한 사고로 안토안의 전화에 응답을 해버린 데다가, 사소한 사고로 안토안의 수족관이 박살나는 바람에 그는 새로운 직업전선에 뛰어들게 된다. 이름하여 지골로! 6,000불을 마련하기 위해 팔자에 없던 플레이보이 신세가 된 것이다.  그 날부터 듀스의 기이한 러브 라이프가 시작된다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/pQ8zyEssiD7WCkWZioMR0TW5hjV.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/zDlHoyE9UGaHJLAk4rvu4v36nfk.jpg",
-            "genres": [
-                "코미디"
-            ],
-            "actors": [
-                "Rob Schneider",
-                "William Forsythe",
-                "Eddie Griffin",
-                "Arija Bareikis",
-                "Oded Fehr",
-                "Gail O'Grady",
-                "Richard Riehle",
-                "Jacqueline Obradors",
-                "Big Boy",
-                "Amy Poehler"
-            ],
-            "director": "Mike Mitchell"
-        }
-    },
-    {
         "pk": 294254,
         "model": "movies.movie",
         "fields": {
@@ -25541,37 +24813,6 @@
                 "Domhnall Gleeson"
             ],
             "director": "J.J. Abrams"
-        }
-    },
-    {
-        "pk": 310,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 310,
-            "title": "브루스 올마이티",
-            "release_date": "2003-05-23",
-            "popularity": 53.206,
-            "vote_avg": 6.715,
-            "description": "무능한 소시민이 전지전능한 능력을 얻어 능력을 남발하고 다니다 곧 \"신의 일에도 여러 가지 힘든 일이 따른다\"는 걸 알게 되는 것. 또한 전지전능한 능력으로도 사랑하는 사람의 마음과 자유 의지는 자기 뜻대로 할 수 없다는 것을 깨닫고 자신의 곁을 떠난 애인을 위해 신의 자리를 포기하기로 한다. 그때 마침 휴가 간 신이 돌아오고, 다시 평범한 리포터로 돌아와 깨달음을 얻고 행복한 삶을 되찾는다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/bIqFRqtvE3pDSgamXGIAbVCxAKG.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/llyfug8S5O3ha3pfZpdKKmOqg4t.jpg",
-            "genres": [
-                "판타지",
-                "코미디"
-            ],
-            "actors": [
-                "Jim Carrey",
-                "Morgan Freeman",
-                "Jennifer Aniston",
-                "Philip Baker Hall",
-                "Catherine Bell",
-                "Lisa Ann Walter",
-                "Steve Carell",
-                "Nora Dunn",
-                "Eddie Jemison",
-                "Paul Satterfield"
-            ],
-            "director": "Tom Shadyac"
         }
     },
     {
@@ -26020,31 +25261,6 @@
                 "Chris Cooper"
             ],
             "director": "Ben Affleck"
-        }
-    },
-    {
-        "pk": 473924,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 473924,
-            "title": "동창회의 목적: 더 비기닝",
-            "release_date": "2017-02-02",
-            "popularity": 74.046,
-            "vote_avg": 8.5,
-            "description": "걔랑 걔랑 사귄다고? 나도 걔랑 했는데?  친구끼리 막 해도 되는 건가?  알아도 모른 척, 몰라도 아는 척 했던 수많은 썸들의 전말 공개!  시도 때도 없이 이뤄지는 은밀한 작업들.  오늘은 선배랑, 내일은 후배랑, 모레는 동기랑.  우리들의 끈적끈적한 동창회의 목적이 밝혀진다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/sqJD8nD2zjRaENBsdcqwpJiSGXj.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/ji6mDx6xUAEsl65AZRrW6pWKxs4.jpg",
-            "genres": [
-                "코미디",
-                "로맨스"
-            ],
-            "actors": [
-                "Yoo Ji-won",
-                "Han Yeong-hoon",
-                "Han Seol-hwa",
-                "Han Gyeol"
-            ],
-            "director": ""
         }
     },
     {
@@ -26650,37 +25866,6 @@
         }
     },
     {
-        "pk": 50270,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 50270,
-            "title": "파프리카",
-            "release_date": "1991-02-13",
-            "popularity": 65.968,
-            "vote_avg": 6.9,
-            "description": "성적 욕망대로 사는 젊은 창녀들이 운명에 대항해 씩씩하게 사는 모습을 그리는 야한 드라마. 시골 소녀 파프리카는 도시로 나와 남자친구의 사업자금을 위해 한 고급 유곽에 들어간다. 그곳은 미지의 관능 세계였다. 수수께끼 같은 여주인과 창녀들의 지도를 받고, 이윽고 마담이 지어준 파프리카라는 이름으로 성의 세계로 깨어난다. 이리하여 그녀는 남자의 욕망에 절대 복종하게 되는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/jwlo74haG1XNmp5IdSJ5Gy3KuIm.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/9CkI4VsYF8qJWfZpPqwZnBctb3M.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Debora Caprioglio",
-                "Stéphane Bonnet",
-                "Stéphane Ferrara",
-                "Martine Brochard",
-                "Luigi Laezza",
-                "Rossana Gavinel",
-                "Clarita Gatto",
-                "Laura Piattella",
-                "Carla Salerno",
-                "Maria Cristina Mastrangeli"
-            ],
-            "director": "Tinto Brass"
-        }
-    },
-    {
         "pk": 43593,
         "model": "movies.movie",
         "fields": {
@@ -26899,38 +26084,6 @@
                 "Petar Knezevic"
             ],
             "director": "Sergej Moya"
-        }
-    },
-    {
-        "pk": 43347,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 43347,
-            "title": "러브 & 드럭스",
-            "release_date": "2010-11-04",
-            "popularity": 52.651,
-            "vote_avg": 7.049,
-            "description": "타고난 바람둥이 제이미(제이크 질렌할 분)는 넘치는 바람기 때문에 다니던 직장에서 해고를 당한다. 제약회사에 영업사원으로 취직한 제이미는 자신의 매력을 100% 활용, 병원을 상대로 영업에 나선다. 얽매이길 싫어하는 자유로운 영혼의 소유자인 매기(앤 헤서웨이 분). 그녀는 진지한 사랑에 빠지길 두려워하며 가벼운 관계만을 쫓아 하룻밤 상대로 남자들을 고른다.  병원에 영업차 갔던 제이미는 그곳에서 환자인 매기를 우연히 만나게 되고 장난스럽고 유쾌한 제이미의 연애신청이 싫지 않은 매기는 진지한 사랑보다는 몇 시간을 함께 보낼 잠자리 친구로 지내자고 제안한다.  한편, 화이자가 개발한 비아그라가 선풍적인 인기를 끌면서 제이미는 업계에서 승승장구하게 된다. 몸으로 하는 사랑(?)엔 쿨하고 마음으로 하는 사랑은 싫은 두 사람은 시간이 지날수록 서로의 매력에 이끌리게 되고 제이미는 매기에게 사랑을 고백하지만 그녀는 받아들이지 않는데……",
-            "poster_url": "https://image.tmdb.org/t/p/w500/3Q4rfwS3HliQa2Yhp9bIDYWetJb.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/rsBFDOVtsVQ76dcOsRMTmREFffV.jpg",
-            "genres": [
-                "드라마",
-                "코미디",
-                "로맨스"
-            ],
-            "actors": [
-                "Jake Gyllenhaal",
-                "Anne Hathaway",
-                "Oliver Platt",
-                "Hank Azaria",
-                "Josh Gad",
-                "Gabriel Macht",
-                "Judy Greer",
-                "Jill Clayburgh",
-                "George Segal",
-                "Kate Jennings Grant"
-            ],
-            "director": "Edward Zwick"
         }
     },
     {
@@ -27254,37 +26407,6 @@
         }
     },
     {
-        "pk": 19173,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 19173,
-            "title": "S 중독자의 고백",
-            "release_date": "2008-10-17",
-            "popularity": 61.822,
-            "vote_avg": 5.587,
-            "description": "사랑... 무엇일까 ? 그녀의 이름 발레리. 아름다운 그녀에게 아직 사랑이라는 것은 서툴고 잡기 힘든 존재이다. 사랑한다고 느꼈지만 만족할 수 없었던 첫 경험, 그리고 다시 찾아간 그의 방에서 찾아낸 특별한 시간. 사랑 보다 몸으로 먼저 느껴지는 감정에 충실해진 발레리는 자신에게 솔직하게 상대를 만나지만 그들은 사랑 없는 섹스에 질려 그녀를 떠나가고 만다. 그리고 우연히 면접에서 그녀에게 찾아 온 사랑. 남들처럼 장미 꽃과 와인, 고백과 근..",
-            "poster_url": "https://image.tmdb.org/t/p/w500/v6tERTerbKk6ACDtL7zxI1yZBk8.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/s7MXg9Srra1aptzaTkvtnHVYSF8.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Belén Fabra",
-                "Leonardo Sbaraglia",
-                "Llum Barrera",
-                "Geraldine Chaplin",
-                "Ángela Molina",
-                "Pedro Gutiérrez",
-                "José Chaves",
-                "Jorge Yaman",
-                "David Vert",
-                "Jaume García Arija"
-            ],
-            "director": "Christian Molina"
-        }
-    },
-    {
         "pk": 495764,
         "model": "movies.movie",
         "fields": {
@@ -27346,33 +26468,6 @@
                 "Emily Wickersham"
             ],
             "director": "D. J. Caruso"
-        }
-    },
-    {
-        "pk": 694943,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 694943,
-            "title": "배달노출: 알몸으로 유혹하기",
-            "release_date": "2020-04-10",
-            "popularity": 54.25,
-            "vote_avg": 7.2,
-            "description": "치킨집을 운영하는 석과 현진 부부.\r 변태섹스를 시도해보고 싶은 석은 현진에게 매일 졸라보지만 현진은 평범한게 좋다며 석의 요구를 들어주지 않는다. 그러던 어느 날, 치킨배달을 하다 배달노출을 즐기는 변태 커플 소라, 현수를 만나게 되는 석.\r 욕구불만이 쌓이던 석은 현진에게 소홀하게 되고 점점 소라 커플의 유혹에 중독되어 간다. 소원해진 현진과의 관계를 회복하기위해 둘만의 데이트 약속을 잡은 석과 현진.\r 그런데 마침 울리는 가게 전화. 전화를 받은 석은 소라, 현수의 섹스에 초대남으로 초대를 받게 된다. 자기를 위해 헌신한 아내와의 데이트냐 지금 아니면 평생 다시 없을지 모르는 초대남이냐 선택의 기로 놓인 석.\r 과연 석은 어떤 선택을 할 것인가. ​​",
-            "poster_url": "https://image.tmdb.org/t/p/w500/km7xKnZoHUXqiozCGzauunMp9OF.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/ruqcHnXZvszzPB4dvDuQI7DT7Wd.jpg",
-            "genres": [
-                "로맨스"
-            ],
-            "actors": [
-                "Yoo Jung",
-                "Yoon So-jung",
-                "Jin Si-ah",
-                "Baek Yoon-jae",
-                "Kang Min-woo",
-                "Shin Yeon-woo",
-                "Yuuta"
-            ],
-            "director": "Kong Ja-kwan"
         }
     },
     {
@@ -27504,34 +26599,6 @@
                 "Jonathan Harris"
             ],
             "director": "John Lasseter"
-        }
-    },
-    {
-        "pk": 532794,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 532794,
-            "title": "성판17: 남자들의 17가지 성적 판타지",
-            "release_date": "2017-11-13",
-            "popularity": 65.779,
-            "vote_avg": 6.2,
-            "description": "기하가 꿈꾸는 성적 판타지…  난데없이 나타난 조희가 실현시켜 준다. 그녀는 누구인가?  여자친구 영은이 딴 남자와 침대에서 뒹굴고 있는 모습을 본 기하! 오 마이 갓!  격한 배신감에 사무쳐 있을 즈음, 난데없이 기하가 사는 옥탑 옆 건물에 조희라는 여자가 이사를 온다. 예쁘고 다정해 보이는 조희, 기하에게 호감을 보이는 것은 물론 제대로 된 섹스 경험이 없는 기하가 “소원이 섹스…” 라고 하자, 한 술 더 떠서 기하의 판타지 속 섹스를 실현해 주겠다고 한다. 단 3주 후면 조희는 어딘가로 떠나야 한다고 하는데...  인정받는 연기파 배우 “최재환”, 아이돌 출신 배우 “박경희”의 거침없는 노출 연기  당신의 모든 성적 판타지를 이루어줄 이야기!",
-            "poster_url": "https://image.tmdb.org/t/p/w500/tA9MDNieaa5vhbOs7aY3aQr5fZ5.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/58qsiLrXYXxSJl5CjeeF7fZbKZH.jpg",
-            "genres": [
-                "코미디",
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Choi Jae-hwan",
-                "Park Kyoung-hee",
-                "Kim Nam-soo",
-                "Park Ha-on",
-                "Jo Ah-rang",
-                "Han Sang-gyoo"
-            ],
-            "director": "Song Eun-joo"
         }
     },
     {
@@ -27920,31 +26987,6 @@
         }
     },
     {
-        "pk": 481871,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 481871,
-            "title": "엄마의 직업",
-            "release_date": "2017-07-27",
-            "popularity": 62.501,
-            "vote_avg": 5.2,
-            "description": "\"누나를 가지고 싶어요\" \"나 의지가 약해, 유혹하지 말아줘\" 막 군대를 전역하고 학교로 복학한 대학생 현우. 어려운 가정 형편으로 인해 술집 아르바이트를 시작하게 되고 그 곳에서 운명의 여인 마담 유선을 만난다. 현우는 그녀의 거부할 수 없는 치명적인 매력에 점점 빠져들게 되지만 술집에 놀러온 친구 민석과 그를 접대하기 위해 온 유선의 충격적인 관계를 알게 된다. 유선이 얼마 전 미국에서 돌아온 민석의 엄마였던 것. 얼마 뒤 두 사람의 사이를 전혀 모르는 민석은 현우에게 자신의 집에서 함께 살자는 제안을 하게 되고, 이를 받아들인 현우는 유선과 위험하고도 아찔한 동거를 시작하게 되는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/oIoJrYsyg34fe66BWndCit1ekUD.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/gLwJ5SsmTqqUVn3lahlBacYSrGH.jpg",
-            "genres": [
-                "로맨스",
-                "드라마"
-            ],
-            "actors": [
-                "Lee Chae-dam",
-                "Jo Wan-jin",
-                "Do Mo-Se",
-                "Ahn Na-young"
-            ],
-            "director": "Do Bong-san"
-        }
-    },
-    {
         "pk": 300671,
         "model": "movies.movie",
         "fields": {
@@ -27975,31 +27017,6 @@
                 "Payman Maadi"
             ],
             "director": "Michael Bay"
-        }
-    },
-    {
-        "pk": 724106,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 724106,
-            "title": "18금 아이돌 승하의 섹스 스캔들",
-            "release_date": "2020-07-17",
-            "popularity": 50.065,
-            "vote_avg": 6.9,
-            "description": "어렸을 때 동네 친구인 민주와 서연은 서로를 아껴주며 친 자매 이상으로 가깝게 지내는 사이이다.  그런데 우연한 계기로 서연의 과외 선생님인 우현을 알게 되고 한 남자 때문에 10년 넘은 우정이 흔들리기 시작한다.  한편 그런 민주를 보고 상처받은 정수는 민주와 거리를 두려고 한다.  민주는 서연과의 오해 때문에 신경 쓰지 못한 정수가 그렇게 떠나 버릴 지도 모른다는 생각에 이번에는 서연의 도움을 받아 정수와 관계를 풀어 보려 한다.  그렇게 정수와 민주의 사이를 풀어 주는 도중에 민주와 서연도 다시 예전에 친했던 사이로 돌아가게 되는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/btpk0Y0m9MjvMCfgrW0i0d7fpd1.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/rnWEut44AFaC4G7H3nSwzKVIyV8.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Seung Ha",
-                "Seo Bo-ra",
-                "Si Hoo",
-                "Gil Dong"
-            ],
-            "director": "Choi Jin-chul"
         }
     },
     {
@@ -28433,36 +27450,6 @@
                 "Jung Hae-kyun"
             ],
             "director": "Kim Min-ho"
-        }
-    },
-    {
-        "pk": 55580,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 55580,
-            "title": "모넬라 3",
-            "release_date": "1995-08-30",
-            "popularity": 52.939,
-            "vote_avg": 5.823,
-            "description": "두 커플이 모래 사장에서 섹스를 하면서 상대방의 섹스 장면을 호기심 어린 눈빛으로 훔쳐보고, 창녀촌에 들어가서 자기의 와이프를 발견하고 색다른 섹스를 즐기며, 낯선 남자에게 자신의 비밀스러운 곳을 보여주는 등 성에 대한 호기심의 실체를 노골적으로 보여준다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/oVF9vgMY5W7aMC1HJStlIm95FQt.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/u40jevTRGVFZtZJpijRNnFFQPh0.jpg",
-            "genres": [
-                "코미디"
-            ],
-            "actors": [
-                "Tinto Brass",
-                "Cinzia Roccaforte",
-                "Cristina Rinaldi",
-                "Erika Savastani",
-                "Gaia Zucchi",
-                "Carla Solaro",
-                "Gabriella Barbuti",
-                "Alessandra Antonelli",
-                "Laura Gualtieri",
-                "Claudia Biagiotti"
-            ],
-            "director": "Tinto Brass"
         }
     },
     {
@@ -28935,36 +27922,6 @@
         }
     },
     {
-        "pk": 286687,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 286687,
-            "title": "화려한 외출",
-            "release_date": "2013-12-05",
-            "popularity": 61.951,
-            "vote_avg": 6.9,
-            "description": "화려한 겉과 달리 외로움에 빠져 있던 한 여인이  우연히 마주친 소년에게 사랑을 가르쳐주면서 진정한 사랑을 다시 느끼는  19금 힐링 로맨스  완성한 곡마다 히트를 기록하는 잘 나가는 작곡가, 희수!  그러나 새로운 곡을 써야 하는 상황에 직면했으나 아무래도 영감이 떠오르지 않는다.  외로움에 익숙해지다 못해 연애세포가 죽어가는 것 같은 이 기분을 어쩌지?  감정을 다 소모해버린 것 같은 허탈감에 젖어있던 희수는 아파트 엘리베이터에서 우연히 소년과 마주치고,  자신의 육감적 몸매에 흔들리는 소년의 눈빛에서 새로운 노래의 영감을 발견한다.  소년에게 음악을 가르쳐주는 것을 핑계로, 러브 레슨을 시작한 희수!  시간이 흐를수록 소년은 희수에게 빠져들고 희수는 소년을 보며 새로운 곡을 완성해나간다.  그런데, 희수에게 음악과 사랑을 가르쳐 주었던 인생의 스승 준호가 돌아왔다?  외로움에 무감각해져 가던 희수에게 가슴 떨리는 사랑을 다시 불러일으킬 남자는 과연 누구?!  작곡가 희수, 그녀의 짜릿한 음악이 지금 시작된다!",
-            "poster_url": "https://image.tmdb.org/t/p/w500/1bMvC9fOTQSfwIGwXBJNcy2cV9N.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/4fza1QWpGAoxReiEsnvdFBeMyfX.jpg",
-            "genres": [
-                "로맨스",
-                "드라마",
-                "코미디"
-            ],
-            "actors": [
-                "Kim Sun-young",
-                "Byun Jun-suk",
-                "Oh Cho-hee",
-                "Kim Ji-hoon",
-                "Heo Jung-min",
-                "Min Ji-Hyuk",
-                "Kim Da-bin",
-                "Nam Tae-boo"
-            ],
-            "director": "Ko Kyeong-Ah"
-        }
-    },
-    {
         "pk": 812037,
         "model": "movies.movie",
         "fields": {
@@ -28992,67 +27949,6 @@
                 "Jean Christophe Pilloix"
             ],
             "director": "Catherine Breillat"
-        }
-    },
-    {
-        "pk": 1631,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1631,
-            "title": "진실한 소녀",
-            "release_date": "1976-01-01",
-            "popularity": 78.533,
-            "vote_avg": 5.4,
-            "description": "때는 1963년 8월,14세 소녀 알리스는 여름방학을 랑드지방에 있는 부모님 집에서 보내게 된다. 침울한 엄마와 뚱뚱한 아빠 사이에서 외로운 소녀는 일기 속에다가 속마음과 섹스에 대한 호기심을 솔직하게 풀어놓는다.그녀는 또한 깨진 달걀, 밀초, 귀지, 토사물, 소변, 혈액 심지어 정액을 만지며 촉각을 즐긴다.그녀는 속바지도 없이 걸어 다니며, 자전거도 타고, 바닷가에 앉아 있기도 한다.어느날 '짐'이라는 건장한 체격과 조각 같은 얼굴의 20대 청년이 아버지의 목재소에 고용된다. 그녀는 그를 첫번째 애인으로 만들리라 결심하고 유혹을 하기 시작한다. 그러나 이미 약혼자가 있는 짐은 그녀의 유혹을 거절하고 그러면 그럴수록 알리스는 둘사이의 에로틱한 정사,나아가 사도매저키즘(가학적이며 피학적)인 환상에 빠져든다.드디어 짐과 밤에 만나기로 약속을 한 날, 눈치를 챈 부모는 그녀를 나가지 못하게 한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/sYLZxnRBoNekrbcLaEzBJSmRRh8.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/fEfFaByobTu2RR2KMMohmCNLReg.jpg",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "Charlotte Alexandra",
-                "Hiram Keller",
-                "Rita Maiden",
-                "Bruno Balp",
-                "Georges Guéret",
-                "Shirley Stoler",
-                "Thierry Roland",
-                "Marie-Hélène Breillat",
-                "Alexandra Gouveia",
-                "Carmelo Petix"
-            ],
-            "director": "Catherine Breillat"
-        }
-    },
-    {
-        "pk": 893694,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 893694,
-            "title": "사모님의 유혹",
-            "release_date": "2021-12-24",
-            "popularity": 56.037,
-            "vote_avg": 5.3,
-            "description": "세 사람의 은밀하고 각별한 관계. 그녀의 모든 것을 앗아가다  욕망이 가득한 사모님 빅토리아. 끊임없이 그녀를 유혹하는 그 앙큼한 메이드 에바, 두 사랑을 탐하다  메이드 에바는 하우스 보이의 끊임없는 열정적인 고백에 마음이 이끌리지만, 사모님과 매일을 함께하며 매혹적인 그녀의 모습에 자연스레 사랑을 느낀다. 세 사람의 은밀하고 각별한 관계를 즐기던 그녀는 둘 중 하나만 선택해야 한다는 사실을 깨닫는다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/t2VN3MShRg6TSZSBLHyHpqwjCrG.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/ougkufYSiruP8jrEHQanXN7DxRv.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Angeli Khang",
-                "Ava Mendez",
-                "Marco Gomez",
-                "Ivan Padilla",
-                "Angelica Cervantes",
-                "Quinn Carrillo",
-                "Cecil Paz",
-                "Max Durano",
-                "Edwin Reyes",
-                "Alecks Ambayec"
-            ],
-            "director": "Jeffrey Hidalgo"
         }
     },
     {
@@ -30660,30 +29556,6 @@
         }
     },
     {
-        "pk": 657654,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 657654,
-            "title": "선배부부와 교환섹스",
-            "release_date": "2019-12-23",
-            "popularity": 62.411,
-            "vote_avg": 6.0,
-            "description": "지방의 대학 커플 원영과 준석은 졸업까지 시간이 많이 남았지만, 준석이 이미 직장을 구해서 졸업때 까지 딱히 할 게 없던 두 사람은 방학을 맞아 동경에 사는 친한 선배부부 애리와 성호의 집에 놀러가기로 한다.  그들이 오기 하루 전, 크게 싸운 애리와 성호. 반갑게 맞이해주지만 왠지 모를 냉랭한 분위기를 느낀다. 성호는 준석에게 따로 전날 부부싸움 한 사실을 이야기하는데, 그날밤 섹스하자 조르는 원영에게 성호부부의 상황을 설명하며 다음에 하자고 미루는 준석. 원영은 결국 성욕을 참지 못하고 성호를 찾아가 유혹하는데, 애리는 그 모습을 보고 준석에게 찾아가 상황을 설명하며 둘도 바람을 피울것을 제안하는데…과연, 두 커플의 사랑은 어떻게 될것인지?",
-            "poster_url": "https://image.tmdb.org/t/p/w500/7Dxc4qV8p2whHmlyCSWtIsLYerA.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/kzF7Wtc6UTJVvggnwx0t5d2O5gm.jpg",
-            "genres": [
-                "로맨스"
-            ],
-            "actors": [
-                "Min Do-yoon",
-                "Kang Min-woo",
-                "Kim Choi He",
-                "Tae Joo"
-            ],
-            "director": "Choi Sung-gil"
-        }
-    },
-    {
         "pk": 718930,
         "model": "movies.movie",
         "fields": {
@@ -31191,36 +30063,6 @@
         }
     },
     {
-        "pk": 399905,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 399905,
-            "title": "여자전쟁: 비열한 거래",
-            "release_date": "2015-09-27",
-            "popularity": 57.331,
-            "vote_avg": 5.481,
-            "description": "불의의 사고로 실명을 하게 된 화가 하림. 남편을 위해 각막 기증자를 찾아 헤매는 아내 선영. 그런 그녀 앞에 각막을 기증하겠다는 말기 암 노인 대근이 나타난다. 남편의 각막기증을 두고 대근과 선영의 아찔하고 위험한 거래가 시작된다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/2xUNRZwprvVwfx12WR1rRXoohSi.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/igBXcB9KkYis1sspNgqxWl9tRsJ.jpg",
-            "genres": [
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Kim Sun-young",
-                "Dong Bang-woo",
-                "Lee Se-chang",
-                "Jung Seo-yoon",
-                "Lee Sung-jae",
-                "Kim Dong-seok",
-                "Kim Bong-soo",
-                "Park Jeong-wan",
-                "Kim Hee-yeol"
-            ],
-            "director": "No Zin-soo"
-        }
-    },
-    {
         "pk": 293863,
         "model": "movies.movie",
         "fields": {
@@ -31281,33 +30123,6 @@
                 "Jonathan Ajayi"
             ],
             "director": "Jesse V. Johnson"
-        }
-    },
-    {
-        "pk": 84706,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 84706,
-            "title": "도색",
-            "release_date": "2004-10-28",
-            "popularity": 65.843,
-            "vote_avg": 4.2,
-            "description": "'세 여자가 들려주는 도색적인 욕망에 대한 아름다움' 침울한 성격의 부동산 중개업자 메이리는 눈에 띄게 잘생긴 외모를 소유한 일본인 사진작가 킴과의 가학피학증적인 관계에 빠져든다. 이 둘은 상류층계 일본인 마담 우메키 소유의 럭셔리 한 대저택에 방문하고, 그곳에서 무언가에 심취해있는 경찰관, 미스터리 한 한국인 여성과 마주하게 된다. 그리고 그 속에서 그들과의 충돌, 욕정, 그리고 거부할 수 없는 욕망에 사로 잡히는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/8BanAWA9jDpQ6Hol78YuSffctM9.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "로맨스"
-            ],
-            "actors": [
-                "Teresa Cheung",
-                "Keiko Matsuzaka",
-                "Carl Ng",
-                "Sho Yokouchi",
-                "Harisu",
-                "Kenneth Tsang",
-                "Ku Feng"
-            ],
-            "director": "Yonfan"
         }
     },
     {
@@ -31403,29 +30218,6 @@
                 "Valentina Bellè"
             ],
             "director": "Michael Mann"
-        }
-    },
-    {
-        "pk": 412092,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 412092,
-            "title": "엄마친구 2",
-            "release_date": "2016-09-01",
-            "popularity": 56.618,
-            "vote_avg": 5.2,
-            "description": "“어서 와~ 우리집은 처음이지?”  미대 입시학원에 다니는 재수생 광호는 그나마 위안이 되어준 여자친구 미란에게 마마보이에 조루라는 이유로 차이고 만다. 미란을 피해 다른 학원으로 가려는 광호에게 엄마는 미술을 하는 엄마친구 수연을 소개해주고, 광호는 아직 미혼인데다 세련되고 지적인 외모의 수연에게 한눈에 반한다.  때마침 해외출장 중인 아빠가 병이 나서 광호의 엄마가 호주로 가게 되고, 광호는 며칠간 수연의 집에 머무르게 된다. 수연의 집에 온 광호는 수연을 보며 온갖 상상을 하고, 개방적인 성격의 수연의 조카 하경의 도발로 광호의 두근거리는 생활이 시작된다.  어느 날, 광호는 수연의 핸드폰 배경화면에 있는 남자가 자신의 아빠란 사실을 알게 되고, 수연의 작업실에서 하경과 섹스를 하던 중 자신의 아빠를 그린 그림을 보게 된다. 수연에게 아빠와의 관계를 따져 묻는 광호. 당황한 수연은 실은 자신이 혼자 짝사랑 한 거라며 감추고 있던 비밀을 말한다. 엄마에게 이 사실을 알려줘야 한다며 짐을 싸는 광호에게 수연은 어떤 부탁이든 들어줄 테니 비밀을 지켜달라는 간청을 한다. 수연의 간청에 망설이던 광호는 수연에게 섹스에 자신감이 없는 자신을 진짜 남자로 만들어 달라고 제안하는데…",
-            "poster_url": "https://image.tmdb.org/t/p/w500/mLlke4cd9R65FYqtMVUZ3h3Z2z9.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/dhaHfxS7AVNG53xdHOfJO5hRQbW.jpg",
-            "genres": [
-                "로맨스"
-            ],
-            "actors": [
-                "Park Joo-bin",
-                "Lee Cheon",
-                "Yeong Ah"
-            ],
-            "director": "Kim Dae-seong-I"
         }
     },
     {
@@ -31746,37 +30538,6 @@
                 "Hristo Petkov"
             ],
             "director": "Todor Chapkanov"
-        }
-    },
-    {
-        "pk": 292777,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 292777,
-            "title": "꽃과 뱀: 더 제로",
-            "release_date": "2014-05-17",
-            "popularity": 51.501,
-            "vote_avg": 6.2,
-            "description": "일반 여성을 납치하여 성적 노예로 삼아 실시간 스트리밍으로 생중계하는 불법웹사이트 ‘바빌론’. 그들을 처단하기 위해 스스로 성적 노예가 되어 추적하는 여형사 미사키와 남편의 빚을 갚기 위해 바빌론에 들어오게 된 그곳에 감금 된 시즈코. 주체할 수 없는 성욕에 괴로워하는 전업주부 루리. 이 세 여자는 각기 다른 이유로 ‘바빌론’에 모이게 된다. 어릴 적부터 ‘바빌론’에 교육받아 온 냉혈 안 ‘에디’. 여자를 가지고 무슨 짓을 하던 아무런 가책도 성욕도 느끼지 못한다. 하지만 착한 시즈코에게 어느 샌가 태어나 처음 느끼는 감정을 가지게 되고 그들은 만인들 앞에서 성 학대가 아닌 진정한 둘만의 교감을 가지게 된다. 그리고 밝혀지는 ‘바빌론’의 계획된 무시무시한 충격적 진실이 그들에게 덮쳐오는데……",
-            "poster_url": "https://image.tmdb.org/t/p/w500/vF4cmgk1EDcsPUcz3xg0TPGK2Cz.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/w3BKakhGKTyNs1G0mZsCj2HoRmD.jpg",
-            "genres": [
-                "미스테리",
-                "스릴러",
-                "드라마"
-            ],
-            "actors": [
-                "Maiko Amano",
-                "Noriko Hamada",
-                "Rina Sakuragi",
-                "Kanji Tsuda",
-                "Naoki Kawano",
-                "Hideo Sakaki",
-                "Yuuki Tsujimoto",
-                "Daikichi Sugawara",
-                "Yuichi Kimura"
-            ],
-            "director": "Hajime Hashimoto"
         }
     },
     {
@@ -32574,39 +31335,6 @@
                 "Bokeem Woodbine"
             ],
             "director": "Len Wiseman"
-        }
-    },
-    {
-        "pk": 277217,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 277217,
-            "title": "디센던츠",
-            "release_date": "2015-07-31",
-            "popularity": 53.202,
-            "vote_avg": 7.138,
-            "description": "디즈니의 각 왕국들은 힘을 모아 한 명의 새로운 지도자를 선출하고, 하나의 왕국으로 새롭게 탄생한다. 20년 후 2대 왕의 즉위를 앞두고, 디즈니 왕국에서 쫓겨났던 네 명의 악당들의 자녀들에게 디즈니 왕국의 학교를 다닐 수 있는 기회가 주어진다. 말리피센트의 딸 ‘말’과 크루엘라의 아들 ‘카를로스’, 이블 퀸의 딸 ‘에비’ 그리고 자파의 아들 ‘제이’. 이들이 디즈니 왕국 학교를 다니게 되면서 벌어지는 사건 사고들을 액션 어드벤쳐 뮤지컬로 만나본다!",
-            "poster_url": "https://image.tmdb.org/t/p/w500/65DkgHPSLVjgr6IYkpY9Aqqqid5.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/wy3ItrIw4DmLFxvFK5LM6FPwdQw.jpg",
-            "genres": [
-                "가족",
-                "모험",
-                "판타지",
-                "TV Movie"
-            ],
-            "actors": [
-                "Dove Cameron",
-                "Sofia Carson",
-                "Cameron Boyce",
-                "Booboo Stewart",
-                "Mitchell Hope",
-                "Melanie Paxson",
-                "Sarah Jeffery",
-                "Brenna D'Amico",
-                "Zachary Gibson",
-                "Jedidiah Goodacre"
-            ],
-            "director": "Kenny Ortega"
         }
     },
     {
@@ -33858,36 +32586,6 @@
         }
     },
     {
-        "pk": 337218,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 337218,
-            "title": "와일드 인 블루",
-            "release_date": "2014-05-05",
-            "popularity": 57.183,
-            "vote_avg": 4.5,
-            "description": "어렸을때 부모로부터 학대를 당한 찰리(프랭크 체르막 주니어)는 친구 벤(마르코스 마테오 오초아)과 정직한 영화를 찍기로 다짐 했지만 실제로는 스스로 범죄를 저지른 장면들을 촬영하기 시작한다. 계속 촬영을 하기 위해 길에서 여자를 납치해오거나 매춘부를 찾아가기도 한다. 그러던 어느 날 우연히 알게된 애슐리(샬롯 엘렌 프라이스)를 보고 사랑에 빠지기 시작하면서 많은 일들이 벌어지는데..",
-            "poster_url": "https://image.tmdb.org/t/p/w500/16aD0gIsLvnq2wv5zpywq00TwqR.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/uuAVFuH2nJVJDtfW8oOFJje0f2Z.jpg",
-            "genres": [
-                "공포"
-            ],
-            "actors": [
-                "Frank Cermak Jr.",
-                "Charlotte Ellen Price",
-                "Daveigh Chase",
-                "Marcos Mateo Ochoa",
-                "Karen Black",
-                "Steve Railsback",
-                "Rosemary Hochschild",
-                "Owen Teague",
-                "Azeen Kazemi",
-                "Andrea Lowell"
-            ],
-            "director": "Matthew Berkowitz"
-        }
-    },
-    {
         "pk": 1081676,
         "model": "movies.movie",
         "fields": {
@@ -34167,37 +32865,6 @@
         }
     },
     {
-        "pk": 108450,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 108450,
-            "title": "여우의 미소",
-            "release_date": "1992-05-22",
-            "popularity": 56.55,
-            "vote_avg": 5.6,
-            "description": "마크는 마이애미의 전직 경관. 그는 마약 판매업자의 뇌물을 받고 행위를 눈감아 주지만 그후에 마음을 바꾼다. 그러나 마약조직은 보복으로 그의 아내와 아들이 탄 차를 폭파시킨다. 경찰은 그의 지난 비리를 문제삼아 그를 파면하고 교도소로 보낸다. 출감 후 일거리를 찾던 그에게 아이레스에 가서 마피아 두목을 암살해 달라는 청탁이 들어온다. 그러던 중 그는 옆집의 여인 마리나에 끌리게 된다. 마크는 자신이 아이레스에 온 이유를 이야기 하고, 마리나는 지금 강제로 돈많고 권력있는 남자의 정부노릇을 하고 있다고 고백한다. 드디어 팩스로 암살대상이 들어온다. 암살대상은 바로 마리나의 애인 행크였다. 그 사실을 마리나에게 밝힌 마크는 그녀와함께 행크를 저격할 계획을 세운다. 그녀는 폴로시합중 행크가 입는 유니폼과번호 그리고 언제나 마스크를 쓰고 시합한다는 사실을 마크에게 알려준다. 폴로경기장에서 행크를 쓰러뜨린 마크는 방가로에서 마리나와 만난다. 그는 TV뉴스를 통해 그가 사살한 인물은 행크가 아니라는 사실을 알게 된다. 놀라는 그를 향해 마리나는 총을 쏘고, 빙가로 밖에서 기다리고 있던 행크가방안으로 들어와 마크가 자살한 것처럼 위장하기 위해 그에게로 다가선다. 그러나 마크는 죽진 않았다. 그 자리에서 행크를 사살한 마크는 달아나는 마리나를 향해 방아쇠를 당긴다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/e0C6tkKajFSVOdqVtyELanfqyCc.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/3XGjywr2ks1OeWHbqbp7e05AyDi.jpg",
-            "genres": [
-                "스릴러",
-                "드라마",
-                "로맨스"
-            ],
-            "actors": [
-                "Debora Caprioglio",
-                "Steve Bond",
-                "Sharon Marino",
-                "Leonardo Treviglio",
-                "Pedro Loeb",
-                "Raffaella Offidani",
-                "Raffaele Mottola",
-                "Martín Coria",
-                "Roberto Ricci"
-            ],
-            "director": "Sergio Martino"
-        }
-    },
-    {
         "pk": 700391,
         "model": "movies.movie",
         "fields": {
@@ -34317,36 +32984,6 @@
         }
     },
     {
-        "pk": 129123,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 129123,
-            "title": "구혼악몽",
-            "release_date": "1999-05-20",
-            "popularity": 61.891,
-            "vote_avg": 4.9,
-            "description": "록옙 (황추생)은 성욕을 잃은 부유한 남자로 수도승을 만난 이후, 아름다운 여학생과 사랑에 빠지는 에로틱한 꿈을 꾼다. 불행히도 꿈은 그에게 중요한 모든 것을 얻거나 파괴하려는 수도승의 음모였던 것이다. 마침내 록옙 이 꿈에서 깨어난후 주변의 모든일이 끔찍하게 잘못되기 시작하는데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/nRFxugw69D1qGzNixRwSUyKyHzU.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/mLMG7iT9iYk1liXhRV07ms2v7Sf.jpg",
-            "genres": [
-                "공포"
-            ],
-            "actors": [
-                "Anthony Wong Chau-Sang",
-                "Eric Wan Tin-Chiu",
-                "Berg Ng Ting-Yip",
-                "Pinky Cheung",
-                "Kei Heung",
-                "Mak King-Ting",
-                "Alannah Ong",
-                "Sunny Luk Kim-Ching",
-                "Le Rong-Rong",
-                "Siu Ling Wong"
-            ],
-            "director": "Steve Cheng Wai-Man"
-        }
-    },
-    {
         "pk": 369885,
         "model": "movies.movie",
         "fields": {
@@ -34408,33 +33045,6 @@
                 "Bianca Blizzard"
             ],
             "director": "Michael Mohan"
-        }
-    },
-    {
-        "pk": 423502,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 423502,
-            "title": "내 친구의 엄마",
-            "release_date": "2016-10-12",
-            "popularity": 50.351,
-            "vote_avg": 3.5,
-            "description": "엄마가 돌아가신 후, 엄마처럼 자신을 돌봐준 큰누나의 집에 찾아온 영재는 그곳에서 오랜만에 누나의 친구, 순애와 재회한다. 나이가 믿기지 않을 정도로 탐스럽고 매력적인 그녀. 순애의 도발로 두 사람은 비밀스러운 관계로 발전한다. 완숙한 그녀의 리드로 뜨거운 밤들을 보내던 어느 날, 그녀의 딸이 두 사람 사이에 끼어드는데... 파릇파릇 젊고 섹시한 딸, 노련하고 완숙미 넘치는 엄마, 그리고 모녀 사이에서 방황하는 남자. 세 사람 간의 파격적인 삼각 로맨스가 시작된다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500/19ly5EebC8LlejpbWWSBEMqtJz1.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/23irkwXmMjHQ2qaJSzyrYdWQfNK.jpg",
-            "genres": [
-                "로맨스"
-            ],
-            "actors": [
-                "Lee Eun-mi",
-                "Lee Yoo-chan",
-                "Kang Ye-na",
-                "Je Dong-hwa",
-                "Joo Ye-bin",
-                "Bae Na-Kwon",
-                "Kim Jeong-soo"
-            ],
-            "director": "Tak Seung-oh"
         }
     },
     {
@@ -34561,31 +33171,6 @@
                 "Xing Xing Cheng"
             ],
             "director": "Sébastien Vaniček"
-        }
-    },
-    {
-        "pk": 795774,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 795774,
-            "title": "그녀의 성적 환상",
-            "release_date": "2022-06-08",
-            "popularity": 54.495,
-            "vote_avg": 5.0,
-            "description": "대니는 맥스와의 관계로 임신했지만 그녀는 파티에서 그에게 말할 여유가 없다. 한편, 맥스는 여자친구 아비샤그의 성적 환상을 그녀와 함께 시도하느라 바쁜데...",
-            "poster_url": "https://image.tmdb.org/t/p/w500/gnLjcgNrXWtCO4qCxAdoI9RoHlU.jpg",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/v6H5APAuwlS5C87EUA0fyuDE2B3.jpg",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "Elisheva Weil",
-                "Leib Levin",
-                "Yoav Hayt",
-                "Hadar Katz",
-                "Hila Mann"
-            ],
-            "director": "Hadas ben Aroya"
         }
     },
     {
@@ -36065,229 +34650,6 @@
         }
     },
     {
-        "pk": 1386682,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386682,
-            "title": "근본 없는 영화",
-            "release_date": "2024-11-29",
-            "popularity": 2.689,
-            "vote_avg": 0.0,
-            "description": "영화감독을 준비 중인 백수 석훈에게 전 여자친구 수진이 찾아와 자신이 쓴 시나리오를 피드백해 달라고 요청한다. 시나리오는 석훈과 수진의 실제 연애 이야기. 석훈은 이 이야기가 세상 밖으로 나가길 원치 않는다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "박윤우"
-        }
-    },
-    {
-        "pk": 1386681,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386681,
-            "title": "소파 밑 괴물",
-            "release_date": "2024-11-29",
-            "popularity": 2.689,
-            "vote_avg": 0.0,
-            "description": "소파는 언제나 연석 차지다. 일의 연장선으로 한잔 걸치고 들어오면 아내는 안방에 얼씬도 말라 하고, 대출을 껴 겨우 구한 집은 방이 달랑 두 개라 딸에게 주면 남는 게 없기 때문이다. 가장 연석의 삶은 항상 이랬다. 희생하고 양보하고. 소파는 그런 연석이 찾은 그나마 나은 안식처다. 느닷없이 나타난 저 소파 밑 괴물에게 빼앗길 순 없단 말이다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "이신우"
-        }
-    },
-    {
-        "pk": 1386698,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386698,
-            "title": "K-ALMA-Q",
-            "release_date": "2024-11-29",
-            "popularity": 1.921,
-            "vote_avg": 0.0,
-            "description": "카자흐스탄의 도시, 알마티에는 사과 동상이 자주 보인다. 그런데 정작 사과 자체는 잘 보이지 않는다. 어떤 사람들은 그 사실에 화가 난 듯하다. 사과를 지키려는 사람들을 만날수록, 각자의 이야기와 함께 정치 상황에 대해 듣게 된다. 소련으로부터 독립한 이후 도시는 계속해서 발전하고, 사람들의 요구는 점점 더 복잡해지고, 사과는 사라지고 있다. 점차 알마티를 둘러싼 욕망들에 대해 질문하기 시작한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "다큐멘터리"
-            ],
-            "actors": [],
-            "director": "안소정"
-        }
-    },
-    {
-        "pk": 1386684,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386684,
-            "title": "그릇된 소녀",
-            "release_date": "2024-11-29",
-            "popularity": 1.905,
-            "vote_avg": 0.0,
-            "description": "300년 역사를 지닌 대한민국 최장 명창가 가주 진례의 장례식. 그녀의 딸이자 오늘날 최고의 명창이라 불리우는 소리청의 대모 채선과 가문의 명맥과 어긋난 꿈을 꾸는 손녀 소련이 각자 다른 한을 간직한 채로 서로 다른 노랫가락을 읊조린다. 집 안에 들어서면 모녀를 감시하듯 줄지어 노려보고 있는 역대 선대 명창들의 영정. 그런 영정 속 선대들을 등에 이고 근본이란 이름의 영광을 누리는 엄마 채선, 저런 영정 속 선대들을 마주하고 대적하는 새로운 미래를 꿈꾸는 후대 소련. 영정 속 선대들은 후대의 자유를 앗아 간 적인가, 그들의 영광을 이룩한 아군인가. 근본이란 이름하에 그릇 된 소녀에게 저항하는 그릇된 소녀의 이야기.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "육광수"
-        }
-    },
-    {
-        "pk": 1386112,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386112,
-            "title": "국도 7호선",
-            "release_date": "2024-11-29",
-            "popularity": 1.886,
-            "vote_avg": 0.0,
-            "description": "일본 아키타현 7번 국도변에 있는 작은 마을에서 어머니 경자와 함께 50년간 영업한 파친코 가게를 접기로 한 재일동포 영호는 은퇴 기념으로 어머니를 해외여행으로 초대하지만 어머니는 해외가 아닌 니가타로 가고 싶다고 한다. 영호는 니가타항에서 고모 순자가 그곳에서 북송 사업으로 북한으로 건너간 것을 떠올리며 어머니의 마음을 깨닫는다. 어머니가 돌아가시고 홀로 남겨진 영호는 어머니 앞으로 온 오래된 북한 편지를 발견한다. 그때 이혼하고 나서 일본인 어머니에게 이끌려 떨어져 살던 딸 나나가 찾아온다. 나나는 북한에서 온 편지를 보고 큰 관심을 가진다. 유서에 이끌려 영호는 나나와 함께 한국의 7번 국도를 달려 북쪽으로 향하는 여정으로 떠난다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/wTnSL0kej6mqYRzeXy0oVZM2fE7.jpg",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "Soji Arai"
-            ],
-            "director": "Jeon Jin-yoong"
-        }
-    },
-    {
-        "pk": 1386159,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386159,
-            "title": "언더랜드",
-            "release_date": "2024-11-29",
-            "popularity": 1.866,
-            "vote_avg": 0.0,
-            "description": "사람들에게 잊혀진 세계 언더랜드로 접속하게 된다. 이곳에는 누군가 아직 머물고 있다. 그가 이곳에 계속 거주하는 이유는 무엇일까? 그의 가이드를 따라 언더랜드를 탐방하게 된다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "다큐멘터리"
-            ],
-            "actors": [],
-            "director": "홍서연"
-        }
-    },
-    {
-        "pk": 1386125,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386125,
-            "title": "벌들의 비행",
-            "release_date": "2024-11-29",
-            "popularity": 1.152,
-            "vote_avg": 0.0,
-            "description": "고등부 국궁 대회 하루 전날, 양봉꾼 형철은 아들 원영이 활을 쏘는 궁도장 숲에 들어가 말벌집을 제거한다. 한편, 그날 주변인 모두와 마찰을 빚은 원영은 말벌이 든 포대를 활로 쏴 버리고, 모두를 벌에 쏘이게 만든다. 자신까지도.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/kzv38EukhQvtRoQ9zGRh0eBqXuy.jpg",
-            "genres": [],
-            "actors": [],
-            "director": "김구림"
-        }
-    },
-    {
-        "pk": 1386124,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386124,
-            "title": "연옥",
-            "release_date": "2024-11-29",
-            "popularity": 1.152,
-            "vote_avg": 0.0,
-            "description": "오랜 연인이자 극단 배우인 유리와 병우는 자신들이 주연을 맡은 연극 연옥의 무대 위에서 서로의 진심 어린 거짓을 확인한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/pe6yzdtHHmiufIf2Zfv1EuGOGyM.jpg",
-            "genres": [],
-            "actors": [],
-            "director": "장재경"
-        }
-    },
-    {
-        "pk": 1386119,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386119,
-            "title": "차가운 겨울 바람이 불어오면 하루를 보내",
-            "release_date": "2024-11-29",
-            "popularity": 1.152,
-            "vote_avg": 0.0,
-            "description": "장거리 연애를 하고 있는 세훈과 정이는 오랜만에 만나 함께 시간을 보낸다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/opA3IK8wODdwSAWqnaT94pHbn0A.jpg",
-            "genres": [],
-            "actors": [],
-            "director": "고승현"
-        }
-    },
-    {
-        "pk": 1386129,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386129,
-            "title": "녹색 눈동자",
-            "release_date": "2024-11-29",
-            "popularity": 1.058,
-            "vote_avg": 0.0,
-            "description": "1960년대, 한국 남쪽의 수많은 섬 중 하나. 큰 바위섬에 사는 수정은 맏딸로서 엄마의 불호령에 맞춰 일하기 바쁘다. 어느 날 수정은 산속에서 알 수 없는 포대기를 발견한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/etJtYrreAjWShEV08o3H9vuZ8Xl.jpg",
-            "genres": [],
-            "actors": [],
-            "director": "혜원"
-        }
-    },
-    {
-        "pk": 1369552,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1369552,
-            "title": "비트메이커",
-            "release_date": "2024-11-29",
-            "popularity": 0.56,
-            "vote_avg": 0.0,
-            "description": "흔한 시골 풍경 안에 있을 법한 판소리 기념관, 지역 주민들에게 마저 외면받는 장소가 되어 버린 이곳에 당대 명창이었던 박만춘의 손녀딸, 은솔이 과거의 유물 같은 존재가 되어 묵묵히 기념관을 지켜 왔다. 간간이 찾아오는 관광객 앞에서 판소리를 들려주던 은솔은 어느 날, 이곳에 몰래 숨어 들어온 힙합 음악을 만드는 또래, 시정이 연주하는 비트에 맞춰 노래를 부르게 된다. 우연한 둘의 음악적 만남은 은솔에게 기념관을 폐쇄의 위기에서 구해 낼 수 있는 유일한 희망이 될 거란 확신을 갖게 한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "음악",
-                "드라마"
-            ],
-            "actors": [
-                "Kim Jun-hyung",
-                "Go Do-eun",
-                "kaogaii",
-                "An Min-young",
-                "Park Si-bon"
-            ],
-            "director": "Shin In-kee"
-        }
-    },
-    {
-        "pk": 1386126,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386126,
-            "title": "홈",
-            "release_date": "2024-11-29",
-            "popularity": 0.528,
-            "vote_avg": 0.0,
-            "description": "주인공은 오래된 자신의 집을 청소하기 시작한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/enjH7dtlOTo3gQxcg8HFgPRbaEp.jpg",
-            "genres": [
-                "애니메이션"
-            ],
-            "actors": [],
-            "director": "이규진"
-        }
-    },
-    {
         "pk": 1391036,
         "model": "movies.movie",
         "fields": {
@@ -36320,141 +34682,6 @@
         }
     },
     {
-        "pk": 1379219,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1379219,
-            "title": "이인",
-            "release_date": "2024-11-30",
-            "popularity": 2.297,
-            "vote_avg": 0.0,
-            "description": "성철이 운영하는 카페에 영화감독 정웅이 찾아온다. 정웅은 자신이 쓰고 있는 시나리오를, 성철은 자신이 겪었던 일을 이야기한다. 정웅은 성철에게 그의 경험을 자신의 영화에 써도 되는지 묻는다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/uKrAyGkPya2bR7nS61P6Sjvf7e4.jpg",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "James Chung",
-                "Son Jun-young",
-                "Ryu Ji-min",
-                "Seon Ji-hyun",
-                "Lee Je-ryn",
-                "Kang Jeong-woong",
-                "Ryu Yu-hyeon",
-                "Jeon Han-na",
-                "Kim Solromon",
-                "Jee Yu-rim"
-            ],
-            "director": "Kim Kyung-rae"
-        }
-    },
-    {
-        "pk": 1379223,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1379223,
-            "title": "달팽이 농구단",
-            "release_date": "2024-11-30",
-            "popularity": 2.001,
-            "vote_avg": 0.0,
-            "description": "휠체어 농구하면 장애인 농구로 알고 있다. 하지만 휠체어 농구는 장애인과 비장애인이 함께하는 스포츠다. 1990년대 코트의 여우로 불렸던 국가대표 명가드 이원우 감독과 그의 제자 한사현 감독의 헌신적인 휠체어 농구 사랑을 영감으로, 인생의 정점에서 내려온 중년의 농구스타와 안하무인 농구천재, 그리고 사고로 둥근 강철 다리를 가진 사나이들이 휠체어 농구로 하나 되어 꿈을 완성해 가는 휴먼 액션 스포츠다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "Park Ho-san",
-                "Seo Ji-seok",
-                "Lee Noah",
-                "Heo Geon-young",
-                "Yook Jin-soo",
-                "Kim Jong-seong",
-                "Oh Sung-hoon",
-                "Park Gil-eun"
-            ],
-            "director": "Go Eun-gi"
-        }
-    },
-    {
-        "pk": 1379218,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1379218,
-            "title": "고백하지마",
-            "release_date": "2024-11-30",
-            "popularity": 1.852,
-            "vote_avg": 0.0,
-            "description": "장편 영화 ‘하나, 둘, 셋, 러브’의 촬영이 끝나고 뒤풀이 다음 날, 주연배우 충길은 같이 연기 한 배우 현경에게 자연스럽게 고백한다. 현경은 그런 충길의 고백이 불편하다. 어색한 두 사람의 관계 속에 의외의 사건이 벌어지고... 3개월 뒤, 현경과 충길은 각자 다른 이유로 부산을 찾게 되고 우연히 만나게 된다. 충길에게 또 한 번 고백의 기회가 생겼다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "Kim Chung-gil",
-                "Ryu Hyun-kyung"
-            ],
-            "director": "Ryu Hyun-kyung"
-        }
-    },
-    {
-        "pk": 1386149,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386149,
-            "title": "겨울잠",
-            "release_date": "2024-11-30",
-            "popularity": 1.716,
-            "vote_avg": 0.0,
-            "description": "곰 웅이와 너구리 영이는 입사 동기이다. 회사의 모든 구성원은 매해 겨울이 오면 겨울잠을 자는 동면 휴가에 들어간다. 하지만 언제부턴가 너구리 영이는 동면 휴가를 사용하지 않으며 일에만 몰두한다. 그런 영이가 곰 웅이는 이해가 가지 않지만 점점 초고속 승진을 하는 너구리 영이를 보며 곰 웅이도 마음이 흔들린다. 어느 사이 직장 분위기도 겨울잠을 자지 않는 기류가 가득해진다. 결국 웅이도 겨울잠을 포기한 채 직장 생활을 하게 되지만 차츰 피폐해지는 자신을 발견한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "애니메이션"
-            ],
-            "actors": [],
-            "director": "김우석"
-        }
-    },
-    {
-        "pk": 1386175,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386175,
-            "title": "산의 뱃속",
-            "release_date": "2024-11-30",
-            "popularity": 1.152,
-            "vote_avg": 0.0,
-            "description": "소이산은 한국전쟁 당시 격전지였던 장소들과 넓은 평야로 둘러싸인 철원에 위치한 야트막한 산이다. 신입 생태해설사 미령은 일터인 소이산을 오르다 우연히 베테랑 선배 해설사 명희를 만나게 된다. 둘은 함께 산을 오르며 탐방객 안내를 위한 스크립트를 연습한다. 이야기의 주제는 아주 작은 이끼와 지의류에서부터 아카시아 나무, 군사시설이 있는 소이산과 주변에 얽힌 이야기를 담고 있다. 산을 오르며 이들은 각자 자신의 기억 속 전쟁과 상실에 얽힌 개인적인 이야기를 마주하게 된다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "윤재원"
-        }
-    },
-    {
-        "pk": 1386168,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386168,
-            "title": "보이지 않는 도시에서",
-            "release_date": "2024-11-30",
-            "popularity": 1.152,
-            "vote_avg": 0.0,
-            "description": "보이지 않는 ‘나’는 우편엽서와 편지를 찾아다니다가 기차를 타고 공업 도시 울산으로 향한다. 공업탑 주변과 반구대 암각화 등을 돌아다니고, 공장이 보이는 숙소에서 누군가에게 편지를 쓴다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "다큐멘터리"
-            ],
-            "actors": [],
-            "director": "이채민"
-        }
-    },
-    {
         "pk": 1378973,
         "model": "movies.movie",
         "fields": {
@@ -36471,40 +34698,6 @@
             ],
             "actors": [],
             "director": "Park Jae-beom"
-        }
-    },
-    {
-        "pk": 1386151,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386151,
-            "title": "The Ice Cube",
-            "release_date": "2024-12-01",
-            "popularity": 2.667,
-            "vote_avg": 0.0,
-            "description": "밤은 매우 덥다. 강두는 여자친구인 윤아와 사랑을 나누고 있지만 그다지 즐기는 것 같지는 않다. 그는 집중하려고 노력해도 더위 때문에 계속할 수는 없다. 강두는 차가운 것을 찾기 위해 부엌으로 가고 얼음 조각을 피부에 문지르자 이전에는 느끼지 못했던 강렬한 흥분을 느낀다. 여자친구에게 들키지 않기 위해 화장실로 간 그는 몸에 스치는 얼음 조각이 강렬하고 아름다운 즐거운 경험이 된다. 하지만 얼음 조각이 빠르게 녹아 사라지는 순간은 덧없다. 얼음이 녹은 후 강두는 실망감과 죄책감, 혼란을 안고 윤아와 함께 침대로 돌아간다. 그녀는 강두가 자신을 더 이상 사랑하지 않는 것 같아 걱정스럽다고 말하지만 강두는 단지 더위 때문에 짜증이 났을 뿐이라고 말한다. 강두와 윤아는 다시 섹스를 하게 되지만 강두는 여전히 흥분을 느끼지 못하고 얼음 생각이 그의 마음을 덮칠 때까지 쾌락과 혼란을 느끼기 때문에 그것을 마음에서 지울 수 없다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500/aemUzo5UMj31CsDJe9HVXhdiFCk.jpg",
-            "genres": [],
-            "actors": [],
-            "director": "Adrián Nassar"
-        }
-    },
-    {
-        "pk": 1386101,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386101,
-            "title": "갈 곳 없는",
-            "release_date": "2024-12-01",
-            "popularity": 2.499,
-            "vote_avg": 0.0,
-            "description": "사회복지사로 일하는 김 대리는 박 과장을 따라 동네 어르신 주거 환경을 파악한다. 그 과정에서 버려진 집에서 듣게 되는 박 과장의 가슴 아픈 이야기를 알게 되고...",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "Jéro Yun"
         }
     },
     {
@@ -36533,112 +34726,6 @@
         }
     },
     {
-        "pk": 1386695,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386695,
-            "title": "초동, 다만 나의.",
-            "release_date": "2024-12-01",
-            "popularity": 1.921,
-            "vote_avg": 0.0,
-            "description": "자신을 흑 비둘기라 생각하는 무명작가 초동. 복잡한 도시. 과시와 바보 같은 취향에 아름답다 말하는 사람들. 남자는 그것들을 공작새라 부른다.  삐뚤어져만 가는 그에게 모하가 나타났고 확고했던 자신의 생각이 흔들리는데, 공작새들을 피해 눈앞에서 사라진 모하를 다시 만나기 위해 찾아다니는 하루. 그는 과연 자신만의 아름다움에 대한 답을 찾을 수 있을까.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "문종호"
-        }
-    },
-    {
-        "pk": 1386167,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386167,
-            "title": "마루와 내 친구의 결혼식",
-            "release_date": "2024-12-01",
-            "popularity": 1.88,
-            "vote_avg": 0.0,
-            "description": "비혼, 직장인, 장애인, 배우, 활동가 등등 다양한 수식어를 가진 민아. 친구 현경의 결혼식을 축하하러 모인 날, 깜장 치와와가 민아게게 다가온다. 민아는 깜장 치와와에게 ‘마루’라는 이름을 지어 주고, 그가 살아온 삶을 알아가기 시작한다. “귀여운” 마루, 오직 귀엽기 위해, 인간 세계에 귀여운 생명들을 제공하기 위해 견디어 온 시간들을. “마루야, 지금 네게는 뭐가 보이니?”",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "Lee Hyun-bin"
-        }
-    },
-    {
-        "pk": 1386696,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386696,
-            "title": "바위가 되는 법",
-            "release_date": "2024-12-01",
-            "popularity": 1.152,
-            "vote_avg": 0.0,
-            "description": "먹구름 낀 어느 여름, 미조와 모두는 컵스카우트 활동 도중 소원을 이루어 준다는 커다란 바위를 보게 된다. 그날 이후로 모두는 흔적도 없이 사라진다. 미조는 매일같이 모두를 찾아가지만 아무런 소용이 없다. 그러던 어느 날, 오랜 시간이 지나 미조에게로 모두가 찾아온다. 그러고는 말한다. 바위가 되고 싶다고.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "김가현"
-        }
-    },
-    {
-        "pk": 1386166,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386166,
-            "title": "다음 중 마리아가 전화를 건 목적은?",
-            "release_date": "2024-12-01",
-            "popularity": 1.152,
-            "vote_avg": 0.0,
-            "description": "SNS에서 BL 굿즈 제작을 하던 중학생 혜주는 동업자로부터 천만 원 사기를 당한다. 혜주는 평소 얄미웠던 남동생을 납치한 척 부모님에게 사기금을 뜯으려고 한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "김수하"
-        }
-    },
-    {
-        "pk": 1386155,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1386155,
-            "title": "급한음끄기",
-            "release_date": "2024-12-01",
-            "popularity": 1.152,
-            "vote_avg": 0.0,
-            "description": "소음 때문에 아랫집을 찾아간 윗집 커플. 소음을 꺼 달라 요청하지만 불가능하다고 말하는 아랫집 남자. 타협점을 찾지 못하고 대화가 계속되던 중, 갑자기 아랫집 사람들이 이상한 행동을 보이기 시작한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "김명선"
-        }
-    },
-    {
-        "pk": 1383119,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1383119,
-            "title": "곡산역",
-            "release_date": "2024-12-01",
-            "popularity": 0.295,
-            "vote_avg": 0.0,
-            "description": "남자는 항상 말을 하고 싶어 한다. 그러나 말을 들어주는 대상은 분명하지 않다. 정해진 것이라곤 전철 안에서 말하는 것뿐. 여느 날과 마찬가지로 서을 외곽을 관통하는 경의중앙선 전철에 올라탄 남자는 뚜렷한 대상 없이 출입문 유리창 앞에서 예전의 기억을 떠올리고 몽골 얘기를 늘어놓기 시작한다. 그의 말들은 계속 반복되거나 변형되고, 우주까지는 알지 못하는 그는 자기가 느낀 지구의 이치에 대해서 독백하듯 ‘말’을 뱉어낸다. 고통스럽기도 하고 내용들도 오락가락하는 ‘말’들. 남자의 얼굴은 때때로 슬프고 처연하다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "Park Jong-hwan"
-            ],
-            "director": "Cho Yong-gyu"
-        }
-    },
-    {
         "pk": 1378881,
         "model": "movies.movie",
         "fields": {
@@ -36655,201 +34742,6 @@
             ],
             "actors": [],
             "director": "Lee Heywon"
-        }
-    },
-    {
-        "pk": 1387218,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1387218,
-            "title": "작은 하루",
-            "release_date": "2024-12-02",
-            "popularity": 2.867,
-            "vote_avg": 0.0,
-            "description": "대학 졸업 후 독립도 취업도 하지 못한 이십 대 은아는 친구를 만나기 위해 낯선 도시 창원에 온다. 그러나 창원 터미널에 도착하자마자 휴대폰을 잃어버린다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "김진"
-        }
-    },
-    {
-        "pk": 1387214,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1387214,
-            "title": "공간 속 기억",
-            "release_date": "2024-12-02",
-            "popularity": 2.867,
-            "vote_avg": 0.0,
-            "description": "6‧25전쟁이 끝나고 할아버지가 집에 돌아오셨을 때. 집은 다 타 버려 연기가 나고 있었다. 할아버지는 가족들과 집을 다시 짓기 시작했다. 그렇게 70년이 흘렀다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "다큐멘터리"
-            ],
-            "actors": [],
-            "director": "박동규"
-        }
-    },
-    {
-        "pk": 1387213,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1387213,
-            "title": "그저 하루",
-            "release_date": "2024-12-02",
-            "popularity": 3.117,
-            "vote_avg": 0.0,
-            "description": "계약직 직원 지영은 마지막 출근을 하며 사용하던 물건들을 정리한다. 퇴근을 앞둔 그녀에게 인사팀 태영이 다가와 사원증을 반납하라고 요구한다. 사원증을 돌려주기 싫은 지영은 잠시 망설이지만, 회사 측은 다음 직원이 사용해야 한다며 반납을 강요한다. 결국 지영은 의미 없는 물건들만 챙긴 채 아쉬운 마음으로 회사를 떠난다. 그러나 버스 정류장에 도착한 지영은 다급히 회사로 돌아가야 할 일이 생긴다. 급하게 다시 회사로 향하지만, 이미 반납한 사원증 때문에 출입문을 열 수 없는 상황. 혼란스러워 하던 지영은 자신의 자리를 대신할 새 여직원을 만나게 되고, 그녀의 도움으로 마침내 회사에 들어가게 된다. 지영은 마지막 출근길에서 이직자와 입사자 사이의 묘한 경계에 서게 된다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "백승환"
-        }
-    },
-    {
-        "pk": 1387212,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1387212,
-            "title": "소박",
-            "release_date": "2024-12-02",
-            "popularity": 2.867,
-            "vote_avg": 0.0,
-            "description": "제2의 봉준호를 꿈꾸는 감독 여홍과 무명배우 주연은 어느 영화제로부터 연락을 받는다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "김종진"
-        }
-    },
-    {
-        "pk": 1387220,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1387220,
-            "title": "잔존하다",
-            "release_date": "2024-12-02",
-            "popularity": 1.372,
-            "vote_avg": 0.0,
-            "description": "영화감독 시연은 영원히 사랑하고 싶다. 하지만 그게 과연 가능한 일일까. 영원도, 사랑도 시연에게는 한없이 무겁기만 하다. 그러던 중, 우연히 발견한 부모님의 27년 전 편지 속 영원한 사랑을 확신하는 두 사람이 보인다. 영원을 꿈꾸던 재순과 재환의 사랑은 어디로 갔을까? 시연은 둘을 대상으로 다큐멘터리를 찍으며 영원히 사랑할 수 있는 법을 배우고자 한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "다큐멘터리"
-            ],
-            "actors": [],
-            "director": "정시연"
-        }
-    },
-    {
-        "pk": 1387217,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1387217,
-            "title": "환절기",
-            "release_date": "2024-12-02",
-            "popularity": 1.372,
-            "vote_avg": 0.0,
-            "description": "윤재는 전학을 앞두고 있다. 윤재는 등굣길에 마주친 민서와 잠시간 대화를 나눈다. 대화가 끝난 후에도 두 사람의 마음속에서는 좀처럼 서로의 잔상이 지워지지 않는다. 방과 후, 두 사람은 어디론가 향한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "김주리"
-        }
-    },
-    {
-        "pk": 1387216,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1387216,
-            "title": "평행선",
-            "release_date": "2024-12-02",
-            "popularity": 1.372,
-            "vote_avg": 0.0,
-            "description": "주인공인 지흔은 같은 아파트의 위층에 사는 현민과 엘리베이터를 같이 타기 싫어서 매일 아침 복도를 달린다. 그런 현민보다 마주하기 싫은 존재는, 바로 엄마의 애인인 현민의 아빠. 그들은 지흔에게서 엄마를 뺏어 가려는 것만 같다. 그러다, 학교에서 열린 학부모 면담 시간에 엄마가 현민이 엄마로 참석한 것을 지흔이 두 눈으로 목격하게 된다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "정은수"
-        }
-    },
-    {
-        "pk": 1383131,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1383131,
-            "title": "몽고반점",
-            "release_date": "2024-12-02",
-            "popularity": 0.675,
-            "vote_avg": 0.0,
-            "description": "건우에게 이웃 아이 도현을 돌보아야 하는 상황이 생긴다. 건우는 도현을 통해 자꾸만 다른 존재의 기억을 떠올린다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [
-                "드라마"
-            ],
-            "actors": [
-                "Kang Gil-woo"
-            ],
-            "director": "Cho Nam-hyun"
-        }
-    },
-    {
-        "pk": 1387210,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1387210,
-            "title": "무빙 아웃",
-            "release_date": "2024-12-03",
-            "popularity": 2.835,
-            "vote_avg": 0.0,
-            "description": "입주 작가의 계약 기간이 끝나면 작업실을 옮겨야 한다. 한동네에서 많은 작가들의 대이동이 시작되었다. 부산 원도심 중앙동에서 작업하는 ‘또따또가’ 레지던시 작가들에게 흔한 일상이 되어 버린 이사. 우리들의 방 문 창 길에 대한 이야기. 히요 방에서 키우던 고양이들은 모두 어디로 갔을까? 섬유 작가들의 방에서 들리던 미싱 소리는 이제 멈추었다. 하지만 골목길 사이를 지나가는 과일 트럭 소리, 인쇄소 기계 소리, 공사장 삽질 소리 그리고 하루의 시간을 알려 주던 FM 라디오 시그널 음악은 아직도 여전하다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "정지영"
-        }
-    },
-    {
-        "pk": 1387208,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1387208,
-            "title": "라스트씬",
-            "release_date": "2024-12-03",
-            "popularity": 2.585,
-            "vote_avg": 0.0,
-            "description": "상업영화의 배우로 활동하는 중학생 성미는 아이패드를 사기 위해 아르바이트로 단편영화에 출연한다. 그러던 어느 날 촬영 중 부상으로 하차한 감독을 대신해 자신이 단편영화의 감독이 되기로 결심한다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "황재필"
-        }
-    },
-    {
-        "pk": 1387209,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1387209,
-            "title": "404호의 사정",
-            "release_date": "2024-12-03",
-            "popularity": 1.921,
-            "vote_avg": 0.0,
-            "description": "404호와 관련된 세 여자 소정, 하연, 미지. 세 여자는 404호의 사정이 궁금하다.",
-            "poster_url": "https://image.tmdb.org/t/p/w500None",
-            "backdrop_url": "https://image.tmdb.org/t/p/w500None",
-            "genres": [],
-            "actors": [],
-            "director": "박장희"
         }
     },
     {
