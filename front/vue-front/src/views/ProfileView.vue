@@ -23,8 +23,22 @@
         {{ isFollowed ? '언팔로우' : '팔로우' }}
       </button>
     </div>
-
+    <div class="button-container">
     <h2>{{ user.username }}의 카테고리</h2>
+      <!-- <a v-if="isOwnProfile" class="add-category" href="#" @click.prevent="showCategoryModal = true"> -->
+        <a v-if="isOwnProfile" class="add-category" href="#" @click.prevent="showCreateCategoryModal = true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            새 카테고리
+          </a></div>
+          <!-- 새 카테고리 추가 버튼 -->
+      <!-- <div v-if="isOwnProfile" class="add-category">
+        <button class="btn btn-primary" @click="showCreateCategoryModal = true">
+          새 카테고리 만들기
+        </button>
+      </div> -->
     <div v-if="categories.length === 0" class="empty-message">
       <p>아직 카테고리가 없습니다.</p>
     </div>
@@ -46,12 +60,7 @@
         <p>영화 개수: {{ category.movies.length }}</p>
       </div>
     </div>
-      <!-- 새 카테고리 추가 버튼 -->
-      <div v-if="isOwnProfile" class="add-category">
-        <button class="btn btn-primary" @click="showCreateCategoryModal = true">
-          새 카테고리 만들기
-        </button>
-      </div>
+      
       <!-- 새 카테고리 추가 모달 -->
       <CreateCategoryModal
         v-if="showCreateCategoryModal"
@@ -111,6 +120,12 @@
         <button @click="saveRecommendation" class="save-btn">완료</button>
         <button @click="closeRecommendationModal" class="close-modal-btn">닫기</button>
       </div>
+      <!-- 카테고리 추가 모달 -->
+    <AddToCategoryModal
+      v-if="showCategoryModal"
+      :movie-id="movie.id"
+      @close="showCategoryModal = false"
+    />
     </div>
 </template>
 
@@ -501,5 +516,124 @@ button:hover {
   width: 20px;
   height: 20px;
   margin-right: 5px;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 버튼 사이 간격 */
+}
+
+.category-button {
+  margin-top: 23px; /* Adjust this value as needed to align with the YouTube logo */
+}
+
+/* 네온 버튼 스타일 */
+a {
+  position: relative;
+  display: inline-block;
+  padding: 15px 20px;
+  font-size: 14px; /* 텍스트 크기 조정 */
+    margin: 50px 0; /* 여백 조정 */
+  color: #e02ff0;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  overflow: hidden;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+a:hover {
+  background: #e02ff0;
+  color: #050801;
+  box-shadow: 0 0 5px #e02ff0, 0 0 25px #e02ff0, 0 0 50px #e02ff0,
+    0 0 200px #e02ff0;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
+a span {
+  position: absolute;
+  display: block;
+}
+
+a span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e02ff0);
+  animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #e02ff0);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+a span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #e02ff0);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #e02ff0);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
 }
 </style>
