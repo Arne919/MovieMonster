@@ -21,9 +21,15 @@
         <p><strong>감독:</strong> {{ movie.director }}</p>
         <!-- 카테고리 추가 버튼 -->
         <div class="button-container">
-        <button class="btn btn-primary category-button" @click="showCategoryModal = true">
-          카테고리 추가
-        </button>
+        <!-- <button class="btn btn-primary category-button" @click="showCategoryModal = true"> -->
+          <a href="#" @click.prevent="showCategoryModal = true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            카테고리 추가
+          </a>
+        <!-- </button> -->
         <div class="movie-youtube mt-4 text-center">
         <button
           type="button"
@@ -52,7 +58,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
-import axios from "axios";
+import axios from "axios"; 
 import AddToCategoryModal from "@/components/AddToCategoryModal.vue";
 import youtubeLogo from "@/assets/youtubeLogo.svg";
 import YoutubeTrailerModal from "@/components/YoutubeTrailerModal.vue";
@@ -157,7 +163,6 @@ p {
   
 }
 
-
 .movie-youtube {
   margin-top: 20px;
   text-align: center;
@@ -167,4 +172,112 @@ p {
   margin-top: 23px; /* Adjust this value as needed to align with the YouTube logo */
 }
 
+/* 네온 버튼 스타일 */
+a {
+  position: relative;
+  display: inline-block;
+  padding: 15px 20px;
+  font-size: 14px; /* 텍스트 크기 조정 */
+    margin: 20px 0; /* 여백 조정 */
+  color: #e02ff0;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  overflow: hidden;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+a:hover {
+  background: #e02ff0;
+  color: #050801;
+  box-shadow: 0 0 5px #e02ff0, 0 0 25px #e02ff0, 0 0 50px #e02ff0,
+    0 0 200px #e02ff0;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
+a span {
+  position: absolute;
+  display: block;
+}
+
+a span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e02ff0);
+  animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #e02ff0);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+a span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #e02ff0);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #e02ff0);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
 </style>
