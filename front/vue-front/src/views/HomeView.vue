@@ -68,7 +68,7 @@
           class="review-card"
           @click="navigateToDetail(review.id)"
         >
-          <img :src="review.poster_url" alt="포스터 이미지" class="poster" />
+          <img :src="getFullPosterUrl(review.poster_url)" alt="포스터 이미지" class="poster" />
           <div class="review-details">
             <h3>{{ review.title }}</h3>
             <p>작성자: {{ review.user }}</p>

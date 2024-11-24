@@ -21,22 +21,22 @@ from .models import Article, Comment
 @permission_classes([IsAuthenticated])
 def article_list(request):
     if request.method == 'GET':
-        # 수정: get_list_or_404를 사용하지 않고 all()을 사용하여 모든 게시글을 가져옴
-        articles = Article.objects.annotate(comment_count=Count('comments')).all()
+        # 댓글 수 포함하여 모든 게시글 가져오기
+        articles = Article.objects.annotate(comment_count=Count('comments')).select_related('movie')
         serializer = ArticleListSerializer(articles, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        movie_id = request.data.get('movie_id')  # movie_id를 요청에서 가져옴
-        movie = get_object_or_404(Movie, id=movie_id) if movie_id else None  # Movie 객체 가져오기
+        movie_id = request.data.get('movie_id')  # 요청에서 영화 ID 가져오기
+        movie = get_object_or_404(Movie, movie_id=movie_id) if movie_id else None
 
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user, movie=movie)
-            user = request.user
-            user.points += 100  # 100 포인트 추가
-            user.save()  # 사용자 정보 저장
+            request.user.points += 100  # 포인트 추가
+            request.user.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         
 # @api_view(['GET', 'POST'])
 # def article_list(request):
@@ -214,8 +214,10 @@ def top_reviews(request):
     """
     top_reviews = (
         Article.objects.annotate(like_count=Count('like_users'))
+        .select_related('movie')
         .order_by('-like_count')[:3]
     )
     serializer = ArticleListSerializer(top_reviews, many=True)
     return Response(serializer.data)
+
 
