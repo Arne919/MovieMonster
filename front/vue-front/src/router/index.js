@@ -20,6 +20,7 @@ import ProfileView from '@/views/ProfileView.vue'
 import CategoryDetail from '@/components/CategoryDetail.vue'
 import CategoryList from '@/components/CategoryList.vue'
 import CreateCategory from "@/components/CreateCategory.vue"
+import HomeView from '@/views/HomeView.vue'
 
 
 
@@ -28,16 +29,21 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'HomeView',
+      component: HomeView
+    },
+    {
+      path: '/reviews',
       name: 'ArticleView',
       component: ArticleView
     },
     {
-      path: '/articles/:id/edit',
+      path: '/reviews/:id/edit',
       name: 'EditView',
       component: EditView
     },
     {
-      path: '/articles/:id',
+      path: '/reviews/:id',
       name: 'DetailView',
       component: DetailView
     },
