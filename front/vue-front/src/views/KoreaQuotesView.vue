@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="text-center my-4">한국영화 명대사</h1>
+    <h1 class="text-center-title my-4">한국영화 명대사</h1>
 
     <div v-if="gameOver" class="text-center">
       <h2>게임 종료!</h2>
@@ -9,34 +9,59 @@
       <p>획득 가능한 포인트 : {{ 100 * correctCount }}</p>
 
       <!-- 포인트 획득하기 버튼 -->
-      <button
-        class="btn btn-success mt-3"
-        @click="openConfirmModal('claim')"
+      <a
+        class="mt-3 add_point"
+        href="#"
+        @click.prevent="openConfirmModal('claim')"
         data-bs-toggle="modal"
         data-bs-target="#confirmModal"
       >
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
         포인트 획득하기
-      </button>
+      </a>
+
 
       <!-- 게임 재시작 버튼 -->
-      <button class="btn btn-primary mt-3" @click="restartGame">다시 시작하기</button>
+      <a
+        class="mt-3 replay"
+        href="#"
+        @click.prevent="restartGame"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        다시 시작하기
+      </a>
 
       <!-- 랭크 확인하기 버튼 -->
-      <button
-        class="btn btn-info mt-3"
-        @click="openConfirmModal('rank')"
+      <a
+        class="mt-3 confirm_rank"
+        href="#"
+        @click.prevent="openConfirmModal('rank')"
         data-bs-toggle="modal"
         data-bs-target="#confirmModal"
       >
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
         랭크 확인하기
-      </button>
+      </a>
     </div>
 
     <div v-else>
       <p class="text-center">문제 {{ currentQuestionIndex + 1 }} / {{ totalQuestions }}</p>
 
       <div v-if="!showResult" class="review-container text-center">
-        <p class="review-text">{{ currentquote.movietext }}</p>
+        <!-- 타이핑 효과 -->
+        <div id="typing-box">
+          <span class="typing-text"></span><span class="blink">|</span>
+        </div>
+
         <div class="input-container text-center">
           <input
             v-model="userAnswer"
@@ -108,7 +133,7 @@
 <script>
 const COOLDOWN_KEY = "KoreaQuotesView"; // 고유 키 설정
 
-import { ref, onMounted } from "vue";
+import { ref, onMounted, nextTick } from "vue";
 import axios from "axios";
 import { useCounterStore } from "@/stores/counter";
 import { useRouter } from "vue-router";
@@ -132,7 +157,6 @@ export default {
     const store = useCounterStore();
 
     const setCooldown = () => {
-      // 현재 시간을 localStorage에 저장
       localStorage.setItem(COOLDOWN_KEY, Date.now());
     };
 
@@ -144,10 +168,10 @@ export default {
     const handleModalConfirm = async () => {
       if (modalAction.value === "claim") {
         await claimPoints();
-        setCooldown(); // 제한 시간 설정
+        setCooldown();
       } else if (modalAction.value === "rank") {
         await goToRank();
-        setCooldown(); // 제한 시간 설정
+        setCooldown();
       }
     };
 
@@ -173,7 +197,7 @@ export default {
 
     const updatePoints = async (points) => {
       try {
-        const response = await axios.post(
+        await axios.post(
           `${store.API_URL}/accounts/user/points/`,
           { points },
           {
@@ -197,6 +221,9 @@ export default {
       isCorrect.value = false;
       selectRandomReviews();
       currentquote.value = selectedQuotes.value[currentQuestionIndex.value];
+
+      // 타이핑 효과를 초기화하고 다시 실행
+      nextTick(() => typingEffect(currentquote.value.movietext));
     };
 
     const fetchReviews = async () => {
@@ -205,6 +232,8 @@ export default {
         reviews.value = response.data;
         selectRandomReviews();
         currentquote.value = selectedQuotes.value[currentQuestionIndex.value];
+        await nextTick();
+        typingEffect(currentquote.value.movietext); // 타이핑 효과 시작
       } catch (error) {
         console.error("Error loading reviews:", error);
       }
@@ -234,12 +263,26 @@ export default {
       currentQuestionIndex.value += 1;
       if (currentQuestionIndex.value < totalQuestions.value) {
         currentquote.value = selectedQuotes.value[currentQuestionIndex.value];
+        nextTick(() => typingEffect(currentquote.value.movietext)); // 다음 문제 타이핑 효과
       } else {
         gameOver.value = true;
       }
     };
 
     const getPosterUrl = (title) => `/korea_movie_poster/${title}.jpg`;
+
+    const typingEffect = (text) => {
+      const typingText = document.querySelector(".typing-text");
+      typingText.textContent = "";
+      let idx = 0;
+      const type = () => {
+        if (idx < text.length) {
+          typingText.textContent += text[idx++];
+          setTimeout(type, 100);
+        }
+      };
+      type();
+    };
 
     onMounted(() => {
       fetchReviews();
@@ -279,6 +322,11 @@ export default {
   margin-top: 40px;
 }
 
+.text-center-title {
+  color: #4caf50;
+  text-align: center;
+}
+
 .modal-backdrop {
   background-color: rgba(0, 0, 0, 0.2) !important;
 }
@@ -290,5 +338,347 @@ export default {
 
 .modal button {
   margin: 10px;
+}
+
+#typing-box {
+  font-size: 1.5rem;
+  color: #dddddd;
+}
+
+.blink {
+  animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+  to {
+    opacity: 0;
+  }
+}
+
+/* 포인트획득하기 버튼: 네온 스타일 */
+.add_point {
+  position: relative;
+  display: inline-block;
+  padding: 15px 20px;
+  font-size: 14px; /* 텍스트 크기 조정 */
+    margin: 50px 0; /* 여백 조정 */
+  color: #4caf50;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  overflow: hidden;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+.add_point:hover {
+  background: #4caf50;
+  color: #050801;
+  box-shadow: 0 0 5px #4caf50, 0 0 25px #4caf50, 0 0 50px #4caf50,
+    0 0 200px #4caf50;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
+.add_point span {
+  position: absolute;
+  display: block;
+}
+
+.add_point span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4caf50);
+  animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.add_point span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #4caf50);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.add_point span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #4caf50);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.add_point span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #4caf50);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
+
+/* 다시 시작하기 버튼: 네온 스타일 */
+.replay {
+  position: relative;
+  display: inline-block;
+  padding: 15px 20px;
+  font-size: 14px; /* 텍스트 크기 조정 */
+    margin: 50px 0; /* 여백 조정 */
+  color: #f54a4a;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  overflow: hidden;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+.replay:hover {
+  background: #f54a4a;
+  color: #050801;
+  box-shadow: 0 0 5px #f54a4a, 0 0 25px #f54a4a, 0 0 50px #f54a4a,
+    0 0 200px #f54a4a;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
+.replay span {
+  position: absolute;
+  display: block;
+}
+
+.replay span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f54a4a);
+  animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.replay span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #f54a4a);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.replay span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #f54a4a);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.replay span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #f54a4a);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
+
+/* 랭크 확인하기 버튼: 네온 버튼 스타일 */
+.confirm_rank {
+  position: relative;
+  display: inline-block;
+  padding: 15px 20px;
+  font-size: 14px; /* 텍스트 크기 조정 */
+    margin: 50px 0; /* 여백 조정 */
+  color: #3358ff;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  overflow: hidden;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+.confirm_rank:hover {
+  background: #3358ff;
+  color: #050801;
+  box-shadow: 0 0 5px #3358ff, 0 0 25px #3358ff, 0 0 50px #3358ff,
+    0 0 200px #3358ff;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
+.confirm_rank span {
+  position: absolute;
+  display: block;
+}
+
+.confirm_rank span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3358ff);
+  animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.confirm_rank span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #3358ff);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.confirm_rank span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #3358ff);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.confirm_rank span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #3358ff);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
 }
 </style>
