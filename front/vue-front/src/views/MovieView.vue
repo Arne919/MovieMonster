@@ -25,9 +25,6 @@
             class="card-img-top"
             :alt="movie.title"
           />
-          <div class="card-body">
-            <h5 class="card-title">{{ movie.title }}</h5>
-          </div>
         </div>
       </div>
     </div>
@@ -40,7 +37,11 @@
       <div v-for="section in sections" :key="section.name" class="mt-5">
         <div class="d-flex justify-content-between align-items-center">
           <h2>{{ section.title }}</h2>
-          <button class="btn btn-link" @click="goToMore(section.name)">더보기</button>
+          <!-- <button class="btn btn-link" @click="goToMore(section.name)">더보기 ></button> -->
+          <button class="btn-more" @click="goToMore(section.name)">
+            더보기 <span class="arrow">&gt;</span>
+          </button>
+
         </div>
         <div class="grid-container">
           <div
@@ -54,16 +55,12 @@
               class="card-img-top"
               :alt="movie.title"
             />
-            <div class="card-body">
-              <h5 class="card-title">{{ movie.title }}</h5>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 import { ref, onMounted } from "vue";
@@ -76,8 +73,8 @@ export default {
   setup() {
     const router = useRouter();
     const searchQuery = ref("");
-    const errorMessage = ref(""); // 오류 메시지 상태 추가
-    const searchResults = ref([]); // 검색 결과 상태
+    const errorMessage = ref("");
+    const searchResults = ref([]);
     const defaultPoster = "http://127.0.0.1:8000/media/default_movies/default-movie.png";
     const sections = ref([
       { name: "popular", title: "인기영화", movies: [] },
@@ -106,7 +103,6 @@ export default {
       }
     };
 
-    // 순서대로 영화 가져오기
     const getMoviesInOrder = (movies, count) => {
       return movies.slice(0, count);
     };
@@ -122,7 +118,6 @@ export default {
     const goToGenre = (genre) => {
       if (genre === "home") {
         router.push({ name: "MovieView" }).then(() => {
-          // 같은 경로일 경우 상태를 초기화
           window.location.reload();
         });
       } else {
@@ -133,40 +128,35 @@ export default {
     const getFullPosterUrl = (posterUrl) =>
       `https://image.tmdb.org/t/p/w500${posterUrl}`;
 
-    // 영화 검색
     const searchMovie = async () => {
-  if (!searchQuery.value.trim()) {
-    searchResults.value = []; // 검색어가 없으면 결과를 초기화
-    errorMessage.value = "영화 제목을 입력해 주세요.";
-    return;
-  }
-
-  try {
-    // 공백을 제거하여 검색어 전처리
-    const processedQuery = searchQuery.value.replace(/\s+/g, "");
-    console.log("전송된 검색어:", processedQuery); // 디버깅 로그
-
-
-    const response = await axios.get(
-      "http://127.0.0.1:8000/api/v1/movies/search/",
-      {
-        params: { title: processedQuery }, // 전처리된 검색어로 요청
+      if (!searchQuery.value.trim()) {
+        searchResults.value = [];
+        errorMessage.value = "영화 제목을 입력해 주세요.";
+        return;
       }
-    );
 
-    searchResults.value = response.data.map((movie) => ({
-      id: movie.id,
-      title: movie.title,
-      poster_url: movie.poster_url,
-      description: movie.description,
-    }));
-    errorMessage.value = ""; // 오류 메시지 초기화
-  } catch (error) {
-    errorMessage.value =
-      error.response?.data?.error || "영화 검색에 실패했습니다.";
-    searchResults.value = []; // 실패 시 빈 배열로 초기화
-  }
-};
+      try {
+        const processedQuery = searchQuery.value.replace(/\s+/g, "");
+        const response = await axios.get(
+          "http://127.0.0.1:8000/api/v1/movies/search/",
+          {
+            params: { title: processedQuery },
+          }
+        );
+
+        searchResults.value = response.data.map((movie) => ({
+          id: movie.id,
+          title: movie.title,
+          poster_url: movie.poster_url,
+          description: movie.description,
+        }));
+        errorMessage.value = "";
+      } catch (error) {
+        errorMessage.value =
+          error.response?.data?.error || "영화 검색에 실패했습니다.";
+        searchResults.value = [];
+      }
+    };
 
     onMounted(fetchMovies);
 
@@ -179,9 +169,9 @@ export default {
       goToGenre,
       getFullPosterUrl,
       getMoviesInOrder,
-      searchMovie, // searchMovie 메서드 추가
+      searchMovie,
       defaultPoster,
-      searchResults
+      searchResults,
     };
   },
 };
@@ -195,12 +185,12 @@ export default {
 .grid-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1rem;
   justify-content: start;
 }
 
 .card {
-  width: 200px;
+  width: 240px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
@@ -214,13 +204,27 @@ export default {
 
 .card-img-top {
   width: 100%;
-  height: 300px;
+  height: 360px;
   object-fit: cover;
 }
 
-.card-title {
-  font-size: 0.9rem;
-  font-weight: bold;
-  margin-top: 10px;
+.btn-more {
+  display: inline-flex;
+  align-items: center; /* 텍스트와 아이콘 정렬 */
+  color: #e5e5e5; /* 평소 텍스트 색상 (연한 흰색) */
+  font-size: 16px; /* 글자 크기 */
+  font-weight: 500; /* 적당한 두께 */
+  background: none; /* 배경 제거 */
+  border: none; /* 버튼 테두리 제거 */
+  cursor: pointer; /* 커서를 포인터로 변경 */
+  padding: 5px 10px; /* 버튼 안쪽 여백 */
+  text-decoration: none; /* 텍스트 장식 제거 */
+  transition: color 0.3s ease-in-out;
+}
+
+.btn-more .arrow {
+  margin-left: 5px; /* 텍스트와 화살표 간격 */
+  font-size: 18px; /* 화살표 크기 */
+  color: inherit; /* 부모의 텍스트 색상 상속 */
 }
 </style>

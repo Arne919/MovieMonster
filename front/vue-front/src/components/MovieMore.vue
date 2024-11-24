@@ -19,9 +19,6 @@
           class="card-img-top"
           :alt="movie.title"
         />
-        <div class="card-body text-center">
-          <h5 class="card-title">{{ movie.title }}</h5>
-        </div>
       </div>
     </div>
   </div>
@@ -104,12 +101,12 @@ export default {
 .grid-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1rem;
   justify-content: start;
 }
 
 .card {
-  width: 200px;
+  width: 240px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
@@ -123,14 +120,8 @@ export default {
 
 .card-img-top {
   width: 100%;
-  height: 300px;
+  height: 360px;
   object-fit: cover;
-}
-
-.card-title {
-  font-size: 0.9rem;
-  font-weight: bold;
-  margin-top: 10px;
 }
 
 .btn-secondary {
