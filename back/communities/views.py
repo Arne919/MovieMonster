@@ -206,3 +206,16 @@ def delete_comment(request, article_pk, comment_pk):
     
     comment.delete()
     return Response({"message": "댓글이 삭제되었습니다."}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+def top_reviews(request):
+    """
+    좋아요 순으로 상위 3개의 리뷰 반환
+    """
+    top_reviews = (
+        Article.objects.annotate(like_count=Count('like_users'))
+        .order_by('-like_count')[:3]
+    )
+    serializer = ArticleListSerializer(top_reviews, many=True)
+    return Response(serializer.data)
+

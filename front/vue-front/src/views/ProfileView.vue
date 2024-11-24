@@ -79,9 +79,6 @@
           <button v-if="isOwnProfile" @click="editRecommendation">추천 수정</button>
         </div>
       </div>
-      <div v-else>
-        <p>추천 데이터를 불러오는 중입니다...</p>
-      </div>
     </div>
 
     <!-- 추천 영화 모달 -->
