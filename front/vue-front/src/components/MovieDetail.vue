@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="container movie-detail"
-    :style="getBackdropStyle(movie.backdrop_url)"
-  >
+  <div class="container movie-detail">
     <div class="row">
       <!-- 좌측: 포스터 섹션 -->
       <div class="col-md-4 text-center">
@@ -23,22 +20,23 @@
         <p><strong>배우:</strong> {{ movie.actors?.join(", ") }}</p>
         <p><strong>감독:</strong> {{ movie.director }}</p>
         <!-- 카테고리 추가 버튼 -->
-        <button class="btn btn-primary" @click="showCategoryModal = true">
+        <div class="button-container">
+        <button class="btn btn-primary category-button" @click="showCategoryModal = true">
           카테고리 추가
+        </button>
+        <div class="movie-youtube mt-4 text-center">
+        <button
+          type="button"
+          class="btn"
+          data-bs-toggle="modal"
+          data-bs-target="#youtubeTrailerModal"
+        >
+          <img :src="youtubeLogo" alt="YouTube" class="youtube-logo" />
         </button>
       </div>
 
       <!-- 공식 예고편 섹션 -->
-      <div class="movie-youtube mt-4 text-center">
-      <h3>공식 예고편</h3>
-      <button
-        type="button"
-        class="btn"
-        data-bs-toggle="modal"
-        data-bs-target="#youtubeTrailerModal"
-      >
-      <img :src="youtubeLogo" alt="YouTube" class="youtube-logo" />
-        </button>
+    </div>
       </div>
     </div>
     <!-- 카테고리 추가 모달 -->
@@ -51,15 +49,13 @@
   </div>
 </template>
 
-
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import AddToCategoryModal from "@/components/AddToCategoryModal.vue";
 import youtubeLogo from "@/assets/youtubeLogo.svg";
 import YoutubeTrailerModal from "@/components/YoutubeTrailerModal.vue";
-
 
 const route = useRoute();
 
@@ -72,14 +68,6 @@ const getFullPosterUrl = (posterUrl) => {
   return `${baseUrl}${posterUrl}`;
 };
 
-// 배경 이미지 URL 생성
-const getBackdropStyle = (backdropUrl) => {
-  const baseUrl = "https://image.tmdb.org/t/p/original";
-  return backdropUrl
-    ? { backgroundImage: `url(${baseUrl}${backdropUrl})` }
-    : {};
-};
-
 // 영화 데이터 가져오기
 const fetchMovie = async () => {
   const movieId = route.params.id; // 라우터에서 영화 ID 가져오기
@@ -88,13 +76,33 @@ const fetchMovie = async () => {
       `http://127.0.0.1:8000/api/v1/movies/${movieId}/`
     );
     movie.value = response.data; // 응답 데이터 저장
+
+    // 배경 이미지 동적으로 설정
+    const backdropUrl = `https://image.tmdb.org/t/p/original${movie.value.backdrop_url}`;
+    document.body.style.backgroundImage = `url('${backdropUrl}')`;
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundRepeat = "no-repeat";
+    document.body.style.backgroundColor = "#000"; // 배경 이미지가 없을 경우 대비
   } catch (error) {
     console.error("Error loading movie:", error);
   }
 };
 
+// 컴포넌트 언마운트 시 배경 복구
+const resetBodyStyle = () => {
+  document.body.style.backgroundImage = "";
+  document.body.style.backgroundSize = "";
+  document.body.style.backgroundPosition = "";
+  document.body.style.backgroundRepeat = "";
+  document.body.style.backgroundColor = "";
+};
+
 // 컴포넌트 마운트 시 영화 데이터 로드
 onMounted(fetchMovie);
+
+// 컴포넌트 언마운트 시 스타일 복구
+onUnmounted(resetBodyStyle);
 </script>
 
 
@@ -102,16 +110,18 @@ onMounted(fetchMovie);
 .container {
   margin-top: 40px;
   padding: 20px;
+  background-color: rgba(0, 0, 0, 0.842); /* 반투명 검은색 배경 */
   border-radius: 8px;
+  color: white;
+  max-width: 1200px;
+  width: 90%; /* 중앙 정렬을 위해 적응형 너비 */
+  margin: 0 auto; /* 좌우 중앙 정렬 */
 }
+
 .movie-detail {
-  background-size: cover; /* 배경 이미지 크기를 전체 화면에 맞춤 */
-  background-position: center; /* 배경 이미지 위치를 중앙에 맞춤 */
-  background-repeat: no-repeat; /* 배경 이미지 반복 방지 */
-  background-color: rgba(0, 0, 0, 0.5); /* 배경색 (이미지가 없을 경우 대비) */
-  color: white; /* 텍스트 색상을 흰색으로 변경 */
-  border-radius: 15px;
+  padding: 40px;
 }
+
 .row {
   align-items: center; /* 세로 정렬 */
 }
@@ -136,14 +146,25 @@ p {
   font-size: 1rem;
   margin-bottom: 10px;
 }
-
-.youtube-logo {
-  width: 36px;
-  height: 36px;
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 버튼 사이 간격 */
 }
+.youtube-logo {
+  width: 50px;
+  height: 50px;
+  
+}
+
 
 .movie-youtube {
   margin-top: 20px;
   text-align: center;
 }
+
+.category-button {
+  margin-top: 23px; /* Adjust this value as needed to align with the YouTube logo */
+}
+
 </style>
