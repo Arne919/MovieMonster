@@ -43,8 +43,14 @@
       <p>수정일 : {{ store.formatDate(article.updated_at) }}</p>
       <button v-if="isAuthor" @click="goToEdit">게시글 수정</button> <!-- 수정 버튼 -->
       <button v-if="isAuthor" @click="deleteArticle">게시글 삭제</button> <!-- 삭제 버튼 -->
-      <p>좋아요 수: {{ article.like_count }}</p> <!-- 좋아요 수 표시 -->
-      <button @click="toggleLike">좋아요</button> <!-- 좋아요 버튼 추가 -->
+      <!-- 좋아요 -->
+      <div class="like-container">
+        <button class="like-button" @click="toggleLike">
+          <span v-if="isLiked" class="liked-icon">❤️</span>
+          <span v-else class="like-icon">🤍</span>
+        </button>
+        <span class="like-count">{{ likeCount }}</span>
+      </div>
 
       <!-- 댓글 목록 표시 -->
       <div v-if="comments && comments.length > 0">
@@ -92,6 +98,9 @@ const comments = ref([]); // 댓글 목록
 const newComment = ref(""); // 새로운 댓글 내용
 const isAuthor = ref(false); // 사용자가 작성자인지 여부
 
+const isLiked = ref(false); // 좋아요 상태
+const likeCount = ref(0); // 좋아요 수
+
 // 영화 디테일 페이지로 이동
 const navigateToMovieDetail = (movieId) => {
   router.push({ name: "MovieDetail", params: { id: movieId } });
@@ -105,37 +114,55 @@ const getFullPosterUrl = (posterUrl) => {
 
 // DetailView가 마운트되기전에 DRF로 단일 게시글 조회를 요청 후 응답데이터를 저장
 onMounted(() => {
-  axios({
-    method: "get",
-    url: `${store.API_URL}/api/v1/communities/${route.params.id}/`,
-    headers: {
-      Authorization: `Token ${store.token}`, // 토큰 추가
-    },
-  })
-    .then((res) => {
-      console.log('aa',res.data)
-      article.value = res.data;
-      isAuthor.value = article.value.user === store.Username; // 작성자인지 확인
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  // 댓글 목록 로드
-  axios({
-    method: "get",
-    url: `${store.API_URL}/api/v1/communities/${route.params.id}/comments/list`, // 댓글 목록 URL
-    headers: {
-      Authorization: `Token ${store.token}`, // 토큰 추가
-    },
-  })
-    .then((res) => {
-      comments.value = res.data; // 댓글 목록 업데이트
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  const articleId = route.params.id;
+  fetchArticle(articleId);
 });
+
+const fetchArticle = async (articleId) => {
+  try {
+    const response = await axios.get(`${store.API_URL}/api/v1/communities/${articleId}/`, {
+      headers: { Authorization: `Token ${store.token}` },
+    });
+    article.value = response.data;
+    isLiked.value = article.value.is_liked;
+    likeCount.value = article.value.like_count;
+  } catch (error) {
+    console.error("Error fetching article:", error);
+  }
+};
+
+const toggleLike = async () => {
+  try {
+    const updatedArticle = await store.updateLikeStatus(article.value.id);
+    article.value.is_liked = updatedArticle.action === "added";
+    article.value.like_count = updatedArticle.like_count;
+
+    // Pinia Store에 변경된 데이터를 반영
+    store.getArticles(true); // 새로 데이터를 동기화
+  } catch (err) {
+    console.error("좋아요 상태 업데이트 실패:", err);
+  }
+};
+
+// const toggleLike = async () => {
+//   try {
+//     const response = await axios.post(
+//       `${store.API_URL}/api/v1/communities/${article.value.id}/like/`,
+//       {},
+//       {
+//         headers: { Authorization: `Token ${store.token}` },
+//       }
+//     );
+//     isLiked.value = response.data.action === "added";
+//     likeCount.value = response.data.like_count;
+
+//     // Vue reactivity를 보장하기 위해 article.value도 업데이트
+//     article.value.is_liked = isLiked.value;
+//     article.value.like_count = likeCount.value;
+//   } catch (error) {
+//     console.error("Error toggling like:", error);
+//   }
+// };
 
 // 뒤로가기
 const goBack = () => {
@@ -146,22 +173,7 @@ const goToEdit = () => {
   router.push({ name: "EditView", params: { id: article.value.id } });
 };
 
-// 좋아요 토글
-const toggleLike = () => {
-  axios({
-    method: "post",
-    url: `${store.API_URL}/api/v1/communities/${article.value.id}/like/`,
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
-  })
-    .then((res) => {
-      article.value.like_count = res.data.like_count;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+
 
 // 댓글 작성 함수
 const submitComment = () => {
@@ -337,5 +349,32 @@ const deleteArticle = async () => {
 .star.filled {
   background: url("/assets/images/yellow-star.png") no-repeat center;
   background-size: contain;
+}
+
+/* 좋아요 버튼 스타일 */
+.like-container {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  gap: 8px;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.like-icon,
+.liked-icon {
+  color: #ff6b6b;
+}
+
+.like-count {
+  font-size: 16px;
+  color: #333;
 }
 </style>
