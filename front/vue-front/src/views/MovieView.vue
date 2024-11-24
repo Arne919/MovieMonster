@@ -267,7 +267,7 @@ export default {
 .btn-more {
   display: inline-flex;
   align-items: center; /* 텍스트와 아이콘 정렬 */
-  color: #e5e5e5; /* 평소 텍스트 색상 */
+  color: #d9d9d9; /* 평소 텍스트 색상 */
   font-size: 16px; /* 글자 크기 */
   font-weight: 500; /* 적당한 두께 */
   background: none; /* 배경 제거 */
