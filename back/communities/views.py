@@ -217,7 +217,7 @@ def top_reviews(request):
         .select_related('movie')
         .order_by('-like_count')[:3]
     )
-    serializer = ArticleListSerializer(top_reviews, many=True)
+    serializer = ArticleListSerializer(top_reviews, many=True, context={'request': request})
     return Response(serializer.data)
 
 
