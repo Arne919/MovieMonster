@@ -41,6 +41,11 @@ class User(AbstractUser):
             with Image.open(default_image_path) as default_img:
                 default_img.thumbnail((300, 300))
                 default_img.save(default_image_path)
+    
+    def get_profile_picture_url(self):
+        if self.profile_picture:
+            return self.profile_picture.url
+        return '/media/default-profile.png'  # 기본 이미지
 
 class Category(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='categories')

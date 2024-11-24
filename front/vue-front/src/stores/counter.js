@@ -30,6 +30,7 @@ export const useCounterStore = defineStore('counter', () => {
         headers: { Authorization: `Token ${token.value}` },
       })
       articles.value = response.data
+      console.log('pp',articles.value)
     } catch (error) {
       console.error('Error fetching articles:', error)
     }
