@@ -22,7 +22,7 @@
     </div>
 
     <!-- 영화 정보 카드 -->
-    <div class="movie-card" @click="navigateToMovieDetail(article.movie_id)">
+    <div class="movie-card" @click="navigateToMovieDetail(article.movie)">
       <img
         v-if="article.poster_url"
         :src="getFullPosterUrl(article.poster_url)"
@@ -37,7 +37,7 @@
           </span>
         </div>
         <p class="movie-overview">{{ article.movie_overview }}</p>
-        <p class="movie-rating">⭐ {{ article.movie_rating.toFixed(1) }}</p>
+        <p class="movie-rating">⭐ {{ article.movie_rating ? article.movie_rating.toFixed(1) : 'N/A' }}</p>
       </div>
     </div>
 
@@ -49,6 +49,11 @@
         <span v-else class="like-icon">🤍</span>
       </button>
       <span class="like-count">{{ likeCount }}</span>
+
+      <div class="comment-count">
+        <span class="comment-icon">💬</span>
+        <span class="comment-count-value">{{ article.comment_count }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -81,6 +86,7 @@ const toggleLike = async () => {
     // Local state 업데이트
     article.value.is_liked = updatedArticle.action === "added";
     article.value.like_count = updatedArticle.like_count;
+    console.log('pp',article.value)
 
     // 부모 컴포넌트에 업데이트 알림
     emit("update-article", article.value);

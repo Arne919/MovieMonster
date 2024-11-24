@@ -22,19 +22,17 @@ from .models import Article, Comment
 def article_list(request):
     if request.method == 'GET':
         # 댓글 수 포함하여 모든 게시글 가져오기
-        articles = Article.objects.annotate(comment_count=Count('comments')).select_related('movie')
+        articles = Article.objects.annotate(comment_count=Count('comments')).all()
         serializer = ArticleListSerializer(articles, many=True, context={'request': request})
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        movie_id = request.data.get('movie_id')  # 요청에서 영화 ID 가져오기
-        movie = get_object_or_404(Movie, movie_id=movie_id) if movie_id else None
-
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user, movie=movie)
-            request.user.points += 100  # 포인트 추가
-            request.user.save()
+            serializer.save(user=request.user)
+            user = request.user
+            user.points += 100  # 100 포인트 추가
+            user.save()  # 사용자 정보 저장
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         
@@ -58,7 +56,7 @@ def article_list(request):
 @api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated])
 def article_detail(request, article_pk):
-    article = get_object_or_404(Article, pk=article_pk)
+    article = get_object_or_404(Article.objects.annotate(comment_count=Count('comments')), pk=article_pk)
 
     if request.method == 'GET':
         serializer = ArticleSerializer(article, context={'request': request})
@@ -80,6 +78,7 @@ def article_detail(request, article_pk):
 @permission_classes([IsAuthenticated])  # 인증된 사용자만 접근 가능
 def delete_article(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
+    
     
     # 요청한 사용자가 게시글 작성자인지 확인
     if request.user != article.user:
@@ -116,7 +115,11 @@ def create_comment(request, article_pk):
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user, article=article)  # 현재 사용자와 게시글을 연결하여 저장
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            article.refresh_from_db()
+            return Response({
+            "comment": serializer.data,
+            "comment_count": article.comments.count()  # 최신 댓글 수 반환
+        }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['GET'])
