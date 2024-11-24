@@ -181,8 +181,8 @@ export default {
 }
 
 .genre-label {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 28px;
+  /* font-weight: bold; */
   color: #ffffff; /* 라벨 텍스트 색상 */
 }
 
