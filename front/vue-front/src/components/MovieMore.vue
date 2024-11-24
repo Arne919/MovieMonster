@@ -98,6 +98,8 @@ export default {
 
 <style scoped>
 .container {
+  width: 100%; /* 전체 화면 너비 */
+  padding: 0; /* 기본 패딩 제거 */
   margin-top: 20px;
 }
 

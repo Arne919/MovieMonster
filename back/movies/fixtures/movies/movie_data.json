@@ -10116,37 +10116,6 @@
         }
     },
     {
-        "pk": 1104171,
-        "model": "movies.movie",
-        "fields": {
-            "movie_id": 1104171,
-            "title": "다음 크리스마스에 만나요",
-            "popularity": 192.937,
-            "vote_avg": 6.4,
-            "description": "낭만에 죽고 사는 골수 로맨티스트. 이상형의 남자를 만나기 위해 뉴욕을 동분서주하는 대장정에 나선다. 그를 만나려면 이미 매진된 펜타토닉스 크리스마스 공연 티켓을 어떻게든 구해야 한다!",
-            "poster_url": "/2CpaK4kzfAB4tIUkMV53PizJkKu.jpg",
-            "genres": [
-                "Romance",
-                "Comedy",
-                "TV Movie"
-            ],
-            "actors": [
-                "Christina Milian",
-                "Devale Ellis",
-                "Kofi Siriboe",
-                "Kalen Allen",
-                "Mitch Grassi",
-                "Scott Hoying",
-                "Kirstin Maldonado",
-                "Kevin Olusola",
-                "Matthew Sallee",
-                "Priyanka"
-            ],
-            "director": "Rusty Cundieff",
-            "release_date": "2024-11-05"
-        }
-    },
-    {
         "pk": 896151,
         "model": "movies.movie",
         "fields": {

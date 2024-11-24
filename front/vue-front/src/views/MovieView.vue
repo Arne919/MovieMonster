@@ -233,6 +233,7 @@ export default {
 .container {
   overflow: hidden; /* 넘치는 콘텐츠 숨김 */
   width: 100%; /* 컨테이너 너비를 화면에 맞춤 */
+  padding: 0; /* 기본 패딩 제거 */
 }
 
 .grid-container {
