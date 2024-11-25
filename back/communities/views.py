@@ -3,7 +3,7 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from django.db.models import Count
+from django.db.models import Count, Sum
 from accounts.models import User, RecommendedMovie
 from movies.models import Movie
 
@@ -145,7 +145,8 @@ def get_ranking(request):
     users = (
         User.objects.annotate(
             articles_count=Count('article', distinct=True),
-            likes_count=Count('article__like_users', distinct=True),
+            # likes_count=Count('article__like_users', distinct=True),
+            likes_count=Count('article__like_users', distinct=False),  # 모든 게시물의 좋아요 수 총합 계산
             followers_count=Count('followers', distinct=True),
         )
         .order_by('-points')[:10]  # 상위 10명
@@ -183,7 +184,7 @@ def get_ranking(request):
             "profile_picture": profile_image_url,  # 프로필 사진 URL 추가
             "recommended_movie": recommended_movie_data,
         })
-
+        print(ranking_data)
     return Response(ranking_data)
 
 @api_view(['PUT'])
