@@ -1,6 +1,7 @@
 <template>
+  <div class="background-container"></div>
   <div class="container">
-    <h1 class="text-center my-4">게임하고 포인트 받자!</h1>
+    <h1 class="text-center tracking-in-expand-fwd my-4">게임하고 포인트 받자!</h1>
 
     <div class="game-list">
       <!-- 한국영화 명대사 -->
@@ -111,8 +112,27 @@ export default {
 </script>
 
 <style scoped>
+/* 배경 스타일 */
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(15, 30, 50, 0.9) 0%,    /* 중앙의 어두운 남색 */
+    rgba(10, 20, 35, 0.95) 70%,  /* 중간의 더 어두운 남색 */
+    rgba(5, 10, 20, 1) 100%      /* 테두리의 거의 검은 남색 */
+  );
+  z-index: -10;
+  pointer-events: none; /* 배경 클릭 차단 방지 */
+}
+
+
+
 .container {
-  margin-top: 20px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -122,6 +142,22 @@ export default {
   color: #4caf50;
   font-size: 2rem;
   font-weight: bold;
+  animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; /* 애니메이션 추가 */
+}
+
+@keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
 }
 
 .game-list {
