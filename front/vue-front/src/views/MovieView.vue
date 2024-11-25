@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h1 class="text-center tracking-in-expand-fwd my-4">MOVIE MONSTER</h1>
     <!-- 장르 선택 -->
     <div class="genre-search-container">
     <GenreMovie @genre-selected="goToGenre" />
@@ -233,8 +234,29 @@ export default {
 
 
 <style scoped>
+.text-center {
+  padding-top: 40px;
+  color: #39ffe5;
+  font-size: 2rem;
+  font-weight: bold;
+  animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; /* 애니메이션 추가 */
+}
+@keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
 .container {
-  
   overflow: hidden; /* 넘치는 콘텐츠 숨김 */
   width: 100%; /* 컨테이너 너비를 화면에 맞춤 */
   padding: 0; /* 기본 패딩 제거 */
@@ -331,8 +353,9 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  color: #39ffe5;
   border: none;
+  font-weight: bold;
   cursor: pointer;
   padding: 10px 15px;
   z-index: 10;
@@ -414,7 +437,7 @@ body {
 
 /* 버튼 손잡이 - 흰색 */
 .search-btn:after {
-  background: #fff; /* 흰색 손잡이 */
+  background: #fff; 
   border-radius: 0 0.25em 0.25em 0;
   top: 51%;
   left: 51%;
@@ -478,7 +501,7 @@ body {
 .search-bar input {
 	background: transparent;
 	border-radius: 1.5em;
-	box-shadow: 0 0 0 0.4em #fff inset;
+	box-shadow: 0 0 0 0.4em #39ffe5 inset;
 	padding: 0.75em;
 	transform: translate(0.5em,0.5em) scale(0.5);
 	transform-origin: 100% 0;
@@ -497,7 +520,7 @@ body {
 	transform: scale(1);
 }
 .search-btn {
-	background: #fff;
+	background: #39ffe5; /* 흰색 손잡이 */
 	border-radius: 0 0.75em 0.75em 0 / 0 1.5em 1.5em 0;
 	padding: 0.75em;
 	position: relative;
@@ -539,7 +562,7 @@ body {
 /* Active state */
 .search-bar input:focus + .search-btn,
 .search-bar input:valid + .search-btn {
-	background: #3a3a3a;
+	background: #39ffe5af;
 	border-radius: 0 0.375em 0.375em 0;
 	transform: scale(1);
 }
@@ -552,7 +575,7 @@ body {
 .search-bar input:focus + .search-btn:hover,
 .search-bar input:valid + .search-btn:hover,
 .search-bar input:valid:not(:focus) + .search-btn:focus {
-	background: #3a3a3a;
+	background: #39ffe5d8;
 }
 .search-bar input:focus + .search-btn:active,
 .search-bar input:valid + .search-btn:active {
@@ -571,7 +594,7 @@ body {
 	}
 	.search-bar input:focus,
 	.search-bar input:valid {
-		background: #3d3d3d;
+		background: #39ffe5;
 		box-shadow: 0 0 0 0.1em #3d3d3d inset;
 	}
 	.search-btn {

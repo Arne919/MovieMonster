@@ -21,7 +21,7 @@
         <p><strong>배우:</strong> {{ movie.actors?.join(", ") }}</p>
         <p><strong>감독:</strong> {{ movie.director }}</p>
         <!-- 카테고리 추가 버튼 -->
-        <div class="button-container">
+        <div class="button-container d-flex align-items-center">
           <a href="#" @click.prevent="showCategoryModal = true">
             <span></span>
             <span></span>
@@ -29,21 +29,23 @@
             <span></span>
             카테고리 추가
           </a>
-        </div>
-
-        <!-- YouTube 섹션 -->
-        <div class="movie-youtube mt-4 text-center">
-          <button
+        
+        <button
             type="button"
-            class="btn"
+            class="btn youtube-btn"
             data-bs-toggle="modal"
             data-bs-target="#youtubeTrailerModal"
           >
-            <img :src="youtubeLogo" alt="YouTube" class="youtube-logo" />
+        <img :src="youtubeLogo" alt="YouTube" class="youtube-logo" />
+        <!-- YouTube 섹션 -->
+        <!-- <div class="movie-youtube mt-4 text-center"> -->
+          
+            
           </button>
         </div>
+        </div>
       </div>
-    </div>
+    
     <!-- 카테고리 추가 모달 -->
     <AddToCategoryModal
       v-if="showCategoryModal"
@@ -157,12 +159,20 @@ p {
 .button-container {
   display: flex;
   align-items: center;
-  gap: 10px; /* 버튼 사이 간격 */
+  gap: 15px; /* 버튼 사이 간격 */
 }
 
 .youtube-logo {
   width: 50px;
   height: 50px;
+}
+
+.youtube-btn {
+  background: none; /* 버튼 배경 없애기 */
+  border: none; /* 버튼 테두리 없애기 */
+  margin-top: 20px;
+  padding: 0;
+  cursor: pointer;
 }
 
 .movie-youtube {

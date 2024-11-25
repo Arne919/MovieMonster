@@ -27,7 +27,7 @@
         <div class="new-category">
           <input
             v-model="newCategoryName"
-            placeholder="새 카테고리 이름"
+            placeholder="새 카테고리 이름을 입력하세요."
             class="category-input"
           />
           <button class="btn btn-create" @click="createCategory">
@@ -155,7 +155,7 @@ export default {
   color: white;
   padding: 25px;
   border-radius: 15px;
-  width: 450px;
+  width: 400px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4),
               0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
@@ -217,7 +217,7 @@ export default {
 
 /* 추가 버튼 */
 .btn-add {
-  background: #3a3a3a;
+  background: #39ffe585;
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -227,7 +227,7 @@ export default {
   transition: all 0.3s ease;
 }
 .btn-add:hover {
-  background: #555555;
+  background: #39ffe5c2;
 }
 
 /* 새 카테고리 생성 섹션 */
@@ -236,7 +236,8 @@ export default {
 }
 
 .category-input {
-  width: calc(100% - 100px);
+  /* width: calc(100% - 100px); */
+  width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #444;
@@ -251,7 +252,7 @@ export default {
 
 /* 생성 버튼 */
 .btn-create {
-  background: #3a3a3a;
+  background: #39ffe585;
   border: none;
   padding: 8px 15px;
   border-radius: 5px;
@@ -262,6 +263,6 @@ export default {
 }
 
 .btn-create:hover {
-  background: #555555;
+  background: #39ffe5c2;
 }
 </style>
