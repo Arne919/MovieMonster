@@ -73,6 +73,9 @@
     })
       .then(() => {
         alert('수정이 완료되었습니다.')
+
+          // store에 있는 articles 배열 업데이트
+        store.getSortedArticles('recent');
         router.push({ name: 'DetailView', params: { id: route.params.id } }) // 수정 후 상세 페이지로 이동
       })
       .catch((err) => console.log(err))

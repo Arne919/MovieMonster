@@ -78,10 +78,10 @@ export const useCounterStore = defineStore('counter', () => {
 
   // 정렬된 데이터 가져오기
   const getSortedArticles = async (sortOrder = "recent") => {
-    if (!articles.value.length) {
-      console.log("Fetching articles from server...");
+    // if (!articles.value.length) {
+    //   console.log("Fetching articles from server...");
       await fetchArticles();
-    }
+    // }
     console.log('111',articles.value)
   
     // 정렬만 수행
@@ -444,13 +444,14 @@ axios.defaults.headers.common['Authorization'] = () => `Token ${token.value}`;
 
   const createArticle = async (articleData) => {
     try {
+      console.log('bb',articleData)
       const response = await axios.post(`${API_URL}/api/v1/communities/`, articleData, {
         headers: {
           Authorization: `Token ${token.value}`,
         },
       });
       console.log("Article created successfully:", response.data);
-      articles.value.unshift(response.data); // 새 리뷰를 맨 앞에 추가
+      
       return response.data;
     } catch (error) {
       console.error("Error creating article:", error);

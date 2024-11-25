@@ -38,6 +38,7 @@ const router = useRouter()
 const store = useCounterStore()
 
 const articles = computed(() => store.articles);
+console.log('vvv',articles)
 
 const sortOrder = ref('recent') // 기본 정렬 기준: 최신순
 

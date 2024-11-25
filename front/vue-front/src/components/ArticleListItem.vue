@@ -18,28 +18,33 @@
     <!-- 리뷰 내용 -->
     <div class="review-content">
       <p class="review-text">{{ article.content }}</p>
-      <p class="rating">⭐ {{ article.rating.toFixed(1) }}</p>
+      <p class="rating">⭐ {{ article.rating ? article.rating.toFixed(1) : 'N/A' }}</p>
     </div>
 
     <!-- 영화 정보 카드 -->
-    <div class="movie-card" @click="navigateToMovieDetail(article.movie)">
+    <div v-if="article.movie" class="movie-card" @click="navigateToMovieDetail(article.movie.movie_id)">
       <img
-        v-if="article.poster_url"
-        :src="getFullPosterUrl(article.poster_url)"
+        v-if="article.movie"
+        :src="article.movie.poster_url"
         alt="영화 포스터"
         class="poster-image"
       />
       <div class="movie-info">
-        <h4 class="movie-title">{{ article.movie_title }}</h4>
+        <h4 class="movie-title">{{ article.movie.title }}</h4>
         <div class="movie-genres">
-          <span v-for="genre in article.movie_genres" :key="genre" class="genre">
+          <span v-for="genre in article.movie.genres" :key="genre" class="genre">
             {{ genre }}
           </span>
         </div>
-        <p class="movie-overview">{{ article.movie_overview }}</p>
-        <p class="movie-rating">⭐ {{ article.movie_rating ? article.movie_rating.toFixed(1) : 'N/A' }}</p>
+        <p class="movie-overview">{{ article.movie.description }}</p>
+        <p class="movie-rating">⭐ {{ article.movie.vote_avg ? article.movie.vote_avg.toFixed(1) : 'N/A' }}</p>
       </div>
     </div>
+    <div v-else>
+      <!-- 영화 정보가 없는 경우 보여줄 내용 -->
+      <p>영화 정보가 없습니다.</p>
+    </div>
+
 
      <!-- 좋아요 기능 -->
      <div class="like-container">
@@ -73,6 +78,19 @@ const router = useRouter();
 
 // 반응형 데이터
 const article = ref({ ...props.article }); // props.article을 반응형으로 관리
+
+const parseGenres = (genres) => {
+  try {
+    if (typeof genres === 'string') {
+      return JSON.parse(genres);
+    }
+    return genres;  // 이미 배열이라면 그대로 반환
+  } catch (e) {
+    console.error("Failed to parse genres:", e);
+    return [];  // 파싱 실패 시 빈 배열 반환
+  }
+};
+
 
 // 초기화: props.article.is_liked를 기반으로 isLiked를 설정
 const isLiked = ref(props.article.is_liked ?? false); // nullish coalescing: 없으면 false
@@ -130,6 +148,8 @@ const getFullPosterUrl = (posterUrl) => {
   const baseUrl = "https://image.tmdb.org/t/p/w500";
   return `${baseUrl}${posterUrl}`;
 };
+
+console.log('pppppppppp',article.value.movie)
 </script>
 
 

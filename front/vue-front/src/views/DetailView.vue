@@ -7,22 +7,22 @@
       <p>작성자: {{ article.user }}</p>
 
       <!-- 영화 정보 카드 -->
-      <div class="movie-card" @click="navigateToMovieDetail(article.movie)">
+      <div class="movie-card" @click="navigateToMovieDetail(article.movie.movie_id)">
         <img
-          v-if="article.poster_url"
-          :src="getFullPosterUrl(article.poster_url)"
+          v-if="article.movie.poster_url"
+          :src="article.movie.poster_url"
           alt="영화 포스터"
           class="poster-image"
         />
         <div class="movie-info">
-          <h4 class="movie-title">{{ article.movie_title }}</h4>
+          <h4 class="movie-title">{{ article.movie.title }}</h4>
           <div class="movie-genres">
-            <span v-for="genre in article.movie_genres" :key="genre" class="genre">
+            <span v-for="genre in article.movie.genres" :key="genre" class="genre">
               {{ genre }}
             </span>
           </div>
-          <p class="movie-overview">{{ article.movie_overview }}</p>
-          <p class="movie-rating">⭐ {{ article.movie_rating ? article.movie_rating.toFixed(1) : 'N/A'  }}</p>
+          <p class="movie-overview">{{ article.movie.description }}</p>
+          <p class="movie-rating">⭐ {{ article.movie.vote_avg ? article.movie.vote_avg.toFixed(1) : 'N/A'  }}</p>
         </div>
       </div>
 
@@ -288,6 +288,12 @@ const deleteArticle = () => {
 const goBack = () => {
   router.push({ name: "ArticleView" });
 };
+
+const goToEdit = () => {
+  router.push({ name: 'EditView', params: { id: article.value.id } });
+};
+
+console.log('aa',article)
 </script>
 
 <style scoped>

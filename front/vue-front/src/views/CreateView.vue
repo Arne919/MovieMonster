@@ -120,27 +120,40 @@ const clearHover = () => (hoverRating.value = 0);
 const selectRating = (rating) => (selectedRating.value = rating);
 
 // 게시글 작성
+const isSubmitting = ref(false);
+
 const createArticle = async () => {
+  if (isSubmitting.value) return; // 이미 요청 중이면 중지
+  isSubmitting.value = true;
+
   if (!selectedMovie.value) {
     alert("리뷰 작성할 영화를 선택해주세요.");
+    isSubmitting.value = false;
     return;
   }
 
   try {
-    await store.createArticle({
+    const newArticle = await store.createArticle({
       title: title.value,
       content: content.value,
       poster_url: selectedMoviePoster.value,
       rating: selectedRating.value,
-      movie_id: selectedMovie.value.id, // 선택된 영화의 ID
+      movie: selectedMovie.value.id,
     });
+
+    // 작성된 리뷰를 프론트엔드의 상태에 추가
+    store.articles.unshift(newArticle);  // 최신순으로 추가
+    await store.fetchUserPoints(); // 사용자 정보를 다시 가져와 업데이트
     alert("리뷰가 성공적으로 작성되었습니다.");
     router.push({ name: "ArticleView" });
   } catch (error) {
     console.error("Error creating article:", error);
     alert("리뷰 작성에 실패했습니다.");
+  } finally {
+    isSubmitting.value = false; // 요청 완료 후 플래그 초기화
   }
 };
+
 </script>
 
 

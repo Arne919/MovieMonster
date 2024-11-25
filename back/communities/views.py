@@ -22,36 +22,27 @@ from .models import Article, Comment
 def article_list(request):
     if request.method == 'GET':
         # 댓글 수 포함하여 모든 게시글 가져오기
-        articles = Article.objects.annotate(comment_count=Count('comments')).all()
+        articles = Article.objects.annotate(comment_count=Count('comments')).select_related('movie').all()
         serializer = ArticleListSerializer(articles, many=True, context={'request': request})
+        print(serializer.data)
         return Response(serializer.data)
 
     elif request.method == 'POST':
         serializer = ArticleSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user)
+            article = serializer.save(user=request.user)
             user = request.user
             user.points += 100  # 100 포인트 추가
             user.save()  # 사용자 정보 저장
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            print(serializer.data)
+            article_data = ArticleSerializer(article, context={'request': request}).data
+            user_data = {"username": user.username, "points": user.points}
+            return Response({
+                "article": article_data,
+                "user": user_data
+            }, status=status.HTTP_201_CREATED)
 
         
-# @api_view(['GET', 'POST'])
-# def article_list(request):
-#     if request.method == 'GET':
-#         articles = get_list_or_404(Article.objects.annotate(comment_count=Count('comments')))
-#         serializer = ArticleListSerializer(articles, many=True)
-#         return Response(serializer.data)
-
-#     elif request.method == 'POST':
-#         # 인증된 사용자만 게시글을 작성할 수 있도록 설정
-#         if not request.user.is_authenticated:
-#             return Response({"error": "인증된 사용자만 게시글을 작성할 수 있습니다."}, status=status.HTTP_403_FORBIDDEN)
-
-#         serializer = ArticleSerializer(data=request.data)
-#         if serializer.is_valid(raise_exception=True):
-#             serializer.save(user=request.user)
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated])
@@ -59,7 +50,8 @@ def article_detail(request, article_pk):
     article = get_object_or_404(Article.objects.annotate(comment_count=Count('comments')), pk=article_pk)
 
     if request.method == 'GET':
-        serializer = ArticleSerializer(article, context={'request': request})
+        serializer = ArticleListSerializer(article, context={'request': request})
+        print(serializer.data)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
@@ -221,6 +213,7 @@ def top_reviews(request):
         .order_by('-like_count')[:3]
     )
     serializer = ArticleListSerializer(top_reviews, many=True, context={'request': request})
+    print(serializer.data)
     return Response(serializer.data)
 
 
