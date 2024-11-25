@@ -98,7 +98,7 @@ const logIn = function () {
 .form-input {
   width: 100%;
   padding: 0.7rem;
-  border: 1px solid #ddd;
+  border: 1px solid #4b47c857;
   border-radius: 5px;
   font-size: 0.9rem;
   box-sizing: border-box;
