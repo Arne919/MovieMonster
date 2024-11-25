@@ -1,6 +1,6 @@
 <template>
   <div class="ranking-container">
-    <h1 class="text-center tracking-in-expand-fwd my-4">몬스터들의 랭킹</h1>
+    <h1 class="text-center tracking-in-expand-fwd my-4">MOVIE MONSTER RANKING</h1>
     <!-- 랭크 시스템 안내 버튼 -->
     <div class="info-container">
       <button class="btn btn-secondary" @click="showModal = true">랭크 시스템 안내</button>

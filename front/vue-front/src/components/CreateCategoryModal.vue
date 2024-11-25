@@ -10,7 +10,7 @@
         <input
           v-model="categoryName"
           class="category-input"
-          placeholder="카테고리 이름을 입력하세요"
+          placeholder="카테고리 이름을 입력하세요."
         />
         <div class="modal-actions">
           <button class="btn btn-create" @click="createCategory">생성</button>
@@ -126,7 +126,7 @@ export default {
   border: 1px solid #444;
   background: #1f1f1f;
   color: white;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .category-input::placeholder {
   color: #666;

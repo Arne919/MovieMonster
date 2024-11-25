@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="text-center tracking-in-expand-fwd my-4">게임하고 포인트 받자!</h1>
+    <h1 class="text-center tracking-in-expand-fwd my-4">MOVIE MONSTER GAME</h1>
 
     <div class="game-list">
       <!-- 한국영화 명대사 -->
@@ -17,7 +17,7 @@
         <div class="badge difficulty-badge">쉬움</div>
         <div class="game-info">
           <h2>한국영화 명대사</h2>
-          <p>한국영화 명대사 보고 영화 맞추기!</p>
+          <p>느그 서장 남천동 살제?</p>
         </div>
       </div>
 
@@ -35,7 +35,7 @@
         <div class="badge difficulty-badge medium">중간</div>
         <div class="game-info">
           <h2>해외영화 명대사</h2>
-          <p>해외영화 명대사 보고 영화 맞추기!</p>
+          <p>Good afternoon, good evening,<br/> and good night!</p>
         </div>
       </div>
 
@@ -53,7 +53,7 @@
         <div class="badge difficulty-badge hard">어려움</div>
         <div class="game-info">
           <h2>이동진의 한줄평</h2>
-          <p>이동진의 한줄평 보고 영화 맞추기!</p>
+          <p>안녕하세요. 평론계의 아이돌입니다.</p>
         </div>
       </div>
     </div>

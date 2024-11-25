@@ -69,7 +69,7 @@
             placeholder="정답(영화 제목)을 입력하세요"
             @keyup.enter="checkAnswer"
           />
-          <button class="btn btn-primary submit-btn" @click="checkAnswer">></button>
+          <button class="btn btn-success submit-btn" @click="checkAnswer">></button>
         </div>
       </div>
 
