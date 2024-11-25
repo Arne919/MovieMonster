@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>리뷰 목록</h3>
+    <!-- <h3>리뷰 목록</h3> -->
 
     <!-- 정렬 버튼 -->
     <div class="sort-buttons">
@@ -74,23 +74,35 @@ onMounted(async () => {
 
 </script>
 
+
 <style scoped>
+/* 정렬 버튼 스타일링 */
 .sort-buttons {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .sort-buttons button {
-  padding: 5px 10px;
+  padding: 10px 20px;
   border: 1px solid #ccc;
   background-color: white;
   cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .sort-buttons button.active {
   font-weight: bold;
   color: white;
   background-color: #007bff;
+}
+
+/* 에러 메시지 스타일 */
+.error-message {
+  color: red;
+  margin-top: 10px;
 }
 </style>

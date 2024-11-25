@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from django.db.models import Count
-from accounts.models import User
+from accounts.models import User, RecommendedMovie
 from movies.models import Movie
 
 # permission Decorators
@@ -24,7 +24,7 @@ def article_list(request):
         # 댓글 수 포함하여 모든 게시글 가져오기
         articles = Article.objects.annotate(comment_count=Count('comments')).select_related('movie').all()
         serializer = ArticleListSerializer(articles, many=True, context={'request': request})
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -34,7 +34,7 @@ def article_list(request):
             user = request.user
             user.points += 100  # 100 포인트 추가
             user.save()  # 사용자 정보 저장
-            print(serializer.data)
+            # print(serializer.data)
             article_data = ArticleSerializer(article, context={'request': request}).data
             user_data = {"username": user.username, "points": user.points}
             return Response({
@@ -51,7 +51,7 @@ def article_detail(request, article_pk):
 
     if request.method == 'GET':
         serializer = ArticleListSerializer(article, context={'request': request})
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
@@ -159,6 +159,19 @@ def get_ranking(request):
             if user.profile_picture
             else '/media/profile_pictures/default-profile.png'  # 디폴트 이미지 URL
         )
+
+         # 추천 영화 데이터 가져오기
+        recommended_movie_data = None
+        if hasattr(user, 'recommended_movie'):
+            recommended_movie_data = {
+                "movie": {
+                    "id": user.recommended_movie.movie.id,
+                    "title": user.recommended_movie.movie.title,
+                    "poster_url": user.recommended_movie.movie.poster_url if user.recommended_movie.movie.poster_url else '/media/default_movie_poster.png',
+                },
+                "reason": user.recommended_movie.reason or '추천 이유가 없습니다.',
+            }
+
         ranking_data.append({
             "id": user.id,
             "username": user.username,
@@ -168,6 +181,7 @@ def get_ranking(request):
             "likes_count": user.likes_count,
             "followers_count": user.followers_count,
             "profile_picture": profile_image_url,  # 프로필 사진 URL 추가
+            "recommended_movie": recommended_movie_data,
         })
 
     return Response(ranking_data)
@@ -213,7 +227,7 @@ def top_reviews(request):
         .order_by('-like_count')[:3]
     )
     serializer = ArticleListSerializer(top_reviews, many=True, context={'request': request})
-    print(serializer.data)
+    # print(serializer.data)
     return Response(serializer.data)
 
 

@@ -17,6 +17,7 @@
           <th>게시물 수</th>
           <th>좋아요 수</th>
           <th>팔로워 수</th>
+          <th>추천 영화</th>
         </tr>
       </thead>
       <tbody>
@@ -52,6 +53,17 @@
           <td>{{ user.articles_count }}</td>
           <td>{{ user.likes_count }}</td>
           <td>{{ user.followers_count }}</td>
+          <td>
+            <!-- 추천 영화 제목을 표시하고, 클릭 시 디테일 페이지로 이동 -->
+            <div v-if="user.recommended_movie">
+              <RouterLink :to="{ name: 'MovieDetail', params: { id: user.recommended_movie.movie.id } }">
+                {{ user.recommended_movie.movie.title }}
+              </RouterLink>
+            </div>
+            <div v-else>
+              <span>추천 없음</span>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -98,6 +110,8 @@ onMounted(() => {
     store.fetchRankings();
   }
 });
+
+console.log('aa',rankings)
 </script>
 
 <style scoped>
