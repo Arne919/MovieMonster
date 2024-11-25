@@ -150,7 +150,7 @@ router.beforeEach((to, from) => {
   // 로그인 사용자가 회원가입 또는 로그인 페이지로 이동하려고 하면 메인 페이지로 리다이렉트
   if ((to.name === 'SignUpView' || to.name === 'LogInView') && store.isLogin) {
     window.alert('이미 로그인 되어있습니다.');
-    return { name: 'ArticleView' };
+    return { name: 'HomeView' };
   }
 });
 
