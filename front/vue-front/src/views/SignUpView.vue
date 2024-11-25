@@ -56,10 +56,32 @@ const onFileChange = (event) => {
     profilePreview.value = URL.createObjectURL(file); // 미리보기 URL 생성
   }
 };
+const signUp = async () => {
+  const formData = new FormData();
+  formData.append('username', username.value);
+  formData.append('password1', password1.value);
+  formData.append('password2', password2.value);
+  if (profilePicture.value) {
+    formData.append('profile_picture', profilePicture.value);
+  }
 
+  console.log("DEBUG: FormData content:");
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}:`, value);
+  }
+
+  try {
+    await store.signUp(formData); // 스토어에서 FormData 처리
+    alert('회원가입 성공!');
+  } catch (error) {
+    console.error('회원가입 실패:', error);
+    alert('회원가입 실패!');
+  }
+}
 const triggerFileInput = () => {
   fileInput.value.click(); // 숨겨진 파일 입력 창 트리거
 };
+
 </script>
 
 <style scoped>
