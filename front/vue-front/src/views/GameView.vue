@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="text-center my-4">게임하고 포인트 받자!</h1>
+    <h1 class="text-center tracking-in-expand-fwd my-4">게임하고 포인트 받자!</h1>
 
     <div class="game-list">
       <!-- 한국영화 명대사 -->
@@ -112,7 +112,7 @@ export default {
 
 <style scoped>
 .container {
-  margin-top: 20px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -122,6 +122,22 @@ export default {
   color: #4caf50;
   font-size: 2rem;
   font-weight: bold;
+  animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; /* 애니메이션 추가 */
+}
+
+@keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
 }
 
 .game-list {

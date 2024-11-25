@@ -1,7 +1,6 @@
 <template>
   <div class="ranking-container">
-    <h1>랭킹 페이지</h1>
-
+    <h1 class="text-center tracking-in-expand-fwd my-4">몬스터들의 랭킹</h1>
     <!-- 랭크 시스템 안내 버튼 -->
     <div class="info-container">
       <button class="btn btn-secondary" @click="showModal = true">랭크 시스템 안내</button>
@@ -10,8 +9,8 @@
     <table class="ranking-table">
       <thead>
         <tr>
-          <th>순위</th>
-          <th class="with-border">프로필</th>
+          <th class="with-border">순위</th>
+          <th>프로필</th>
           <th>이름</th>
           <th>랭크</th>
           <th>게시물 수</th>
@@ -27,7 +26,7 @@
           :class="{ 'text-focus-in': animatedIndexes.includes(index), hidden: !animatedIndexes.includes(index) }"
         >
           <!-- 순위 -->
-          <td>
+          <td class="with-border">
             <div v-if="index === 0">
               <img src="@/assets/gold.png" alt="Gold Medal" class="medal-icon" />
             </div>
@@ -40,7 +39,7 @@
             <div v-else>{{ index + 1 }}</div>
           </td>
           <!-- 프로필 -->
-          <td class="with-border">
+          <td>
             <div class="profile-picture">
               <img :src="`http://127.0.0.1:8000${user.profile_picture}`" alt="프로필 사진" class="profile-img" />
             </div>
@@ -72,7 +71,7 @@
               </RouterLink>
             </div>
             <div v-else>
-              <span>추천 없음</span>
+              <span>X</span>
             </div>
           </td>
         </tr>
@@ -136,50 +135,124 @@ onMounted(() => {
 });
 </script>
 
+
 <style scoped>
-/* 테이블 스타일 */
+.text-center {
+  color: #4da0ff;
+  font-size: 2rem;
+  font-weight: bold;
+  animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; /* 애니메이션 추가 */
+}
+
+@keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+/* 랭킹 컨테이너 */
 .ranking-container {
-  max-width: 800px;
-  width: 90%;
-  margin: 20px auto;
+  max-width: 1000px; /* 테이블 컨테이너 고정 */
+  margin: 40px auto;
   text-align: center;
+  color: #f0f8ff; /* 연한 파랑 텍스트 */
+  overflow-x: auto; /* 가로 스크롤 활성화 */
+  padding-bottom: 10px; /* 스크롤 바와 겹치지 않도록 여백 추가 */
 }
 
 .info-container {
   text-align: right;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
+/* 테이블 스타일 */
 .ranking-table {
-  width: 100%;
-  border-collapse: separate; /* 셀 간격을 분리 */
-  border-spacing: 0; /* 셀 간격 없음 */
-  margin-bottom: 20px;
-  background-color: #222; /* 테이블 배경색 */
-  border: 1px solid #444; /* 테이블 전체 외곽선 */
+  width: 1000px; /* 고정된 테이블 너비 */
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: #1a2a44; /* 테이블 배경색 - 진한 남색 */
+  border: 1px solid #4169e1; /* 파랑색 외곽선 */
+  table-layout: fixed; /* 고정된 레이아웃 */
 }
 
 .ranking-table th,
 .ranking-table td {
   padding: 10px;
   text-align: center;
-  background-color: #2c2c2c; /* 셀 배경색 */
-  color: #fff; /* 글자색 */
+  background-color: #243653; /* 셀 배경색 - 중간 남색 */
+  color: #e6f0ff; /* 텍스트 색상 - 연한 파랑 */
+  border-bottom: 1px solid #4169e1; /* 파랑색 하단 경계선 */
+  white-space: normal; /* 텍스트 줄바꿈 허용 */
+  word-wrap: break-word; /* 긴 단어 줄바꿈 */
+  overflow-wrap: break-word; /* 단어가 칸을 넘어가면 줄바꿈 */
+  font-size: 0.9rem; /* 폰트 크기 조정 */
 }
 
-/* 세로 구분선 스타일 */
+.ranking-table th {
+  font-weight: bold;
+  background-color: #2a4066; /* 헤더 배경 - 더 밝은 남색 */
+  color: #f0faff; /* 헤더 텍스트 색상 */
+  border-bottom: 2px solid #6090d0; /* 헤더 경계선 */
+  font-size: 1rem; /* 헤더 글자 크기 */
+}
+
 .ranking-table th.with-border,
 .ranking-table td.with-border {
-  border-right: 1px solid #555; /* 프로필 옆 회색 선 */
+  border-right: 1px solid #4169e1; /* 세로 구분선 */
 }
 
-/* 행 구분선 스타일 */
 .ranking-table tbody tr {
-  border-bottom: 1px solid #555; /* 행 간 회색 구분선 */
+  border-bottom: 1px solid #4169e1; /* 행 경계선 */
 }
 
-.ranking-table thead th {
-  border-bottom: 2px solid #777; /* 헤더 구분선 */
+/* 테이블 너비 조정 */
+.ranking-table th:first-child,
+.ranking-table td:first-child {
+  width: 5%; /* 순위 */
+}
+
+.ranking-table th:nth-child(2),
+.ranking-table td:nth-child(2) {
+  width: 10%; /* 프로필 */
+}
+
+.ranking-table th:nth-child(3),
+.ranking-table td:nth-child(3) {
+  width: 15%; /* 이름 */
+}
+
+.ranking-table th:nth-child(4),
+.ranking-table td:nth-child(4) {
+  width: 10%; /* 랭크 */
+}
+
+.ranking-table th:nth-child(5),
+.ranking-table td:nth-child(5) {
+  width: 10%; /* 게시물 수 */
+}
+
+.ranking-table th:nth-child(6),
+.ranking-table td:nth-child(6) {
+  width: 10%; /* 좋아요 수 */
+}
+
+.ranking-table th:nth-child(7),
+.ranking-table td:nth-child(7) {
+  width: 10%; /* 팔로워 수 */
+}
+
+.ranking-table th:last-child,
+.ranking-table td:last-child {
+  width: 20%; /* 추천 영화 */
 }
 
 .medal-icon {
@@ -187,12 +260,31 @@ onMounted(() => {
   height: 32px;
 }
 
-/* 프로필 이미지를 둥글게 */
+/* 프로필 이미지 */
 .profile-img {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   object-fit: cover;
+  border: 0.5px solid #87cefa; /* 연한 파랑 테두리 */
+}
+
+.rank-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+/* 라우터 링크 스타일 */
+.ranking-table a {
+  color: #e6f0ff; /* 링크 글자색을 셀과 동일하게 설정 */
+  text-decoration: none; /* 밑줄 제거 */
+  font-weight: normal;
+}
+
+.ranking-table a:hover {
+  color: #87cefa; /* 호버 시 연한 파랑색 */
+  text-decoration: underline; /* 호버 시 밑줄 표시 */
 }
 
 /* 애니메이션 */
@@ -211,8 +303,27 @@ onMounted(() => {
   }
 }
 
-/* 처음에 숨김 */
+/* 숨김 */
 .hidden {
   opacity: 0;
+}
+
+/* 버튼 스타일 */
+.btn-secondary {
+  position: relative;
+  background-color: rgba(65, 105, 225, 0.2); /* 연한 파랑 투명 */
+  border: 1px solid rgba(65, 105, 225, 0.5); /* 파랑 테두리 */
+  color: #e6f0ff; /* 연한 파랑 텍스트 */
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(65, 105, 225, 0.4);
+  color: #000;
 }
 </style>
