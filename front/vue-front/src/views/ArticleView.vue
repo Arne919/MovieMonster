@@ -1,9 +1,9 @@
 <template>
   <div class="review-page-container">
+    <h1 class="text-center tracking-in-expand-fwd my-4">MONSTER'S REVIEWS</h1>
     <!-- 페이지 상단: 리뷰 제목과 설명 -->
     <div class="header">
       <div class="title-section">
-        <h1>Review</h1>
         <p>영화에 대한 유저들의 리뷰들을 모아봤어요.</p>
       </div>
       <RouterLink :to="{ name: 'CreateView' }" class="create-button">리뷰 작성하기</RouterLink>
@@ -27,6 +27,33 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.text-center {
+  padding-top: 20px;
+  color: #ff9800;
+  font-size: 2rem;
+  font-weight: bold;
+  animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; /* 애니메이션 추가 */
+}
+@keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+.container {
+  overflow: hidden; /* 넘치는 콘텐츠 숨김 */
+  width: 100%; /* 컨테이너 너비를 화면에 맞춤 */
+  padding: 0; /* 기본 패딩 제거 */
+}
 .review-page-container {
   width: 100%;
   max-width: 1200px;

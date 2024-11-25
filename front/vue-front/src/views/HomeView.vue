@@ -83,7 +83,7 @@
 
     <!-- Categories of Top Ranker -->
     <div class="top-ranker-categories-container" v-if="topRankerCategories">
-      <h2>{{ topThreeRankings[0]?.username }}님의 카테고리</h2>
+      <h2>zㅣ존 Monster ★ {{ topThreeRankings[0]?.username }} ★님의 카테고리</h2>
       <div class="categories">
         <div
           v-for="category in topRankerCategories"
@@ -312,40 +312,59 @@ console.log('ppss',topReviews)
 
 .review-card {
   display: flex;
+  align-items: center;
   gap: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #f9f9f9; /* 조금 더 밝은 배경색 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .review-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.03); /* 살짝 확대 효과 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 호버 시 강조된 그림자 */
 }
 
 .poster {
   width: 100px;
   height: 150px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 포스터 그림자 */
 }
 
 .review-details {
   display: flex;
   flex-direction: column;
+  justify-content: center; /* 텍스트가 수직 중앙 정렬 */
+  flex-grow: 1; /* 텍스트가 충분히 공간을 차지하도록 설정 */
 }
 
 .review-details h3 {
   margin: 0;
   font-size: 18px;
+  font-weight: bold;
+  color: #333; /* 다소 어두운 글씨 */
 }
 
 .review-details p {
   margin: 5px 0;
   font-size: 14px;
-  color: #555;
+  color: #555; /* 중간 밝기의 글씨 */
 }
+
+.review-details p:first-of-type {
+  font-weight: bold; /* 작성자 이름 강조 */
+}
+
+.review-details p:last-of-type {
+  color: #777; /* 작성일자 다소 흐릿하게 표시 */
+  font-size: 12px;
+}
+
 
 /* Top Ranker Categories Section */
 .top-ranker-categories-container {
