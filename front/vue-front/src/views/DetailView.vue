@@ -1,10 +1,20 @@
 <template>
-  <div>
-    <button @click="goBack">전체 리뷰로 돌아가기</button> <!-- 뒤로가기 버튼 추가 -->
+  <div class="container">
+    <button @click="goBack">전체 리뷰로 돌아가기</button>
     <div v-if="article">
+      <!-- 제목 -->
       <h2>제목 : {{ article.title }}</h2>
-      <!-- 작성자 정보 출력 -->
-      <p>작성자: {{ article.user }}</p>
+
+      <!-- 작성일/수정일 -->
+      <div class="date-container">
+        <p>작성일: {{ store.formatDate(article.created_at) }}</p>
+        <p>수정일: {{ store.formatDate(article.updated_at) }}</p>
+      </div>
+
+      <!-- 리뷰 내용 -->
+      <div class="content-container">
+        <p>{{ article.content }}</p>
+      </div>
 
       <!-- 영화 정보 카드 -->
       <div class="movie-card" @click="navigateToMovieDetail(article.movie.movie_id)">
@@ -22,13 +32,13 @@
             </span>
           </div>
           <p class="movie-overview">{{ article.movie.description }}</p>
-          <p class="movie-rating">⭐ {{ article.movie.vote_avg ? article.movie.vote_avg.toFixed(1) : 'N/A'  }}</p>
+          <p class="movie-rating">⭐ {{ article.movie.vote_avg ? article.movie.vote_avg.toFixed(1) : 'N/A' }}</p>
         </div>
       </div>
 
+      <!-- 별점 -->
       <p class="rating-container">
-        <span>별점 : </span>
-        <div class="stars">
+        <span>별점:</span><div class="stars">
           <div
             v-for="(star, index) in store.displayStars(article.rating)"
             :key="index"
@@ -37,14 +47,8 @@
           ></div>
         </div>
       </p>
-      <p>게시글 번호 : {{ article.id }}</p>
-      <p>내용 : {{ article.content }}</p>
-      <p>작성일 : {{ store.formatDate(article.created_at) }}</p>
-      <p>수정일 : {{ store.formatDate(article.updated_at) }}</p>
-      <button v-if="isAuthor" @click="goToEdit">게시글 수정</button> <!-- 수정 버튼 -->
-      <button v-if="isAuthor" @click="deleteArticle">게시글 삭제</button> <!-- 삭제 버튼 -->
 
-      <!-- 좋아요 및 댓글 수 -->
+      <!-- 좋아요 및 댓글 섹션 -->
       <div class="like-comment-container">
         <button class="like-button" @click="toggleLike">
           <span v-if="article.is_liked" class="liked-icon">❤️</span>
@@ -52,35 +56,31 @@
         </button>
         <span class="like-count">{{ article.like_count }}</span>
 
-        <!-- 댓글 수 표시 -->
         <div class="comment-count">
           <span class="comment-icon">💬</span>
           <span class="comment-count-value">{{ comments.length }}</span>
         </div>
       </div>
 
-      <!-- 댓글 목록 표시 -->
+      <!-- 댓글 섹션 -->
       <div v-if="comments && comments.length > 0">
         <h3>댓글</h3>
         <div v-for="comment in comments" :key="comment.id">
           <p><strong>{{ comment.user }}</strong>: {{ comment.content }}</p>
-          <!-- 댓글 수정 및 삭제 버튼 -->
           <button v-if="comment.user === store.Username" @click="editComment(comment)">수정</button>
           <button v-if="comment.user === store.Username" @click="removeComment(comment.id)">삭제</button>
         </div>
       </div>
-      <!-- 댓글이 없으면 표시할 메시지 -->
       <div v-else>
         <p>댓글이 없습니다.</p>
       </div>
 
-      <!-- 댓글 작성 폼 -->
+      <!-- 댓글 작성 -->
       <div v-if="!editingComment">
         <textarea v-model="newComment" placeholder="댓글을 작성하세요"></textarea>
-        <button @click="submitComment">댓글 작성</button> <!-- 댓글 작성 버튼 -->
+        <button @click="submitComment">댓글 작성</button>
       </div>
 
-      <!-- 댓글 수정 폼 -->
       <div v-if="editingComment">
         <textarea v-model="updatedCommentContent"></textarea>
         <button @click="submitUpdatedComment">수정 완료</button>
@@ -297,15 +297,74 @@ console.log('aa',article)
 </script>
 
 <style scoped>
+/* 컨테이너 스타일 - 양쪽 마진 통일 */
+.container {
+  max-width: 1200px; /* 전체 페이지와 동일한 너비 */
+  margin: 0 auto; /* 가운데 정렬 */
+  padding: 0 20px; /* 좌우 여백 추가 */
+}
+/* 전체 페이지 스타일 */
+body {
+  background-color: #1c1c1c; /* 어두운 배경 */
+  color: #fff; /* 기본 텍스트 색상 */
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* 컨테이너 스타일 */
+div {
+  padding: 20px;
+}
+
+/* 뒤로가기 버튼 스타일 */
+button {
+  background-color: #ff9f43; /* 오렌지 색상 */
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #ff6f3c; /* hover 시 더 어두운 오렌지 */
+}
+
+/* 제목 스타일 */
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #f1c40f; /* 노란색 */
+  text-align: center;
+}
+
+/* 작성자 정보 스타일 */
+p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+p span {
+  font-weight: bold;
+  color: #ff9f43; /* 오렌지 */
+}
+
 /* 영화 카드 스타일 */
 .movie-card {
   display: flex;
-  cursor: pointer;
-  border: 1px solid #ddd;
+  gap: 15px;
+  background-color: #2c2c2c; /* 어두운 회색 배경 */
   border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s;
+  padding: 10px;
   margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
 }
 
 .movie-card:hover {
@@ -315,78 +374,90 @@ console.log('aa',article)
 .poster-image {
   width: 100px;
   height: 150px;
+  border-radius: 8px;
   object-fit: cover;
 }
 
 .movie-info {
-  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-between;
+  color: #fff;
 }
 
 .movie-title {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  margin: 0;
+  margin-bottom: 10px;
 }
 
 .movie-genres {
   display: flex;
+  flex-wrap: wrap;
   gap: 5px;
 }
 
 .genre {
-  background-color: #f1f1f1;
-  padding: 2px 5px;
+  background-color: #ff9f43;
+  padding: 2px 8px;
   font-size: 12px;
   border-radius: 4px;
+  color: #fff;
 }
 
 .movie-overview {
-  font-size: 12px;
-  color: #666;
-  margin-top: 10px;
-  line-height: 1.4;
+  font-size: 14px;
+  color: #bbb;
 }
 
 .movie-rating {
   font-weight: bold;
-  color: #f39c12;
+  color: #f1c40f; /* 노란색 */
+  font-size: 16px;
+  margin-top: 10px;
 }
 
-/* 기존 스타일 */
+/* 별점 컨테이너 */
 .rating-container {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0px; /* 별 사이 간격 */
+  margin: 0;
+  padding: 0
 }
 
 .stars {
   display: flex;
-  gap: 5px;
-  pointer-events: none;
+  gap: 0px;
+  margin: -5px
 }
 
 .star {
-  width: 24px;
-  height: 24px;
+  display: inline-block; /* 상속된 스타일 방지 */
+  width: 5px; /* 원하는 별 크기 */
+  height: 5px;
+  box-sizing: border-box; /* 크기 계산 오류 방지 */
   background: url("/assets/images/gray-star.png") no-repeat center;
-  background-size: contain;
+  background-size:  18px 18px; /* 별 이미지를 강제로 컨테이너 크기에 맞춤 */
 }
 
 .star.filled {
   background: url("/assets/images/yellow-star.png") no-repeat center;
-  background-size: contain;
+  background-size: 18px 18px;; /* 별 이미지를 강제로 컨테이너 크기에 맞춤 */
 }
 
-/* 좋아요 버튼 스타일 */
-.like-container {
+/* 좋아요 및 댓글 섹션 */
+.like-comment-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
+  margin-top: 20px;
+  justify-content: center;
 }
+
 .like-button {
+  display: flex;
+  align-items: center;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -394,11 +465,114 @@ console.log('aa',article)
 
 .like-icon,
 .liked-icon {
+  font-size: 24px;
   color: #ff6b6b;
 }
 
 .like-count {
   font-size: 16px;
-  color: #333;
+  color: #fff;
+}
+
+.comment-count {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.comment-icon {
+  font-size: 24px;
+  color: #fff;
+}
+
+.comment-count-value {
+  font-size: 16px;
+  color: #fff;
+}
+
+.rating-container span {
+  margin-right: -18px; /* 간격 강제 조정 */
+  line-height: 1; /* 텍스트 라인 높이 조정 */
+  display: inline-block; /* 텍스트가 중앙에 정렬되도록 설정 */
+}
+
+/* 댓글 섹션 스타일 */
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: #2c2c2c;
+  color: #fff;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+textarea::placeholder {
+  color: #888;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #ff9f43;
+}
+
+/* 댓글 목록 */
+.comment-list {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #2c2c2c;
+  border-radius: 5px;
+}
+
+.comment-list p {
+  margin-bottom: 10px;
+}
+
+.comment-list strong {
+  color: #ff9f43;
+}
+
+/* 댓글 작성 버튼 */
+.comment-list button {
+  background-color: #ff9f43;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.comment-list button:hover {
+  background-color: #ff6f3c;
+}
+
+/* 작성일과 수정일 위치 */
+.date-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #bbb;
+  margin-bottom: 10px;
+}
+
+/* 내용 스타일 */
+.content-container {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #2c2c2c; /* 어두운 회색 배경 */
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 </style>
+
+

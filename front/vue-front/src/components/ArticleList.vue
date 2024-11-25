@@ -3,7 +3,7 @@
     <!-- <h3>리뷰 목록</h3> -->
 
     <!-- 정렬 버튼 -->
-    <div class="sort-buttons">
+    <div class="tabs-container">
       <button @click="setSortOrder('popular')" :class="{ active: sortOrder === 'popular' }">인기순</button>
       <button @click="setSortOrder('recent')" :class="{ active: sortOrder === 'recent' }">최신순</button>
     </div>
@@ -76,33 +76,43 @@ onMounted(async () => {
 
 
 <style scoped>
-/* 정렬 버튼 스타일링 */
-.sort-buttons {
+/* 탭 스타일링 */
+.tabs-container {
   display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
+  justify-content: flex-start;
+  gap: 25px; /* 탭 간 간격을 넓혀서 더 명확히 구분 */
+  border-bottom: 2px solid #ff9800; /* 탭 아래에 강조선 추가 */
+  padding-bottom: 10px; /* 탭과 아래 내용 간격을 넉넉히 */
+  margin-bottom: 25px; /* 리뷰 목록과의 간격 추가 */
 }
 
-.sort-buttons button {
+.tabs-container button {
   padding: 10px 20px;
-  border: 1px solid #ccc;
-  background-color: white;
+  border: none;
+  background: none;
   cursor: pointer;
-  font-size: 16px;
-  color: #333;
-  border-radius: 5px;
-  transition: background-color 0.3s, color 0.3s;
+  font-size: 18px;
+  color: #888888; /* 기본 탭 색상: 회색 */
+  transition: color 0.3s, border-bottom 0.3s;
+  font-weight: 600;
 }
 
-.sort-buttons button.active {
-  font-weight: bold;
-  color: white;
-  background-color: #007bff;
+.tabs-container button.active {
+  color: #ffffff; /* 활성화된 탭 색상: 흰색 */
+  border-bottom: 3px solid #ffffff; /* 활성화된 탭 하단 강조선 */
 }
 
 /* 에러 메시지 스타일 */
 .error-message {
-  color: red;
-  margin-top: 10px;
+  color: #ff4d4d; /* 빨간색으로 강조 */
+  margin-top: 20px;
+}
+
+/* 리뷰가 없을 때 메시지 스타일 */
+.empty-message {
+  color: #cccccc; /* 조금 더 밝은 회색 */
+  font-size: 18px;
+  text-align: center; /* 중앙 정렬 */
+  margin-top: 30px;
 }
 </style>

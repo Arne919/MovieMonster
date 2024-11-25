@@ -9,16 +9,16 @@
         class="profile-image"
         @click.stop="navigateToProfile(article.user)"
       />
-      <div>
+      <div class="user-info">
         <p class="username">{{ article.user }}</p>
-        <p class="created-at">작성일 : {{ store.formatDate(article.created_at) }}</p>
+        <p class="created-at">{{ store.formatDate(article.created_at) }}</p>
+        <p class="rating">⭐ {{ article.rating ? article.rating.toFixed(1) : 'N/A' }}</p>
       </div>
     </div>
 
     <!-- 리뷰 내용 -->
     <div class="review-content">
       <p class="review-text">{{ article.content }}</p>
-      <p class="rating">⭐ {{ article.rating ? article.rating.toFixed(1) : 'N/A' }}</p>
     </div>
 
     <!-- 영화 정보 카드 -->
@@ -55,9 +55,11 @@
       </button>
       <span class="like-count">{{ likeCount }}</span>
 
-      <div class="comment-count">
-        <span class="comment-icon">💬</span>
-        <span class="comment-count-value">{{ article.comment_count }}</span>
+      <div class="comment-count" @click="navigateToReviewDetail(article.id)">
+        <button class="like-button">
+          <span class="comment-icon">💬</span>
+          <span class="comment-count-value">{{ article.comment_count }}</span>
+        </button>
       </div>
     </div>
   </div>
@@ -153,7 +155,6 @@ console.log('pppppppppp',article.value.movie)
 </script>
 
 
-
 <style scoped>
 /* 동일한 스타일 유지 */
 .review-card {
@@ -163,83 +164,105 @@ console.log('pppppppppp',article.value.movie)
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
+/* 작성자 정보 수평 정렬 */
 .author-section {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  cursor: pointer; /* 클릭 가능 */
+  gap: 5px; /* 간격 축소 */
+  margin-bottom: 3px; /* 전체 하단 마진 축소 */
+  cursor: pointer;
+  /* border-bottom: 1px solid #ddd; */
+  padding-bottom: 3px;
 }
 
 .profile-image {
-  width: 50px;
-  height: 50px;
+  width: 40px; /* 크기 축소 */
+  height: 40px;
   border-radius: 50%;
-  margin-right: 10px;
-  cursor: pointer; /* 클릭 가능 */
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* 유저명, 작성일, 별점 간격 축소 */
 }
 
 .username {
   font-weight: bold;
+  font-size: 18px; /* 크기 축소 */
+  color: #000; /* 글자색 검정 */
 }
 
 .created-at {
-  color: #888;
+  color: #000;
   font-size: 12px;
 }
 
-/* 기존 스타일 유지 */
-.review-content {
-  margin-bottom: 15px;
+.rating {
+  font-size: 15px;
+  color: #f39c12;
+  font-weight: bold;
 }
 
-.review-text {
+/* 리뷰 내용 배치 조정 */
+.review-content .review-text {
   font-size: 14px;
   margin-bottom: 10px;
+  line-height: 1.4;
+  color: #000; /* 글자색 검정 */
 }
 
-.rating {
-  font-weight: bold;
-  color: #f39c12;
-}
-
+/* 영화 카드: 수평 정렬 */
 .movie-card {
   display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
   cursor: pointer;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s;
+  background-color: #d3d3d3; /* 배경색 회색 */
+  margin-top: 10px;
+  padding: 10px;
 }
-
 .movie-card:hover {
   transform: scale(1.02);
 }
 
 .poster-image {
-  width: 100px;
-  height: 150px;
+  width: 80px; /* 크기 조정 */
+  height: 120px;
   object-fit: cover;
 }
 
 .movie-info {
-  padding: 10px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
   gap: 5px;
+  color: #000; /* 텍스트 검정색 */
 }
 
 .movie-title {
-  font-size: 16px;
+  font-size: 14px; /* 크기 축소 */
   font-weight: bold;
   margin: 0;
+  color: #000; /* 텍스트 검정색 */
 }
 
 .movie-genres {
   display: flex;
   gap: 5px;
+  flex-wrap: wrap; /* 장르가 많을 경우 줄바꿈 */
+  color: #000; /* 장르 텍스트 검정 */
 }
 
 .genre {
@@ -247,11 +270,12 @@ console.log('pppppppppp',article.value.movie)
   padding: 2px 5px;
   font-size: 12px;
   border-radius: 4px;
+  color: #000; /* 장르 텍스트 검정 */
 }
 
 .movie-overview {
   font-size: 12px;
-  color: #666;
+  color: #000; /* 텍스트 검정색 */
   margin-top: 10px;
   line-height: 1.4;
 }
@@ -262,29 +286,79 @@ console.log('pppppppppp',article.value.movie)
 }
 
 /* 좋아요 기능 스타일 */
+/* 좋아요 및 댓글 컨테이너 */
 .like-container {
   display: flex;
   align-items: center;
-  margin-top: 15px;
-  gap: 8px;
+  gap: 20px; /* 좋아요와 댓글 사이 간격 조정 */
+  margin-top: 10px; /* 상단 마진 */
+  justify-content: flex-start; /* 왼쪽 정렬 */
 }
 
+/* 좋아요 버튼 */
 .like-button {
+  display: flex;
+  align-items: center;
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
+  gap: 22px; /* 아이콘과 숫자 사이 간격 */
+  font-size: 14px; /* 숫자 크기 통일 */
+  color: #000; /* 검정색 텍스트 */
+  transition: color 0.3s ease; /* 색상 변화 애니메이션 추가 */
+}
+
+/* 좋아요 아이콘 */
+.like-button:hover .like-icon,
+.like-button:hover .liked-icon {
+  color: #e74c3c; /* hover 시 빨간색으로 변경 */
+}
+
+.like-button:hover .like-count {
+  color: #e74c3c; /* 좋아요 숫자도 hover 시 동일한 색상으로 변경 */
 }
 
 .like-icon,
 .liked-icon {
-  color: #ff6b6b;
+  font-size: 20px; /* 좋아요 아이콘 크기 */
+  color: #ff6b6b; /* 좋아요 아이콘 색상 */
 }
 
+/* 좋아요 숫자 */
 .like-count {
-  font-size: 16px;
-  color: #333;
+  font-size: 14px; /* 숫자 크기 */
+  color: #000; /* 숫자 색상 */
 }
+
+/* 댓글 버튼 */
+.comment-count {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 아이콘과 숫자 사이 간격 */
+  font-size: 14px; /* 숫자 크기 통일 */
+  color: #000; /* 검정색 텍스트 */
+  transition: color 0.3s ease; /* 색상 변화 애니메이션 추가 */
+}
+
+.comment-count:hover .comment-icon {
+  color: #3498db; /* hover 시 파란색으로 변경 */
+}
+
+.comment-count:hover .comment-count-value {
+  color: #3498db; /* 댓글 숫자도 hover 시 동일한 색상으로 변경 */
+}
+
+/* 댓글 아이콘 */
+.comment-icon {
+  font-size: 20px; /* 댓글 아이콘 크기 */
+  color: #000; /* 아이콘 색상 */
+}
+
+/* 댓글 숫자 */
+.comment-count-value {
+  font-size: 14px; /* 숫자 크기 */
+  color: #000; /* 숫자 색상 */
+}
+
 </style>
+
