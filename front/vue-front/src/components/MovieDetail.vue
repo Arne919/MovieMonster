@@ -1,4 +1,5 @@
 <template>
+  <div class="movie-background"></div> <!-- 배경포스터 -->
   <div class="container movie-detail">
     <div class="row">
       <!-- 좌측: 포스터 섹션 -->
@@ -21,7 +22,6 @@
         <p><strong>감독:</strong> {{ movie.director }}</p>
         <!-- 카테고리 추가 버튼 -->
         <div class="button-container">
-        <!-- <button class="btn btn-primary category-button" @click="showCategoryModal = true"> -->
           <a href="#" @click.prevent="showCategoryModal = true">
             <span></span>
             <span></span>
@@ -29,20 +29,19 @@
             <span></span>
             카테고리 추가
           </a>
-        <!-- </button> -->
-        <div class="movie-youtube mt-4 text-center">
-        <button
-          type="button"
-          class="btn"
-          data-bs-toggle="modal"
-          data-bs-target="#youtubeTrailerModal"
-        >
-          <img :src="youtubeLogo" alt="YouTube" class="youtube-logo" />
-        </button>
-      </div>
+        </div>
 
-      <!-- 공식 예고편 섹션 -->
-    </div>
+        <!-- YouTube 섹션 -->
+        <div class="movie-youtube mt-4 text-center">
+          <button
+            type="button"
+            class="btn"
+            data-bs-toggle="modal"
+            data-bs-target="#youtubeTrailerModal"
+          >
+            <img :src="youtubeLogo" alt="YouTube" class="youtube-logo" />
+          </button>
+        </div>
       </div>
     </div>
     <!-- 카테고리 추가 모달 -->
@@ -85,34 +84,35 @@ const fetchMovie = async () => {
 
     // 배경 이미지 동적으로 설정
     const backdropUrl = `https://image.tmdb.org/t/p/original${movie.value.backdrop_url}`;
-    document.body.style.backgroundImage = `url('${backdropUrl}')`;
-    document.body.style.backgroundSize = "cover";
-    document.body.style.backgroundPosition = "center";
-    document.body.style.backgroundRepeat = "no-repeat";
-    document.body.style.backgroundColor = "#000"; // 배경 이미지가 없을 경우 대비
+    const backgroundElement = document.querySelector(".movie-background");
+    if (backgroundElement) {
+      backgroundElement.style.backgroundImage = `url('${backdropUrl}')`;
+    }
   } catch (error) {
     console.error("Error loading movie:", error);
   }
 };
 
-// 컴포넌트 언마운트 시 배경 복구
-const resetBodyStyle = () => {
-  document.body.style.backgroundImage = "";
-  document.body.style.backgroundSize = "";
-  document.body.style.backgroundPosition = "";
-  document.body.style.backgroundRepeat = "";
-  document.body.style.backgroundColor = "";
-};
-
 // 컴포넌트 마운트 시 영화 데이터 로드
 onMounted(fetchMovie);
-
-// 컴포넌트 언마운트 시 스타일 복구
-onUnmounted(resetBodyStyle);
 </script>
 
-
 <style scoped>
+/* 배경포스터 스타일 */
+.movie-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #000; /* 배경 이미지가 없을 경우 대비 */
+  z-index: -2; /* app.vue의 배경색 위에 표시 */
+}
+
+/* 메인 컨테이너 */
 .container {
   margin-top: 40px;
   padding: 20px;
@@ -120,8 +120,8 @@ onUnmounted(resetBodyStyle);
   border-radius: 8px;
   color: white;
   max-width: 1200px;
-  width: 90%; /* 중앙 정렬을 위해 적응형 너비 */
-  margin: 0 auto; /* 좌우 중앙 정렬 */
+  width: 90%;
+  margin: 0 auto;
 }
 
 .movie-detail {
@@ -130,12 +130,12 @@ onUnmounted(resetBodyStyle);
 }
 
 .row {
-  align-items: center; /* 세로 정렬 */
+  align-items: center;
 }
 
 .img-fluid {
   max-height: 500px; /* 포스터 최대 높이 */
-  object-fit: cover; /* 이미지 비율 유지 */
+  object-fit: cover;
   margin-bottom: 20px;
 }
 
@@ -153,15 +153,16 @@ p {
   font-size: 1rem;
   margin-bottom: 10px;
 }
+
 .button-container {
   display: flex;
   align-items: center;
   gap: 10px; /* 버튼 사이 간격 */
 }
+
 .youtube-logo {
   width: 50px;
   height: 50px;
-  
 }
 
 .movie-youtube {
