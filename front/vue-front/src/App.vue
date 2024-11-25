@@ -172,4 +172,28 @@ onMounted(() => {
     width: 1px;
     height: 1px;
 }
+
+form input[type="submit"] {
+  background: linear-gradient(135deg, #ff5858, #f09819); /* 그래디언트 색상 */
+  border: none; /* 기본 테두리 제거 */
+  color: white; /* 텍스트 색상 */
+  padding: 10px 20px; /* 여백 설정 */
+  font-size: 16px; /* 글씨 크기 */
+  font-weight: bold; /* 글씨 굵기 */
+  border-radius: 25px; /* 버튼 모서리를 둥글게 */
+  cursor: pointer; /* 마우스 커서를 포인터로 변경 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+  transition: transform 0.2s ease, box-shadow 0.3s ease; /* 애니메이션 */
+}
+
+form input[type="submit"]:hover {
+  transform: translateY(-2px); /* 살짝 위로 이동 */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3); /* 호버 시 더 강한 그림자 */
+}
+
+form input[type="submit"]:active {
+  transform: translateY(0); /* 클릭 시 원래 위치로 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 클릭 시 그림자 감소 */
+}
+
 </style>
