@@ -1,28 +1,50 @@
 <template>
-  <div>
-    <div>
+  <div class="container">
+  <h1 class="text-center tracking-in-expand-fwd my-4">MY PROFILE</h1>
+  <div class="profile-page">
+    <!-- 좌측: 프로필 정보 -->
+    <div class="profile-info">
+      <div class="profile-header">
       <img :src="`http://127.0.0.1:8000${user.profile_picture}`" alt="프로필 사진">
+      <div class="profile-basic">
+        <h1 class="profile-title">{{ user.username }}</h1>
+        <div class="profile-follow-stats">
+          <p>팔로잉: {{ user.followingsCount }}</p>
+          <p>팔로워: {{ user.followersCount }}</p>
+        </div>
+        <button v-if="!isOwnProfile" class="follow-button" @click="toggleFollow">
+          {{ isFollowed ? '언팔로우' : '팔로우' }}
+        </button>
+      </div>
+    </div>
+    <div class="profile-details">
+      <p>
+        <span class="rank-display">
+          <img :src="getRankImage(user.rank_title)" :alt="user.rank_title" class="rank-icon" />
+          <!-- {{ user.rank_title }} -->
+        </span>
+      </p>
+      <p>포인트: {{ user.points }}</p>
+      <p>게시글 수: {{ user.articlesCount }}</p>
+      <p>받은 좋아요 수: {{ user.likesCount }}</p>
+    </div>
+  </div>
 
-      <h1>{{ user.username }}의 프로필 페이지</h1>
+    <!-- 우측: 추천 영화 -->
+    <div class="recommended-movie-section">
+      <h2>이거 안보면 진짜 후회해요!</h2>
+      <div v-if="!recommendedMovie">
+        <p>아직 추천하는 영화가 없어요.</p>
+        <button v-if="isOwnProfile" @click="openRecommendationModal" class="edit-button">영화 추천하기</button>
+      </div>
+      <div v-else>
+        <img :src="recommendedMovie.posterUrl" alt="추천 영화 포스터" />
+        <h3>{{ recommendedMovie.title }}</h3>
+        <p class="recommendation-reason">추천 이유: {{ recommendedMovie.reason }}</p>
+        <button v-if="isOwnProfile" @click="editRecommendation" class="edit-button">추천 수정</button>
+      </div>
     </div>
-    <!-- 사용자 랭크 -->
-    <p>
-      랭크: 
-      <span class="rank-display">
-        <img :src="getRankImage(user.rank_title)" :alt="user.rank_title" class="rank-icon" />
-        {{ user.rank_title }}
-      </span>
-    </p>
-    <p>포인트: {{ user.points }}</p>
-    <p>팔로잉: <span id="followings-count">{{ user.followingsCount }}</span></p>
-    <p>팔로워: <span id="followers-count">{{ user.followersCount }}</span></p>
-    <p>게시글 수: <span id="articles-count">{{ user.articlesCount }}</span></p>
-    <p>받은 좋아요 수: <span id="like-count">{{ user.likesCount }}</span></p>
-    <div v-if="!isOwnProfile">
-      <button @click="toggleFollow" id="followBtn">
-        {{ isFollowed ? '언팔로우' : '팔로우' }}
-      </button>
-    </div>
+    
     <div class="button-container">
     <h2>{{ user.username }}의 카테고리</h2>
       <!-- <a v-if="isOwnProfile" class="add-category" href="#" @click.prevent="showCategoryModal = true"> -->
@@ -33,12 +55,6 @@
             <span></span>
             새 카테고리
           </a></div>
-          <!-- 새 카테고리 추가 버튼 -->
-      <!-- <div v-if="isOwnProfile" class="add-category">
-        <button class="btn btn-primary" @click="showCreateCategoryModal = true">
-          새 카테고리 만들기
-        </button>
-      </div> -->
     <div v-if="categories.length === 0" class="empty-message">
       <p>아직 카테고리가 없습니다.</p>
     </div>
@@ -69,26 +85,7 @@
       />
     </div>
 
-    <!-- 추천 영화 섹션 -->
-    <div class="recommended-movie-section">
-      <h2>이거 안보면 진짜 후회해요!</h2>
-      <div v-if="!recommendedMovie" class="empty-recommendation">
-        <p>아직 추천하는 영화가 없어요.</p>
-        <button v-if="isOwnProfile" @click="openRecommendationModal">영화 추천하기</button>
-      </div>
-      <div v-if="recommendedMovie">
-        <div class="recommendation-display">
-          <div class="movie-details">
-            <img :src="recommendedMovie.posterUrl" alt="추천 영화 포스터" class="movie-poster" />
-            <div>
-              <h3>{{ recommendedMovie.title }}</h3>
-              <p>추천 이유: {{ recommendedMovie.reason }}</p>
-            </div>
-          </div>
-          <button v-if="isOwnProfile" @click="editRecommendation">추천 수정</button>
-        </div>
-      </div>
-    </div>
+    
 
     <!-- 추천 영화 모달 -->
     <div v-if="showRecommendationModal" class="modal">
@@ -126,7 +123,8 @@
       :movie-id="movie.id"
       @close="showCategoryModal = false"
     />
-    </div>
+  </div>
+</div>
 </template>
 
 <script setup>
@@ -163,7 +161,6 @@ const toggleFollow = async () => {
     console.error("Error toggling follow:", error);
   }
 };
-
 
 const getFullPosterUrl = (posterUrl) => {
   const baseUrl = "https://image.tmdb.org/t/p/w500"; // TMDB 이미지 베이스 URL
@@ -331,7 +328,6 @@ const selectRecommendedMovie = (movie) => {
   console.log("선택된 영화 데이터:", selectedMovie.value); // 디버깅용
 };
 
-
 // 추천 영화 저장
 const saveRecommendation = async () => {
   if (!recommendedMovie.value || !recommendedMovie.value.id || !recommendationReason.value.trim()) {
@@ -342,7 +338,6 @@ const saveRecommendation = async () => {
     });
     return;
   }
-
   try {
     const response = await axios.post(
       `${store.API_URL}/accounts/recommend-movie/`,
@@ -370,14 +365,11 @@ const saveRecommendation = async () => {
   }
 };
 
-
-
 // 추천 영화 수정
 const editRecommendation = () => {
   openRecommendationModal();
   recommendationReason.value = recommendedMovie.value.reason || '';
 };
-
 
 onMounted(() => {
   fetchProfile();
@@ -390,142 +382,198 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 });
 </script>
 
+
+
+
 <style scoped>
-.recommended-movie-section {
-  margin-top: 30px;
-}
-
-.movie-details {
-  display: flex;
-  align-items: center;
-}
-
-.movie-poster {
-  width: 100px;
-  height: 150px;
-  margin-right: 20px;
-}
-
-/* 선택된 영화 미리보기 스타일 */
-.selected-movie-preview {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.movie-poster-preview {
-  width: 150px;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.recommendation-reason {
-  width: 100%;
-  margin-top: 10px;
-  height: 80px;
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 400px;
-}
-
-.close-modal-btn {
-  margin-top: 10px;
-}
-
-/* 카드 내용 */
-.card-content {
+.container {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding: 10px;
-}
-/* 이미지 컨테이너 */
-.image-container {
-  width: 300px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 8px;
-  margin: 0 auto 10px auto;
 }
 
-button {
+.text-center {
+  color: #e02ff0;
+  font-size: 2rem;
+  font-weight: bold;
+  animation: tracking-in-expand-fwd 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both; /* 애니메이션 추가 */
+}
+
+@keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateZ(0);
+    opacity: 1;
+  }
+}
+
+
+/* 전체 페이지 스타일 */
+.profile-page {
+  width: 80%; /* 전체 컨테이너 너비를 80%로 설정 */
+  max-width: 1200px; /* 최대 고정 너비 설정 */
+  margin: 0 auto; /* 중앙 정렬 */
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 좌측 1, 우측 2 비율 */
+  gap: 20px;
+  padding: 20px;
+  background-color: #e02ff017;
+  color: #f5f5f5;
+  border-radius: 10px;
+}
+
+
+/* 프로필 정보 (좌측 섹션) */
+.profile-info {
+  background-color: #282b3b;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-header img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #f5f5f5;
+}
+
+
+.profile-basic {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.profile-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.profile-follow-stats {
+  display: flex;
+  gap: 15px;
+  font-size: 0.9rem;
+}
+
+.follow-button {
+  margin-top: 15px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #3897f0;
   color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 20px;
   border: none;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+.follow-button:hover {
+  background-color: #217ac0;
+}
+
+
+/* 추천 영화 섹션 (우측 섹션) */
+.recommended-movie-section {
+  background-color: #282b3b;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.recommended-movie-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #f5f5f5;
+}
+
+.recommended-movie-section img {
+  width: 150px; /* 포스터 크기 조정 */
+  height: 225px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.recommended-movie-section h3 {
+  font-size: 1rem;
+  color: #fff;
+}
+
+.recommended-movie-section p {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin: 5px 0;
+}
+
+.edit-button {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  color: white;
+  background-color: #f39c12;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #d4860b;
+}
+
+/* 카테고리 섹션 */
+.category-section {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.category-section h2 {
+  font-size: 1.3rem;
+  text-align: center;
+  margin-bottom: 15px;
 }
 
 .category-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* 카테고리 이미지의 그리드 레이아웃 */
+  gap: 15px;
+  margin-top: 15px;
 }
 
 .category-card {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.category-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width: calc(33.333% - 20px);
-  margin: 10px;
-  background-color: #fff;
+  margin: 0 auto 10px auto;
 }
 
 .category-card h3 {
-  margin-top: 0;
-  font-size: 1.2em;
-}
-
-.category-poster {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-/* 랭크 표시 스타일 */
-.rank-display {
-  display: inline-flex;
-  align-items: center;
-}
-
-.rank-icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-}
-
-.button-container {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* 버튼 사이 간격 */
-}
-
-.category-button {
-  margin-top: 23px; /* Adjust this value as needed to align with the YouTube logo */
+  font-size: 0.9rem;
+  color: #f5f5f5;
 }
 
 /* 네온 버튼 스타일 */
