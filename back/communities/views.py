@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from django.db.models import Count
-from accounts.models import User
+from accounts.models import User, RecommendedMovie
 from movies.models import Movie
 
 # permission Decorators
@@ -159,6 +159,19 @@ def get_ranking(request):
             if user.profile_picture
             else '/media/profile_pictures/default-profile.png'  # 디폴트 이미지 URL
         )
+
+         # 추천 영화 데이터 가져오기
+        recommended_movie_data = None
+        if hasattr(user, 'recommended_movie'):
+            recommended_movie_data = {
+                "movie": {
+                    "id": user.recommended_movie.movie.id,
+                    "title": user.recommended_movie.movie.title,
+                    "poster_url": user.recommended_movie.movie.poster_url if user.recommended_movie.movie.poster_url else '/media/default_movie_poster.png',
+                },
+                "reason": user.recommended_movie.reason or '추천 이유가 없습니다.',
+            }
+
         ranking_data.append({
             "id": user.id,
             "username": user.username,
@@ -168,6 +181,7 @@ def get_ranking(request):
             "likes_count": user.likes_count,
             "followers_count": user.followers_count,
             "profile_picture": profile_image_url,  # 프로필 사진 URL 추가
+            "recommended_movie": recommended_movie_data,
         })
 
     return Response(ranking_data)
