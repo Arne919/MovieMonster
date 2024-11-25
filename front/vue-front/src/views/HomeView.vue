@@ -1,5 +1,6 @@
 <template>
   <div class="main-page-container">
+    <h1 class="maintext">MOVIE MONSTER</h1>
     <!-- 인기 영화 섹션 -->
     <div class="popular-movies-section">
       <h2>요즘 핫한 영화</h2>
@@ -39,34 +40,54 @@
       </div>
     </div>
     <!-- Top Ranking Section -->
-    <div class="main-page-container">
-    <!-- Top Ranking Section -->
-    <div class="top-ranking">
-      <div class="rank-wrapper">
-        <!-- 각 사용자 랭킹 카드 -->
+    <div class="top-ranking-section">
+      <!-- 카드 섹션 -->
+      <div class="ranking-card-container">
+        <h2 class="modiTop3">TOP 3 MONSTERS</h2>
         <div
-          class="rank-card"
-          v-for="(user, index) in topThreeRankings"
-          :key="user.username"
-          :class="getRankClass(index)"
+          v-for="(rank, index) in topThreeRankings"
+          :key="rank.username"
+          class="ranking-card"
         >
-          <div class="card-inner">
-            <!-- 카드 앞면 -->
+          <div class="card-inner" @click="navigateToProfile(rank.username)">
+            <!-- 앞면 -->
             <div class="card-front">
-              <img :src="getRankImage(user.rank_title)" alt="Rank Badge" class="rank-icon" />
-              <p class="rank-number">{{ index + 1 }}위</p>
-              <h3 class="username">{{ user.username }}</h3>
+              <h1>{{ index + 1 }}st</h1>
+              <img :src="getRankImage(rank.rank_title)" alt="랭크 이미지" class="rank-image" />
+              <div class="profile-header">
+                <img :src="getProfileImage(rank.profile_picture)" alt="프로필 사진" class="profile-image" />
+                <p class="username">{{ rank.username }}</p>
+              </div>
             </div>
-            <!-- 카드 뒷면 -->
+            <!-- 뒷면 -->
             <div class="card-back">
-              <p class="points">포인트: {{ user.points }}</p>
-              <button @click="navigateToProfile(user.username)">프로필 보기</button>
+              <div class="back-stats">
+                <div class="back-stat">
+                  <p>포인트</p>
+                  <div class="circle">{{ rank.points }}</div>
+                </div>
+                <div class="back-stat">
+                  <p>받은 좋아요</p>
+                  <div class="circle">{{ rank.likes_count }}</div>
+                </div>
+                <div class="back-stat">
+                  <p>게시글 수</p>
+                  <div class="circle">{{ rank.articles_count }}</div>
+                </div>
+                <div class="back-stat">
+                  <p>팔로워</p>
+                  <div class="circle">{{ rank.followers_count }}</div>
+                </div>
+              </div>
+              <div class="recommendation">
+                <span class="recommendation-label">추천작:</span>
+                <!-- <span class="recommendation-title">{{ rank.recommended_movie.movie.title || "없음" }}</span> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
     <!-- Best Reviews Section -->
     <div class="best-reviews-container">
@@ -128,11 +149,11 @@ const router = useRouter();
 
 // Top 3 랭킹 데이터 가져오기
 const topThreeRankings = computed(() => store.rankings.slice(0, 3));
-// 순위에 따라 카드 스타일 변경
-const getRankClass = (index) => {
-  return ["gold", "silver", "bronze"][index];
-};
 
+// 프로필 사진 URL 반환 함수
+const getProfileImage = (path) => {
+  return `http://127.0.0.1:8000${path}`;
+};
 
 // 상태 관리
 const topReviews = ref([]);
@@ -282,7 +303,7 @@ onMounted(async () => {
   await fetchPopularMovies(); // 인기 영화 데이터 가져오기
 });
 
-console.log('ppss',topReviews)
+console.log('ppss', topThreeRankings)
 </script>
 
 
@@ -297,6 +318,20 @@ console.log('ppss',topReviews)
   flex-direction: column;
   gap: 50px;
 }
+
+.maintext {
+  text-align: center;
+  font-size: 4rem; /* 글자 크기 */
+  font-weight: bold; /* 굵기 */
+  background: linear-gradient(135deg, #e02ff0, #39ffe5); /* 그래디언트 색상 */
+  -webkit-background-clip: text; /* 그래디언트가 글자 내부에만 표시되게 함 */
+  -webkit-text-fill-color: transparent; /* 텍스트 색상을 투명으로 */
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 입체감을 위한 그림자 */
+  transform: perspective(500px) rotateX(10deg); /* 휘어진 효과 */
+  letter-spacing: 3px; /* 글자 간격 */
+  margin-bottom: 20px; /* 아래쪽 여백 */
+}
+
 /* 인기 영화 섹션 */
 .popular-movies-section {
   margin-bottom: 50px;
@@ -345,12 +380,12 @@ console.log('ppss',topReviews)
   flex: 0 0 auto; /* 크기 고정 */
   width: 240px; /* 카드 너비 */
   height: 360px; /* 카드 높이 */
-  margin-bottom: 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s ease-in-out;
   background-color: transparent; /* 카드 배경을 투명하게 설정 */
+  padding: 5px;
 }
 
 .card img {
@@ -565,5 +600,206 @@ console.log('ppss',topReviews)
 .category-card p {
   font-size: 14px;
   margin: 0 10px 10px;
+}
+
+/* 카드 컨테이너 */
+.ranking-card-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 0px;
+  margin-bottom: 50px;
+}
+
+/* 카드 */
+.ranking-card {
+  width: 280px;
+  height: 390px;
+  perspective: 1000px;
+  margin-inline: 50px;
+  margin-bottom: -40px;
+  margin-top: -5px;
+}
+
+/* 카드 내부 */
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+  cursor: pointer;
+}
+
+/* 카드 회전 */
+.card-inner:hover {
+  transform: rotateY(180deg);
+}
+
+/* 카드 앞면 */
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 카드 앞면 스타일 */
+.card-front {
+  background: linear-gradient(135deg, #e02ff0, #39ffe5);
+  color: white;
+}
+
+.card-front h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.card-front .rank-image {
+  width: 80px;
+  height: 80px;
+  margin: 10px 0;
+}
+
+.card-front .username {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/* 카드 뒷면 스타일 */
+.card-back {
+  background: linear-gradient(135deg, #e02ff0, #39ffe5);
+  transform: rotateY(180deg);
+  color: #333;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.back-stats {
+  display: grid; /* 그리드 레이아웃 사용 */
+  grid-template-columns: repeat(2, 1fr); /* 2열로 설정 */
+  gap: 20px; /* 항목 간의 간격 */
+  justify-content: center;
+  align-items: center;
+}
+
+.back-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.back-stat p {
+  font-size: 1rem;
+  margin: 0;
+  color: #555;
+}
+
+.circle {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+}
+
+.top-ranking-section {
+  margin-top: -50px;
+}
+
+.back-recommend {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.back-recommend p {
+  font-size: 1rem;
+  margin: 0;
+  color: #555;
+}
+
+.recommendation {
+  display: flex;
+  align-items: center; /* 세로로 중앙 정렬 */
+  justify-content: center; /* 가로로 중앙 정렬 */
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.recommendation-label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.recommendation-title {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  color: #555;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.card-back h3 {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+.back-section {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.back-section p {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.back-section strong {
+  color: #555;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 0px;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 10rem;
+  font-weight: bold;
+}
+
+/* 프로필 헤더 */
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px; /* 중앙 정렬을 위한 여백 추가 */
 }
 </style>
