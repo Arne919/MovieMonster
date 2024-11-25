@@ -1,8 +1,11 @@
 <template>
   <div class="review-page-container">
-    <!-- 페이지 상단: 리뷰 작성 버튼과 제목 -->
+    <!-- 페이지 상단: 리뷰 제목과 설명 -->
     <div class="header">
-      <h1>전체 영화 리뷰</h1>
+      <div class="title-section">
+        <h1>Review</h1>
+        <p>영화에 대한 유저들의 리뷰들을 모아봤어요.</p>
+      </div>
       <RouterLink :to="{ name: 'CreateView' }" class="create-button">리뷰 작성하기</RouterLink>
     </div>
     <ArticleList />
@@ -28,36 +31,52 @@ onMounted(() => {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* 섹션 간격 */
+  gap: 25px; /* 섹션 간 간격 */
+  background-color: #1f1f1f; /* 배경색을 어두운 톤으로 설정하여 집중도를 높임 */
+  border-radius: 10px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #ff9800; /* 탭 컨테이너와의 일관성을 위해 강조선 추가 */
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .header h1 {
-  font-size: 24px;
+  font-size: 28px;
+  color: #ffffff; /* 색상을 하얀색으로 변경 */
+  font-weight: bold; /* 글씨를 굵게 설정 */
+}
+
+.header p {
+  font-size: 16px;
+  color: #888888; /* 부드러운 회색으로 설명 추가 */
   margin: 0;
 }
 
 .create-button {
-  padding: 8px 12px;
-  background-color: #007bff;
-  color: white;
+  padding: 10px 16px;
+  background-color: #ff9800; /* 버튼 색상을 따뜻한 오렌지로 유지 */
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   transition: background-color 0.3s;
 }
 
 .create-button:hover {
-  background-color: #0056b3;
+  background-color: #e68900;
 }
 </style>
