@@ -11,7 +11,7 @@ class Article(models.Model):
         settings.AUTH_USER_MODEL, related_name='like_movies'
     )
     title = models.CharField(max_length=100)
-    movie = models.ForeignKey(Movie, on_delete=models.SET_NULL, null=True, blank=True, related_name="articles")  # Movie 모델 연결
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True, related_name="articles")  # Movie 모델 연결
     content = models.TextField()
     rating = models.IntegerField(default=0)  # 소수점 대신 정수형으로 변경
     poster_url = models.URLField(max_length=500, blank=True, null=True)  # 포스터 URL 필드 추가
