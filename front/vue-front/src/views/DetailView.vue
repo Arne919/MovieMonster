@@ -4,6 +4,7 @@
     <div v-if="article">
       <!-- 제목 -->
       <h2>제목 : {{ article.title }}</h2>
+      <p>작성자 : {{ article.user }}</p>
 
       <!-- 작성일/수정일 -->
       <div class="date-container">
@@ -11,9 +12,15 @@
         <p>수정일: {{ store.formatDate(article.updated_at) }}</p>
       </div>
 
+      <!-- 게시글 수정 및 삭제 버튼 -->
+      <div v-if="isAuthor" class="article-actions">
+        <button class="edit-article-button" @click="goToEdit">게시글 수정</button>
+        <button class="delete-article-button" @click="deleteArticle">게시글 삭제</button>
+      </div>
+
       <!-- 리뷰 내용 -->
-      <div class="content-container">
-        <p>{{ article.content }}</p>
+      <div class="content-text">
+        <h6>{{ article.content }}</h6>
       </div>
 
       <!-- 영화 정보 카드 -->
@@ -63,29 +70,37 @@
       </div>
 
       <!-- 댓글 섹션 -->
+      <div class="comment-section">
+      <h3>댓글</h3>
       <div v-if="comments && comments.length > 0">
-        <h3>댓글</h3>
-        <div v-for="comment in comments" :key="comment.id">
-          <p><strong>{{ comment.user }}</strong>: {{ comment.content }}</p>
-          <button v-if="comment.user === store.Username" @click="editComment(comment)">수정</button>
-          <button v-if="comment.user === store.Username" @click="removeComment(comment.id)">삭제</button>
+        <div class="comment-card" v-for="comment in comments" :key="comment.id">
+          <div class="comment-header">
+            <strong>{{ comment.user }} : </strong>
+            <p class="comment-content">{{ comment.content }}</p>
+            <div class="comment-actions" v-if="comment.user === store.Username">
+              <button class="edit-button" @click="editComment(comment)">수정</button>
+              <button class="delete-button" @click="removeComment(comment.id)">삭제</button>
+            </div>
+          </div>
         </div>
       </div>
       <div v-else>
-        <p>댓글이 없습니다.</p>
+        <p class="no-comments">댓글이 없습니다.</p>
       </div>
 
       <!-- 댓글 작성 -->
-      <div v-if="!editingComment">
+      <div v-if="!editingComment" class="comment-input-container">
         <textarea v-model="newComment" placeholder="댓글을 작성하세요"></textarea>
-        <button @click="submitComment">댓글 작성</button>
+        <button class="submit-button" @click="submitComment">댓글 작성</button>
       </div>
 
-      <div v-if="editingComment">
+      <!-- 댓글 수정 -->
+      <div v-if="editingComment" class="comment-edit-container">
         <textarea v-model="updatedCommentContent"></textarea>
-        <button @click="submitUpdatedComment">수정 완료</button>
-        <button @click="cancelEdit">취소</button>
+        <button class="submit-button" @click="submitUpdatedComment">수정 완료</button>
+        <button class="cancel-button" @click="cancelEdit">취소</button>
       </div>
+    </div>
     </div>
   </div>
 </template>
@@ -125,7 +140,6 @@ const toggleLike = async () => {
     console.error("좋아요 상태 업데이트 실패:", err);
   }
 };
-
 
 // 영화 디테일 페이지로 이동
 const navigateToMovieDetail = (movieId) => {
@@ -206,7 +220,6 @@ const submitComment = () => {
     });
 };
 
-
 // 댓글 수정 시작
 const editComment = (comment) => {
   editingComment.value = comment;
@@ -262,7 +275,6 @@ const removeComment = (commentId) => {
     });
 };
 
-
 // 댓글 수정 취소
 const cancelEdit = () => {
   editingComment.value = null;
@@ -302,6 +314,7 @@ console.log('aa',article)
   max-width: 1200px; /* 전체 페이지와 동일한 너비 */
   margin: 0 auto; /* 가운데 정렬 */
   padding: 0 20px; /* 좌우 여백 추가 */
+  background-color: #1f1f1f;
 }
 /* 전체 페이지 스타일 */
 body {
@@ -315,7 +328,7 @@ body {
 
 /* 컨테이너 스타일 */
 div {
-  padding: 20px;
+  padding: 7.5px;
 }
 
 /* 뒤로가기 버튼 스타일 */
@@ -346,7 +359,8 @@ h2 {
 
 /* 작성자 정보 스타일 */
 p {
-  margin-bottom: 10px;
+  margin-bottom: 1px;
+  margin-left: 10px;
   font-size: 14px;
 }
 
@@ -417,13 +431,17 @@ p span {
   margin-top: 10px;
 }
 
+.content-text {
+  margin-bottom: 70px;
+}
+
 /* 별점 컨테이너 */
 .rating-container {
   display: flex;
   align-items: center;
   gap: 0px; /* 별 사이 간격 */
   margin: 0;
-  padding: 0
+  padding: 0;
 }
 
 .stars {
@@ -461,12 +479,15 @@ p span {
   border: none;
   background: transparent;
   cursor: pointer;
+
 }
 
 .like-icon,
 .liked-icon {
-  font-size: 24px;
+  font-size: 23px;
   color: #ff6b6b;
+  vertical-align: middle; /* 수직 정렬을 중앙으로 */
+  margin-top: 20px; /* 아이콘을 살짝 아래로 내림 */
 }
 
 .like-count {
@@ -480,9 +501,51 @@ p span {
   gap: 5px;
 }
 
+.comment-section {
+  margin-top: -25px;
+}
+
+.comment-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.comment-card {
+  background-color: #2c2c2c;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .comment-icon {
   font-size: 24px;
   color: #fff;
+  margin-right: 25px;
+}
+
+.comment-content {
+  font-size: 14px;
+  color: #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 1;
 }
 
 .comment-count-value {
@@ -491,9 +554,23 @@ p span {
 }
 
 .rating-container span {
-  margin-right: -18px; /* 간격 강제 조정 */
+  margin-right: 0px; /* 간격 강제 조정 */
   line-height: 1; /* 텍스트 라인 높이 조정 */
   display: inline-block; /* 텍스트가 중앙에 정렬되도록 설정 */
+}
+
+.no-comments {
+  color: #888;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.comment-input-container,
+.comment-edit-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 /* 댓글 섹션 스타일 */
@@ -502,15 +579,12 @@ textarea {
   padding: 10px;
   border: 1px solid #444;
   border-radius: 5px;
-  background-color: #2c2c2c;
+  background-color: #333;
   color: #fff;
   font-size: 14px;
-  margin-top: 10px;
+  resize: none;
 }
 
-textarea::placeholder {
-  color: #888;
-}
 
 textarea:focus {
   outline: none;
@@ -559,6 +633,7 @@ textarea:focus {
   font-size: 12px;
   color: #bbb;
   margin-bottom: 10px;
+  border-bottom: 2px solid #ff9800
 }
 
 /* 내용 스타일 */
@@ -566,13 +641,83 @@ textarea:focus {
   margin-top: 20px;
   margin-bottom: 30px;
   padding: 15px;
-  background-color: #2c2c2c; /* 어두운 회색 배경 */
+  background-color: #fff; /* 어두운 회색 배경 */
   border-radius: 8px;
-  color: #fff;
+  color: #2c2c2c ;
   font-size: 14px;
   line-height: 1.6;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+textarea::placeholder {
+  color: #888;
+}
+
+.submit-button {
+  background-color: #ff9f43;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #ff7a29;
+}
+
+.cancel-button {
+  background-color: #555;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: #777;
+}
+
+.edit-button,
+.delete-button {
+  background-color: transparent;
+  color: #ff9f43;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  color: #ff7a29;
+}
+
+/* 게시글 수정 및 삭제 버튼 스타일 */
+.article-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.edit-article-button,
+.delete-article-button {
+  background-color: #ff9f43;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-article-button:hover,
+.delete-article-button:hover {
+  background-color: #ff6f3c;
+}
 </style>
-
-
