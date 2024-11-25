@@ -1,65 +1,77 @@
 <template>
   <div class="main-page-container">
+    <!-- 인기 영화 섹션 -->
+    <div class="popular-movies-section">
+      <h2>요즘 핫한 영화</h2>
+      <p>요즘 가장 인기 있는 영화들을 모아봤어요!</p>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" @click="prevSlide('popular')">&lt;</button>
+        <div class="carousel-track-container">
+          <div
+            class="carousel-track"
+            :style="{ transform: `translateX(-${currentIndex['popular'] * 100}%)` }"
+          >
+            <div
+              class="carousel-slide"
+              v-for="(chunk, index) in getChunks(popularMovies, 5)"
+              :key="index"
+            >
+              <div
+                class="card"
+                v-for="movie in chunk"
+                :key="movie.movie_id"
+                @click.stop="goToDetail(movie.movie_id)"
+              >
+                <img
+                  :src="getFullPosterUrl(movie.poster_url)"
+                  class="card-img-top"
+                  :alt="movie.title"
+                />
+                <div>
+                  <p class = "movietitle">{{ movie.title }}</p>
+                  <span>⭐ {{ movie.rating || 'N/A' }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-btn next" @click="nextSlide('popular')">&gt;</button>
+      </div>
+    </div>
+    <!-- Top Ranking Section -->
+    <div class="main-page-container">
     <!-- Top Ranking Section -->
     <div class="top-ranking">
-      <!-- 2등 -->
-      <div v-if="topThreeRankings[1]" class="second">
-        <img
-          src="@/assets/second.png"
-          alt="2등"
-          class="position-icon"
-          @click="navigateToProfile(topThreeRankings[1].username)"
-        />
-        <div class="user-info">
-          <img
-            :src="getRankImage(topThreeRankings[1].rank_title)"
-            :alt="topThreeRankings[1].rank_title"
-            class="rank-icon"
-          />
-          <span class="username">{{ topThreeRankings[1].username }}</span>
-        </div>
-      </div>
-
-      <!-- 1등 -->
-      <div v-if="topThreeRankings[0]" class="first">
-        <img
-          src="@/assets/first.png"
-          alt="1등"
-          class="position-icon"
-          @click="navigateToProfile(topThreeRankings[0].username)"
-        />
-        <div class="user-info">
-          <img
-            :src="getRankImage(topThreeRankings[0].rank_title)"
-            :alt="topThreeRankings[0].rank_title"
-            class="rank-icon"
-          />
-          <span class="username">{{ topThreeRankings[0].username }}</span>
-        </div>
-      </div>
-
-      <!-- 3등 -->
-      <div v-if="topThreeRankings[2]" class="third">
-        <img
-          src="@/assets/third.png"
-          alt="3등"
-          class="position-icon"
-          @click="navigateToProfile(topThreeRankings[2].username)"
-        />
-        <div class="user-info">
-          <img
-            :src="getRankImage(topThreeRankings[2].rank_title)"
-            :alt="topThreeRankings[2].rank_title"
-            class="rank-icon"
-          />
-          <span class="username">{{ topThreeRankings[2].username }}</span>
+      <div class="rank-wrapper">
+        <!-- 각 사용자 랭킹 카드 -->
+        <div
+          class="rank-card"
+          v-for="(user, index) in topThreeRankings"
+          :key="user.username"
+          :class="getRankClass(index)"
+        >
+          <div class="card-inner">
+            <!-- 카드 앞면 -->
+            <div class="card-front">
+              <img :src="getRankImage(user.rank_title)" alt="Rank Badge" class="rank-icon" />
+              <p class="rank-number">{{ index + 1 }}위</p>
+              <h3 class="username">{{ user.username }}</h3>
+            </div>
+            <!-- 카드 뒷면 -->
+            <div class="card-back">
+              <p class="points">포인트: {{ user.points }}</p>
+              <button @click="navigateToProfile(user.username)">프로필 보기</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 
     <!-- Best Reviews Section -->
     <div class="best-reviews-container">
-      <h2>베스트 리뷰</h2>
+      <h2>Best Review</h2>
+      <p>금주 가장 ❤를 많이 받은 게시물은 무엇일까요?</p>
       <div v-if="isLoading" class="loading-message">리뷰 데이터를 불러오는 중입니다...</div>
       <div v-else class="best-reviews">
         <div
@@ -74,7 +86,7 @@
             <p>작성자: {{ review.user }}</p>
             <p>평점: {{ review.rating }} / 10</p>
             <p>{{ review.content }}...</p>
-            <p>좋아요: {{ review.like_count }}</p>
+            <p>❤: {{ review.like_count }}</p>
             <p>작성일: {{ formatDate(review.created_at) }}</p>
           </div>
         </div>
@@ -116,12 +128,20 @@ const router = useRouter();
 
 // Top 3 랭킹 데이터 가져오기
 const topThreeRankings = computed(() => store.rankings.slice(0, 3));
+// 순위에 따라 카드 스타일 변경
+const getRankClass = (index) => {
+  return ["gold", "silver", "bronze"][index];
+};
+
 
 // 상태 관리
 const topReviews = ref([]);
 const isLoading = ref(true);
 const topRankerCategories = ref(null);
 const isLoadingCategories = ref(false);
+
+const popularMovies = ref([]); // 인기 영화 데이터
+const currentIndex = ref({ popular: 0 }); // 캐러셀 현재 인덱스
 
 // 날짜 포맷 함수
 const formatDate = (dateString) => {
@@ -135,6 +155,11 @@ import silverRank from "@/assets/SilverRank.png";
 import goldRank from "@/assets/GoldRank.png";
 import platinumRank from "@/assets/PlatinumRank.png";
 import diamondRank from "@/assets/DiamondRank.png";
+
+// 영화 상세 페이지로 이동
+const goToDetail = (movieId) => {
+      router.push({ name: "MovieDetail", params: { id: movieId } });
+    };
 
 const getRankImage = (rankTitle) => {
   switch (rankTitle) {
@@ -179,6 +204,45 @@ const fetchTopReviews = async () => {
   }
 };
 
+// 인기 영화 가져오기
+const fetchPopularMovies = async () => {
+  try {
+    const response = await axios.get("/popular.json");
+    popularMovies.value = response.data.map((item) => ({
+      movie_id: item.fields.movie_id,
+      title: item.fields.title,
+      poster_url: item.fields.poster_url,
+      rating: item.fields.vote_avg || "N/A", // 평점 추가 (없으면 N/A)
+    }));
+    console.log('ww',popularMovies.value)
+  } catch (error) {
+    console.error("Error fetching popular movies:", error);
+  }
+};
+
+// 슬라이드 이동
+const nextSlide = (section) => {
+  const totalSlides = Math.ceil(popularMovies.value.length / 5);
+  if (currentIndex.value[section] < totalSlides - 1) {
+    currentIndex.value[section]++;
+  }
+};
+
+const prevSlide = (section) => {
+  if (currentIndex.value[section] > 0) {
+    currentIndex.value[section]--;
+  }
+};
+
+// 데이터를 5개씩 나누기
+const getChunks = (movies, size) => {
+  const chunks = [];
+  for (let i = 0; i < movies.length; i += size) {
+    chunks.push(movies.slice(i, i + size));
+  }
+  return chunks;
+};
+
 // API 호출: Top Ranker Categories
 const fetchTopRankerCategories = async () => {
   if (!topThreeRankings.value[0]?.username) return;
@@ -215,6 +279,7 @@ onMounted(async () => {
   }
   await fetchTopReviews();
   await fetchTopRankerCategories();
+  await fetchPopularMovies(); // 인기 영화 데이터 가져오기
 });
 
 console.log('ppss',topReviews)
@@ -231,6 +296,101 @@ console.log('ppss',topReviews)
   display: flex;
   flex-direction: column;
   gap: 50px;
+}
+/* 인기 영화 섹션 */
+.popular-movies-section {
+  margin-bottom: 50px;
+  border-bottom: 1px solid #ddd;
+}
+
+.popular-movies-section h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.popular-movies-section p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.movietitle {
+  color: #f9f9f9
+}
+
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.carousel-track-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  display: flex;
+  flex-shrink: 0; /* 크기 축소 방지 */
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card {
+  flex: 0 0 auto; /* 크기 고정 */
+  width: 240px; /* 카드 너비 */
+  height: 360px; /* 카드 높이 */
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+  background-color: transparent; /* 카드 배경을 투명하게 설정 */
+}
+
+.card img {
+  width: 100%;
+  height: 300px; /* 고정된 크기 */
+  object-fit: cover; /* 이미지 비율 유지 */
+  border-radius: 10px;
+}
+
+.card p {
+  margin: 10px 0 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.card span {
+  font-size: 14px;
+  color: #666;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #39ffe5;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 15px;
+  z-index: 10;
+}
+
+
+.carousel-btn.prev {
+  left: 0;
+}
+
+.carousel-btn.next {
+  right: 0;
 }
 
 /* Top 랭킹 섹션 스타일 */
