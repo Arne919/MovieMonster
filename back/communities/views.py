@@ -24,7 +24,7 @@ def article_list(request):
         # 댓글 수 포함하여 모든 게시글 가져오기
         articles = Article.objects.annotate(comment_count=Count('comments')).select_related('movie').all()
         serializer = ArticleListSerializer(articles, many=True, context={'request': request})
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
 
     elif request.method == 'POST':
@@ -34,7 +34,7 @@ def article_list(request):
             user = request.user
             user.points += 100  # 100 포인트 추가
             user.save()  # 사용자 정보 저장
-            print(serializer.data)
+            # print(serializer.data)
             article_data = ArticleSerializer(article, context={'request': request}).data
             user_data = {"username": user.username, "points": user.points}
             return Response({
@@ -51,7 +51,7 @@ def article_detail(request, article_pk):
 
     if request.method == 'GET':
         serializer = ArticleListSerializer(article, context={'request': request})
-        print(serializer.data)
+        # print(serializer.data)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
@@ -213,7 +213,7 @@ def top_reviews(request):
         .order_by('-like_count')[:3]
     )
     serializer = ArticleListSerializer(top_reviews, many=True, context={'request': request})
-    print(serializer.data)
+    # print(serializer.data)
     return Response(serializer.data)
 
 
