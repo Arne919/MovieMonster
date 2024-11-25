@@ -14,6 +14,7 @@ import OneLineView from "@/views/OneLineView.vue"
 import KoreaQuotesView from "@/views/KoreaQuotesView.vue"
 import ForeignQuotesView from "@/views/ForeignQuotesView.vue"
 import RankView from '@/views/RankView.vue'
+import RankInfoModal from '@/components/RankInfoModal.vue'
 import { useCounterStore } from '@/stores/counter'
 import EditView from '@/views/EditView.vue'
 import ProfileView from '@/views/ProfileView.vue'
@@ -107,6 +108,11 @@ const router = createRouter({
       path: '/rank',
       name: 'RankView',
       component: RankView,
+    },
+    {
+      path: '/rank/info',
+      name: 'RankInfoModal',
+      component: RankInfoModal,
     },
     {
       path: '/profile/:username',
