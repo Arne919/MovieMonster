@@ -42,8 +42,8 @@
       <!-- 우측: 추천 영화 -->
       <div class="recommended-movie-section">
         <h2>이거 안보면 진짜 후회해요!</h2>
-        <div v-if="!recommendedMovie">
-          <p  class="not_yet_recommend">아직 추천하는 영화가 없어요.</p>
+        <div v-if="!recommendedMovie" class="not_yet_recommend">
+          <p>아직 추천하는 영화가 없어요.</p>
           <a v-if="isOwnProfile" class="add-movie" @click="openRecommendationModal">
             <span></span>
             <span></span>
@@ -52,17 +52,23 @@
             영화 추천하기
           </a>
         </div>
-        <div v-else>
-          <img :src="recommendedMovie.posterUrl" alt="추천 영화 포스터" />
+        <div v-else class="yes_recommend">
+          <div class="yes-yes-recommend">
+            <img :src="recommendedMovie.posterUrl"  alt="추천 영화 포스터" />
+            <a v-if="isOwnProfile" class="add-movie-after" @click="editRecommendation" >
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              영화 수정
+            </a>
+          </div>
+          
+          <div class="recommend-detail">
           <h3>{{ recommendedMovie.title }}</h3>
           <p class="recommendation-reason">추천 이유: {{ recommendedMovie.reason }}</p>
-          <a v-if="isOwnProfile" class="add-movie-after" @click="editRecommendation" >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            추천 수정
-          </a>
+        </div>
+          
         </div>
       </div>
     </div>
@@ -530,6 +536,7 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 
 
 .follow-button {
+  
   margin-top: 10px 20px;
   padding: 10px;
   width: 100%; /* 버튼 길이를 프로필 스탯에 맞춤 */
@@ -547,6 +554,7 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 }
 
 .profile-details {
+
   margin-top: auto; /* 프로필 헤더와 버튼 사이 고정된 거리 확보 */
   border-top: 1px solid #e02ff06b; /* 상단에 경계선 추가 */
   padding-top: 15px; /* 경계선과 내용 간격 */
@@ -600,32 +608,103 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 }
 /* 추천 영화 섹션 */
 .not_yet_recommend {
+  text-align: center;
   padding-top: 15%;
+  flex-direction: column;
+  display: flex;
 }
 
+.yes_recommend {
+  /* margin-left: -10px; */
+  display: flex; /* 가로 정렬 */
+  flex-direction: row; /* 이미지와 텍스트를 가로로 배치 */
+  align-items: center; /* 세로 정렬 */
+  /* gap: 20px; 이미지와 텍스트 사이 간격 */
+  width: 100%; /* 부모 요소 너비에 맞춤 */
+  grid-template-columns: 1fr 1fr; /* 좌측 1, 우측 2 비율 */
+}
+
+.yes_recommend img {
+  width: 40%; /* 컨테이너 너비의 40% */
+  height: auto; /* 이미지의 비율 유지 */
+  object-fit: cover; /* 이미지가 비율에 맞도록 자름 */
+  border-radius: 10px; /* 둥근 모서리 */
+}
+
+.recommend-detail {
+  flex-grow: 1; /* 남은 공간 차지 */
+  display: flex;
+  flex-direction: column; /* 텍스트를 세로로 정렬 */
+  justify-content: center; /* 텍스트 중앙 정렬 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+}
+
+.yes_yes_recommend {
+  flex-direction: column;
+}
+
+.add-movie {
+  
+  bottom: 20px; /* 하단 여백 */
+  left: 20px; /* 좌측 여백 */
+}
 .recommended-movie-section {
+  position: relative;
+  display: flex;
   text-align: center;
+  flex-direction: column;
+  align-items: center;
   padding: 30px;
   background-color: #e02ff01c;
   border-radius: 10px;
   height: 425px;
   margin: 20px;
-  display: flex;
-  flex-direction: column;
+  
   gap: 20px;
 }
 
+.recommended-movie-section > div {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px; /* 포스터와 텍스트 간 간격 */
+}
+
+.recommended-movie-section img {
+  width: 150px;
+  height: 225px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+
+.recommended-movie-section h3 {
+  font-size: 1rem;
+  margin: 0 0 10px 0;
+}
+
+
 .recommendation-reason {
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 최대 3줄까지만 보이게 설정 */
+  -webkit-line-clamp: 7; /* 최대 3줄까지만 보이게 설정 */
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
+  text-align: left; /* 추천 이유 왼쪽 정렬 */
+  /* text-overflow: ellipsis; */
+  /* white-space: normal; */
   font-size: 0.9rem; /* 글자 크기 조정 */
   line-height: 1.4; /* 줄 간격 조정 */
   color: #aaa; /* 텍스트 색상 */
   margin: 5px 0;
+
+  width: 100%; /* 텍스트박스 전체 너비 */
+  height: 150px; /* 높이 지정 */
+  /* margin-top: 10px; */
+  padding: 10px;
+  /* font-size: 1rem; */
+  /* border: 1px solid #ddd; */
+  border-radius: 5px;
+  resize: none;
 }
 
 
@@ -636,24 +715,13 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   color: #f5f5f5;
 }
 
-.recommended-movie-section img {
-  width: 150px; /* 포스터 크기 조정 */
-  height: 225px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.recommended-movie-section h3 {
-  font-size: 1rem;
-  color: #fff;
-}
-
 .recommended-movie-section p {
   font-size: 0.9rem;
   color: #aaa;
   margin: 5px 0;
 }
+
+
 
 /* 카테고리 섹션 */
 .category-section {
@@ -699,14 +767,27 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: block; /* 강제로 표시 */
+  display: flex; /* 강제로 표시 */
+  flex-direction: column;
+  gap: 20px;
 }
 
 .modal-content {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
+  position: relative;
 }
+
+
+.selected-movie-preview {
+  display: flex;
+  align-items: flex-start; /* 포스터와 텍스트를 수직 정렬 */
+  gap: 20px; /* 포스터와 텍스트 사이 간격 */
+  /* margin-top: 20px; */
+}
+
+
 
 .hidden {
   display: none; /* 숨김 */
