@@ -117,33 +117,34 @@
 
     <!-- 추천 영화 모달 -->
     <div v-show="showRecommendationModal" class="modal">
-  <div class="modal-content">
-    <h2>추천 영화 선택</h2>
-    <input v-model="searchQuery" @input="searchMovies" placeholder="영화 제목 입력" />
+      <div class="modal-content">
+        <h2>추천 영화 선택</h2>
+          <input v-model="searchQuery" @input="searchMovies" placeholder="영화 제목 입력" />
+          <!-- 영화 검색 결과 -->
+          <ul>
+            <li v-for="movie in searchResults" :key="movie.id">
+              {{ movie.title }}
+              <button @click="selectRecommendedMovie(movie)">선택</button>
+            </li>
+          </ul>
 
-        <!-- 영화 검색 결과 -->
-        <ul>
-          <li v-for="movie in searchResults" :key="movie.id">
-            {{ movie.title }}
-            <button @click="selectRecommendedMovie(movie)">선택</button>
-          </li>
-        </ul>
+          <!-- 선택된 영화 포스터 및 정보 -->
+          <div v-if="selectedMovie" class="selected-movie-preview">
+            <h3>선택된 영화:</h3>
+            <img :src="selectedMovie.posterUrl" alt="선택된 영화 포스터" class="movie-poster-preview" />
+            <p>{{ selectedMovie.title }}</p>
+          </div>
 
-        <!-- 선택된 영화 포스터 및 정보 -->
-        <div v-if="selectedMovie" class="selected-movie-preview">
-          <h3>선택된 영화:</h3>
-          <img :src="selectedMovie.posterUrl" alt="선택된 영화 포스터" class="movie-poster-preview" />
-          <p>{{ selectedMovie.title }}</p>
-        </div>
-
-        <!-- 추천 이유 작성 -->
-        <textarea
-          v-model="recommendationReason"
-          placeholder="추천 이유를 작성해주세요"
-          class="recommendation-reason"
-        ></textarea>
-        <button @click="saveRecommendation" class="save-btn">완료</button>
-        <button @click="closeRecommendationModal" class="close-modal-btn">닫기</button>
+          <!-- 추천 이유 작성 -->
+          <textarea
+            v-model="recommendationReason"
+            placeholder="추천 이유를 작성해주세요"
+            class="recommendation-reason"
+          ></textarea>
+          <div class="modal-actions">
+            <button class="save-btn" @click="saveRecommendation">완료</button>
+            <button class="close-modal-btn" @click="closeRecommendationModal">닫기</button>
+          </div>
       </div>
       <!-- 카테고리 추가 모달 -->
     <AddToCategoryModal
@@ -621,28 +622,45 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 }
 
 .yes_recommend {
-  /* margin-left: -10px; */
-  display: flex; /* 가로 정렬 */
-  flex-direction: row; /* 이미지와 텍스트를 가로로 배치 */
-  align-items: center; /* 세로 정렬 */
-  /* gap: 20px; 이미지와 텍스트 사이 간격 */
-  width: 100%; /* 부모 요소 너비에 맞춤 */
-  grid-template-columns: 1fr 1fr; /* 좌측 1, 우측 2 비율 */
+  display: flex;
+  flex-direction: row; /* 가로 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: space-between; /* 양 끝 정렬 */
+  gap: 20px; /* 간격 추가 */
+  width: 100%; /* 부모 요소 너비 */
 }
 
+
 .yes_recommend img {
-  width: 40%; /* 컨테이너 너비의 40% */
-  height: auto; /* 이미지의 비율 유지 */
-  object-fit: cover; /* 이미지가 비율에 맞도록 자름 */
-  border-radius: 10px; /* 둥근 모서리 */
+  width: 150px; /* 이미지 크기 고정 */
+  height: auto;
+  object-fit: cover; /* 이미지 비율 유지 */
+  border-radius: 10px;
+  border: 2px solid #e02ff0; /* 테두리 */
 }
 
 .recommend-detail {
-  flex-grow: 1; /* 남은 공간 차지 */
   display: flex;
-  flex-direction: column; /* 텍스트를 세로로 정렬 */
-  justify-content: center; /* 텍스트 중앙 정렬 */
-  text-align: left; /* 텍스트 왼쪽 정렬 */
+  flex-direction: column; /* 세로 정렬 */
+  justify-content: center;
+  text-align: left;
+}
+
+.recommend-detail h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.recommend-detail p {
+  display: block; /* 블록 레벨 요소 */
+  font-size: 1rem; /* 글씨 크기 */
+  color: #ffffff; /* 하얀색 텍스트 */
+  margin-top: 5px; /* 제목과의 간격 */
+  text-align: left; /* 왼쪽 정렬 */
+  background: none; /* 박스 배경 제거 */
+  border: none; /* 경계선 제거 */
+  padding: 0; /* 내부 여백 제거 */
 }
 
 .yes_yes_recommend {
@@ -795,32 +813,167 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: #2b2b2b; /* 어두운 배경 */
   z-index: 9999;
   width: 80%;
-  max-width: 450px;
+  max-width: 500px; /* 모달 최대 너비 */
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex; /* 강제로 표시 */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
   flex-direction: column;
   gap: 20px;
+  color: #fff; /* 흰색 텍스트 */
 }
 
 .modal-content {
+  background-color: #1e1e1e; /* 어두운 배경 */
+  color: #ffffff; /* 흰색 텍스트 */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   gap: 20px;
-  position: relative;
 }
 
+.modal-content h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #e02ff0;
+  margin-bottom: 15px;
+}
+
+.modal-content input {
+  background-color: #333333; /* 입력 필드 배경 */
+  color: #ffffff; /* 흰색 텍스트 */
+  border: 1px solid #555555; /* 필드 경계선 */
+  padding: 10px;
+  border-radius: 5px;
+}
+.modal-content input::placeholder {
+  color: #bbbbbb; /* 플레이스홀더 색상 */
+}
+
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px; /* 리스트의 최대 높이를 제한 */
+  overflow-y: auto; /* 스크롤이 필요한 경우 표시 */
+}
+
+.modal-content ul li {
+  background-color: #2a2a2a; /* 리스트 아이템 배경 */
+  color: #ffffff; /* 텍스트를 흰색으로 변경 */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-content ul li:last-child {
+  border-bottom: none; /* 마지막 아이템의 테두리 제거 */
+}
+
+.modal-content ul li button {
+  background-color: #e02ff0; /* 버튼 배경색 */
+  color: #1e1e1e; /* 버튼 텍스트 색상 */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content ul li button:hover {
+  background-color: #ff3ff3; /* 호버 시 더 밝은 색상 */
+}
+
+textarea.recommendation-reason {
+  background-color: #333333; /* 텍스트박스 배경 */
+  color: #ffffff; /* 흰색 텍스트 */
+  border: 1px solid #555555; /* 경계선 */
+  padding: 10px;
+  border-radius: 5px;
+}
 
 .selected-movie-preview {
   display: flex;
-  align-items: flex-start; /* 포스터와 텍스트를 수직 정렬 */
-  gap: 20px; /* 포스터와 텍스트 사이 간격 */
+  flex-direction: column; /* 수직 정렬 */
+  align-items: center; /* 중앙 정렬 */
+  gap: 10px; /* 간격 추가 */
   margin-top: 20px;
 }
+
+.selected-movie-preview h3 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.selected-movie-preview img {
+  width: 150px; /* 포스터 크기 조정 */
+  height: 225px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.selected-movie-preview p {
+  font-size: 1rem;
+  color: #bbbbbb;
+}
+
+.recommendation-reason {
+  width: 100%;
+  height: 80px; /* 텍스트박스 높이 */
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background: #1f1f1f;
+  color: #fff;
+  resize: none;
+}
+
+.save-btn,
+.close-modal-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  transition: background 0.3s;
+}
+
+.save-btn {
+  background-color: #4caf50; /* 완료 버튼 색상 */
+}
+
+.save-btn:hover {
+  background-color: #45a049; /* 호버 효과 */
+}
+
+.close-modal-btn {
+  background-color: #e53935; /* 닫기 버튼 색상 */
+}
+
+.close-modal-btn:hover {
+  background-color: #d32f2f; /* 호버 효과 */
+}
+
+/* 버튼 부모 요소: flexbox를 사용해 우측 정렬 및 한 줄 배치 */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end; /* 버튼을 우측 정렬 */
+  gap: 10px; /* 버튼 간 간격 */
+  margin-top: 20px; /* 상단 여백 */
+}
+
 
 
 

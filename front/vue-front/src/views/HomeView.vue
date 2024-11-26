@@ -79,10 +79,10 @@
                   <div class="circle">{{ rank.followers_count }}</div>
                 </div>
               </div>
-              <div class="recommendation">
-                <span class="recommendation-label">추천작:</span>
+              <!-- <div class="recommendation"> -->
+                <!-- <span class="recommendation-label">추천작:</span> -->
                 <!-- <span class="recommendation-title">{{ rank.recommended_movie.movie.title || "없음" }}</span> -->
-              </div>
+              <!-- </div> -->
             </div>
           </div>
         </div>
