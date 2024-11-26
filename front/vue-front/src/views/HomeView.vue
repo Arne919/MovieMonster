@@ -116,7 +116,7 @@
 
     <!-- Categories of Top Ranker -->
     <div class="top-ranker-categories-container" v-if="topRankerCategories">
-      <h2 class="zizon">z l 존 M✪N⭑스✧ㅌr 💥 {{ topThreeRankings[0]?.username }} 💥님의 카테고리</h2>
+      <h2 class="zizon">zㅣ존 MONSTER 💥 {{ topThreeRankings[0]?.username }} 💥님의 컬렉션을 만나보세요!</h2>
       <div class="categories">
         <div
           v-for="category in topRankerCategories"
@@ -336,7 +336,9 @@ console.log('ppss', topThreeRankings)
 .popular-movies-section {
   margin-bottom: 50px;
   padding-bottom: 30px;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid transparent; /* 기본 투명 */
+  border-image: linear-gradient(135deg, #e02ff0, #39ffe5); /* 그래디언트 색상 */
+  border-image-slice: 1; /* 전체 영역 적용 */
 }
 
 .popular-movies-section h2 {
@@ -491,7 +493,9 @@ console.log('ppss', topThreeRankings)
 .best-reviews-container {
   width: 100%;
   padding: 20px;
-  border-top: 1px solid #ddd;
+  border-top: 2px solid transparent; /* 기본 투명 */
+  border-image: linear-gradient(135deg, #e02ff0, #39ffe5); /* 그래디언트 색상 */
+  border-image-slice: 1; /* 전체 영역 적용 */
 }
 
 .loading-message {
@@ -564,7 +568,9 @@ console.log('ppss', topThreeRankings)
 
 /* Top Ranker Categories Section */
 .top-ranker-categories-container {
-  border-top: 1px solid #ddd;
+  border-top: 2px solid transparent; /* 기본 투명 */
+  border-image: linear-gradient(135deg, #e02ff0, #39ffe5); /* 그래디언트 색상 */
+  border-image-slice: 1; /* 전체 영역 적용 */
   padding-top: 20px;
   padding-left: 20px
 }
