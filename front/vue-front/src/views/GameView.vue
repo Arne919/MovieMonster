@@ -77,8 +77,8 @@ export default {
   name: "GameView",
   data() {
     return {
-      // cooldownTime: 8 * 60 * 60 * 1000, // 8시간 제한 시간
-      cooldownTime: 2 * 60 * 1000, // 테스트용 시간조절(2분)
+      cooldownTime: 8 * 60 * 60 * 1000, // 8시간 제한 시간
+      // cooldownTime: 2 * 60 * 1000, // 테스트용 시간조절(2분)
       showModal: false,
       modalMessage: "",
     };

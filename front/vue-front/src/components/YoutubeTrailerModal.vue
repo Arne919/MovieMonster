@@ -15,7 +15,7 @@
           </h5>
           <!-- 닫기 버튼 -->
           <button
-            type="button"
+            type="button" 
             class="btn-close custom-close-btn"
             data-bs-dismiss="modal"
             aria-label="Close"
