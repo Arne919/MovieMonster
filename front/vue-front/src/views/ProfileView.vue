@@ -4,7 +4,9 @@
     <div class="profile-page">
       <!-- 좌측: 프로필 정보 -->
       <div class="profile-info">
+        <div class="follow-button-wrapper">
         <div class="profile-header">
+          
           <img :src="`http://127.0.0.1:8000${user.profile_picture}`" class="profile-img" alt="프로필 사진">
           <div class="profile-basic">
             <h1 class="profile-title">{{ user.username }}</h1>
@@ -12,12 +14,12 @@
               <p>팔로잉 {{ user.followingsCount }}</p><hr/><hr/>
               <p>팔로워 {{ user.followersCount }}</p>
             </div>
-            <div class="follow-button-wrapper">
-            <button v-if="!isOwnProfile" class="follow-button" @click="toggleFollow">
+            
+          </div>
+          </div>
+          <button v-if="!isOwnProfile" class="follow-button" @click="toggleFollow">
               {{ isFollowed ? '언팔로우' : '팔로우' }}
             </button>
-          </div>
-          </div>
         </div>
         <div class="profile-details">
           <div class="stats-row">
@@ -465,28 +467,33 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 
 /* 프로필 정보 (좌측 섹션) */
 .profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 425px;
+  padding: 30px;
   background-color: #e02ff01c;
   border-radius: 10px;
   margin: 20px;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
+
   /* position: relative; */
   gap: 20px;
-  height: 425px;
+  
 }
 
 .profile-header {
   display: flex;
   align-items: center;
   gap: 20px;
-  position: relative;
+  /* position: relative; */
+  justify-content: center; /* 중앙 정렬 */
+  margin-bottom: 20px;
 }
 
 .profile-header img {
   display: flex;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   border: 1.5px solid #f5f5f5;
@@ -501,19 +508,29 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 }
 
 .profile-title {
-  align-items: center;
+  /* align-items: center; */
   font-size: 2.5rem;
+  color: white;
+  margin-bottom: 5px;
   /* font-weight: bold; */
 }
 
 .profile-follow-stats {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 20px;
+  font-size: 1rem;
+  color: #f5f5f5;
+  justify-content: space-between; /* 왼쪽 정렬 */
 }
 
+.follow-button-wrapper {
+  margin-top: 20px; /* 팔로잉/팔로워와 버튼 간격 */
+  text-align: center; /* 버튼을 중앙 정렬 */
+}
+
+
 .follow-button {
-  margin-top: 10px;
+  margin-top: 10px 20px;
   padding: 10px;
   width: 100%; /* 버튼 길이를 프로필 스탯에 맞춤 */
   background-color: #3897f0;
@@ -531,6 +548,8 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 
 .profile-details {
   margin-top: auto; /* 프로필 헤더와 버튼 사이 고정된 거리 확보 */
+  border-top: 1px solid #e02ff06b; /* 상단에 경계선 추가 */
+  padding-top: 15px; /* 경계선과 내용 간격 */
 }
 
 /* 랭크 이미지 */
@@ -561,24 +580,23 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 .stats-row {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   /* background-color: #e02ff02c; */
-  padding: 10px 20px;
-  /* border-radius: 10px; */
+  padding: 10px 0;
   text-align: center;
   /* border: 1px solid #e02ff06b; */
-  border-top: 1px solid #e02ff06b;
+  /* border-top: 1px solid #e02ff06b; */
   color: white;
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 .stat-box {
   /* background-color: #282b3b; */
   padding: 10px 20px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   text-align: center;
   color: white;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 /* 추천 영화 섹션 */
 .not_yet_recommend {
