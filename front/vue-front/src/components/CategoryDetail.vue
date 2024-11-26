@@ -1,19 +1,58 @@
 <template>
-  <div>
-    <h1>{{ category.name }} 카테고리</h1>
-    <div v-if="isOwner">
-      <button @click="startEditingName" v-if="!isEditingName" class="edit-btn">이름 수정</button>
-      <input
+  <div class="category-container">
+    <div class="category-header">
+      <h1 class="collection-title">{{category.name}} Collection</h1>
+    </div>
+    <div class="top-menu">
+      <div v-if="isOwner" class="edit-group">
+        <a v-if="!isEditingName" class="add-movie-after" @click="startEditingName" >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            이름 수정
+        </a>
+        <!-- <button @click="startEditingName" v-if="!isEditingName" class="edit-btn">이름 수정</button> -->
+        <input
         v-if="isEditingName"
         v-model="newCategoryName"
         type="text"
         class="edit-category-input"
         placeholder="새 카테고리 이름 입력"
-      />
-      <button v-if="isEditingName" @click="saveCategoryName" class="save-btn">저장</button>
-      <button v-if="isEditingName" @click="cancelEditingName" class="cancel-btn">취소</button>
-      <button @click="openAddMovieModal" class="add-movie-btn">이 카테고리에 영화 추가</button>
-      <button @click="deleteCategory" class="delete-category-btn">카테고리 삭제</button>
+        />
+        <a v-if="isEditingName" class="add-movie-after" @click="saveCategoryName" >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            저장
+        </a>
+        <a v-if="isEditingName" class="add-movie-after" @click="cancelEditingName" >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            취소
+        </a>
+        <a class="add-movie-after" @click="openAddMovieModal" >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            이 카테고리에 영화 추가
+        </a>
+        <a class="add-movie-after" @click="deleteCategory" >
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            카테고리 삭제
+        </a>
+        <!-- <button v-if="isEditingName" @click="saveCategoryName" class="save-btn">저장</button> -->
+        <!-- <button v-if="isEditingName" @click="cancelEditingName" class="cancel-btn">취소</button> -->
+        <!-- <button @click="openAddMovieModal" class="add-movie-btn">이 카테고리에 영화 추가</button> -->
+        <!-- <button @click="deleteCategory" class="delete-category-btn">카테고리 삭제</button> -->
+      </div>
     </div>
 
     <!-- 영화 추가 모달 -->
@@ -258,6 +297,77 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+
+/* 카테고리 페이지 전체 레이아웃에 패딩 추가 */
+.category-container {
+  padding: 0 230px; /* 양쪽에 40px 패딩 추가 */
+}
+
+/* 왼쪽 상단으로 이동 및 스타일 수정 */
+.category-header {
+  position: relative; /* 상대 위치 지정 */
+  top: 50px; /* 상단에서 50px 아래로 */
+  left: 50px; /* 왼쪽에서 50px 오른쪽으로 */
+}
+
+.collection-title {
+  font-size: 2.5rem; /* 글씨 크기 키움 */
+  font-weight: bold; /* 두꺼운 글씨 */
+  color: #e02ff0; /* 네온 핑크와 일치하는 색상 */
+  text-shadow: 0 0 2px #e02ff0, 0 0 4px #e02ff0, 0 0 6px #e02ff0;
+  font-family: 'Arial', sans-serif; /* 깔끔하고 현대적인 글씨체 */
+  animation: neon-flicker 2s infinite; /* 깜빡이는 애니메이션 */
+}
+
+/* 깜빡이는 네온 효과 애니메이션 */
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 0 0 2px #e02ff0, 0 0 4px #e02ff0, 0 0 6px #e02ff0;
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    text-shadow: 0 0 1px #e02ff0, 0 0 2px #e02ff0, 0 0 3px #e02ff0;
+    opacity: 0.8;
+  }
+  22% {
+    text-shadow: 0 0 4px #ff00ff, 0 0 8px #ff00ff, 0 0 12px #ff00ff;
+    opacity: 0.6;
+  }
+}
+
+
+
+/* 상단 메뉴 스타일 */
+.top-menu {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  gap: 10px; /* 버튼 간 간격 */
+  padding: 10px 20px; /* 상단 여백 */
+  position: relative;
+  top: 10px; /* 페이지 상단에서 떨어진 거리 */
+  right: 0;
+  padding-right: 38px;
+}
+
+.edit-group {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* 요소 간격 */
+}
+
+.inline-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 텍스트 박스와 버튼 간 간격 */
+}
+
+.category-title {
+  text-align: center; /* 중앙 정렬 */
+  margin-top: 60px; /* 상단 메뉴와의 간격 */
+  font-size: 24px;
+  color: #fff; /* 텍스트 색상 */
+}
+
 /* 모달 스타일 */
 .modal {
   position: fixed;
@@ -265,64 +375,319 @@ onMounted(async () => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6); /* 어두운 반투명 배경 */
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000; /* 모달이 항상 위에 보이도록 설정 */
 }
 
 .modal-content {
-  background: white;
+  background: #2b2b2b; /* 어두운 배경 */
   padding: 20px;
   border-radius: 8px;
   width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  position: relative; /* 닫기 버튼 배치를 위한 설정 */
+  display: flex;
+  flex-direction: column; /* 내부 요소를 세로 정렬 */
+  gap: 15px; /* 요소 간격 */
+}
+
+.modal-content h2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #fff;
+  text-align: center;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #1f1f1f; /* 입력 필드 배경 */
+  color: #fff;
+  font-size: 14px;
+}
+
+.modal-content input::placeholder {
+  color: #888;
+}
+
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px; /* 리스트의 최대 높이를 제한 */
+  overflow-y: auto; /* 스크롤이 필요한 경우 표시 */
+}
+
+.modal-content ul li {
+  display: flex;
+  justify-content: space-between; /* 추가 버튼과 영화 제목 간격 유지 */
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #444; /* 리스트 아이템 구분선 */
+  font-size: 16px;
+}
+
+.modal-content ul li:last-child {
+  border-bottom: none; /* 마지막 아이템의 테두리 제거 */
+}
+
+.modal-content ul li button {
+  background: #e02ff0; /* 기본 버튼 색상 */
+  color: white;
+  border: none;
+  padding: 5px 10px; /* 버튼 크기 축소 */
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.modal-content ul li button:hover {
+  background: #e02ff0; /* 호버 시 약간 어두운 색상 */
 }
 
 .close-modal-btn {
-  margin-top: 10px;
+  align-self: flex-end; /* 닫기 버튼을 오른쪽으로 정렬 */
+  background: #d32f2f; /* 닫기 버튼 색상 */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
+.close-modal-btn:hover {
+  background: #b71c1c; /* 닫기 버튼 호버 색상 */
+}
+/* 영화 리스트 */
 .movie-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 20px; /* 카드 간 간격 */
+  justify-content: center; /* 카드들을 가운데 정렬 */
+  padding: 20px 0; /* 리스트 위아래 여백 추가 */
 }
 
+
 .movie-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 2px solid #e02ff0; /* 네온 테두리 */
+  border-radius: 10px;
   padding: 15px;
-  background-color: #f9f9f9;
-  width: calc(33.333% - 20px);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  object-fit: contain;
+  background-color: rgba(15, 15, 15, 0.9); /* 반투명 어두운 배경 */
+  width: 250px; /* 카드 크기 */
+  box-shadow: 0 0 15px rgba(224, 47, 240, 0.6); /* 네온 효과 */
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-align: center; /* 텍스트 가운데 정렬 */
+  position: relative; /* 삭제 버튼을 정렬하기 위해 필요 */
+}
+
+.movie-card:hover {
+  transform: scale(1.05); /* 호버 시 확대 */
+  box-shadow: 0 0 30px rgba(224, 47, 240, 0.9); /* 네온 효과 강화 */
 }
 
 .movie-card h3 {
-  margin: 0;
+  margin: 10px 0 5px; /* 제목 간격 */
   font-size: 1.2em;
+  color: #fff; /* 흰색 텍스트 */
+  font-weight: bold;
 }
 
 .movie-card p {
   font-size: 0.9em;
-  margin: 5px 0 0;
+  color: #aaa; /* 부드러운 텍스트 색상 */
+  margin-bottom: 20px; /* 제목과 개봉일 간 간격 */
 }
 
 .image-container {
-  width: 300px;
+  width: 100%;
   height: 300px;
+  overflow: hidden;
+  border-radius: 10px; /* 카드와 동일한 둥근 모서리 */
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  border-radius: 8px;
-  margin: 0 auto 10px auto;
 }
 
 .movie-poster {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover; /* 포스터가 카드에 맞게 조정 */
+  border-radius: 10px; /* 이미지 둥근 모서리 */
+}
+
+.remove-movie-btn {
+  position: absolute; /* 버튼을 카드 내에서 절대 위치 */
+  bottom: 5px; /* 카드 하단에서 15px 위로 배치 */
+  right: 5px; /* 카드 오른쪽에서 15px 안쪽으로 배치 */
+  background: #e02ff0;
+  color: #050801;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.remove-movie-btn:hover {
+  background: rgba(224, 47, 240, 0.8);
+  color: white;
+}
+
+
+/* 기존 네온 버튼 스타일과 통일된 텍스트 박스 스타일 */
+.edit-category-input {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 14px; /* 텍스트 크기 조정 */
+  color: #e02ff0;
+  background: transparent;
+  border: 2px solid #e02ff0;
+  border-radius: 4px;
+  outline: none;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  overflow: hidden;
+  margin-right: 20px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+.edit-category-input:focus,
+.edit-category-input:hover {
+  background: #e02ff0;
+  color: #050801;
+  box-shadow: 0 0 5px #e02ff0, 0 0 25px #e02ff0, 0 0 50px #e02ff0,
+    0 0 200px #e02ff0;
+}
+
+.edit-category-input::placeholder {
+  color: #e02ff0;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.edit-category-input::placeholder {
+  color: #e02ff0;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+/* 네온 버튼 스타일 */
+a {
+  position: relative;
+  display: inline-block;
+  padding: 15px 20px;
+  font-size: 14px; /* 텍스트 크기 조정 */
+    margin: 50px 0; /* 여백 조정 */
+  color: #e02ff0;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  overflow: hidden;
+  margin-right: 20px;
+  margin-top: 40px;
+}
+
+a:hover {
+  background: #e02ff0;
+  color: #050801;
+  box-shadow: 0 0 5px #e02ff0, 0 0 25px #e02ff0, 0 0 50px #e02ff0,
+    0 0 200px #e02ff0;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
+a span {
+  position: absolute;
+  display: block;
+}
+
+a span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #e02ff0);
+  animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #e02ff0);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+a span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #e02ff0);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #e02ff0);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
 }
 </style>

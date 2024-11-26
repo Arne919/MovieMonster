@@ -158,16 +158,16 @@ export default {
   padding: 15px;
   border-radius: 15px;
   background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  /* box-shadow: 6px 6px 12px #c8c8c8, -6px -6px 12px #ffffff; */
   transition: all 0.3s ease-in-out;
   animation: fadeIn 0.5s ease-in-out; /* 등장 애니메이션 */
   height: 500px; /* 세로 길이를 기존보다 늘림 */
+  border: 2px solid #4caf50; /* 네온 효과 색상 */
+  box-shadow: 0 0 10px #4caf50, 0 0 20px #4caf50; /* 네온 효과 추가 */
 }
 
 .game-card:hover {
   transform: translateY(-5px);
-  box-shadow: 6px 6px 12px #c8c8c8, -6px -6px 12px #ffffff;
-  border-color: #4caf50;
+  box-shadow: 0 0 15px #4caf50, 0 0 30px #4caf50; /* 호버 시 네온 효과 강화 */
 }
 
 .game-card.disabled {
