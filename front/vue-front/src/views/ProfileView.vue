@@ -479,17 +479,26 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   background-color: #e02ff01c;
   border-radius: 10px;
   margin: 20px;
-
-  /* position: relative; */
+  position: relative; /* 하단 고정을 위해 부모 요소 위치 기준 설정 */
   gap: 20px;
   
+}
+
+.profile-details {
+  position: absolute; /* 부모 요소의 하단에 고정 */
+  bottom: 0; /* 아래쪽 여백 제거 */
+  left: 0;
+  right: 0; /* 좌우로 꽉 차게 */
+  padding: 0px 20px; /* 내부 여백 */
+  margin-top: auto; /* 프로필 헤더와 버튼 사이 고정된 거리 확보 */
+  border-top: 1px solid #e02ff06b; /* 상단에 경계선 추가 */
+  /* padding-top: 15px; */
 }
 
 .profile-header {
   display: flex;
   align-items: center;
-  gap: 20px;
-  /* position: relative; */
+  gap: 30px;
   justify-content: center; /* 중앙 정렬 */
   margin-bottom: 20px;
 }
@@ -529,15 +538,15 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 
 .follow-button-wrapper {
   margin-top: 20px; /* 팔로잉/팔로워와 버튼 간격 */
-  text-align: center; /* 버튼을 중앙 정렬 */
+  text-align: right; /* 버튼을 중앙 정렬 */
 }
 
 
 .follow-button {
-  
-  margin-top: 10px 20px;
-  padding: 10px;
-  width: 100%; /* 버튼 길이를 프로필 스탯에 맞춤 */
+  margin-top: -10px;
+  margin-bottom: 20px;
+  padding: 8px;
+  width: 50%; /* 버튼 길이를 프로필 스탯에 맞춤 */
   background-color: #3897f0;
   color: white;
   font-weight: bold;
@@ -551,12 +560,6 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   background-color: #217ac0;
 }
 
-.profile-details {
-
-  margin-top: auto; /* 프로필 헤더와 버튼 사이 고정된 거리 확보 */
-  border-top: 1px solid #e02ff06b; /* 상단에 경계선 추가 */
-  padding-top: 15px; /* 경계선과 내용 간격 */
-}
 
 /* 랭크 이미지 */
 .rank-section {
