@@ -116,7 +116,7 @@
 
     <!-- Categories of Top Ranker -->
     <div class="top-ranker-categories-container" v-if="topRankerCategories">
-      <h2 class="zizon">zㅣ존 Monster 💥 {{ topThreeRankings[0]?.username }} 💥님의 카테고리</h2>
+      <h2 class="zizon">z l 존 M✪N⭑스✧ㅌr 💥 {{ topThreeRankings[0]?.username }} 💥님의 카테고리</h2>
       <div class="categories">
         <div
           v-for="category in topRankerCategories"
