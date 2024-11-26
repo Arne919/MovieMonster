@@ -820,6 +820,7 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   z-index: 9999;
   width: 80%;
   max-width: 500px; /* 모달 최대 너비 */
+  max-height: 80%;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -827,6 +828,7 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   flex-direction: column;
   gap: 20px;
   color: #fff; /* 흰색 텍스트 */
+  
 }
 
 .modal-content {
@@ -843,7 +845,7 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 .modal-content h2 {
   text-align: center;
   font-size: 1.5rem;
-  color: #e02ff0;
+  color: #ffffff;
   margin-bottom: 15px;
 }
 
@@ -883,7 +885,7 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 
 .modal-content ul li button {
   background-color: #e02ff0; /* 버튼 배경색 */
-  color: #1e1e1e; /* 버튼 텍스트 색상 */
+  color: #ffffff; /* 버튼 텍스트 색상 */
   border: none;
   padding: 5px 10px;
   border-radius: 5px;
@@ -954,19 +956,19 @@ textarea.recommendation-reason {
 }
 
 .save-btn {
-  background-color: #4caf50; /* 완료 버튼 색상 */
+  background-color: #e02ff0; /* 완료 버튼 색상 */
 }
 
 .save-btn:hover {
-  background-color: #45a049; /* 호버 효과 */
+  background-color: #ff3ff2ad; /* 호버 효과 */
 }
 
 .close-modal-btn {
-  background-color: #e53935; /* 닫기 버튼 색상 */
+  background-color: #505050; /* 닫기 버튼 색상 */
 }
 
 .close-modal-btn:hover {
-  background-color: #d32f2f; /* 호버 효과 */
+  background-color: #505050a8; /* 호버 효과 */
 }
 
 /* 버튼 부모 요소: flexbox를 사용해 우측 정렬 및 한 줄 배치 */
