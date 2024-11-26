@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h2>카테고리 관리</h2>
+    <h2>컬렉션 관리</h2>
     <form @submit.prevent="createCategory">
-      <input v-model="newCategoryName" placeholder="새 카테고리 이름" />
-      <button type="submit">카테고리 생성</button>
+      <input v-model="newCategoryName" placeholder="새 컬렉션 이름" />
+      <button type="submit">컬렉션 생성</button>
     </form>
     <ul>
       <li v-for="category in categories" :key="category.id">

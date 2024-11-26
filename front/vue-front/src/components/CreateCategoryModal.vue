@@ -2,15 +2,15 @@
   <div class="modal-overlay">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">새 카테고리 만들기</h5>
+        <h5 class="modal-title">새 컬렉션 만들기</h5>
         <button class="btn-close" @click="$emit('close')">&times;</button>
       </div>
       <div class="modal-body">
-        <!-- <p>새 카테고리 이름을 입력하세요:</p> -->
+        <!-- <p>새 컬렉션 이름을 입력하세요:</p> -->
         <input
           v-model="categoryName"
           class="category-input"
-          placeholder="카테고리 이름을 입력하세요."
+          placeholder="컬렉션 이름을 입력하세요."
         />
         <div class="modal-actions">
           <button class="btn btn-create" @click="createCategory">생성</button>
@@ -34,7 +34,7 @@ export default {
   methods: {
     async createCategory() {
       if (!this.categoryName.trim()) {
-        alert("카테고리 이름을 입력하세요.");
+        alert("컬렉션 이름을 입력하세요.");
         return;
       }
       try {
@@ -48,12 +48,12 @@ export default {
             },
           }
         );
-        alert("카테고리가 생성되었습니다.");
-        this.$emit("categoryCreated", data); // 생성된 카테고리를 부모 컴포넌트로 전달
+        alert("컬렉션이 생성되었습니다.");
+        this.$emit("categoryCreated", data); // 생성된 컬렉션를 부모 컴포넌트로 전달
         this.$emit("close"); // 모달 닫기
       } catch (error) {
         console.error("Error creating category:", error);
-        alert("카테고리 생성에 실패했습니다.");
+        alert("컬렉션 생성에 실패했습니다.");
       }
     },
   },

@@ -21,7 +21,7 @@
         </div>
   
         <div v-if="selectedMovie">
-          <p>{{ selectedMovie.title }}를 카테고리에 추가하시겠습니까?</p>
+          <p>{{ selectedMovie.title }}를 컬렉션에 추가하시겠습니까?</p>
           <button @click="confirmAddMovie" class="confirm-btn">예</button>
           <button @click="cancelAddMovie" class="cancel-btn">아니오</button>
         </div>

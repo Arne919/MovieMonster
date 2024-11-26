@@ -2,11 +2,11 @@
   <div class="modal-overlay">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">카테고리 선택</h5>
+        <h5 class="modal-title">컬렉션 선택</h5>
         <button class="btn-close" @click="$emit('close')">&times;</button>
       </div>
       <div class="modal-body">
-        <!-- 카테고리 리스트 -->
+        <!-- 컬렉션 리스트 -->
         <ul class="category-list">
           <li
             v-for="category in categories"
@@ -23,15 +23,15 @@
           </li>
         </ul>
 
-        <!-- 새 카테고리 생성 -->
+        <!-- 새 컬렉션 생성 -->
         <div class="new-category">
           <input
             v-model="newCategoryName"
-            placeholder="새 카테고리 이름을 입력하세요."
+            placeholder="새 컬렉션 이름을 입력하세요."
             class="category-input"
           />
           <button class="btn btn-create" @click="createCategory">
-            카테고리 생성
+            컬렉션 생성
           </button>
         </div>
       </div>
@@ -49,10 +49,10 @@ export default {
     movieId: Number, // 영화 ID
   },
   setup(props) {
-    const categories = ref([]); // 카테고리 목록
-    const newCategoryName = ref(""); // 새 카테고리 이름
+    const categories = ref([]); // 컬렉션 목록
+    const newCategoryName = ref(""); // 새 컬렉션 이름
     const store = useCounterStore()
-    // 카테고리 목록 가져오기
+    // 컬렉션 목록 가져오기
     const fetchCategories = async () => {
       try {
         const response = await axiosInstance.get(
@@ -65,14 +65,14 @@ export default {
         categories.value = response.data;
       } catch (error) {
         console.error("Error fetching categories:", error);
-        alert("카테고리를 불러오는 데 실패했습니다.");
+        alert("컬렉션을 불러오는 데 실패했습니다.");
       }
     };
 
-    // 새 카테고리 생성
+    // 새 컬렉션 생성
     const createCategory = async () => {
       if (!newCategoryName.value.trim()) {
-        alert("카테고리 이름을 입력해주세요.");
+        alert("컬렉션 이름을 입력해주세요.");
         return;
       }
       try {
@@ -87,17 +87,17 @@ export default {
         );
         categories.value.push(response.data);
         newCategoryName.value = ""; // 입력 필드 초기화
-        alert("카테고리가 생성되었습니다.");
+        alert("컬렉션이 생성되었습니다.");
       } catch (error) {
         console.error("Error creating category:", error.response || error.message);
         alert(
-          "카테고리를 생성하는 데 실패했습니다: " +
+          "컬렉션을 생성하는 데 실패했습니다: " +
             (error.response?.data?.detail || "알 수 없는 오류")
         );
       }
     };
 
-    // 영화를 카테고리에 추가
+    // 영화를 컬렉션에 추가
     const addMovieToCategory = async (categoryId) => {
       try {
         await axiosInstance.post(
@@ -112,14 +112,14 @@ export default {
             },
           }
         );
-        alert("영화가 카테고리에 추가되었습니다.");
+        alert("영화가 컬렉션에 추가되었습니다.");
       } catch (error) {
         console.error("Error adding movie to category:", error);
         alert("영화를 추가하는 데 실패했습니다.");
       }
     };
 
-    // 컴포넌트가 마운트되면 카테고리 목록 가져오기
+    // 컴포넌트가 마운트되면 컬렉션 목록 가져오기
     onMounted(fetchCategories);
 
     return {
@@ -190,7 +190,7 @@ export default {
   color: #fff;
 }
 
-/* 카테고리 리스트 */
+/* 컬렉션 리스트 */
 .category-list {
   list-style: none;
   padding: 0;
@@ -230,7 +230,7 @@ export default {
   background: #39ffe5c2;
 }
 
-/* 새 카테고리 생성 섹션 */
+/* 새 컬렉션 생성 섹션 */
 .new-category {
   margin-top: 20px;
 }

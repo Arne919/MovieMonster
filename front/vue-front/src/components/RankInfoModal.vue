@@ -59,7 +59,7 @@
       높은 등급의 유저는 커뮤니티에서 더 두드러진 노출과 인정을 받을 수 있습니다.<br />
       <ul>
         <li><span class="highlight">RANK 상단 노출</span>: 높은 등급 유저가 우선적으로 노출됩니다.</li>
-        <li><span class="highlight">카테고리 추천</span>: 높은 등급 유저의 콘텐츠가 홈 페이지에 우선 표시됩니다.</li>
+        <li><span class="highlight">컬렉션 추천</span>: 높은 등급 유저의 콘텐츠가 홈 페이지에 우선 표시됩니다.</li>
       </ul>
     </p>
   </section>

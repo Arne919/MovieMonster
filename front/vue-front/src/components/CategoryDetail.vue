@@ -18,7 +18,7 @@
         v-model="newCategoryName"
         type="text"
         class="edit-category-input"
-        placeholder="새 카테고리 이름 입력"
+        placeholder="새 컬렉션 이름 입력"
         />
         <a v-if="isEditingName" class="add-movie-after" @click="saveCategoryName" >
             <span></span>
@@ -39,19 +39,19 @@
             <span></span>
             <span></span>
             <span></span>
-            이 카테고리에 영화 추가
+            이 컬렉션에 영화 추가
         </a>
         <a class="add-movie-after" @click="deleteCategory" >
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            카테고리 삭제
+            컬렉션 삭제
         </a>
         <!-- <button v-if="isEditingName" @click="saveCategoryName" class="save-btn">저장</button> -->
         <!-- <button v-if="isEditingName" @click="cancelEditingName" class="cancel-btn">취소</button> -->
-        <!-- <button @click="openAddMovieModal" class="add-movie-btn">이 카테고리에 영화 추가</button> -->
-        <!-- <button @click="deleteCategory" class="delete-category-btn">카테고리 삭제</button> -->
+        <!-- <button @click="openAddMovieModal" class="add-movie-btn">이 컬렉션에 영화 추가</button> -->
+        <!-- <button @click="deleteCategory" class="delete-category-btn">컬렉션 삭제</button> -->
       </div>
     </div>
 
@@ -70,8 +70,8 @@
       </div>
     </div>
 
-    <div v-if="movies.length === 0">
-      <p>이 카테고리에 추가된 영화가 없습니다.</p>
+    <div v-if="movies.length === 0" class="plz-pass">
+      <p>이 컬렉션에 추가된 영화가 없습니다.</p>
     </div>
 
     <div v-else class="movie-list">
@@ -110,14 +110,14 @@ import axios from "axios";
 
 const route = useRoute();
 const router = useRouter();
-const category = ref({}); // 카테고리 데이터
+const category = ref({}); // 컬렉션 데이터
 const movies = ref([]); // 영화 데이터
 const store = useCounterStore();
 const showAddMovieModal = ref(false);
 const searchQuery = ref(""); // 영화 검색어
 const searchResults = ref([]); // 검색 결과
 const isEditingName = ref(false); // 이름 수정 상태
-const newCategoryName = ref(""); // 새로운 카테고리 이름
+const newCategoryName = ref(""); // 새로운 컬렉션 이름
 
 const startEditingName = () => {
   isEditingName.value = true;
@@ -125,7 +125,7 @@ const startEditingName = () => {
 
 const saveCategoryName = async () => {
   if (!newCategoryName.value.trim()) {
-    alert("새 카테고리 이름을 입력해주세요.");
+    alert("새 컬렉션 이름을 입력해주세요.");
     return;
   }
   try {
@@ -140,10 +140,10 @@ const saveCategoryName = async () => {
     );
     category.value.name = response.data.name;
     isEditingName.value = false; // 저장 후 수정 모드 종료
-    alert("카테고리 이름이 수정되었습니다.");
+    alert("컬렉션 이름이 수정되었습니다.");
   } catch (error) {
     console.error("Error saving category name:", error);
-    alert("카테고리 이름 저장에 실패했습니다.");
+    alert("컬렉션 이름 저장에 실패했습니다.");
   }
 };
 
@@ -153,7 +153,7 @@ const cancelEditingName = () => {
 };
 
 
-// 현재 로그인한 유저와 카테고리 소유자 비교
+// 현재 로그인한 유저와 컬렉션 소유자 비교
 const isOwner = computed(() => store.user?.id === category.value?.owner_id); // owner_id는 백엔드에서 반환
 
 // 포스터 URL을 처리하는 함수
@@ -162,7 +162,7 @@ const getFullPosterUrl = (posterUrl) => {
   return `${baseUrl}${posterUrl}`;
 };
 
-// 카테고리 상세 데이터 가져오기
+// 컬렉션 상세 데이터 가져오기
 const fetchCategoryDetails = async () => {
   try {
     const response = await axios.get(
@@ -240,7 +240,7 @@ const searchMovies = async () => {
 
 // 영화 추가 확인 및 추가
 const confirmAddMovie = async (movie) => {
-  const confirmed = confirm(`영화 "${movie.title}"를 카테고리에 추가하시겠습니까?`);
+  const confirmed = confirm(`영화 "${movie.title}"를 컬렉션에 추가하시겠습니까?`);
   if (confirmed) {
     await addMovieToCategory(movie);
   }
@@ -250,14 +250,14 @@ const confirmAddMovie = async (movie) => {
 const addMovieToCategory = async (movie) => {
   try {
     await store.addMovieToCategory(route.params.categoryId, movie.id);
-    await fetchCategoryDetails(); // 카테고리 데이터 갱신
+    await fetchCategoryDetails(); // 컬렉션 데이터 갱신
     closeAddMovieModal();
   } catch (error) {
     console.error("Error adding movie to category:", error);
   }
 };
 
-// **카테고리 삭제 함수**
+// **컬렉션 삭제 함수**
 const deleteCategory = async () => {
   const confirmed = confirm("진짜 삭제하시겠습니까?");
   if (confirmed) {
@@ -270,11 +270,11 @@ const deleteCategory = async () => {
           },
         }
       );
-      alert("카테고리가 삭제되었습니다.");
+      alert("컬렉션이 삭제되었습니다.");
       router.push(`/profile/${store.user.username}`);
     } catch (error) {
       console.error("Error deleting category:", error);
-      alert("카테고리 삭제에 실패했습니다.");
+      alert("컬렉션 삭제에 실패했습니다.");
     }
   }
 };
@@ -298,7 +298,7 @@ onMounted(async () => {
 
 <style scoped>
 
-/* 카테고리 페이지 전체 레이아웃에 패딩 추가 */
+/* 컬렉션 페이지 전체 레이아웃에 패딩 추가 */
 .category-container {
   padding: 0 230px; /* 양쪽에 40px 패딩 추가 */
 }
@@ -689,5 +689,10 @@ a span:nth-child(4) {
   100% {
     bottom: 100%;
   }
+}
+
+.plz-pass {
+  padding-top: 100px;
+  padding-left: 50px;
 }
 </style>

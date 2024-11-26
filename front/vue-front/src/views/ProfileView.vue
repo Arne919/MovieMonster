@@ -73,20 +73,20 @@
       </div>
     </div>
 
-    <!-- 유저의 카테고리 섹션 -->
+    <!-- 유저의 컬렉션 섹션 -->
     <div class="category-section">
       <div class="category-header">
-        <h2>{{ user.username }}의 카테고리</h2>
+        <h2>{{ user.username }}의 컬렉션</h2>
         <a v-if="isOwnProfile" class="add-category" @click.prevent="showCreateCategoryModal = true">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            새 카테고리
+            새 컬렉션
         </a>
       </div>
       <div v-if="categories.length === 0" class="empty-message">
-        <p>아직 카테고리가 없습니다.</p>
+        <p>아직 컬렉션이 없습니다.</p>
       </div>
 
       <div v-else class="categories">
@@ -98,14 +98,14 @@
       >
         <!-- 영화 포스터 또는 디폴트 이미지 -->
         <img :src="category.movies.length > 0 ? getFullPosterUrl(category.movies[0].poster_url) : 'http://127.0.0.1:8000/media/default_categories/default-category.png'" 
-        alt="카테고리 이미지" 
+        alt="컬렉션 이미지" 
         class="category-poster">
       <h3>{{ category.name }}</h3>
       <p>영화 개수: {{ category.movies.length }}</p>
     </div>
   </div>
       
-  <!-- 새 카테고리 추가 모달 -->
+  <!-- 새 컬렉션 추가 모달 -->
   <CreateCategoryModal
     v-if="showCreateCategoryModal"
     @close="closeCreateCategoryModal"
@@ -146,7 +146,7 @@
             <button class="close-modal-btn" @click="closeRecommendationModal">닫기</button>
           </div>
       </div>
-      <!-- 카테고리 추가 모달 -->
+      <!-- 컬렉션 추가 모달 -->
     <AddToCategoryModal
       v-if="showCategoryModal"
       :movie-id="movie.id"
@@ -295,12 +295,12 @@ const fetchProfile = async () => {
   }
 };
 
-// 카테고리 상세 페이지로 이동
+// 컬렉션 상세 페이지로 이동
 const goToCategoryDetail = (categoryId) => {
   router.push(`/categories/${categoryId}`);
 };
 
-// 새 카테고리 모달 열기/닫기
+// 새 컬렉션 모달 열기/닫기
 const openCreateCategoryModal = () => {
   showCreateCategoryModal.value = true;
 };
@@ -308,7 +308,7 @@ const closeCreateCategoryModal = () => {
   showCreateCategoryModal.value = false;
 };
 
-// 새 카테고리 목록에 추가
+// 새 컬렉션 목록에 추가
 const addCategory = (category) => {
   categories.value.push(category);
 };
@@ -749,7 +749,7 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 
 
 
-/* 카테고리 섹션 */
+/* 컬렉션 섹션 */
 .category-section {
   width: 950px;
   text-align: left; /* 전체 섹션 텍스트 왼쪽 정렬 */
