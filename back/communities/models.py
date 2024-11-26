@@ -5,10 +5,10 @@ from movies.models import Movie
 
 class Article(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='articles'
     )
     like_users = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, related_name='like_movies'
+        settings.AUTH_USER_MODEL, related_name='like_articles'
     )
     title = models.CharField(max_length=100)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True, related_name="articles")  # Movie 모델 연결

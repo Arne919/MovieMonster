@@ -3,9 +3,10 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-from django.db.models import Count, Sum
+from django.db.models import Subquery, OuterRef, Count, Sum, F, Prefetch
 from accounts.models import User, RecommendedMovie
 from movies.models import Movie
+from communities.models import Article 
 
 # permission Decorators
 from rest_framework.decorators import permission_classes
@@ -142,24 +143,20 @@ def get_ranking(request):
     """
     사용자 랭킹 데이터를 반환
     """
-    users = (
-        User.objects.annotate(
-            articles_count=Count('article', distinct=True),
-            # likes_count=Count('article__like_users', distinct=True),
-            likes_count=Count('article__like_users', distinct=False),  # 모든 게시물의 좋아요 수 총합 계산
-            followers_count=Count('followers', distinct=True),
-        )
-        .order_by('-points')[:10]  # 상위 10명
-    )
+    users = User.objects.order_by('-points')[:10]  # 상위 10명의 유저 가져오기
+
 
     ranking_data = []
     for user in users:
+
         rank_title = get_rank_title(user.points)  # 랭크 계산
         profile_image_url = (
             user.profile_picture.url
             if user.profile_picture
             else '/media/profile_pictures/default-profile.png'  # 디폴트 이미지 URL
         )
+
+        likes_count = user.sum_likes  # User 모델의 sum_likes 속성을 사용
 
          # 추천 영화 데이터 가져오기
         recommended_movie_data = None
@@ -178,9 +175,9 @@ def get_ranking(request):
             "username": user.username,
             "points": user.points,
             "rank_title": rank_title,
-            "articles_count": user.articles_count,
-            "likes_count": user.likes_count,
-            "followers_count": user.followers_count,
+            "articles_count": user.articles.count(),  # 작성한 게시글 수
+            "likes_count": likes_count,  # 총 좋아요 수 (sum_likes 사용)
+            "followers_count": user.followers.count(),  # 팔로워 수
             "profile_picture": profile_image_url,  # 프로필 사진 URL 추가
             "recommended_movie": recommended_movie_data,
         })

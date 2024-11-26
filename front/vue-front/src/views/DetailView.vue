@@ -6,7 +6,7 @@
       <h2>제목 : {{ article.title }}</h2>
       
       <div class="author-container">
-        <div class="author">작성자: user7878</div>
+        <div class="author">작성자: {{ article.user }}</div>
         <div class="date-info">
           <span>작성일: 2024-11-26 15:23</span>
           <span>수정일: 2024-11-26 15:27</span>
