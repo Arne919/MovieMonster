@@ -3,8 +3,16 @@
     <h1 class="text-center tracking-in-expand-fwd my-4">MOVIE MONSTER RANKING</h1>
     <!-- 랭크 시스템 안내 버튼 -->
     <div class="info-container">
-      <button class="btn btn-secondary" @click="showModal = true">랭크 시스템 안내</button>
+      <a href="#" class="rankinfo" @click="showModal = true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        랭크 시스템 안내
+      </a>
     </div>
+
+
 
     <table class="ranking-table">
       <thead>
@@ -201,7 +209,7 @@ onMounted(() => {
   font-weight: bold;
   background-color: #2a4066; /* 헤더 배경 - 더 밝은 남색 */
   color: #f0faff; /* 헤더 텍스트 색상 */
-  border-bottom: 2px solid #6090d0; /* 헤더 경계선 */
+  border-bottom: 1px solid #6090d0; /* 헤더 경계선 */
   font-size: 1rem; /* 헤더 글자 크기 */
 }
 
@@ -308,22 +316,114 @@ onMounted(() => {
   opacity: 0;
 }
 
-/* 버튼 스타일 */
-.btn-secondary {
+
+/* 네온 버튼 스타일 */
+.rankinfo {
   position: relative;
-  background-color: rgba(65, 105, 225, 0.2); /* 연한 파랑 투명 */
-  border: 1px solid rgba(65, 105, 225, 0.5); /* 파랑 테두리 */
-  color: #e6f0ff; /* 연한 파랑 텍스트 */
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 10;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+  padding: 15px 20px;
+  font-size: 14px; /* 텍스트 크기 조정 */
+    margin: 20px 0; /* 여백 조정 */
+  color: #4169e1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 1px;
+  overflow: hidden;
+  /* margin-right: 20px; */
+  margin-top: 40px;
+  margin-bottom: 0px;
 }
 
-.btn-secondary:hover {
-  background-color: rgba(65, 105, 225, 0.4);
-  color: #000;
+.rankinfo:hover {
+  background: #4169e1;
+  color: #050801;
+  box-shadow: 0 0 5px #4169e1, 0 0 25px #4169e1, 0 0 50px #4169e1,
+    0 0 200px #4169e1;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+}
+
+.rankinfo span {
+  position: absolute;
+  display: block;
+}
+
+.rankinfo span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4169e1);
+  animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.rankinfo span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #4169e1);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.rankinfo span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #4169e1);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.rankinfo span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #4169e1);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
 }
 </style>
