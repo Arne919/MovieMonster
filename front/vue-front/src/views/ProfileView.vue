@@ -25,15 +25,15 @@
           <div class="stats-row">
             <div class="stat-box">
               <img :src="getRankImage(user.rank_title)" alt="랭크 이미지" class="rank-icon-small" />
-              <p>{{ user.points }}</p>
+              <p class="stat-num">{{ user.points }}</p>
             </div>
             <div class="stat-box">
-              <h6>📝</h6>
-              <p>{{ user.articlesCount }}</p>
+              <h1>📝</h1>
+              <p class="stat-num-count">{{ user.articlesCount }}</p>
             </div>
             <div class="stat-box">
-              <h6>❤️</h6>
-              <p>{{ user.likesCount }}</p>
+              <h1>❤️</h1>
+              <p class="stat-num">{{ user.likesCount }}</p>
             </div>
           </div>
         </div>
@@ -89,19 +89,17 @@
         <p>아직 카테고리가 없습니다.</p>
       </div>
 
-      <div v-else class="category-list">
+      <div v-else class="categories">
       <div
         v-for="category in categories"
         :key="category.id"
         class="category-card"
         @click="goToCategoryDetail(category.id)"
       >
-      <div class="image-container">
         <!-- 영화 포스터 또는 디폴트 이미지 -->
         <img :src="category.movies.length > 0 ? getFullPosterUrl(category.movies[0].poster_url) : 'http://127.0.0.1:8000/media/default_categories/default-category.png'" 
         alt="카테고리 이미지" 
         class="category-poster">
-      </div>
       <h3>{{ category.name }}</h3>
       <p>영화 개수: {{ category.movies.length }}</p>
     </div>
@@ -502,7 +500,7 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid #f5f5f5;
+  border: 1.2px solid #e02ff0;
 }
 
 
@@ -575,8 +573,8 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 }
 
 .rank-icon-small {
-  width: 25px;
-  height: 25px;
+  width: 58px;
+  height: 58px;
 }
 
 .rank-stats {
@@ -601,10 +599,18 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 .stat-box {
   /* background-color: #282b3b; */
   padding: 10px 20px;
+  margin-top: 0px;
   /* border-radius: 10px; */
   text-align: center;
   color: white;
   font-size: 1rem;
+}
+.stat-num {
+  padding-top: 20px;
+}
+.stat-num-count {
+  padding-top: 20px;
+  padding-right: 5px;
 }
 /* 추천 영화 섹션 */
 .not_yet_recommend {
@@ -675,7 +681,7 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   object-fit: cover;
   border-radius: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #e02ff0;
 }
 
 .recommended-movie-section h3 {
@@ -707,8 +713,6 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   resize: none;
 }
 
-
-
 .recommended-movie-section h2 {
   font-size: 1.2rem;
   margin-bottom: 15px;
@@ -723,36 +727,67 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
 
 
 
+
 /* 카테고리 섹션 */
 .category-section {
-  margin-top: 30px;
+  width: 950px;
+  text-align: left; /* 전체 섹션 텍스트 왼쪽 정렬 */
 }
 
 .category-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
+  
+}
+.category-header h2 {
+  font-size: 2.2rem;
+  /* font-weight: bold; */
+  /* color: #333; */
 }
 
-.category-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* 카테고리 이미지의 그리드 레이아웃 */
-  gap: 15px;
-  /* margin-top: 15px; */
+.empty-message {
+  text-align: left;
+  font-size: 1rem;
+  color: #999;
+  padding: 0 0 20px 0;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  
 }
 
 .category-card {
-  text-align: center;
-  /* font-size: 0.9rem; */
+  width: calc(25% - 20px);
+  border: 1px solid #e02ff0;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
-.category-image {
-  width: 100px;
-  height: 100px;
+.category-card:hover {
+  transform: scale(1.02);
+}
+
+.category-poster {
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  margin: 0 auto 10px auto;
+}
+
+.category-card h3 {
+  font-size: 18px;
+  margin: 10px;
+}
+
+.category-card p {
+  font-size: 14px;
+  margin: 0 10px 10px;
 }
 
 .modal {
@@ -784,7 +819,7 @@ watch(() => route.params.username, (newUsername, oldUsername) => {
   display: flex;
   align-items: flex-start; /* 포스터와 텍스트를 수직 정렬 */
   gap: 20px; /* 포스터와 텍스트 사이 간격 */
-  /* margin-top: 20px; */
+  margin-top: 20px;
 }
 
 
