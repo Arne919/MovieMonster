@@ -20,14 +20,14 @@
         <p><strong>장르:</strong> {{ movie.genres?.join(", ") }}</p>
         <p><strong>배우:</strong> {{ movie.actors?.join(", ") }}</p>
         <p><strong>감독:</strong> {{ movie.director }}</p>
-        <!-- 카테고리 추가 버튼 -->
+        <!-- 컬렉션 추가 버튼 -->
         <div class="button-container d-flex align-items-center">
           <a href="#" @click.prevent="showCategoryModal = true">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            카테고리 추가
+            컬렉션 추가
           </a>
         
         <button
@@ -46,7 +46,7 @@
         </div>
       </div>
     
-    <!-- 카테고리 추가 모달 -->
+    <!-- 컬렉션 추가 모달 -->
     <AddToCategoryModal
       v-if="showCategoryModal"
       :movie-id="movie.id"
@@ -67,7 +67,7 @@ import YoutubeTrailerModal from "@/components/YoutubeTrailerModal.vue";
 const route = useRoute();
 
 const movie = ref({}); // 영화 데이터를 저장할 객체
-const showCategoryModal = ref(false); // 카테고리 모달 상태
+const showCategoryModal = ref(false); // 컬렉션 모달 상태
 
 // TMDB 이미지 URL 생성
 const getFullPosterUrl = (posterUrl) => {

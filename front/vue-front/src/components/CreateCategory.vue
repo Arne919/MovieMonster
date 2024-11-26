@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h2>카테고리 생성</h2>
+    <h2>컬렉션 생성</h2>
     <form @submit.prevent="createCategory">
       <input
         v-model="categoryName"
-        placeholder="카테고리 이름을 입력하세요"
+        placeholder="컬렉션 이름을 입력하세요"
         class="form-control"
       />
-      <button type="submit" class="btn btn-primary mt-2">카테고리 생성</button>
+      <button type="submit" class="btn btn-primary mt-2">컬렉션 생성</button>
     </form>
     <p v-if="message" class="mt-2">{{ message }}</p>
   </div>
@@ -20,7 +20,7 @@ import {useCounterStore} from "@/stores/counter.js"
 
 export default {
   setup() {
-    const categoryName = ref(""); // 입력된 카테고리 이름
+    const categoryName = ref(""); // 입력된 컬렉션 이름
     const message = ref(""); // 사용자 메시지
 
     const createCategory = async () => {
@@ -32,12 +32,12 @@ export default {
           }, {
           name: categoryName.value,
         });
-        message.value = `카테고리 "${response.data.name}"가 생성되었습니다.`;
+        message.value = `컬렉션 "${response.data.name}"가 생성되었습니다.`;
         categoryName.value = ""; // 입력 필드 초기화
       } catch (error) {
         if (error.response && error.response.data) {
           message.value =
-            error.response.data.error || "카테고리 생성에 실패했습니다.";
+            error.response.data.error || "컬렉션 생성에 실패했습니다.";
         } else {
           message.value = "서버와의 연결에 문제가 발생했습니다.";
         }
