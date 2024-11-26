@@ -40,7 +40,7 @@
       <!-- 인기/최신/개봉예정 섹션 -->
       <div v-for="section in sections" :key="section.name" class="mt-5">
         <div class="d-flex justify-content-between align-items-center">
-          <h3>{{ section.title }}</h3>
+          <h3 class="sectionpadd">{{ section.title }}</h3>
           <button class="btn-more" @click="goToMore(section.name)">
             더보기 <span class="arrow">&gt;</span>
           </button>
@@ -210,6 +210,7 @@ export default {
     };
 
     onMounted(fetchMovies);
+    console.log('ssssssssssssssssss',searchResults)
 
     return {
       sections,
@@ -275,6 +276,7 @@ export default {
   gap: 1rem; /* 카드 간의 간격 */
   width: calc(240px * 5 + 1rem * 4); /* 카드 5개 크기 + 간격 4개 */
   overflow: hidden; /* 넘치는 부분 숨김 */
+  flex-wrap: wrap; /* 카드들을 여러 줄로 배치 */
 }
 
 .card {
@@ -600,5 +602,9 @@ body {
 	.search-btn {
 		background: #f1f1f1;
 	}
+}
+
+.sectionpadd {
+  padding-bottom: 10px;
 }
 </style>

@@ -184,6 +184,7 @@ console.log('pppppppppp',article.value.movie)
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
+  margin-bottom: 80px;
 }
 
 .user-info {

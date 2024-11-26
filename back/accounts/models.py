@@ -45,7 +45,7 @@ class User(AbstractUser):
     def get_profile_picture_url(self):
         if self.profile_picture:
             return self.profile_picture.url
-        return '/media/default-profile.png'  # 기본 이미지
+        return '/media/profile_pictures/default-profile.png' # 기본 이미지
 
 class Category(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='categories')
