@@ -6,29 +6,32 @@
         <div class="container">
           <img class="logoimage" src="/assets/logos/Monster Logo.png" alt="로고이미지">
           <!-- 네비게이션 링크 -->
-          <RouterLink :to="{ name: 'SignUpView' }" class="nav-link">회원가입</RouterLink> |
-          <RouterLink :to="{ name: 'HomeView' }" class="nav-link">홈</RouterLink> |
-          <RouterLink :to="{ name: 'ArticleView' }" class="nav-link">리뷰</RouterLink> |
-          <RouterLink :to="{ name: 'MovieView' }" class="nav-link">영화</RouterLink> |
-          <RouterLink :to="{ name: 'GameView' }" class="nav-link">게임</RouterLink> |
-          <RouterLink :to="{ name: 'RankView' }" class="nav-link">랭크</RouterLink> |
+          
+          <RouterLink :to="{ name: 'HomeView' }" class="nav-link">HOME</RouterLink> |
+          <RouterLink :to="{ name: 'MovieView' }" class="nav-link">MOVIE</RouterLink> |
+          <RouterLink :to="{ name: 'ArticleView' }" class="nav-link">REVIEW</RouterLink> |
+          <RouterLink :to="{ name: 'GameView' }" class="nav-link">GAME</RouterLink> |
+          <RouterLink :to="{ name: 'RankView' }" class="nav-link">RANKING</RouterLink> |
 
           <RouterLink
             v-if="isLogin && user.username"
             :to="{ name: 'ProfileView', params: { username: user.username || '' } }"
             class="nav-link"
           >
-            내 프로필
+            MY PROFILE
           </RouterLink>
-
-          <RouterLink v-else :to="{ name: 'LogInView' }" class="nav-link">로그인</RouterLink>
+          
+          <div v-else>
+            <RouterLink :to="{ name: 'LogInView' }" class="nav-link">로그인</RouterLink>
+            <RouterLink :to="{ name: 'SignUpView' }" class="nav-link">회원가입</RouterLink>
+          </div>
 
           <!-- 사용자 정보 -->
           <div class="user-info" v-if="!isLoading && user.username">
             <div v-if="user.rank_title" class="rank-display">
               <img :src="getRankImage(user.rank_title)" :alt="user.rank_title" class="rank-icon" />
             </div> |
-            {{ user.username }} | 포인트: {{ user.current_points }}
+            {{ user.username }} | Points: {{ user.current_points }}
           </div>
 
           <form @submit.prevent="logOut" v-if="isLogin">
@@ -202,4 +205,45 @@ form input[type="submit"]:active {
   height: 50px;
   object-fit: cover;
 }
+
+.nav-link {
+  position: relative;
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(224, 47, 240, 0.2), rgba(0, 0, 0, 0));
+  border-radius: 5px;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+  z-index: -1; /* 텍스트 뒤로 가게 설정 */
+}
+
+.nav-link:hover {
+  color: #e02ff0; /* 마우스 오버 시 텍스트 색상 */
+}
+
+.nav-link:hover::after {
+  transform: scale(1);
+  opacity: 1;
+  background: linear-gradient(135deg, rgba(224, 47, 240, 0.4), rgba(0, 0, 0, 0));
+  box-shadow: 0 0 15px rgba(224, 47, 240, 0.5), 0 0 20px rgba(224, 47, 240, 0.3);
+}
+
+
 </style>
