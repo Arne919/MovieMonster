@@ -4,13 +4,15 @@
     <div v-if="article">
       <!-- 제목 -->
       <h2>제목 : {{ article.title }}</h2>
-      <p>작성자 : {{ article.user }}</p>
-
-      <!-- 작성일/수정일 -->
-      <div class="date-container">
-        <p>작성일: {{ store.formatDate(article.created_at) }}</p>
-        <p>수정일: {{ store.formatDate(article.updated_at) }}</p>
+      
+      <div class="author-container">
+        <div class="author">작성자: user7878</div>
+        <div class="date-info">
+          <span>작성일: 2024-11-26 15:23</span>
+          <span>수정일: 2024-11-26 15:27</span>
+        </div>
       </div>
+      
 
       <!-- 게시글 수정 및 삭제 버튼 -->
       <div v-if="isAuthor" class="article-actions">
@@ -341,7 +343,7 @@ button {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s ease;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 button:hover {
@@ -479,7 +481,7 @@ p span {
   border: none;
   background: transparent;
   cursor: pointer;
-
+  margin-bottom : 38px;
 }
 
 .like-icon,
@@ -633,7 +635,7 @@ textarea:focus {
   font-size: 12px;
   color: #bbb;
   margin-bottom: 10px;
-  border-bottom: 2px solid #ff9800
+  border-bottom: 2px solid #ff9800;
 }
 
 /* 내용 스타일 */
@@ -719,5 +721,29 @@ textarea::placeholder {
 .edit-article-button:hover,
 .delete-article-button:hover {
   background-color: #ff6f3c;
+}
+.titlebottom {
+  justify-content: space-between;
+}
+
+.author-container {
+  display: flex; /* 요소들을 가로로 정렬 */
+  justify-content: space-between; /* 양 끝에 요소 배치 */
+  align-items: center; /* 세로로 가운데 정렬 */
+  width: 100%; /* 컨테이너의 너비를 부모에 맞춤 */
+  padding: 0.5rem 0; /* 위아래 여백 */
+  border-bottom: 2px solid #ff9800;
+}
+
+.author {
+  font-size: 1rem;
+  color: #fff;
+}
+
+.date-info {
+  display: flex;
+  gap: 1rem; /* 작성일과 수정일 사이 간격 */
+  font-size: 0.9rem;
+  color: #ccc;
 }
 </style>

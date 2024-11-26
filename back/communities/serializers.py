@@ -47,7 +47,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
         user = obj.user
         if hasattr(user, 'get_profile_picture_url'):
             return user.get_profile_picture_url()
-        return '/media/default-profile.png'  # 기본값
+        return '/media/profile_pictures/default-profile.png'  # 기본값
 
 
 class ArticleSerializer(serializers.ModelSerializer):
