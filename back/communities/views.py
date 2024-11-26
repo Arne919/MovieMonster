@@ -33,7 +33,7 @@ def article_list(request):
         if serializer.is_valid(raise_exception=True):
             article = serializer.save(user=request.user)
             user = request.user
-            user.points += 100  # 100 포인트 추가
+            user.points += 10  # 100 포인트 추가
             user.save()  # 사용자 정보 저장
             # print(serializer.data)
             article_data = ArticleSerializer(article, context={'request': request}).data
@@ -126,13 +126,13 @@ def get_rank_title(points):
     """
     포인트 기준으로 랭크 타이틀 반환
     """
-    if points <= 1000:
+    if points < 1000:
         return "Bronze"
-    elif points <= 2000:
+    elif points < 2000:
         return "Silver"
-    elif points <= 3000:
+    elif points < 3000:
         return "Gold"
-    elif points <= 4000:
+    elif points < 4000:
         return "Platinum"
     else:
         return "Diamond"

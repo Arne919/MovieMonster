@@ -6,7 +6,7 @@
       <h2>게임 종료!</h2>
       <p>모든 문제를 완료하였습니다.</p>
       <p>정답 수: {{ correctCount }} / {{ totalQuestions }}</p>
-      <p>획득 가능한 포인트 : {{ 100 * correctCount }}</p>
+      <p>획득 가능한 포인트 : {{ 10 * correctCount }}</p>
 
       <!-- 포인트 획득하기 버튼 -->
       <a
@@ -93,7 +93,7 @@
         </div>
         <div class="modal-body">
           <p>{{ modalMessage }}</p>
-          <p>포인트를 획득하시면 12시간에 재도전 가능합니다!</p>
+          <p>포인트를 획득하시면 8시간에 재도전 가능합니다!</p>
           <div class="modal-actions">
             <button class="btn btn-create" @click="handleModalConfirm">확인</button>
             <button class="btn btn-cancel" @click="closeModal">취소</button>
@@ -139,7 +139,7 @@ export default {
 
     const openConfirmModal = (action) => {
       modalAction.value = action;
-      modalMessage.value = `${100 * correctCount.value}p를 획득 하시겠어요?`;
+      modalMessage.value = `${10 * correctCount.value}p를 획득 하시겠어요?`;
       showModal.value = true; // 모달 열기
     };
 
@@ -164,7 +164,7 @@ export default {
 
     const claimPoints = async () => {
       if (correctCount.value > 0) {
-        await updatePoints(correctCount.value * 100);
+        await updatePoints(correctCount.value * 10);
       }
       await store.fetchUserPoints();
       router.push({ name: "GameView" });
@@ -172,7 +172,7 @@ export default {
 
     const goToRank = async () => {
       if (correctCount.value > 0) {
-        await updatePoints(correctCount.value * 100);
+        await updatePoints(correctCount.value * 10);
       }
       await store.fetchUserPoints();
       router.push({ name: "RankView" });
