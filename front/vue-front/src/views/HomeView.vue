@@ -125,7 +125,7 @@
           @click="navigateToCategoryDetail(category.id)"
         >
           <img
-            :src="category.movies.length > 0 ? getFullPosterUrl(category.movies[0].poster_url) : '/default-category.png'"
+            :src="category.movies.length > 0 ? getFullPosterUrl(category.movies[0].poster_url) : 'http://127.0.0.1:8000/media/default-category.png'"
             alt="카테고리 포스터"
             class="category-poster"
           />

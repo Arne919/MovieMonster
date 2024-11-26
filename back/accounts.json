@@ -1,0 +1,538 @@
+[
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$7PJJ9AvDJrGGNtSqR9revJ$Ye3ud1T5mpJ38AWh9KHSmCFnzdClrKlGfETA0c4AkQE=",
+        "last_login": "2024-11-26T07:08:33.674Z",
+        "is_superuser": false,
+        "username": "포켓볼",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:06:31.044Z",
+        "profile_picture": "",
+        "points": 500,
+        "created_at": "2024-11-26T07:06:31.304Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$dxCpDfHJL8IZeB4nFpt22J$sfkmF5PIfhN2IJ+8jycuVPVHG1YkHGiMjw+avgVAM5o=",
+        "last_login": "2024-11-26T07:59:21.516Z",
+        "is_superuser": false,
+        "username": "피카츄",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:10:05.869Z",
+        "profile_picture": "profile_pictures/피카츄.webp",
+        "points": 3800,
+        "created_at": "2024-11-26T07:10:06.133Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": [
+            4,
+            5,
+            6
+        ]
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$DOajjd7jtYCtCmupNFGpBC$GY8mxV/UQuKCK+R/5VBDK8RddekfHtLECPpmPy7HmZA=",
+        "last_login": "2024-11-26T07:20:36.401Z",
+        "is_superuser": false,
+        "username": "꼬부기",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:14:37.854Z",
+        "profile_picture": "profile_pictures/꼬부기.webp",
+        "points": 1500,
+        "created_at": "2024-11-26T07:14:38.282Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": [
+            3
+        ]
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$ogLZ7ZSiPZQrzdRHtIjL9Q$2rl6tvZ8j3QOJJOmku4jsC0Tenx0iHd0ScYZAXOa32Y=",
+        "last_login": "2024-11-26T07:45:29.795Z",
+        "is_superuser": false,
+        "username": "이상해씨",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:18:12.358Z",
+        "profile_picture": "profile_pictures/이상해씨.webp",
+        "points": 1500,
+        "created_at": "2024-11-26T07:18:12.781Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": [
+            3
+        ]
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$UNJCGSfOtwRMZMDymqqeYe$F2eL9wtBJO5g/wnI2JR2pFBEGyVFaorzQagq41bDUWY=",
+        "last_login": "2024-11-26T07:21:40.542Z",
+        "is_superuser": false,
+        "username": "이브이",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:21:39.591Z",
+        "profile_picture": "profile_pictures/이브이.webp",
+        "points": 1500,
+        "created_at": "2024-11-26T07:21:40.017Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": [
+            3,
+            4
+        ]
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$04hCmL10lYP38qu1JB5nr2$axxEYzYFsGtQWAwK4U7LUIrY/GowJyOWompfYaBMgzQ=",
+        "last_login": "2024-11-26T07:28:29.249Z",
+        "is_superuser": false,
+        "username": "삐삐",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:28:28.300Z",
+        "profile_picture": "profile_pictures/삐삐.webp",
+        "points": 600,
+        "created_at": "2024-11-26T07:28:28.724Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 8,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$JtD0aPZOly6ggTYFf3N1Wf$FhV05C4VmkrBRHrCAPaoPZbqmUkQpMzmcZq0n5WCSL4=",
+        "last_login": "2024-11-26T07:30:22.258Z",
+        "is_superuser": false,
+        "username": "망나뇽",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:30:21.306Z",
+        "profile_picture": "profile_pictures/망나뇽.webp",
+        "points": 1000,
+        "created_at": "2024-11-26T07:30:21.729Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": [
+            3,
+            4,
+            6,
+            7
+        ]
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 9,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$vqi1UsAmDfvDP1D1UiZPPx$XxamWqcuZdUVKRj/bBE4rI50B6qNtV4x8eJhVAJTAsw=",
+        "last_login": "2024-11-26T07:32:26.518Z",
+        "is_superuser": false,
+        "username": "구구",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:32:25.564Z",
+        "profile_picture": "profile_pictures/구구.webp",
+        "points": 600,
+        "created_at": "2024-11-26T07:32:25.990Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": [
+            3,
+            6,
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 10,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$tf6TuvS881MsWOkvCF4HyD$OYe1crPBxAzpH6V+3Ui+h3JivPZoavLEYOPFj8U/HP0=",
+        "last_login": "2024-11-26T07:39:50.215Z",
+        "is_superuser": false,
+        "username": "무플방지원",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:39:49.643Z",
+        "profile_picture": "",
+        "points": 1500,
+        "created_at": "2024-11-26T07:39:49.905Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 11,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$dRBmHLeeV3ZKqRo6QKFAO8$WbFeiAMOxWBkRcIhfmDok50Iff87YHA+jYZi0NgyQi0=",
+        "last_login": "2024-11-26T07:52:30.714Z",
+        "is_superuser": false,
+        "username": "잠만보",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:52:29.759Z",
+        "profile_picture": "profile_pictures/잠만보.webp",
+        "points": 700,
+        "created_at": "2024-11-26T07:52:30.185Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": [
+            3,
+            4,
+            6,
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 12,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$O3DvbOJAnOXFBY0zRVJoPC$BoySZdaF+tUt47t3RcQW1Bvu9oM9xqKf+0VXYJhPGEE=",
+        "last_login": "2024-11-26T07:56:18.185Z",
+        "is_superuser": false,
+        "username": "나옹",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-26T07:56:17.231Z",
+        "profile_picture": "profile_pictures/나옹.webp",
+        "points": 600,
+        "created_at": "2024-11-26T07:56:17.656Z",
+        "groups": [],
+        "user_permissions": [],
+        "followings": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 1,
+    "fields": {
+        "user": 6,
+        "name": "공포전문팀",
+        "movies": [
+            440,
+            663712,
+            957452,
+            1034541,
+            1063877,
+            1100782
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 2,
+    "fields": {
+        "user": 7,
+        "name": "최애무비",
+        "movies": [
+            1184918
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 3,
+    "fields": {
+        "user": 9,
+        "name": "99",
+        "movies": [
+            562,
+            2756,
+            37724,
+            181812,
+            955916
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 4,
+    "fields": {
+        "user": 9,
+        "name": "999",
+        "movies": [
+            1924,
+            20352,
+            93456,
+            277834,
+            502356
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 5,
+    "fields": {
+        "user": 10,
+        "name": "오늘도 일하자",
+        "movies": [
+            118,
+            3933,
+            140300,
+            166428,
+            787699
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 6,
+    "fields": {
+        "user": 10,
+        "name": "무방원만 보고싶은 영화",
+        "movies": [
+            49026,
+            260346,
+            475557,
+            1029235,
+            1051896,
+            1084736
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 7,
+    "fields": {
+        "user": 3,
+        "name": "달달충전",
+        "movies": [
+            13,
+            296096,
+            313369,
+            746036,
+            843527,
+            1010581,
+            1064213,
+            1079091,
+            1290486
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 8,
+    "fields": {
+        "user": 3,
+        "name": "지우랑 볼 영화",
+        "movies": [
+            10191,
+            82702,
+            166428,
+            402431,
+            592983,
+            638507,
+            639720,
+            1087192
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 9,
+    "fields": {
+        "user": 3,
+        "name": "해리포터 정주행",
+        "movies": [
+            671,
+            672,
+            673,
+            674,
+            675,
+            767,
+            12444,
+            12445,
+            899082
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 10,
+    "fields": {
+        "user": 3,
+        "name": "마블 바구니",
+        "movies": [
+            1726,
+            10138,
+            10195,
+            24428,
+            68721,
+            76338,
+            99861,
+            271110,
+            284053,
+            299534,
+            299536,
+            609681,
+            616037,
+            822119
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 11,
+    "fields": {
+        "user": 3,
+        "name": "끓어오르는",
+        "movies": [
+            8681,
+            76341,
+            82675,
+            168259,
+            260346,
+            337339,
+            384018,
+            385128,
+            385687,
+            786892
+        ]
+    }
+},
+{
+    "model": "accounts.category",
+    "pk": 12,
+    "fields": {
+        "user": 3,
+        "name": "내일볼거",
+        "movies": []
+    }
+},
+{
+    "model": "accounts.recommendedmovie",
+    "pk": 1,
+    "fields": {
+        "user": 6,
+        "movie": 945961,
+        "reason": "돌아왔구나!"
+    }
+},
+{
+    "model": "accounts.recommendedmovie",
+    "pk": 2,
+    "fields": {
+        "user": 3,
+        "movie": 8871,
+        "reason": "GRINCH?"
+    }
+},
+{
+    "model": "accounts.recommendedmovie",
+    "pk": 3,
+    "fields": {
+        "user": 9,
+        "movie": 955916,
+        "reason": "더 높이 날고싶어요"
+    }
+},
+{
+    "model": "accounts.recommendedmovie",
+    "pk": 4,
+    "fields": {
+        "user": 10,
+        "movie": 10191,
+        "reason": "겁.나.귀.엽.습.니.다."
+    }
+},
+{
+    "model": "accounts.recommendedmovie",
+    "pk": 5,
+    "fields": {
+        "user": 5,
+        "movie": 299534,
+        "reason": "불금을 더 뜨겁게 해줄!"
+    }
+},
+{
+    "model": "accounts.recommendedmovie",
+    "pk": 6,
+    "fields": {
+        "user": 11,
+        "movie": 402431,
+        "reason": "잠잘오는영화"
+    }
+},
+{
+    "model": "accounts.recommendedmovie",
+    "pk": 7,
+    "fields": {
+        "user": 12,
+        "movie": 823219,
+        "reason": "내 이상형이다옹"
+    }
+}
+]

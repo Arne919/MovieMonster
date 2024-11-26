@@ -1,0 +1,357 @@
+[
+{
+    "model": "communities.article",
+    "pk": 1,
+    "fields": {
+        "user": 3,
+        "title": "재밌삐까!",
+        "movie": 404368,
+        "content": "첫번째꺼 안봐도 이해가능삐까!",
+        "rating": 6,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/54HHWP4Sqz22yKGM68kRQXCXXxS.jpg",
+        "created_at": "2024-11-26T07:12:20.105Z",
+        "updated_at": "2024-11-26T07:29:16.571Z",
+        "like_users": [
+            3,
+            7
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 2,
+    "fields": {
+        "user": 3,
+        "title": "렛잇고~",
+        "movie": 330457,
+        "content": "You'll never see me cry!\nHere l stand~!!",
+        "rating": 9,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/lVcwSnzhSMWYXUQzyMilCztSE6I.jpg",
+        "created_at": "2024-11-26T07:13:37.267Z",
+        "updated_at": "2024-11-26T08:10:18.434Z",
+        "like_users": [
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 3,
+    "fields": {
+        "user": 4,
+        "title": "정.말.재.밌.습.니.다.",
+        "movie": 120,
+        "content": "근ㅡ본",
+        "rating": 10,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/r18JdjImbWDRwkbVDIzWoLQqkCo.jpg",
+        "created_at": "2024-11-26T07:16:54.199Z",
+        "updated_at": "2024-11-26T07:57:27.027Z",
+        "like_users": [
+            3,
+            4,
+            6,
+            7,
+            8,
+            9,
+            10,
+            12
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 4,
+    "fields": {
+        "user": 5,
+        "title": "공포영화 전문가로써 이 영화는...",
+        "movie": 1949,
+        "content": "별점 2점 드립니다.",
+        "rating": 2,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/rREsWQodwtdGFjo9BYAP1smMrIG.jpg",
+        "created_at": "2024-11-26T07:19:40.514Z",
+        "updated_at": "2024-11-26T07:57:43.437Z",
+        "like_users": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 5,
+    "fields": {
+        "user": 6,
+        "title": "드라이브 같이 갈 사람~~",
+        "movie": 76341,
+        "content": "저 운전 잘 해요 ㅎㅎ",
+        "rating": 4,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/cadVm6gKYYukmPysHGCwrawUHHa.jpg",
+        "created_at": "2024-11-26T07:26:11.948Z",
+        "updated_at": "2024-11-26T07:57:22.818Z",
+        "like_users": [
+            3,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 6,
+    "fields": {
+        "user": 7,
+        "title": "삐익!",
+        "movie": 1011985,
+        "content": "삐~삐~~삐~!!",
+        "rating": 8,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/1ZNOOMmILNUzVYbzG1j7GYb5bEV.jpg",
+        "created_at": "2024-11-26T07:29:47.986Z",
+        "updated_at": "2024-11-26T07:42:07.149Z",
+        "like_users": [
+            7,
+            8,
+            9,
+            10
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 7,
+    "fields": {
+        "user": 9,
+        "title": "구구",
+        "movie": 519182,
+        "content": "999~",
+        "rating": 9,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/5hl1PEpAvZ8Ok37kB7woIssHi3X.jpg",
+        "created_at": "2024-11-26T07:39:00.458Z",
+        "updated_at": "2024-11-26T07:54:39.315Z",
+        "like_users": [
+            10
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 8,
+    "fields": {
+        "user": 11,
+        "title": "4달라",
+        "movie": 497,
+        "content": "4번 울었습니다. 4점 드립니다.",
+        "rating": 4,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/yuSpRhrTIJa5JN8oESrfD2bndp1.jpg",
+        "created_at": "2024-11-26T07:53:38.271Z",
+        "updated_at": "2024-11-26T07:54:04.440Z",
+        "like_users": []
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 9,
+    "fields": {
+        "user": 11,
+        "title": "저랑 비슷하네요",
+        "movie": 8392,
+        "content": "나 닮은거 나옴",
+        "rating": 7,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/c9zCkL0rTkNQ1HB9cmeFIqbkS50.jpg",
+        "created_at": "2024-11-26T07:54:34.650Z",
+        "updated_at": "2024-11-26T08:08:12.787Z",
+        "like_users": [
+            3,
+            11,
+            12
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 10,
+    "fields": {
+        "user": 12,
+        "title": "난 나옹이다옹",
+        "movie": 315162,
+        "content": "내 롤모델이다옹",
+        "rating": 10,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/rKgvctIuPXyuqOzCQ16VGdnHxKx.jpg",
+        "created_at": "2024-11-26T07:58:16.927Z",
+        "updated_at": "2024-11-26T08:08:11.515Z",
+        "like_users": [
+            3,
+            12
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 11,
+    "fields": {
+        "user": 3,
+        "title": "드래곤 여친 내스탈",
+        "movie": 166428,
+        "content": "드래곤 여친도 나옴",
+        "rating": 7,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/51HTWy1h5a2cbXC9gKYGOt2YQBV.jpg",
+        "created_at": "2024-11-26T08:08:07.688Z",
+        "updated_at": "2024-11-26T08:08:10.201Z",
+        "like_users": [
+            3
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 12,
+    "fields": {
+        "user": 3,
+        "title": "감정 이야기",
+        "movie": 1022789,
+        "content": "사람의 성장일기",
+        "rating": 7,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/x2BHx02jMbvpKjMvbf8XxJkYwHJ.jpg",
+        "created_at": "2024-11-26T08:09:16.339Z",
+        "updated_at": "2024-11-26T08:09:18.499Z",
+        "like_users": [
+            3
+        ]
+    }
+},
+{
+    "model": "communities.article",
+    "pk": 13,
+    "fields": {
+        "user": 3,
+        "title": "또 혼자서 그 영화를",
+        "movie": 9714,
+        "content": "이번크리스마스엔~~~~~",
+        "rating": 3,
+        "poster_url": "https://image.tmdb.org/t/p/w500https://image.tmdb.org/t/p/w500/6MJimng1MriEwrou9Vl4WKdO7Pe.jpg",
+        "created_at": "2024-11-26T08:09:58.066Z",
+        "updated_at": "2024-11-26T08:10:00.098Z",
+        "like_users": [
+            3
+        ]
+    }
+},
+{
+    "model": "communities.comment",
+    "pk": 1,
+    "fields": {
+        "article": 4,
+        "user": 7,
+        "content": "삐삐?",
+        "created_at": "2024-11-26T07:29:08.934Z"
+    }
+},
+{
+    "model": "communities.comment",
+    "pk": 2,
+    "fields": {
+        "article": 5,
+        "user": 7,
+        "content": "삐?",
+        "created_at": "2024-11-26T07:29:26.532Z"
+    }
+},
+{
+    "model": "communities.comment",
+    "pk": 3,
+    "fields": {
+        "article": 5,
+        "user": 8,
+        "content": "같이 가실래요?",
+        "created_at": "2024-11-26T07:30:50.843Z"
+    }
+},
+{
+    "model": "communities.comment",
+    "pk": 4,
+    "fields": {
+        "article": 5,
+        "user": 9,
+        "content": "전 비행 잘해요",
+        "created_at": "2024-11-26T07:32:48.126Z"
+    }
+},
+{
+    "model": "communities.comment",
+    "pk": 5,
+    "fields": {
+        "article": 6,
+        "user": 9,
+        "content": "구구?",
+        "created_at": "2024-11-26T07:39:08.765Z"
+    }
+},
+{
+    "model": "communities.comment",
+    "pk": 6,
+    "fields": {
+        "article": 7,
+        "user": 10,
+        "content": "무플방지위원회에서 나왔습니다.",
+        "created_at": "2024-11-26T07:41:52.500Z"
+    }
+},
+{
+    "model": "communities.comment",
+    "pk": 7,
+    "fields": {
+        "article": 1,
+        "user": 10,
+        "content": "무플방지위원회에서 나왔습니다.",
+        "created_at": "2024-11-26T07:41:57.667Z"
+    }
+},
+{
+    "model": "communities.comment",
+    "pk": 8,
+    "fields": {
+        "article": 5,
+        "user": 11,
+        "content": "뒷자석에 취침 가능?",
+        "created_at": "2024-11-26T07:54:58.407Z"
+    }
+},
+{
+    "model": "communities.comment",
+    "pk": 9,
+    "fields": {
+        "article": 9,
+        "user": 12,
+        "content": "냐옹이도 나오나옹?",
+        "created_at": "2024-11-26T07:58:39.036Z"
+    }
+},
+{
+    "model": "communities.comment",
+    "pk": 10,
+    "fields": {
+        "article": 3,
+        "user": 12,
+        "content": "어쩐지 감동이다옹",
+        "created_at": "2024-11-26T07:59:02.761Z"
+    }
+}
+]
