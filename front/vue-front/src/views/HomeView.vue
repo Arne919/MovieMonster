@@ -116,7 +116,7 @@
 
     <!-- Categories of Top Ranker -->
     <div class="top-ranker-categories-container" v-if="topRankerCategories">
-      <h2>zㅣ존 Monster ★ {{ topThreeRankings[0]?.username }} ★님의 카테고리</h2>
+      <h2 class="zizon">zㅣ존 Monster 💥 {{ topThreeRankings[0]?.username }} 💥님의 카테고리</h2>
       <div class="categories">
         <div
           v-for="category in topRankerCategories"
@@ -335,7 +335,8 @@ console.log('ppss', topThreeRankings)
 /* 인기 영화 섹션 */
 .popular-movies-section {
   margin-bottom: 50px;
-  border-bottom: 1px solid #ddd;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #ddd;
 }
 
 .popular-movies-section h2 {
@@ -345,7 +346,7 @@ console.log('ppss', topThreeRankings)
 
 .popular-movies-section p {
   font-size: 14px;
-  color: #666;
+  color: #f9f9f9;
   margin-bottom: 20px;
 }
 
@@ -565,6 +566,7 @@ console.log('ppss', topThreeRankings)
 .top-ranker-categories-container {
   border-top: 1px solid #ddd;
   padding-top: 20px;
+  padding-left: 20px
 }
 
 .categories {
@@ -600,6 +602,10 @@ console.log('ppss', topThreeRankings)
 .category-card p {
   font-size: 14px;
   margin: 0 10px 10px;
+}
+
+.zizon {
+  margin-bottom: 30px;
 }
 
 /* 카드 컨테이너 */

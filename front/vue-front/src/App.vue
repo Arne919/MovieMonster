@@ -4,6 +4,7 @@
     <header>
       <nav class="navbar">
         <div class="container">
+          <img class="logoimage" src="/assets/logos/Monster Logo.png" alt="로고이미지">
           <!-- 네비게이션 링크 -->
           <RouterLink :to="{ name: 'SignUpView' }" class="nav-link">회원가입</RouterLink> |
           <RouterLink :to="{ name: 'HomeView' }" class="nav-link">홈</RouterLink> |
@@ -196,4 +197,9 @@ form input[type="submit"]:active {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 클릭 시 그림자 감소 */
 }
 
+.logoimage {
+  width: 60px;
+  height: 50px;
+  object-fit: cover;
+}
 </style>
