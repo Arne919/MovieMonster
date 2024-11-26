@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="text-center tracking-in-expand-fwd my-4">MY PROFILE</h1>
+    <h1 class="text-center tracking-in-expand-fwd my-4">PROFILE</h1>
     <div class="profile-page">
       <!-- 좌측: 프로필 정보 -->
       <div class="profile-info">
