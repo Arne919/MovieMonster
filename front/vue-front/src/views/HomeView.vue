@@ -67,11 +67,11 @@
                   <div class="circle">{{ rank.points }}</div>
                 </div>
                 <div class="back-stat">
-                  <p>받은 좋아요</p>
+                  <p>좋아요</p>
                   <div class="circle">{{ rank.likes_count }}</div>
                 </div>
                 <div class="back-stat">
-                  <p>게시글 수</p>
+                  <p>게시글</p>
                   <div class="circle">{{ rank.articles_count }}</div>
                 </div>
                 <div class="back-stat">
@@ -105,9 +105,9 @@
           <div class="review-details">
             <h3>{{ review.title }}</h3>
             <p>작성자: {{ review.user }}</p>
-            <p>평점: {{ review.rating }} / 10</p>
+            <p>⭐  {{ review.rating }} / 10</p>
             <p>{{ review.content }}...</p>
-            <p>❤: {{ review.like_count }}</p>
+            <p>❤  {{ review.like_count }}</p>
             <p>작성일: {{ formatDate(review.created_at) }}</p>
           </div>
         </div>
@@ -116,7 +116,7 @@
 
     <!-- Categories of Top Ranker -->
     <div class="top-ranker-categories-container" v-if="topRankerCategories">
-      <h2 class="zizon">zㅣ존 MONSTER 💥 {{ topThreeRankings[0]?.username }} 💥님의 컬렉션을 만나보세요!</h2>
+      <h2 class="zizon">zl존 M✪N⭑스✧ㅌr  💥 <span class="firstuser">{{ topThreeRankings[0]?.username }}</span> 💥님의 컬렉션을 만나보세요!</h2>
       <div class="categories">
         <div
           v-for="category in topRankerCategories"
@@ -583,13 +583,13 @@ console.log('ppss', topThreeRankings)
 
 .category-card {
   width: calc(25% - 20px);
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
+  border: 1px solid transparent; /* 기본 테두리 투명 */
+  border-radius: 8px; /* 테두리에 둥근 효과 */
+  background: linear-gradient(135deg, #e02ff0, #39ffe5) border-box; /* 그래디언트 테두리 */
+  overflow: hidden; /* 내부 요소가 영역을 넘지 않도록 */
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-
 .category-card:hover {
   transform: scale(1.02);
 }
@@ -603,11 +603,15 @@ console.log('ppss', topThreeRankings)
 .category-card h3 {
   font-size: 18px;
   margin: 10px;
+  color: black;
+  font-weight: bold;
 }
 
 .category-card p {
   font-size: 14px;
   margin: 0 10px 10px;
+  color: black;
+
 }
 
 .zizon {
@@ -618,14 +622,14 @@ console.log('ppss', topThreeRankings)
 .ranking-card-container {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 0px;
   margin-top: 0px;
   margin-bottom: 50px;
 }
 
 /* 카드 */
 .ranking-card {
-  width: 280px;
+  width: 500px;
   height: 390px;
   perspective: 1000px;
   margin-inline: 50px;
@@ -813,5 +817,13 @@ console.log('ppss', topThreeRankings)
   flex-direction: column;
   align-items: center;
   margin-top: 10px; /* 중앙 정렬을 위한 여백 추가 */
+}
+
+.firstuser {
+  font-weight: bold;
+  background: linear-gradient(135deg, #e02ff0, #39ffe5);
+  -webkit-background-clip: text;  /* 웹킷 기반 브라우저에서 배경을 텍스트에 맞게 자르기 */
+  background-clip: text;         /* 비-웹킷 브라우저에서 배경을 텍스트에 맞게 자르기 */
+  color: transparent;            /* 텍스트 색상은 투명하게 처리 */
 }
 </style>
