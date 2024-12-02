@@ -138,10 +138,11 @@ cd back
 source venv/Scripts/activate
 pip install -r requirements.txt 
 py manage.py makemigrations
-py manage.py shell
-from rest_framework.authtoken.models import Token
-Token.objects.filter(user_id=2).delete()
-quit()
+    [마이그래이션 안 될 시]
+    py manage.py shell
+    from rest_framework.authtoken.models import Token
+    Token.objects.filter(user_id=2).delete()
+    quit()
 py manage.py migrate
 python manage.py loaddata movies/fixtures/movies/popular.json movies/fixtures/movies/recent.json movies/fixtures/movies/upcoming.json movies/fixtures/movies/movie_data.json
 py manage.py runserver
@@ -149,7 +150,7 @@ py manage.py runserver
 ### 느낀 점
 #### 팀장 하건수(로그인, 홈, 리뷰)
 
-#### 팀원 강혜경(영화, 게임, 카테고리) 랭크 프로필
+#### 팀원 강혜경(영화, 게임, 랭크, 프로필)
 Movie Monster를 개발하면서 다양한 기능을 구현하고, 사용자 경험을 개선하면서 웹 개반 전반에 대한 깊은 이해를 얻게 되었습니다.
 ##### 🤔 힘들었던 부분
 1. 🎥 영화(Movie)부분

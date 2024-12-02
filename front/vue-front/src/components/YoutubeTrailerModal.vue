@@ -55,7 +55,7 @@ const props = defineProps({
 const videoData = ref("");
 const isLoading = ref(false);
 const modalRef = ref(null);
-const youtubeKey = "AIzaSyAvDN5ECAKK-StTzlh97JIt_daHFyimQlY"; // API 키
+const youtubeKey = import.meta.env.VITE_YOUTUBE_API_KEY; // API 키
 
 const stopVideo = () => {
   videoData.value = ""; // 비디오 정지
