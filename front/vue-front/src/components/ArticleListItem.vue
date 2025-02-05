@@ -18,7 +18,8 @@
 
     <!-- 리뷰 내용 -->
     <div class="review-content">
-      <p class="review-text">{{ article.content }}</p>
+      <p class="review-text">{{ article.title }}</p>
+      <!-- <p class="review-text">{{ article.content }}</p> -->
     </div>
 
     <!-- 영화 정보 카드 -->
