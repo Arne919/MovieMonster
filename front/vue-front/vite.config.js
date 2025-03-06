@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/MovieMonster/', // ✅ GitHub Pages에서 올바르게 로딩되도록 설정
+  base: '/MovieMonster/',  // ✅ GitHub Pages에서 정적 파일을 올바르게 찾도록 설정
   plugins: [
     vue(),
     vueDevTools(),
