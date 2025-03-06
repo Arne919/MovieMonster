@@ -457,12 +457,12 @@ p span {
   width: 5px; /* 원하는 별 크기 */
   height: 5px;
   box-sizing: border-box; /* 크기 계산 오류 방지 */
-  background: url("/assets/images/gray-star.png") no-repeat center;
+  background: url("@/assets/images/gray-star.png") no-repeat center;
   background-size:  18px 18px; /* 별 이미지를 강제로 컨테이너 크기에 맞춤 */
 }
 
 .star.filled {
-  background: url("/assets/images/yellow-star.png") no-repeat center;
+  background: url("@/assets/images/yellow-star.png") no-repeat center;
   background-size: 18px 18px;; /* 별 이미지를 강제로 컨테이너 크기에 맞춤 */
 }
 

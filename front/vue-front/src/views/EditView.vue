@@ -185,13 +185,13 @@ const selectRating = (rating) => {
   .star {
     width: 24px;
     height: 24px;
-    background: url("/assets/images/gray-star.png") no-repeat center;
+    background: url("@/assets/images/gray-star.png") no-repeat center;
     background-size: contain;
     cursor: pointer;
   }
   
   .star.filled {
-    background: url("/assets/images/yellow-star.png") no-repeat center;
+    background: url("@/assets/images/yellow-star.png") no-repeat center;
     background-size: contain;
   }
   
