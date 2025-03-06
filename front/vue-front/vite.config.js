@@ -6,6 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/MovieMonster/', // ✅ GitHub Pages를 위한 경로 추가
   plugins: [
     vue(),
     vueDevTools(),
